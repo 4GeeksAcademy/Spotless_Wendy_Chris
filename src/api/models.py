@@ -84,3 +84,28 @@ class Property(db.Model):
             "user_id": self.user_id
             # do not serialize the password, its a security breach
         }
+    
+
+
+
+class Listing(db.Model):
+    id= db.Column(db.Integer, primary_key=True)
+    property_id = db.Column(db.Integer, db.ForeignKey('property.id'), nullable=False)
+    date_needed = db.Column(db.String(120), nullable=False)
+    special_note = db.Column(db.String(120), nullable=True)
+    status = db.Column(db.Boolean, default=True)
+    property_link = db.relationship('Property', backref='listing', lazy=True)
+        
+
+    def __repr__(self):
+        return f'Listing: {self.id}'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "property_id": self.property_id,
+            "date_needed": self.cdate_needed,
+            "special_note": self.sspecial_note,
+            "status": self.status
+            # do not serialize the password, its a security breach
+        }
