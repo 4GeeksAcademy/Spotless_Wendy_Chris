@@ -6,10 +6,17 @@ from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
-from api.models import db
+from api.models import db, User
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+
+
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 
 # from models import Person
 
@@ -18,6 +25,9 @@ static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
 app.url_map.strict_slashes = False
+
+# Allow CORS requests to this API
+CORS(app)
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
@@ -30,6 +40,43 @@ else:
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
+
+# Setup the Flask-JWT-Extended extension
+app.config["JWT_SECRET_KEY"] = "super-fancy-secret"  # Change this "super secret" to something else!
+jwt = JWTManager(app)
+
+# Authenticate user and generate token
+@app.route("/token", methods=["POST"])
+def create_token():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+
+    # Query your database for username and password
+    user = User.query.filter_by(email=email, password=password).first()
+
+    if user is None:
+        # The user was not found on the database
+        return jsonify({"msg": "Bad username or password"}), 401
+    
+    # Create a new token with the user id inside
+    access_token = create_access_token(identity=user.id)
+    return jsonify({"msg": "successfully authenticated",
+                    "token": access_token,
+                    "id": user.id,
+                    "email": user.email })
+
+
+ # Protect a route with jwt_required, which will kick out requests without a valid JWT
+@app.route("/auth/user", methods=["GET"])
+@jwt_required()
+def protected():
+    # Access the identity of the current user with get_jwt_identity
+    current_user_id = get_jwt_identity()
+    user = User.query.get(current_user_id)
+    
+    return jsonify({
+        "msg": "successfully authenticated",
+        "id": user.id, "email": user.email }), 200
 
 # add the admin
 setup_admin(app)
