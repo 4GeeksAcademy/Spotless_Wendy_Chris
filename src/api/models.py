@@ -57,6 +57,8 @@ class Worker(db.Model):
     
 class Property(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    
     name = db.Column(db.String(120), unique=True, nullable=False)
     city = db.Column(db.String(120), unique=True, nullable=False)
     state = db.Column(db.String(120), unique=True, nullable=False)
@@ -64,7 +66,7 @@ class Property(db.Model):
     bath = db.Column(db.Integer, nullable=False)
     img = db.Column(db.String(10000), unique=True, nullable=True)
     address = db.Column(db.String(120), unique=True, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    
     user_link = db.relationship('User', backref='property', lazy=True)
         
 
@@ -91,6 +93,7 @@ class Property(db.Model):
 class Listing(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     property_id = db.Column(db.Integer, db.ForeignKey('property.id'), nullable=False)
+
     date_needed = db.Column(db.String(120), nullable=False)
     special_note = db.Column(db.String(120), nullable=True)
     status = db.Column(db.Boolean, default=True)
@@ -109,3 +112,60 @@ class Listing(db.Model):
             "status": self.status
             # do not serialize the password, its a security breach
         }
+    
+    
+
+
+class Schedule(db.Model):
+    id= db.Column(db.Integer, primary_key=True)
+    listing_id = db.Column(db.Integer, db.ForeignKey('listing.id'), nullable=False)
+    worker_id = db.Column(db.Integer, db.ForeignKey('worker.id'), nullable=False)
+
+    date_time = db.Column(db.String(120), nullable=False)
+   
+    paid_status = db.Column(db.Boolean, default=False)
+    review= db.Column(db.Integer, nullable=True)
+
+    listing_link = db.relationship('Listing', backref='schedule', lazy=True)
+    worker_link = db.relationship('Worker', backref='schedule', lazy=True)
+    
+        
+
+    def __repr__(self):
+        return f'Schedule: {self.id}'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "listing_id": self.listing_id,
+            "worker_id": self.worker_id,
+            "date_time": self.date_time,
+            "paid_status": self.paid_status,
+            "review": self.review
+            # do not serialize the password, its a security breach
+        }
+    
+    
+
+
+class Payment(db.Model):
+    id= db.Column(db.Integer, primary_key=True)
+    schedule_id = db.Column(db.Integer, db.ForeignKey('schedule.id'), nullable=False)
+
+    amount= db.Column(db.Integer, nullable=False)
+    schedule_link = db.relationship('Schedule', backref='payment', lazy=True)
+   
+
+    def __repr__(self):
+        return f'Schedule: {self.id}'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "schedule_id": self.schedule_id,
+            "amount": self.amount
+            # do not serialize the password, its a security breach
+        }
+    
+    
+
