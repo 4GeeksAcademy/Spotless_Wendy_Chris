@@ -94,39 +94,39 @@ def get_all_worker():
 
 @app.route('/user/new/load', methods=['POST'])
 def add_newuser_load():
-        request_body=request.json
-        for el in request_body:
+    request_body=request.json
+    for el in request_body:
               
         
-            test_user= User.query.filter_by(email=el['email']).first()
+        test_user= User.query.filter_by(email=el['email']).first()
     
-            if(test_user):
+        if(test_user):
                print(f"This one already exists"), 500
         
-            else:
+        else:
                  newU=User (full_name=el['name'], email=el['email'],password= el['password'], phone=el['phone'], address=el['address']  )
                  db.session.add(newU)
                  db.session.commit()
-        return jsonify(f"Success"), 200        
+    return jsonify(f"Success"), 200        
      
 
 
 @app.route('/property/new/load', methods=['POST'])
 def add_newproperty_load():
-        request_body=request.json
-        for el in request_body:
+    request_body=request.json
+    for el in request_body:
               
         
-            test_property= Property.query.filter_by(address=el['address']).first()
+        test_property= Property.query.filter_by(address=el['address']).first()
     
-            if(test_property):
-               return jsonify(f"User already exists"), 500
+        if(test_property):
+           print(f"This one already exists")
         
-            else:
-                 newU=User (name=el['name'], city=el['city'],beds= el['beds'],bath= el['bath'], phone=el['phone'], address=el['address'], img=el['images']  )
-                 db.session.add(newU)
-                 db.session.commit()
-        return jsonify(f"Success"), 200         
+        else:
+            newU=Property(name=el['name'], city=el['city'], state=el['state'], beds= el['beds'],bath= el['bath'], phone=el['phone'], address=el['address'], img=el['images']  )
+            db.session.add(newU)
+            db.session.commit()
+    return jsonify(f"Success"), 200         
      
 
 

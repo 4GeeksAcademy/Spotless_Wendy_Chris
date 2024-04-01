@@ -75,6 +75,7 @@ def add_newProperty(id):
              db.session.commit()
              return jsonify(f"Success"), 200
 
+
 @api.route('/user/<id>/delete/property/<idP>', methods=['DELETE'])
 def remove_Property(id,idP):
         request_body=request.json

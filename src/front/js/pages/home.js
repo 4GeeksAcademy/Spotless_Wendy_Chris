@@ -7,6 +7,8 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [testApi, setTestApi]= useState([]);
 	const [cityR, setCityR]=useState(['Chicago', 'Miami', 'Boston', "Houston", 'Hollywood', 'Mobile','Orlando']);
+	const [stateR, setStateR]=useState(['Texas', 'Florida', 'Georgia', 'New York', 'Indiana','California', 'Utah']);
+
 
 
 	// useEffect(() => {
@@ -31,16 +33,17 @@ function fetch_listing(){
 				return res.json();
 			})
 			.then(response => {
-				//setTestApi(response);
+			
 				let test= [... response.results]
 				let test2=[]
 				let each_house={}
 				test.forEach((el)=>{
-
+                    each_house.user_id=Math.floor(Math.random()*12)+1,
 					each_house.name=el.name,
 					each_house.baths=el.bathrooms,
 					each_house.bed=el.beds,
 					each_house.city= cityR[Math.floor(Math.random()*5)],
+					each_house.state= stateR[Math.floor(Math.random()*5)],
 					each_house.address=el.address,
 					each_house.images= el.images[0]+'   '+ el.images[1]+'  '+el.images[2]
 					test2.push(each_house)
@@ -56,6 +59,31 @@ function fetch_listing(){
 	
 			.catch(error => console.log(error));
 	
+}
+
+function load_property(load_pro){
+	let test=[load_pro[0]];
+
+	fetch('https://super-doodle-pj9rp965rvw2r75g-3001.app.github.dev/property/new/load',
+		{
+			method: 'POST',
+			body: JSON.stringify(test),
+          
+            headers: {
+                'Content-Type': 'application/json'
+			}
+		})
+			.then(res => {
+				if (!res.ok) throw Error(res.statusText);
+				return res.json();
+			})
+			.then(response => {
+				console.log(response)
+					
+					})
+	
+			.catch(error => console.log(error));
+
 }
 
 
