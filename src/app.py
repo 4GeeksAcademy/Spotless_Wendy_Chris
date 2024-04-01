@@ -168,26 +168,26 @@ def add_newuser_load():
      
 
 
-@app.route('/property/new/load', methods=['POST'])
-def add_newproperty_load():
-    request_body=request.json
-    print('function works')
+# @app.route('/property/new/load/test', methods=['POST'])
+# def add_newproperty_load2():
+#     request_body=request.json
+#     print('function works')
     
-    # for el in request_body:
+#     # for el in request_body:
               
         
-        # test_property= Property.query.filter_by(name=el['name']).first()
+#         # test_property= Property.query.filter_by(name=el['name']).first()
     
-        # if(test_property):
-        #    print(f"This one already exists")
+#         # if(test_property):
+#         #    print(f"This one already exists")
         
-        # else:
-        # newP=Property(user_id= el['user_id'], name=el['name'], city=el['city'], state=el['state'], beds= el['beds'], bath= el['bath'], address=el['address'], img=el['images']  )
-        # db.session.add(newP)
-        # db.session.commit()
-        #print('This is our test ', el)
+#         # else:
+#         # newP=Property(user_id= el['user_id'], name=el['name'], city=el['city'], state=el['state'], beds= el['beds'], bath= el['bath'], address=el['address'], img=el['images']  )
+#         # db.session.add(newP)
+#         # db.session.commit()
+#         #print('This is our test ', el)
             
-    return jsonify(request_body),200
+#     return jsonify(request_body),200
            
      
 
