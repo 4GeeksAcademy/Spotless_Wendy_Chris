@@ -123,7 +123,7 @@ def add_newproperty_load():
            print(f"This one already exists")
         
         else:
-            newU=Property(name=el['name'], city=el['city'], state=el['state'], beds= el['beds'],bath= el['bath'], phone=el['phone'], address=el['address'], img=el['images']  )
+            newU=Property(name=el['name'], city=el['city'], state=el['state'], beds= el['beds'],bath= el['bath'], address=el['address'], img=el['images']  )
             db.session.add(newU)
             db.session.commit()
     return jsonify(f"Success"), 200         

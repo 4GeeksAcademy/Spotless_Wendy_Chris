@@ -11,9 +11,10 @@ export const Home = () => {
 
 
 
-	// useEffect(() => {
-
-	// }, []);
+	useEffect(() => {
+		let r=Math.floor(Math.random()*6);
+		console.log('test that '+r)
+	}, []);
 	
 function fetch_listing(){
 
@@ -34,25 +35,37 @@ function fetch_listing(){
 			})
 			.then(response => {
 			
-				let test= [... response.results]
-				let test2=[]
-				let each_house={}
+				let test= [... response.results];
+				console.log(test);
+				console.log('above is what we got');
+  
+				let test2=[];
+				
+
 				test.forEach((el)=>{
-                    each_house.user_id=Math.floor(Math.random()*12)+1,
-					each_house.name=el.name,
-					each_house.baths=el.bathrooms,
-					each_house.bed=el.beds,
-					each_house.city= cityR[Math.floor(Math.random()*5)],
-					each_house.state= stateR[Math.floor(Math.random()*5)],
-					each_house.address=el.address,
-					each_house.images= el.images[0]+'   '+ el.images[1]+'  '+el.images[2]
-					test2.push(each_house)
+					let each_house={};
 
+					let r=Math.floor(Math.random()*6);
+					let u=Math.floor(Math.random()*12)+1;
+					let b=Math.floor(Math.random()*4)+1;
+					let be=Math.floor(Math.random()*5)+1;
+				
+                    each_house.user_id=u;
+					each_house.name=el.name;
+					each_house.baths=b;
+					each_house.bed=be;
+					each_house.city= cityR[r];
+					each_house.state= stateR[r];
+					each_house.address=el.address;
+					each_house.images= el.images[0]+'   '+ el.images[1]+'  '+el.images[2];
+
+					test2.push(each_house);
+				
 				})
-
-				console.log('Test starts here')
 				console.log(test2)
-				console.log('Test ends here')
+				// console.log('Test starts here')
+				// console.log(test2)
+				// console.log('Test ends here')
 				
 						
 			})
