@@ -95,6 +95,29 @@ def remove_Property(id,idP):
 
 
 
+
+@api.route('property/new/load', methods=['POST'])
+def add_newproperty_load():
+    request_body=request.json
+    print('function works')
+    
+    for el in request_body:
+              
+        
+        test_property= Property.query.filter_by(name=el['name']).first()
+    
+        if(test_property):
+           print(f"This one already exists")
+        
+        else:
+          newP=Property(user_id= el['user_id'], name=el['name'], city=el['city'], state=el['state'], beds= el['beds'], bath= el['bath'], address=el['address'], img=el['images']  )
+          db.session.add(newP)
+          db.session.commit()
+          print('This one passed ')
+            
+    return jsonify(f"Success"),200
+       
+
 # generated data from Mock
 
 

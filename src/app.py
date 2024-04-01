@@ -117,6 +117,15 @@ def serve_any_other_file(path):
 
 
 
+@app.route('/property/all', methods=['GET'])
+def get_all_property():
+
+    all_property= Property.query.all()
+    final= list(map(lambda x: x.serialize(), all_property))
+   
+    return  jsonify(final)
+
+
 @app.route('/user/all', methods=['GET'])
 def get_all_host():
 
@@ -159,22 +168,27 @@ def add_newuser_load():
      
 
 
-@app.route('/property/new/load', methods=['POST'])
-def add_newproperty_load():
-    request_body=request.json
-    for el in request_body:
+# @app.route('/property/new/load/test', methods=['POST'])
+# def add_newproperty_load2():
+#     request_body=request.json
+#     print('function works')
+    
+#     # for el in request_body:
               
         
-        test_property= Property.query.filter_by(address=el['address']).first()
+#         # test_property= Property.query.filter_by(name=el['name']).first()
     
-        if(test_property):
-           print(f"This one already exists")
+#         # if(test_property):
+#         #    print(f"This one already exists")
         
-        else:
-            newU=Property(name=el['name'], city=el['city'], state=el['state'], beds= el['beds'],bath= el['bath'], address=el['address'], img=el['images']  )
-            db.session.add(newU)
-            db.session.commit()
-    return jsonify(f"Success"), 200         
+#         # else:
+#         # newP=Property(user_id= el['user_id'], name=el['name'], city=el['city'], state=el['state'], beds= el['beds'], bath= el['bath'], address=el['address'], img=el['images']  )
+#         # db.session.add(newP)
+#         # db.session.commit()
+#         #print('This is our test ', el)
+            
+#     return jsonify(request_body),200
+           
      
 
 

@@ -66,7 +66,7 @@ class Property(db.Model):
     beds = db.Column(db.Integer, nullable=False)
     bath = db.Column(db.Integer, nullable=False)
     img = db.Column(db.String(10000), unique=True, nullable=True)
-    address = db.Column(db.String(120), unique=True, nullable=False)
+    address = db.Column(db.String(120), unique=False, nullable=False)
     user_link = db.relationship('User')
         
 
