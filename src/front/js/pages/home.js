@@ -12,8 +12,7 @@ export const Home = () => {
 
 
 	useEffect(() => {
-		let r=Math.floor(Math.random()*6);
-		console.log('test that '+r)
+		
 	}, []);
 	
 function fetch_listing(){
@@ -52,20 +51,20 @@ function fetch_listing(){
 				
                     each_house.user_id=u;
 					each_house.name=el.name;
-					each_house.baths=b;
-					each_house.bed=be;
+					each_house.bath=b;
+					each_house.beds=be;
 					each_house.city= cityR[r];
 					each_house.state= stateR[r];
 					each_house.address=el.address;
-					each_house.images= el.images[0]+'   '+ el.images[1]+'  '+el.images[2];
+					each_house.images= el.images[0]+'   '+ el.images[1]+'  '+el.images[2]+' '+el.images[3]+" "+el.images[4];
 
 					test2.push(each_house);
 				
 				})
 				console.log(test2)
-				// console.log('Test starts here')
-				// console.log(test2)
-				// console.log('Test ends here')
+				setTestApi(test2);
+				localStorage.setItem('property_list', test2);
+				
 				
 						
 			})
@@ -74,20 +73,20 @@ function fetch_listing(){
 	
 }
 
-function load_property(load_pro){
-	let test=[load_pro[0]];
+function load_property(){
+	let test=[... testApi];
+	console.log(test);
 
 	fetch('https://super-doodle-pj9rp965rvw2r75g-3001.app.github.dev/property/new/load',
 		{
 			method: 'POST',
 			body: JSON.stringify(test),
-          
             headers: {
                 'Content-Type': 'application/json'
 			}
 		})
 			.then(res => {
-				if (!res.ok) throw Error(res.statusText);
+				if (!res.ok) console.log(res.statusText);
 				return res.json();
 			})
 			.then(response => {
@@ -105,7 +104,8 @@ function load_property(load_pro){
 
 <div className="container">
 	<h1>test</h1>
-	<button type="button" className="btn btn-secondary" onClick={()=>fetch_listing()}>Fetch api</button>
+	<button type="button" className="btn btn-secondary" onClick={()=>fetch_listing()}>Fetch api</button><br/><br/><br/>
+	<button type="button" className="btn btn-secondary" onClick={()=>load_property()}>Test property</button>
 
 </div>
 
