@@ -77,6 +77,7 @@ function load_property(){
 	
 	let test = JSON.parse(localStorage.getItem('property_list'));
 	let test2 =localStorage.getItem('property_list');
+	
 	console.log('the thing below is my local storage : ');
 	console.log(test);
 
