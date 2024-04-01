@@ -63,7 +63,8 @@ function fetch_listing(){
 				})
 				console.log(test2)
 				setTestApi(test2);
-				localStorage.setItem('property_list', test2);
+				let string_list = JSON.stringify(test2)
+				localStorage.setItem('property_list',string_list);
 				
 				
 						
@@ -74,13 +75,16 @@ function fetch_listing(){
 }
 
 function load_property(){
-	let test=[... testApi];
+	
+	let test = JSON.parse(localStorage.getItem('property_list'));
+	let test2 =localStorage.getItem('property_list');
+	console.log('the thing below is my local storage : ');
 	console.log(test);
 
 	fetch('https://super-doodle-pj9rp965rvw2r75g-3001.app.github.dev/property/new/load',
 		{
 			method: 'POST',
-			body: JSON.stringify(test),
+			body: test2,
             headers: {
                 'Content-Type': 'application/json'
 			}
