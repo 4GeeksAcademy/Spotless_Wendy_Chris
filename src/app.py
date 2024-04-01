@@ -6,7 +6,8 @@ from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
-from api.models import db, User
+
+from api.models import db, User, Worker, Property
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
@@ -113,6 +114,77 @@ def serve_any_other_file(path):
     response = send_from_directory(static_file_dir, path)
     response.cache_control.max_age = 0  # avoid cache memory
     return response
+
+
+
+@app.route('/user/all', methods=['GET'])
+def get_all_host():
+
+    all_user= User.query.all()
+    final= list(map(lambda x: x.serialize(), all_user))
+   
+    return  jsonify(final)
+
+
+@app.route('/worker/all', methods=['GET'])
+def get_all_worker():
+
+    all_user= Worker.query.all()
+    final= list(map(lambda x: x.serialize(), all_user))
+   
+    return  jsonify(final)
+
+
+
+
+
+
+
+@app.route('/user/new/load', methods=['POST'])
+def add_newuser_load():
+    request_body=request.json
+    for el in request_body:
+              
+        
+        test_user= User.query.filter_by(email=el['email']).first()
+    
+        if(test_user):
+               print(f"This one already exists"), 500
+        
+        else:
+                 newU=User (full_name=el['name'], email=el['email'],password= el['password'], phone=el['phone'], address=el['address']  )
+                 db.session.add(newU)
+                 db.session.commit()
+    return jsonify(f"Success"), 200        
+     
+
+
+@app.route('/property/new/load', methods=['POST'])
+def add_newproperty_load():
+    request_body=request.json
+    for el in request_body:
+              
+        
+        test_property= Property.query.filter_by(address=el['address']).first()
+    
+        if(test_property):
+           print(f"This one already exists")
+        
+        else:
+            newU=Property(name=el['name'], city=el['city'], state=el['state'], beds= el['beds'],bath= el['bath'], address=el['address'], img=el['images']  )
+            db.session.add(newU)
+            db.session.commit()
+    return jsonify(f"Success"), 200         
+     
+
+
+
+
+
+
+
+
+
 
 
 # this only runs if `$ python src/main.py` is executed
