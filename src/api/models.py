@@ -5,12 +5,12 @@ db = SQLAlchemy()
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
     full_name = db.Column(db.String(120), unique=True, nullable=False)
     phone = db.Column(db.String(120), unique=True, nullable=False)
-    img = db.Column(db.String(300), unique=True, nullable=True)
-    billing = db.Column(db.String(300), unique=True, nullable=False)
-    address = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(80), unique=False, nullable=False)
+    address = db.Column(db.String(120), unique=False, nullable=True)
+    img = db.Column(db.String(300))
+    billing = db.Column(db.String(300), unique=True)
     
 
     def __repr__(self):
@@ -34,9 +34,10 @@ class Worker(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     full_name = db.Column(db.String(120), unique=True, nullable=False)
     phone = db.Column(db.String(120), unique=True, nullable=False)
+    address = db.Column(db.String(120), unique=True, nullable=True)
     img = db.Column(db.String(300), unique=True, nullable=True)
-    banking_info = db.Column(db.String(300), unique=True, nullable=False)
-    address = db.Column(db.String(120), unique=True, nullable=False)
+    banking_info = db.Column(db.String(300), unique=True, nullable=True)
+   
     ranking = db.Column(db.Float, nullable=True)
 
     def __repr__(self):
@@ -60,14 +61,13 @@ class Property(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
     name = db.Column(db.String(120), unique=True, nullable=False)
-    city = db.Column(db.String(120), unique=True, nullable=False)
-    state = db.Column(db.String(120), unique=True, nullable=False)
+    city = db.Column(db.String(120), nullable=False)
+    state = db.Column(db.String(120), nullable=False)
     beds = db.Column(db.Integer, nullable=False)
     bath = db.Column(db.Integer, nullable=False)
     img = db.Column(db.String(10000), unique=True, nullable=True)
     address = db.Column(db.String(120), unique=True, nullable=False)
-    
-    user_link = db.relationship('User', backref='property', lazy=True)
+    user_link = db.relationship('User')
         
 
     def __repr__(self):
