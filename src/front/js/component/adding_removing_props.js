@@ -4,7 +4,7 @@ import { AppContext } from "../layout";
 import { Context } from "../store/appContext";
 
 
-export const AddContact = () => {
+export const AddProperty = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [state, setState] = useState("")
