@@ -143,24 +143,24 @@ final_load.push(each_listing);
    }
    console.log(final_load)
 
-   	fetch(process.env.BACKEND_URL + "/api/user/property/<idp>/listing/new",
-		{
-			method: 'POST',
-			body: JSON.stringify(final_load),
-            headers: {
-                'Content-Type': 'application/json'
-			}
-		})
-			.then(res => {
-				if (!res.ok) console.log(res.statusText);
-				return res.json();
-			})
-			.then(response => {
-				console.log(response)
+   	// fetch(process.env.BACKEND_URL + "/api/user/property/<idp>/listing/new",
+	// 	{
+	// 		method: 'POST',
+	// 		body: JSON.stringify(final_load),
+    //         headers: {
+    //             'Content-Type': 'application/json'
+	// 		}
+	// 	})
+	// 		.then(res => {
+	// 			if (!res.ok) console.log(res.statusText);
+	// 			return res.json();
+	// 		})
+	// 		.then(response => {
+	// 			console.log(response)
 					
-					})
+	// 				})
 	
-			.catch(error => console.log(error));
+	// 		.catch(error => console.log(error));
 
 
 }
