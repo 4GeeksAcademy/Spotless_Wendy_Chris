@@ -9,6 +9,7 @@ export const Login = () => {
 	const [userE, setUserE] = useState('')
     const [userP, setUserP] = useState('')
 	const [signupEffect, setSignupEffect] = useState('')
+	const [user, setUser] = useState({})
 	
 
 
@@ -21,7 +22,7 @@ export const Login = () => {
         let log_info= {email:userE,
 			password: userP}
    
-        fetch('https://super-halibut-pggprg9v4g426vw-3001.app.github.dev/token', {
+        fetch('https://crispy-computing-machine-x99vw9x6gvjf94v-3001.app.github.dev/token', {
                 method: 'POST',
                 body: JSON.stringify(log_info), 
                 headers: {
@@ -29,16 +30,19 @@ export const Login = () => {
                 }
             })
                 .then(res => {
-                    if (!res.ok) throw Error(res.statusText);
+                    if (!res.ok) console.log(res.statusText);
                     return res.json();
                 })
-                .then(response => {
+                .then(responseAsJson => {
                  //context.setCurrentUser(response);
                 // navigate('/home')
-				
-				  
-                
-                } )
+				console.log("This is the login response:")
+				console.log(responseAsJson)	
+				setUser(responseAsJson)
+				} )
+				.then(()=> {
+				   // navigate('/home')			   		 
+				   } )
                 .catch(error =>  console.log(error));    
            
         // }
