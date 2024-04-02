@@ -167,7 +167,28 @@ def add_newuser_load():
                  newU=User (full_name=el['name'], email=el['email'],password= el['password'], phone=el['phone'], address=el['address']  )
                  db.session.add(newU)
                  db.session.commit()
-    return jsonify(f"Success"), 200        
+    return jsonify(f"Success"), 200
+
+@app.route('/user/<int:id>/property', methods=['GET'])
+def get_user_property(id):
+    get_property= Property.query.filter_by(user_id=id)
+    all_property= list(map(lambda x: x.serialize(), get_property))
+    return jsonify(all_property), 200
+
+
+@app.route('/user/<id>/property/<idp>', methods=['DELETE'])
+def delete_user_property(id, idp):
+    delete_property=Property.query.get(idp)
+    db.session.delete(delete_property)
+    db.session.commit()
+    get_property= Property.query.filter_by(user_id=id)
+    all_property= list(map(lambda x: x.serialize(), get_property))
+    return jsonify(
+            {
+            "msg": "success",
+            "user_properties": all_property
+            }
+        ), 200        
      
 
 

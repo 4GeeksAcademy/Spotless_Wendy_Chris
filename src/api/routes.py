@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Worker, Property, Payment
+from api.models import db, User, Worker, Property, Payment, Listing
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 
@@ -95,7 +95,7 @@ def remove_Property(id,idP):
 
 
 
-
+# Bulk add properties below
 @api.route('property/new/load', methods=['POST'])
 def add_newproperty_load():
     request_body=request.json
@@ -116,6 +116,20 @@ def add_newproperty_load():
           print('This one passed ')
             
     return jsonify(f"Success"),200
+
+# Add a new listing for specific user below
+@api.route('/user/property/listing/new', methods=['POST'])
+def add_user_listing():
+    request_body=request.json
+    for el in request_body:
+        test_listing= Listing.query.filter_by(property_id=el['property_id'],date_needed=el['date_needed']).first()
+        if test_listing:
+            print('This one Already exist')
+        else:
+            newL=Listing(property_id=el['property_id'], date_needed= el['date_needed'], special_note=el['special_note'],status=el['status'])
+            db.session.add(newL)
+            db.session.commit()
+    return jsonify(f"Success"), 200
        
 
 # generated data from Mock
