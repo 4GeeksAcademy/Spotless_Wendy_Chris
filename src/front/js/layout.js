@@ -26,7 +26,8 @@ const Layout = () => {
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
 
-
+    const [myListings, setMyListings] = useState([])
+    const [myProperties, setMyProperties] = useState([])
     const [currentUser, setCurrentUser] = useState({
         email: "dmeasor1@cisco.com",
         full_name: "Dov Measor",

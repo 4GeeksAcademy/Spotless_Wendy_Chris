@@ -11,7 +11,7 @@ import { AppContext } from "../layout";
 
 
 export const Login = () => {
-	const { currentUser, setCurrentUser, token, setToken } = useContext(AppContext);
+	const { user, setUser, token, setToken } = useContext(AppContext);
 
 	const navigate = useNavigate();
 
@@ -52,7 +52,7 @@ export const Login = () => {
 				// navigate('/home')
 				console.log("This is the login response:")
 				console.log(responseAsJson)
-				setCurrentUser(responseAsJson)
+				setUser(responseAsJson)
 				var token = responseAsJson.token
 				setToken(token)
 
@@ -74,23 +74,20 @@ export const Login = () => {
 	}
 
 
+	function get_username(val) {
+		let test = val.target.value;
+		setUserU(test)
+	}
 
+	function get_email(val) {
+		let test = val.target.value;
+		setUserE(test)
+	}
 
-    function get_username(val) {
-        let user_name = val.target.value;
-        setUserU(user_name)
-    }
-    
-    function get_email(val) {
-        let user_email = val.target.value;
-        setUserE(user_email)
-    }
-
-    function get_password(val) {
-        let user_password = val.target.value;
-        setUserP(user_password)
-    }
-
+	function get_password(val) {
+		let test = val.target.value;
+		setUserP(test)
+	}
 
 
 	function sign_up_function() {

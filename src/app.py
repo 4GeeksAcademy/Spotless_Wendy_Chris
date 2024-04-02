@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
 
-from api.models import db, User, Worker, Property
+from api.models import db, User, Worker, Property, Listing
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
@@ -90,9 +90,6 @@ def protected():
         "id": user.id, "email": user.email,
          "phone": user.phone, "full_name": user.full_name
           }), 200
-#     return jsonify({
-#         "msg": "successfully authenticated",
-#         "id": user.id, "email": user.email }), 200
 
 
 # add the admin
@@ -105,7 +102,6 @@ setup_commands(app)
 app.register_blueprint(api, url_prefix='/api')
 
 # Handle/serialize errors like a JSON object
-
 
 @app.errorhandler(APIException)
 def handle_invalid_usage(error):
@@ -160,6 +156,15 @@ def get_all_worker():
     return  jsonify(final)
 
 
+@app.route('/listing/all', methods=['GET'])
+def get_all_listing():
+
+    all_listing= Listing.query.all()
+    final= list(map(lambda x: x.serialize(), all_listing))
+   
+    return  jsonify(final)
+
+
 
 
 
@@ -206,6 +211,59 @@ def add_newuser_load():
 #     return jsonify(request_body),200
            
      
+
+@app.route('/user/<int:id>/property', methods=['GET'])
+def get_user_property(id):
+    get_property= Property.query.filter_by(user_id=id)
+    all_property= list(map(lambda x: x.serialize(), get_property))
+    return jsonify(all_property), 200
+
+
+@app.route('/user/<int:id>/property/<idp>', methods=['DELETE'])
+def delete_user_property(idp):
+    delete_property=Property.query.get(idp)
+    db.session.delete(delete_property)
+    db.session.commit()
+
+    return jsonify(f"Success"), 200
+
+
+
+@app.route('/user/<int:id>/listing', methods=['GET'])
+def get_user_listing(id):
+    get_listing= Listing.query.filter_by(user_id=id)
+    all_listing= list(map(lambda x: x.serialize(), get_listing))
+
+    return jsonify(all_listing), 200
+
+
+# @app.route('/user/property/<idp>/listing/new', methods=['POST'])
+# def add_user_listing(idp):
+#     request_body=request.json
+    
+#     for el in request_body:
+#         test_listing= Listing.query.filter_by(property_id=el['property_id'],date_needed=el['date_needed']).first()
+
+#         if test_listing:
+#             print('This one Already exist')
+#         else:    
+         
+#             newL=Listing(property_id=el['property_id'], date_needed= el['date_needed'], special_note=el['special_note'],status=el['status'])
+#             db.session.add(newL)
+#             db.session.commit()
+
+#     return jsonify(f"Success"), 200
+
+
+
+
+
+
+@app.route('/user/<int:id>/property', methods=['GET'])
+def see_available_listing(id):
+    get_property= Listing.query.filter_by(user_id=id)
+    all_property= list(map(lambda x: x.serialize(), get_property))
+    return jsonify(all_property), 200
 
 
 

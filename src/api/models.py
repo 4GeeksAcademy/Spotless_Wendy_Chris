@@ -95,7 +95,7 @@ class Listing(db.Model):
     property_id = db.Column(db.Integer, db.ForeignKey('property.id'), nullable=False)
 
     date_needed = db.Column(db.String(120), nullable=False)
-    special_note = db.Column(db.String(120), nullable=True)
+    special_note = db.Column(db.String(300), nullable=True)
     status = db.Column(db.Boolean, default=True)
     property_link = db.relationship('Property', backref='listing', lazy=True)
         
@@ -107,8 +107,8 @@ class Listing(db.Model):
         return {
             "id": self.id,
             "property_id": self.property_id,
-            "date_needed": self.cdate_needed,
-            "special_note": self.sspecial_note,
+            "date_needed": self.date_needed,
+            "special_note": self.special_note,
             "status": self.status
             # do not serialize the password, its a security breach
         }

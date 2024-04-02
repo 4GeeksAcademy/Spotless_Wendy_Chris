@@ -63,19 +63,19 @@ def add_newuser():
 
 
 @api.route('/user/<id>/property/all', methods=['GET'])
-def get_user_property():
+def get_user_property(id):
     get_property= Property.query.filter_by(user_id=id)
     all_property= list(map(lambda x: x.serialize, get_property))
 
     return jsonify(all_property), 200
 
 
-@api.route('/user/<id>/listing/all', methods=['GET'])
-def get_user_listing():
-    get_listing= Listing.query.filter_by(user_id=id)
-    all_listing= list(map(lambda x: x.serialize, get_listing))
+# @api.route('/user/<id>/listing/all', methods=['GET'])
+# def get_user_listing():
+#     get_listing= Listing.query.filter_by(property_id=id)
+#     all_listing= list(map(lambda x: x.serialize, get_listing))
 
-    return jsonify(all_listing), 200
+#     return jsonify(all_listing), 200
 
 
 
@@ -139,6 +139,25 @@ def add_newproperty_load():
           print('This one passed ')
             
     return jsonify(f"Success"),200
+
+
+
+@api.route('/user/property/<idp>/listing/new', methods=['POST'])
+def add_user_listing(idp):
+    request_body=request.json
+    
+    for el in request_body:
+        test_listing= Listing.query.filter_by(property_id=el['property_id'],date_needed=el['date_needed']).first()
+
+        if test_listing:
+            print('This one Already exist')
+        else:    
+         
+            newL=Listing(property_id=el['property_id'], date_needed= el['date_needed'], special_note=el['special_note'],status=el['status'])
+            db.session.add(newL)
+            db.session.commit()
+
+    return jsonify(f"Success"), 200
        
 
 # generated data from Mock
