@@ -7,10 +7,18 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Login } from "./pages/login";
 import { Single } from "./pages/single";
+import { Landing } from "./pages/landing";
+
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { useState } from "react";
+
+
+export const AppContext = React.createContext(null);
+
+
 
 //create your first component
 const Layout = () => {
@@ -18,16 +26,23 @@ const Layout = () => {
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
 
+
+    const [user, setUser] = useState({})
+
+    const [token, setToken] = useState("")
+
     if(!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL/ >;
 
     return (
         <div>
+        <AppContext.Provider value={{ user, setUser, token, setToken}}>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
                         <Route element={<Login />} path="/login" />
                         <Route element={<Home />} path="/" />
+                        <Route element={<Landing />} path="/landing" />
                         <Route element={<Demo />} path="/demo" />          
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
@@ -35,6 +50,7 @@ const Layout = () => {
                     <Footer />
                 </ScrollToTop>
             </BrowserRouter>
+            </AppContext.Provider>
         </div>
     );
 };
