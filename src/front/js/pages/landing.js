@@ -11,7 +11,7 @@ import { AppContext } from "../layout";
 
 
 export const Landing = () => {
-    const { user, setUser, token, setToken } = useContext(AppContext);
+    const { currentUser, setCurrentUser, token, setToken } = useContext(AppContext);
 
     const navigate = useNavigate();
 
@@ -100,8 +100,8 @@ export const Landing = () => {
         sign_in_panel.classList.remove('right-panel-active');
     }
 
-    if (user) {
-        var trunc_email = user.email.split("@")
+    if (currentUser) {
+        var trunc_email = currentUser.email.split("@")
         var name = trunc_email[0]
     }
 
