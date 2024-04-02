@@ -41,18 +41,20 @@ const Layout = () => {
 
     const [myProperties, setMyProperties] = useState([])
 
+    const [role, setRole] = useState("")
+
     const [token, setToken] = useState("")
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
     return (
-        <div>
+        <div className="container">
             {/* Export global variables below */}
             <AppContext.Provider value={
                 {
                     currentUser, setCurrentUser, token, setToken,
-                    myListings, setMyListings,
-                    myProperties, setMyProperties
+                    myListings, setMyListings, myProperties, setMyProperties,
+                    role, setRole
                 }
             }>
                 <BrowserRouter basename={basename}>
