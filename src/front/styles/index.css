@@ -1,3 +1,55 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+
+
+.myButton1 {
+    width: 169px;
+    background-color: rgba(145, 145, 145, 0.69);
+    padding: 7px;
+    color: rgb(63, 49, 60);
+    border-radius: 7px;
+    display: block;
+    margin:auto;
+}
+
+.myButton1:hover {
+    cursor: pointer;
+    background-color: rgba(145, 145, 145, 0.89);
+    color: rgb(255, 255, 255);
+    box-shadow: 0 5px 15px rgba(145, 92, 182, 0.59);
+}
+
+.myMenu {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: rgb(233, 233, 233);
+    color: rgb(82, 82, 82);
+   
+}
+
+.myMenu:Hover {
+    cursor: pointer;
+    background-color: rgb(140, 139, 139);
+    color: rgb(255, 255, 255);
+    box-shadow: 0 5px 15px rgba(145, 92, 182, 0.59);
+}
+
+.activeMenu {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: rgb(97, 97, 97);
+    color: rgb(255, 255, 255);
+   
+}
+
+.activeMenu:Hover {
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    box-shadow: 0 5px 15px rgba(145, 92, 182, 0.59);
+}
+
+.dashComponents {
+    background-color: rgb(97, 97, 97);
+    color: rgb(255, 255, 255);
+}
