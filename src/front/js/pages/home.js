@@ -22,7 +22,7 @@ function fetch_listing(){
 		{
 			method: 'GET',
 			headers: {
-				'X-RapidAPI-Key': 'b7d8c24116msh18d47855c91a4c6p129b19jsn25ca23c193e6',
+				'X-RapidAPI-Key': ' insert key here ',
 				'X-RapidAPI-Host': 'airbnb13.p.rapidapi.com'
 			}
 		
@@ -45,7 +45,7 @@ function fetch_listing(){
 					let each_house={};
 
 					let r=Math.floor(Math.random()*6);
-					let u=Math.floor(Math.random()*12)+1;
+					let u=Math.floor(Math.random()*11)+1;
 					let b=Math.floor(Math.random()*4)+1;
 					let be=Math.floor(Math.random()*5)+1;
 				
@@ -63,11 +63,8 @@ function fetch_listing(){
 				})
 				
 				let string_list = JSON.stringify(test2)
-				localStorage.setItem('property_list',string_list);
-				
-				
-						
-			})
+				localStorage.setItem('property_list',string_list);	
+				})
 	
 			.catch(error => console.log(error));
 	
@@ -81,7 +78,7 @@ function load_property(){
 	console.log('the thing below is my local storage : ');
 	console.log(test);
 
-	fetch(process.env.BACKEND_URL + "api/property/new/load",
+	fetch(process.env.BACKEND_URL + "/api/property/new/load",
 		{
 			method: 'POST',
 			body: test2,
