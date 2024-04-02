@@ -22,7 +22,8 @@ export const Home = () => {
 			{
 				method: 'GET',
 				headers: {
-					'X-RapidAPI-Key': '3120cf29c6msh09f9843c6d6f37fp18c3c0jsneebc5116c467',
+
+					'X-RapidAPI-Key': ' insert key here ',
 					'X-RapidAPI-Host': 'airbnb13.p.rapidapi.com'
 				}
 
