@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Worker, Property, Payment
+from api.models import db, User, Worker, Property, Payment, Listing
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 
@@ -64,11 +64,22 @@ def add_newuser():
 
 @api.route('/user/<id>/property/all', methods=['GET'])
 def get_user_property():
-    request_body=request.json   
     get_property= Property.query.filter_by(user_id=id)
     all_property= list(map(lambda x: x.serialize, get_property))
 
     return jsonify(all_property), 200
+
+
+@api.route('/user/<id>/listing/all', methods=['GET'])
+def get_user_listing():
+    get_listing= Listing.query.filter_by(user_id=id)
+    all_listing= list(map(lambda x: x.serialize, get_listing))
+
+    return jsonify(all_listing), 200
+
+
+
+
 
 
 
