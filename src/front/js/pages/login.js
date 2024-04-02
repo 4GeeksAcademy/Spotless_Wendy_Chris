@@ -105,7 +105,7 @@ export const Login = () => {
 		<>
 			<div className="container" id='container'>
 				<div className="form-container sign-up-container">
-					<form action="#">
+					<form>
 						<h4>Create Account</h4>
 						<div className="social-container">
 							<a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
@@ -121,7 +121,7 @@ export const Login = () => {
 					</form>
 				</div>
 				<div className="form-container sign-in-container">
-					<form action="#">
+					<form>
 						<h1>Sign in</h1>
 						<div className="social-container">
 							<a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
@@ -132,7 +132,11 @@ export const Login = () => {
 						<input type="email" placeholder="Email" value={userE} onChange={(e) => get_email(e)} />
 						<input type="password" placeholder="Password" value={userP} onChange={(e) => get_password(e)} />
 						<a href="#">Forgot your password?</a>
-						<button onClick={() => login_function()}>Sign In</button>
+						<button onClick={(event) => {
+							event.preventDefault();
+							login_function()
+						}
+						}>Sign In</button>
 					</form>
 				</div>
 				<div className="overlay-container">
