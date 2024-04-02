@@ -64,7 +64,8 @@ def create_token():
     return jsonify({"msg": "successfully authenticated",
                     "token": access_token,
                     "id": user.id,
-                    "email": user.email })
+                    "email": user.email,
+                     "phone": user.phone, "full_name": user.full_name })
 
 
  # Protect a route with jwt_required, which will kick out requests without a valid JWT
@@ -77,7 +78,9 @@ def protected():
     
     return jsonify({
         "msg": "successfully authenticated",
-        "id": user.id, "email": user.email }), 200
+        "id": user.id, "email": user.email,
+         "phone": user.phone, "full_name": user.full_name
+          }), 200
 
 # add the admin
 setup_admin(app)
