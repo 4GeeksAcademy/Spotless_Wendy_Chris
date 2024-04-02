@@ -13,7 +13,7 @@ from api.admin import setup_admin
 from api.commands import setup_commands
 
 
-from flask_jwt_extended import create_access_token
+#from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
@@ -47,28 +47,37 @@ app.config["JWT_SECRET_KEY"] = "super-fancy-secret"  # Change this "super secret
 jwt = JWTManager(app)
 
 # Authenticate user and generate token
-@app.route("/token", methods=["POST"])
-def create_token():
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
+# @app.route("/token", methods=["POST"])
+# def create_token():
+#     email = request.json.get("email", None)
+#     password = request.json.get("password", None)
 
-    # Query your database for username and password
-    user = User.query.filter_by(email=email, password=password).first()
+#     # Query your database for username and password
+#     user = User.query.filter_by(email=email, password=password).first()
 
-    if user is None:
-        # The user was not found on the database
-        return jsonify({"msg": "Bad username or password"}), 401
+#     if user is None:
+#         # The user was not found on the database
+#         return jsonify({"msg": "Bad username or password"}), 401
     
+
     # Create a new token with the user id inside
-    access_token = create_access_token(identity=user.id)
-    return jsonify({"msg": "successfully authenticated",
-                    "token": access_token,
-                    "id": user.id,
-                    "email": user.email,
-                     "phone": user.phone, "full_name": user.full_name })
+    # access_token = create_access_token(identity=user.id)
+    # return jsonify({"msg": "successfully authenticated",
+    #                 "token": access_token,
+    #                 "id": user.id,
+    #                 "email": user.email,
+    #                  "phone": user.phone, "full_name": user.full_name })
+
+#     # Create a new token with the user id inside
+#     access_token = create_access_token(identity=user.id)
+#     return jsonify({"msg": "successfully authenticated",
+#                     "token": access_token,
+#                     "id": user.id,
+#                     "email": user.email })
 
 
- # Protect a route with jwt_required, which will kick out requests without a valid JWT
+
+ #Protect a route with jwt_required, which will kick out requests without a valid JWT
 @app.route("/auth/user", methods=["GET"])
 @jwt_required()
 def protected():
@@ -81,6 +90,10 @@ def protected():
         "id": user.id, "email": user.email,
          "phone": user.phone, "full_name": user.full_name
           }), 200
+#     return jsonify({
+#         "msg": "successfully authenticated",
+#         "id": user.id, "email": user.email }), 200
+
 
 # add the admin
 setup_admin(app)

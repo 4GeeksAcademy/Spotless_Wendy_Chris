@@ -74,20 +74,23 @@ export const Login = () => {
 	}
 
 
-	function get_username(val) {
-		let test = val.target.value;
-		setUserU(test)
-	}
 
-	function get_email(val) {
-		let test = val.target.value;
-		setUserE(test)
-	}
 
-	function get_password(val) {
-		let test = val.target.value;
-		setUserP(test)
-	}
+    function get_username(val) {
+        let user_name = val.target.value;
+        setUserU(user_name)
+    }
+    
+    function get_email(val) {
+        let user_email = val.target.value;
+        setUserE(user_email)
+    }
+
+    function get_password(val) {
+        let user_password = val.target.value;
+        setUserP(user_password)
+    }
+
 
 
 	function sign_up_function() {
