@@ -59,6 +59,18 @@ def add_newuser():
              db.session.add(newU)
              db.session.commit()
              return jsonify(f"Success"), 200
+        
+
+
+@api.route('/user/<id>/property/all', methods=['GET'])
+def get_user_property():
+    request_body=request.json   
+    get_property= Property.query.filter_by(user_id=id)
+    all_property= list(map(lambda x: x.serialize, get_property))
+
+    return jsonify(all_property), 200
+
+
 
 @api.route('/user/<id>/new/property', methods=['POST'])
 def add_newProperty(id):
