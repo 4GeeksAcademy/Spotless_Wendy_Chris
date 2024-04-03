@@ -5,6 +5,7 @@ import "../../styles/home.css";
 
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../layout";
+import { AddProperty } from "../component/add_prop";
 
 
 
@@ -110,6 +111,7 @@ export const Landing = () => {
                         <div className="col-10 text-center dashComponents fs-3"
                             style={menu == "properties" ? { display: "block" } : { display: "none" }}
                         >My Properties
+                            <div><AddProperty /></div>
                             <span className="myButton2 mt-5">Add new property</span>
                         </div>
                         <div className="col-10 text-center dashComponents fs-3"

@@ -202,11 +202,11 @@ def add_newworker_load():
         request_body
         ), 200
 
-@app.route('/user/<int:id>/property', methods=['GET'])
-def get_user_property(id):
-    get_property= Property.query.filter_by(user_id=id)
-    all_property= list(map(lambda x: x.serialize(), get_property))
-    return jsonify(all_property), 200
+# @app.route('/user/<int:id>/property', methods=['GET'])
+# def get_user_property(id):
+#     get_property= Property.query.filter_by(user_id=id)
+#     all_property= list(map(lambda x: x.serialize(), get_property))
+#     return jsonify(all_property), 200
 
 
 @app.route('/user/<id>/property/<idp>', methods=['DELETE'])
@@ -221,9 +221,8 @@ def delete_user_property(id, idp):
             "msg": "success",
             "user_properties": all_property
             }
-        ), 200        
+        ), 200
      
-
 
 # @app.route('/property/new/load/test', methods=['POST'])
 # def add_newproperty_load2():
@@ -248,20 +247,10 @@ def delete_user_property(id, idp):
            
      
 
-@app.route('/user/<int:id>/property', methods=['GET'])
-def get_user_property(id):
-    get_property= Property.query.filter_by(user_id=id)
-    all_property= list(map(lambda x: x.serialize(), get_property))
-    return jsonify(all_property), 200
 
 
-@app.route('/user/<int:id>/property/<idp>', methods=['DELETE'])
-def delete_user_property(idp):
-    delete_property=Property.query.get(idp)
-    db.session.delete(delete_property)
-    db.session.commit()
 
-    return jsonify(f"Success"), 200
+
 
 
 

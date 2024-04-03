@@ -69,18 +69,12 @@ def get_user_property(id):
 
     return jsonify(all_property), 200
 
-
 # @api.route('/user/<id>/listing/all', methods=['GET'])
 # def get_user_listing():
 #     get_listing= Listing.query.filter_by(property_id=id)
 #     all_listing= list(map(lambda x: x.serialize, get_listing))
 
 #     return jsonify(all_listing), 200
-
-
-
-
-
 
 
 @api.route('/user/<id>/new/property', methods=['POST'])
