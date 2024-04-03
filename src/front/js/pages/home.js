@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -69,6 +70,7 @@ export const Home = () => {
 
 			.catch(error => console.log(error));
 
+
 	}
 
 	function load_property() {
@@ -97,17 +99,19 @@ export const Home = () => {
 			})
 
 			.catch(error => console.log(error));
-
-	}
-
-
-
+}
 	return (
 
-		<div className="container">
-			<h1>test</h1>
-			<button type="button" className="btn btn-secondary" onClick={() => fetch_listing()}>Fetch api</button><br /><br /><br />
-			<button type="button" className="btn btn-secondary" onClick={() => load_property()}>Test property</button>
+<div className="container">
+	<h1>test</h1>
+	<button type="button" className="btn btn-secondary" onClick={()=>fetch_listing()}>Fetch api</button><br/><br/><br/>
+	<button type="button" className="btn btn-secondary" onClick={()=>load_property()}>Test property</button><br/><br/><br/>
+	<button type="button" className="btn btn-secondary" onClick={()=>load_listing()}>Add Listing randomly</button><br/><br/><br/>
+
+    <Link to='/dashboard'>
+	<button type="button" className="btn btn-secondary" >a Link to Dashboard</button>
+</Link>
+
 
 		</div>
 

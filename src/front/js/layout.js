@@ -8,6 +8,7 @@ import { Demo } from "./pages/demo";
 import { Login } from "./pages/login";
 import { Single } from "./pages/single";
 import { Landing } from "./pages/landing";
+import { Dashboard } from "./pages/dashboard";
 
 import injectContext from "./store/appContext";
 
@@ -27,7 +28,8 @@ const Layout = () => {
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
 
-
+    const [myListings, setMyListings] = useState([])
+    const [myProperties, setMyProperties] = useState([])
     const [currentUser, setCurrentUser] = useState({
         email: "dmeasor1@cisco.com",
         full_name: "Dov Measor",
@@ -37,9 +39,7 @@ const Layout = () => {
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMjA2NTYzNSwianRpIjoiNjU3YTJjNDQtMjE5Yy00NmI0LThkMTItZDk3NDRhNzFkODFiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MiwibmJmIjoxNzEyMDY1NjM1LCJjc3JmIjoiYWY3NDg2MmEtMjRkMC00ZTk1LWJlYjUtYjAwNjFhZjQ3N2NlIiwiZXhwIjoxNzEyMDY2NTM1fQ.PiFqu7nYF7sVFxUTpUsOazRhkK3frQWwBa0jsB32gmc"
     })
 
-    const [myListings, setMyListings] = useState([])
-
-    const [myProperties, setMyProperties] = useState([])
+ 
 
     const [role, setRole] = useState("")
 
@@ -63,12 +63,14 @@ const Layout = () => {
                         <Routes>
                             <Route element={<Login />} path="/login" />
                             <Route element={<Home />} path="/" />
+                            <Route element={<Dashboard />} path="/dashboard" />
                             <Route element={<Landing />} path="/landing" />
                             <Route element={<AddProperty />} path="/addproperty" />
                             <Route element={<Demo />} path="/demo" />
                             <Route element={<Single />} path="/single/:theid" />
                             <Route element={<h1>Not found!</h1>} />
                         </Routes>
+                        <Footer />
                     </ScrollToTop>
                 </BrowserRouter>
             </AppContext.Provider>

@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
 
-from api.models import db, User, Worker, Property
+from api.models import db, User, Worker, Property, Listing
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
@@ -46,7 +46,7 @@ db.init_app(app)
 app.config["JWT_SECRET_KEY"] = "super-fancy-secret"  # Change this "super secret" to something else!
 jwt = JWTManager(app)
 
-# Authenticate user and generate token
+#Authenticate user and generate token
 @app.route("/token", methods=["POST"])
 def create_token():
     email = request.json.get("email", None)
@@ -59,7 +59,8 @@ def create_token():
         # The user was not found on the database
         return jsonify({"msg": "Bad username or password"}), 401
     
-    # Create a new token with the user id inside
+
+   # Create a new token with the user id inside
     access_token = create_access_token(identity=user.id)
     return jsonify({"msg": "successfully authenticated",
                     "token": access_token,
@@ -68,7 +69,8 @@ def create_token():
                      "phone": user.phone, "full_name": user.full_name })
 
 
- # Protect a route with jwt_required, which will kick out requests without a valid JWT
+
+ #Protect a route with jwt_required, which will kick out requests without a valid JWT
 @app.route("/auth/user", methods=["GET"])
 @jwt_required()
 def protected():
@@ -82,6 +84,7 @@ def protected():
          "phone": user.phone, "full_name": user.full_name
           }), 200
 
+
 # add the admin
 setup_admin(app)
 
@@ -92,7 +95,6 @@ setup_commands(app)
 app.register_blueprint(api, url_prefix='/api')
 
 # Handle/serialize errors like a JSON object
-
 
 @app.errorhandler(APIException)
 def handle_invalid_usage(error):
@@ -143,6 +145,15 @@ def get_all_worker():
 
     all_user= Worker.query.all()
     final= list(map(lambda x: x.serialize(), all_user))
+   
+    return  jsonify(final)
+
+
+@app.route('/listing/all', methods=['GET'])
+def get_all_listing():
+
+    all_listing= Listing.query.all()
+    final= list(map(lambda x: x.serialize(), all_listing))
    
     return  jsonify(final)
 
@@ -236,6 +247,59 @@ def delete_user_property(id, idp):
 #     return jsonify(request_body),200
            
      
+
+@app.route('/user/<int:id>/property', methods=['GET'])
+def get_user_property(id):
+    get_property= Property.query.filter_by(user_id=id)
+    all_property= list(map(lambda x: x.serialize(), get_property))
+    return jsonify(all_property), 200
+
+
+@app.route('/user/<int:id>/property/<idp>', methods=['DELETE'])
+def delete_user_property(idp):
+    delete_property=Property.query.get(idp)
+    db.session.delete(delete_property)
+    db.session.commit()
+
+    return jsonify(f"Success"), 200
+
+
+
+@app.route('/user/<int:id>/listing', methods=['GET'])
+def get_user_listing(id):
+    get_listing= Listing.query.filter_by(user_id=id)
+    all_listing= list(map(lambda x: x.serialize(), get_listing))
+
+    return jsonify(all_listing), 200
+
+
+# @app.route('/user/property/<idp>/listing/new', methods=['POST'])
+# def add_user_listing(idp):
+#     request_body=request.json
+    
+#     for el in request_body:
+#         test_listing= Listing.query.filter_by(property_id=el['property_id'],date_needed=el['date_needed']).first()
+
+#         if test_listing:
+#             print('This one Already exist')
+#         else:    
+         
+#             newL=Listing(property_id=el['property_id'], date_needed= el['date_needed'], special_note=el['special_note'],status=el['status'])
+#             db.session.add(newL)
+#             db.session.commit()
+
+#     return jsonify(f"Success"), 200
+
+
+
+
+
+
+@app.route('/user/<int:id>/property', methods=['GET'])
+def see_available_listing(id):
+    get_property= Listing.query.filter_by(user_id=id)
+    all_property= list(map(lambda x: x.serialize(), get_property))
+    return jsonify(all_property), 200
 
 
 
