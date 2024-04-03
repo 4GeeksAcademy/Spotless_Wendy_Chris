@@ -1,16 +1,15 @@
-import React, { useContext, useState, useEffect, useNavigate } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
-import howto from "../../img/how-to.png";
 import "../../styles/home.css";
 import { AppContext } from "../layout";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom";
 
 export const Dashboard = () => {
 	const { store, actions } = useContext(Context);
     const { currentUser, myProperties, setMyProperties, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
 
 	useEffect(() => {
@@ -51,18 +50,51 @@ console.log(finalProperty);
 	}, []);
 
 	
+function delete_property(id_to_delete){
+  	fetch(process.env.BACKEND_URL + "/api/user/delete/property/"+id_to_delete,
+		{
+			method: 'DELETE',
+			body: id_to_delete,
+            headers: {
+                'Content-Type': 'application/json'
+			}
+		})
+			.then(res => {
+				if (!res.ok) console.log(res.statusText);
+				return res.json();
+			})
+			.then(response => {
+				console.log(response)
+					
+					})
+	
+			.catch(error => console.log(error));
+
+}
+
+
+
 	return (
-<div >
+    <div> 
+      <div className="add_property_class_div">
+      <button class="button-24" role="button" onClick={()=>navigate("/")}>Add New Property</button>
+      </div>
+<div class="product-list-container">
+
 
     {myProperties.map((element, index)=>
 
 
 
 <div class="card" style={{width: "18rem" }}>
+
+
+
+
 <div id="carouselExampleSlidesOnly" class="carousel slide h-50" data-bs-ride="carousel">
   <div class="carousel-inner" style={{height: "10rem" }}>
-    <div class="carousel-item active">
-      <img src={element.image1} class="d-block w-100 " alt="..."/>
+   <div class="carousel-item active">
+     <img src={element.image1} class="d-block w-100 " alt="..."/>
     </div>
     <div class="carousel-item">
       <img src={element.image2} class="d-block w-100 " alt="..."/>
@@ -71,13 +103,27 @@ console.log(finalProperty);
       <img src={element.image3} class="d-block w-100  " alt="..."/>
     </div>
   </div>
-</div>
+ </div>
+
+
+
+
+
+
+
+
  
   <div class="card-body">
     <h5 class="card-title">{element.name}</h5>
     <p class="card-text">Address: {element.address}<br/>
       City: {element.city}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+      <div>
+      <button class="button-24" role="button" >Add to Listing</button>
+      <button className="btn" onClick={() =>delete_property(element.id)}> 
+               <i className="fas fa-trash-alt fa-bounce fa-xl" />
+                   </button> 
+      </div>
+   
   </div>
 </div>
 
@@ -87,9 +133,17 @@ console.log(finalProperty);
 
 
 
-  
 
-
+</div>
 </div>
 	);
 };
+
+
+
+
+
+
+
+
+
