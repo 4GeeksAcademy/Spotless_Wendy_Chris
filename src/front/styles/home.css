@@ -32,7 +32,7 @@
 .product-list-container {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: flex-start;
 	row-gap: 5px;
 	gap: 10px;
   }
@@ -48,12 +48,12 @@
 	cursor: pointer;
 	display: inline-block;
 	font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
-	font-size: 16px;
-	font-weight: 800;
-	line-height: 16px;
-	min-height: 40px;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 11px;
+	min-height: 27px;
 	outline: 0;
-	padding: 12px 14px;
+	padding: 9px 10px;
 	text-align: center;
 	text-rendering: geometricprecision;
 	text-transform: none;
@@ -170,7 +170,7 @@ input {
 			0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
-	width: 999px;
+	width: 1111px;
 	max-width: 100%;
 	min-height: 480px;
 }

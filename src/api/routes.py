@@ -98,21 +98,15 @@ def remove_Property(idP):
 def add_newproperty_load():
     property_request=request.json
     print('function works')
-    
-   
     test_property= Property.query.filter_by(name=property_request['name']).first()
-
     if(test_property):
         print(f"This one already exists")
-    
     else:
         newP=Property(user_id= property_request['user_id'], name=property_request['name'], city=property_request['city'], state=property_request['state'], beds= property_request['beds'], bath= property_request['bath'], address=property_request['address'], img=property_request['img']  )
         db.session.add(newP)
         db.session.commit()
         get_property= Property.query.filter_by(user_id=property_request['user_id'])
         all_property= list(map(lambda x: x.serialize(), get_property))
-          
-            
     return jsonify(all_property),200
 
 
