@@ -6,16 +6,16 @@ import { AppContext } from "../layout";
 import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom";
 
 export const Dashboard = () => {
-  const { store, actions } = useContext(Context);
-  const { currentUser, myProperties, setMyProperties, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
+
+	const { store, actions } = useContext(Context);
+    const { currentUser, myProperties, setMyProperties, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
+
 
   const navigate = useNavigate();
 
 
   useEffect(() => {
 
-
-    let myProperty_url = "api/user/2/property/all";
     fetch(process.env.BACKEND_URL + "api/user/" + currentUser.id + "/property/all")
       .then(res => {
         if (!res.ok) throw Error(res.statusText);
