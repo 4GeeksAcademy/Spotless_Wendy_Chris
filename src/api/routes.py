@@ -81,38 +81,14 @@ def get_user_property(id):
 
 
 
-
-
-@api.route('/user/<id>/new/property', methods=['POST'])
-def add_newProperty(id):
+@api.route('/user/delete/property/<idP>', methods=['DELETE'])
+def remove_Property(idP):
         request_body=request.json
         
-        test_property= property.query.filter_by(name=request_body[0], user_id=id).first()
-    
-        if(test_property):
-             return jsonify(f"Property already exists"), 400
-        
-        else:
-             newP=property (user_id=id , name=request_body['name'], city=request_body[1], state=request_body[2], address=request_body[3],beds= request_body[4],bath= request_body[4], img=request_body[6]  )
-             db.session.add(newP)
-             db.session.commit()
-             return jsonify(f"Success"), 200
-
-
-@api.route('/user/<id>/delete/property/<idP>', methods=['DELETE'])
-def remove_Property(id,idP):
-        request_body=request.json
-        
-        test_property= property.query.get(idP=id)
-    
-        if test_property :
-             return jsonify(f"Property already exists"), 400
-        
-        else:
-             test_property
-             db.session.delete(test_property)
-             db.session.commit()
-             return jsonify(f"Success"), 200
+        get_property= Property.query.get(idP)
+        db.session.delete(get_property)
+        db.session.commit()
+        return jsonify(f"Success"), 200
 
 
 
@@ -133,7 +109,7 @@ def add_newproperty_load():
            print(f"This one already exists")
         
         else:
-          newP=Property(user_id= el['user_id'], name=el['name'], city=el['city'], state=el['state'], beds= el['beds'], bath= el['bath'], address=el['address'], img=el['images']  )
+          newP=Property(user_id= el['user_id'], name=el['name'], city=el['city'], state=el['state'], beds= el['beds'], bath= el['bath'], address=el['address'], img=el['img']  )
           db.session.add(newP)
           db.session.commit()
           print('This one passed ')
