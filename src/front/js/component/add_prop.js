@@ -6,7 +6,9 @@ import { Context } from "../store/appContext";
 
 export const AddProperty = () => {
 
-    const { currentUser, setCurrentUser, role, setRole, } = useContext(AppContext);
+    const { currentUser, setCurrentUser, role, setRole, myProperties, setMyProperties,
+        displayAddProperty, setDisplayAddProperty
+    } = useContext(AppContext);
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -18,7 +20,6 @@ export const AddProperty = () => {
     const [city, setCity] = useState("")
     const { contacts, setcontacts } = useContext(AppContext);
     const { store, actions } = useContext(Context);
-
 
     const handleSave = () => {
         var newProp = {
@@ -39,8 +40,31 @@ export const AddProperty = () => {
                 'Content-Type': 'application/json'
             }
         })
-            .then(resp => resp.JSON)
-            .then(data => fetchMethod())
+            .then(res => {
+                if (!res.ok) console.log(res.statusText);
+                return res.json();
+            })
+            .then(responseAsJson => {
+                console.log("This is the backend response"),
+                    console.log(responseAsJson)
+
+                let newArray = [...responseAsJson];
+                let finalProperty = [];
+
+                newArray.forEach((el) => {
+                    let each_property = {};
+                    let all_img = el.img.split("  ");
+                    // console.log(all_img)
+                    each_property = el;
+                    each_property.image1 = all_img[0];
+                    each_property.image2 = all_img[1];
+                    each_property.image3 = all_img[2];
+                    finalProperty.push(each_property);
+                    console.log('test begins here')
+                    console.log(finalProperty);
+                })
+                setMyProperties(finalProperty)
+            })
             .catch(error => console.error(error));
     }
 
@@ -82,6 +106,7 @@ export const AddProperty = () => {
                 type="submit" onClick={(event) => {
                     event.preventDefault();
                     handleSave()
+                    setDisplayAddProperty(!displayAddProperty)
                 }} >Save New Property</button>
 
         </form>
