@@ -34,7 +34,7 @@ class Worker(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     full_name = db.Column(db.String(120), unique=True, nullable=False)
     phone = db.Column(db.String(120), unique=True, nullable=False)
-    address = db.Column(db.String(120), unique=True, nullable=True)
+    address = db.Column(db.String(120), unique=False, nullable=True)
     img = db.Column(db.String(300), unique=True, nullable=True)
     banking_info = db.Column(db.String(300), unique=True, nullable=True)
    

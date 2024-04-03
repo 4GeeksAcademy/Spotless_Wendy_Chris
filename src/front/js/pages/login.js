@@ -110,7 +110,7 @@ export const Login = () => {
 		let password = userPassword
 		let phone = userPhone
 
-		if (localRole == "Host") {
+		if (localRole == "Host" && userEmail && userPassword && userPhone && userFullName) {
 			fetch(process.env.BACKEND_URL + "/user/new/load", {
 				method: 'POST', // or 'PUT'
 				body: JSON.stringify(
@@ -135,31 +135,30 @@ export const Login = () => {
 				.then(response => console.log('Success:', response))
 				.catch(error => console.error(error));
 		}
-		else if (localRole == "Worker") {
-			console.log("You are a worker!")
-			// fetch(process.env.BACKEND_URL + "/user/new/load", {
-			// 	method: 'POST', // or 'PUT'
-			// 	body: JSON.stringify(
-			// 		[
-			// 			{
-			// 				"name": name,
-			// 				"email": email,
-			// 				"password": password,
-			// 				"phone": phone,
-			// 				"address": ""
-			// 			}
-			// 		]
-			// 	), // data can be a 'string' or an {object} which comes from somewhere further above in our application
-			// 	headers: {
-			// 		'Content-Type': 'application/json'
-			// 	}
-			// })
-			// 	.then(res => {
-			// 		if (!res.ok) console.log(res.statusText);
-			// 		return res.json();
-			// 	})
-			// 	.then(response => console.log('Success:', response))
-			// 	.catch(error => console.error(error));
+		else if (localRole == "Worker" && userEmail && userPassword && userPhone && userFullName) {
+			fetch(process.env.BACKEND_URL + "/worker/new/load", {
+				method: 'POST', // or 'PUT'
+				body: JSON.stringify(
+					[
+						{
+							"name": name,
+							"email": email,
+							"password": password,
+							"phone": phone,
+							"address": ""
+						}
+					]
+				), // data can be a 'string' or an {object} which comes from somewhere further above in our application
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+				.then(res => {
+					if (!res.ok) console.log(res.statusText);
+					return res.json();
+				})
+				.then(response => console.log('Success:', response))
+				.catch(error => console.error(error));
 		}
 	}
 
@@ -173,7 +172,10 @@ export const Login = () => {
 			<div className="container" id='container'>
 				<div className="form-container sign-up-container">
 					<form>
-						<h2>Time to Choose!</h2>
+						<h2 style={localRole == "" ? { display: "block" } : { display: "none" }}>Time to Choose!</h2>
+						<h2 style={localRole == "Host" ? { display: "block" } :
+							localRole == "Worker" ? { display: "block" } :
+								{ display: "none" }}>Create Account</h2>
 						<div className="rolePath"
 							style={localRole == "Host" ? { display: "none" } :
 								localRole == "Worker" ? { display: "none" } :
