@@ -15,6 +15,7 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { useState } from "react";
+import { AddProperty } from "./component/adding_removing_props";
 
 
 export const AppContext = React.createContext(null);
@@ -64,6 +65,7 @@ const Layout = () => {
                             <Route element={<Home />} path="/" />
                             <Route element={<Dashboard />} path="/dashboard" />
                             <Route element={<Landing />} path="/landing" />
+                            <Route element={<AddProperty />} path="/addproperty" />
                             <Route element={<Demo />} path="/demo" />
                             <Route element={<Single />} path="/single/:theid" />
                             <Route element={<h1>Not found!</h1>} />

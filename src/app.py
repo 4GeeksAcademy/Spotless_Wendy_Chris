@@ -162,7 +162,7 @@ def get_all_listing():
 
 
 
-
+# Add a new user below
 @app.route('/user/new/load', methods=['POST'])
 def add_newuser_load():
     request_body=request.json
@@ -172,13 +172,56 @@ def add_newuser_load():
         test_user= User.query.filter_by(email=el['email']).first()
     
         if(test_user):
-               print(f"This one already exists"), 500
+               return jsonify("This user already exists!"), 500
         
         else:
-                 newU=User (full_name=el['name'], email=el['email'],password= el['password'], phone=el['phone'], address=el['address']  )
-                 db.session.add(newU)
-                 db.session.commit()
-    return jsonify(f"Success"), 200        
+            newU=User(full_name=el['name'], email=el['email'],password= el['password'], phone=el['phone'], address=el['address']  )
+            db.session.add(newU)
+            db.session.commit()
+    return jsonify(
+        request_body
+        ), 200
+
+# Add a new worker below
+@app.route('/worker/new/load', methods=['POST'])
+def add_newworker_load():
+    request_body=request.json
+    for el in request_body:
+              
+        
+        test_worker= Worker.query.filter_by(email=el['email']).first()
+    
+        if(test_worker):
+               return jsonify("This worker already exists!"), 500
+        
+        else:
+            newW=Worker(full_name=el['name'], email=el['email'],password= el['password'], phone=el['phone'], address=el['address']  )
+            db.session.add(newW)
+            db.session.commit()
+    return jsonify(
+        request_body
+        ), 200
+
+@app.route('/user/<int:id>/property', methods=['GET'])
+def get_user_property(id):
+    get_property= Property.query.filter_by(user_id=id)
+    all_property= list(map(lambda x: x.serialize(), get_property))
+    return jsonify(all_property), 200
+
+
+@app.route('/user/<id>/property/<idp>', methods=['DELETE'])
+def delete_user_property(id, idp):
+    delete_property=Property.query.get(idp)
+    db.session.delete(delete_property)
+    db.session.commit()
+    get_property= Property.query.filter_by(user_id=id)
+    all_property= list(map(lambda x: x.serialize(), get_property))
+    return jsonify(
+            {
+            "msg": "success",
+            "user_properties": all_property
+            }
+        ), 200        
      
 
 
