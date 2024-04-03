@@ -94,7 +94,7 @@ def remove_Property(idP):
 
 
 # Bulk add properties below
-@api.route('property/new/load', methods=['POST'])
+@api.route('/property/new/load', methods=['POST'])
 def add_newproperty_load():
     request_body=request.json
     print('function works')
