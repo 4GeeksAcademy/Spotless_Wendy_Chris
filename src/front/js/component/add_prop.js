@@ -21,7 +21,7 @@ export const AddProperty = () => {
 
 
     const handleSave = () => {
-        var newProp = [{
+        var newProp = {
             "user_id": currentUser.id,
             "name": name,
             "state": state,
@@ -30,10 +30,7 @@ export const AddProperty = () => {
             "bath": bath,
             "img": img,
             "address": address,
-
-
-
-        }]
+        }
 
         fetch(process.env.BACKEND_URL + "api/property/new/load", {
             method: 'POST',
