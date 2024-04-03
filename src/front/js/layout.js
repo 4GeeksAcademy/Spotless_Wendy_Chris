@@ -10,6 +10,7 @@ import { Single } from "./pages/single";
 import { Landing } from "./pages/landing";
 import { Dashboard } from "./pages/dashboard";
 
+import { AddListing } from "./pages/addlisting";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -65,6 +66,7 @@ const Layout = () => {
                             <Route element={<Home />} path="/" />
                             <Route element={<Dashboard />} path="/dashboard" />
                             <Route element={<Landing />} path="/landing" />
+                            <Route element={<AddListing />} path="/addlisting" />
                             <Route element={<AddProperty />} path="/addproperty" />
                             <Route element={<Demo />} path="/demo" />
                             <Route element={<Single />} path="/single/:theid" />

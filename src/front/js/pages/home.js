@@ -109,7 +109,13 @@ export const Home = () => {
 	<button type="button" className="btn btn-secondary" onClick={()=>load_listing()}>Add Listing randomly</button><br/><br/><br/>
 
     <Link to='/dashboard'>
-	<button type="button" className="btn btn-secondary" >a Link to Dashboard</button>
+	<button type="button" className="btn btn-secondary" >a Link to Dashboard</button><br/><br/><br/>
+
+</Link>
+
+
+<Link to='/addlisting'>
+	<button type="button" className="btn btn-secondary" >Go to listing</button>
 </Link>
 
 
