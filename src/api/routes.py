@@ -69,7 +69,6 @@ def get_user_property(id):
 
     return jsonify(all_property), 200
 
-
 # @api.route('/user/<id>/listing/all', methods=['GET'])
 # def get_user_listing():
 #     get_listing= Listing.query.filter_by(property_id=id)
@@ -94,7 +93,7 @@ def remove_Property(idP):
 
 
 
-
+# Bulk add properties below
 @api.route('property/new/load', methods=['POST'])
 def add_newproperty_load():
     request_body=request.json
@@ -117,22 +116,18 @@ def add_newproperty_load():
     return jsonify(f"Success"),200
 
 
-
-@api.route('/user/property/<idp>/listing/new', methods=['POST'])
-def add_user_listing(idp):
+# Add a new listing for specific user below
+@api.route('/user/property/listing/new', methods=['POST'])
+def add_user_listing():
     request_body=request.json
-    
     for el in request_body:
         test_listing= Listing.query.filter_by(property_id=el['property_id'],date_needed=el['date_needed']).first()
-
         if test_listing:
             print('This one Already exist')
-        else:    
-         
+        else:
             newL=Listing(property_id=el['property_id'], date_needed= el['date_needed'], special_note=el['special_note'],status=el['status'])
             db.session.add(newL)
             db.session.commit()
-
     return jsonify(f"Success"), 200
        
 

@@ -7,9 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../layout";
 
 
-
-
-
 export const Login = () => {
 	const { user, setUser, token, setToken } = useContext(AppContext);
 
@@ -22,6 +19,13 @@ export const Login = () => {
 	const [userE, setUserE] = useState('')
 	const [userP, setUserP] = useState('')
 	const [signupEffect, setSignupEffect] = useState('')
+
+	const [userEmail, setUserEmail] = useState('')
+	const [userFullName, setUserFullName] = useState('')
+	const [userPassword, setUserPassword] = useState('')
+	const [userPhone, setUserPhone] = useState('')
+
+	const [localRole, setLocalRole] = useState('')
 
 
 
@@ -100,35 +104,129 @@ export const Login = () => {
 		sign_in_panel.classList.remove('right-panel-active');
 	}
 
+	const handleSignUp = () => {
+		let name = userFullName
+		let email = userEmail
+		let password = userPassword
+		let phone = userPhone
+
+		if (localRole == "Host" && userEmail && userPassword && userPhone && userFullName) {
+			fetch(process.env.BACKEND_URL + "/user/new/load", {
+				method: 'POST', // or 'PUT'
+				body: JSON.stringify(
+					[
+						{
+							"name": name,
+							"email": email,
+							"password": password,
+							"phone": phone,
+							"address": ""
+						}
+					]
+				), // data can be a 'string' or an {object} which comes from somewhere further above in our application
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+				.then(res => {
+					if (!res.ok) console.log(res.statusText);
+					return res.json();
+				})
+				.then(response => console.log('Success:', response))
+				.catch(error => console.error(error));
+		}
+		else if (localRole == "Worker" && userEmail && userPassword && userPhone && userFullName) {
+			fetch(process.env.BACKEND_URL + "/worker/new/load", {
+				method: 'POST', // or 'PUT'
+				body: JSON.stringify(
+					[
+						{
+							"name": name,
+							"email": email,
+							"password": password,
+							"phone": phone,
+							"address": ""
+						}
+					]
+				), // data can be a 'string' or an {object} which comes from somewhere further above in our application
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+				.then(res => {
+					if (!res.ok) console.log(res.statusText);
+					return res.json();
+				})
+				.then(response => console.log('Success:', response))
+				.catch(error => console.error(error));
+		}
+	}
+
+
+
+
+
 
 	return (
 		<>
 			<div className="container" id='container'>
 				<div className="form-container sign-up-container">
 					<form>
-						<h4>Create Account</h4>
-						<div className="social-container">
-							<a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-							<a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-							<a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
+						<h2 style={localRole == "" ? { display: "block" } : { display: "none" }}>Time to Choose!</h2>
+						<h2 style={localRole == "Host" ? { display: "block" } :
+							localRole == "Worker" ? { display: "block" } :
+								{ display: "none" }}>Create Account</h2>
+						<div className="rolePath"
+							style={localRole == "Host" ? { display: "none" } :
+								localRole == "Worker" ? { display: "none" } :
+									{ display: "block" }
+							}
+						>
+							<p>I am looking for on demand cleaning services for my short term rental</p>
+							<button
+								onClick={(event) => {
+									event.preventDefault();
+									setLocalRole("Host")
+								}
+								}
+							>I am a Host</button>
+							<p className="border-top border-bottom"></p>
+							<p>I am looking to provide on demand cleaning services for short term rentals</p>
+							<button
+								onClick={(event) => {
+									event.preventDefault();
+									setLocalRole("Worker")
+								}
+								}
+							>I am a Worker</button>
 						</div>
-						<span>or use your email for registration</span>
-						<input type="text" placeholder="Name" />
-						<input type="email" placeholder="Email" />
-						<input type="number" placeholder="(123) 456-7890" />
-						<input type="password" placeholder="Password" />
-						<button>Sign Up</button>
+						<div className="signUpForm"
+							style={localRole == "Host" ? { display: "block" } :
+								localRole == "Worker" ? { display: "block" } :
+									{ display: "none" }}>
+							<input type="text" placeholder="Full Name"
+								onChange={e => setUserFullName(e.target.value)} value={userFullName} />
+							<input type="email" placeholder="Email"
+								onChange={e => setUserEmail(e.target.value)} value={userEmail} />
+							<input type="number" placeholder="(123) 456-7890"
+								onChange={e => setUserPhone(e.target.value)} value={userPhone} />
+							<input type="password" placeholder="Password"
+								onChange={e => setUserPassword(e.target.value)} value={userPassword} />
+							<button
+								onClick={(event) => {
+									event.preventDefault();
+									handleSignUp();
+									sign_in_function()
+								}
+								}
+							>Sign Up</button>
+						</div>
+
 					</form>
-				</div>
+				</div >
 				<div className="form-container sign-in-container">
 					<form>
-						<h1>Sign in</h1>
-						<div className="social-container">
-							<a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-							<a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-							<a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
-						</div>
-						<span>or use your account</span>
+						<h1 className="pb-3">Sign in</h1>
 						<input type="email" placeholder="Email" value={userE} onChange={(e) => get_email(e)} />
 						<input type="password" placeholder="Password" value={userP} onChange={(e) => get_password(e)} />
 						<a href="#">Forgot your password?</a>
@@ -142,28 +240,17 @@ export const Login = () => {
 				<div className="overlay-container">
 					<div className="overlay">
 						<div className="overlay-panel overlay-left">
-							<h1>Welcome Back!</h1>
-							<p>To keep connected with us please login with your personal info</p>
+							<h1 className="pb-3">Already have an account?</h1>
 							<button className="ghost" id="signIn" onClick={() => sign_in_function()}>Sign In</button>
 						</div>
 						<div className="overlay-panel overlay-right">
-							<h1>Hello, Friend!</h1>
-							<p>Enter your personal details and start journey with us</p>
+							<h1>Welcome to Spotless!</h1>
+							<p>Start your on demand cleaning journey today!</p>
 							<button className="ghost" id="signUp" onClick={() => sign_up_function()}>Sign Up</button>
 						</div>
 					</div>
 				</div>
-			</div>
-
-			<footer>
-				<p>
-					Created with <i className="fa fa-heart"></i> by
-					<a target="_blank" href="https://florin-pop.com">Florin Pop</a>
-					- Read how I created this and how you can join the challenge
-					<a target="_blank" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/">here</a>.
-				</p>
-			</footer>
-
+			</div >
 		</>
 	);
 };

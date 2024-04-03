@@ -5,6 +5,7 @@ import "../../styles/home.css";
 
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../layout";
+import { AddProperty } from "../component/add_prop";
 
 
 
@@ -66,59 +67,119 @@ export const Landing = () => {
                 <div className="row d-flex justify-content-center pt-3">
                     <div className="col text-center fs-3 pt-2 border-bottom"
                         style={role == "User" ? { display: "block" } : { display: "none" }}
-                    >Welcome User!</div>
+                    >Main User Dashboard</div>
                     <div className="col text-center fs-3 pt-2 border-bottom"
                         style={role == "Worker" ? { display: "block" } : { display: "none" }}
-                    >Welcome Worker!</div>
+                    >Main Worker Dashboard</div>
                 </div>
-                <div className="row d-flex justify-content-center pt-3">
-                    <div className="col-2 text-center">
-                        <div className="row">
-                            <div className={`col-12 border-bottom border-dark
+                {/* The div below conditionally renders the "User" dashboard */}
+                <div style={role == "User" ? { display: "block" } : { display: "none" }}>
+                    <div className="row d-flex justify-content-center pt-3">
+                        <div className="col-2 text-center">
+                            <div className="row">
+                                <div className={`col-12 border-bottom border-dark
                             ${menu == "listings" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("listings")}
-                            >My Listings</div>
-                            <div className={`col-12 border-bottom border-dark
+                                    onClick={() => setMenu("listings")}
+                                ><i class="fa-solid fa-house"></i></div>
+                                <div className={`col-12 border-bottom border-dark
                             ${menu == "properties" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("properties")}
-                            >My Properties</div>
-                            <div className={`col-12 border-bottom border-dark
+                                    onClick={() => setMenu("properties")}
+                                >My Properties</div>
+                                <div className={`col-12 border-bottom border-dark
                             ${menu == "profile" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("profile")}
-                            >My Profile</div>
-                            <div className={`col-12 border-bottom border-dark
+                                    onClick={() => setMenu("profile")}
+                                >My Profile</div>
+                                <div className={`col-12 border-bottom border-dark
                             ${menu == "history" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("history")}
-                            >My History</div>
-                            <div className={`col-12 border-bottom border-dark
+                                    onClick={() => setMenu("history")}
+                                >My History</div>
+                                <div className={`col-12 border-bottom border-dark
                             ${menu == "payments" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("payments")}
-                            >My Payments</div>
+                                    onClick={() => setMenu("payments")}
+                                >My Payments</div>
+                            </div>
+
+                        </div>
+                        <div className="col-10 text-center dashComponents fs-3"
+                            style={menu == "listings" ? { display: "block" } : { display: "none" }}
+                        >My Active Listings
+                            <p>Map all active listings</p>
+                            <p>Green = Listing has booked worker</p>
+                            <p>Yellow = Listing is active and looking for worker</p>
+                            <p>Red = Listing is about to run out of time and needs emergency boost</p>
+                        </div>
+                        <div className="col-10 text-center dashComponents fs-3"
+                            style={menu == "properties" ? { display: "block" } : { display: "none" }}
+                        >My Properties
+                            <div><AddProperty /></div>
+                            <span className="myButton2 mt-5">Add new property</span>
+                        </div>
+                        <div className="col-10 text-center dashComponents fs-3"
+                            style={menu == "profile" ? { display: "block" } : { display: "none" }}
+                        >My Profile
+                            <div>Email: {currentUser.email}</div>
+                        </div>
+                        <div className="col-10 text-center dashComponents fs-3"
+                            style={menu == "history" ? { display: "block" } : { display: "none" }}
+                        >My History
+                        </div>
+                        <div className="col-10 text-center dashComponents fs-3"
+                            style={menu == "payments" ? { display: "block" } : { display: "none" }}
+                        >My Payments
                         </div>
 
-                    </div>
-                    <div className="col-10 text-center dashComponents fs-3"
-                        style={menu == "listings" ? { display: "block" } : { display: "none" }}
-                    >My Active Listings
-                    </div>
-                    <div className="col-10 text-center dashComponents fs-3"
-                        style={menu == "properties" ? { display: "block" } : { display: "none" }}
-                    >My Properties
-                    </div>
-                    <div className="col-10 text-center dashComponents fs-3"
-                        style={menu == "profile" ? { display: "block" } : { display: "none" }}
-                    >My Profile
-                    </div>
-                    <div className="col-10 text-center dashComponents fs-3"
-                        style={menu == "history" ? { display: "block" } : { display: "none" }}
-                    >My History
-                    </div>
-                    <div className="col-10 text-center dashComponents fs-3"
-                        style={menu == "payments" ? { display: "block" } : { display: "none" }}
-                    >My Payments
-                    </div>
 
+                    </div>
+                </div>
+                {/* The div below conditionally renders the "Worker" dashboard */}
+                <div style={role == "Worker" ? { display: "block" } : { display: "none" }}>
+                    <div className="row d-flex justify-content-center pt-3">
+                        <div className="col-2 text-center">
+                            <div className="row">
+                                <div className={`col-12 border-bottom border-dark
+                            ${menu == "listings" ? "activeMenu" : "myMenu"}`}
+                                    onClick={() => setMenu("listings")}
+                                ><i class="fa-solid fa-house"></i></div>
+                                <div className={`col-12 border-bottom border-dark
+                            ${menu == "properties" ? "activeMenu" : "myMenu"}`}
+                                    onClick={() => setMenu("properties")}
+                                >My Properties</div>
+                                <div className={`col-12 border-bottom border-dark
+                            ${menu == "profile" ? "activeMenu" : "myMenu"}`}
+                                    onClick={() => setMenu("profile")}
+                                >My Profile</div>
+                                <div className={`col-12 border-bottom border-dark
+                            ${menu == "history" ? "activeMenu" : "myMenu"}`}
+                                    onClick={() => setMenu("history")}
+                                >My History</div>
+                                <div className={`col-12 border-bottom border-dark
+                            ${menu == "payments" ? "activeMenu" : "myMenu"}`}
+                                    onClick={() => setMenu("payments")}
+                                >My Payments</div>
+                            </div>
 
+                        </div>
+                        <div className="col-10 text-center dashComponents fs-3"
+                            style={menu == "listings" ? { display: "block" } : { display: "none" }}
+                        >Available listings will populate and filter below
+                        </div>
+                        <div className="col-10 text-center dashComponents fs-3"
+                            style={menu == "properties" ? { display: "block" } : { display: "none" }}
+                        >My Properties
+                        </div>
+                        <div className="col-10 text-center dashComponents fs-3"
+                            style={menu == "profile" ? { display: "block" } : { display: "none" }}
+                        >My Profile
+                        </div>
+                        <div className="col-10 text-center dashComponents fs-3"
+                            style={menu == "history" ? { display: "block" } : { display: "none" }}
+                        >My History
+                        </div>
+                        <div className="col-10 text-center dashComponents fs-3"
+                            style={menu == "payments" ? { display: "block" } : { display: "none" }}
+                        >My Payments
+                        </div>
+                    </div>
                 </div>
 
 
