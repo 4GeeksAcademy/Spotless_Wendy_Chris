@@ -161,13 +161,15 @@ def add_newuser_load():
         test_user= User.query.filter_by(email=el['email']).first()
     
         if(test_user):
-               print(f"This one already exists"), 500
+               return jsonify("This user already exists!"), 500
         
         else:
-                 newU=User (full_name=el['name'], email=el['email'],password= el['password'], phone=el['phone'], address=el['address']  )
-                 db.session.add(newU)
-                 db.session.commit()
-    return jsonify(f"Success"), 200
+            newU=User(full_name=el['name'], email=el['email'],password= el['password'], phone=el['phone'], address=el['address']  )
+            db.session.add(newU)
+            db.session.commit()
+    return jsonify(
+        request_body
+        ), 200
 
 @app.route('/user/<int:id>/property', methods=['GET'])
 def get_user_property(id):
