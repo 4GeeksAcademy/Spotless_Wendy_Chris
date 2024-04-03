@@ -215,7 +215,8 @@ export const Login = () => {
 							<button
 								onClick={(event) => {
 									event.preventDefault();
-									handleSignUp()
+									handleSignUp();
+									sign_in_function()
 								}
 								}
 							>Sign Up</button>
