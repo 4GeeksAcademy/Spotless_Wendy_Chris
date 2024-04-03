@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
+import rigoImage from "../../img/how-to.png";
 import "../../styles/home.css";
 import { AppContext } from "../layout";
 import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom";
@@ -156,10 +157,10 @@ setListingNote('');
                   <img src={element.image1} class="d-block w-100 " alt="..." />
                 </div>
                 <div class="carousel-item">
-                  <img src={element.image2} class="d-block w-100 " alt="..." />
+                  <img src={rigoImage} class="d-block w-100 " alt="..." />
                 </div>
                 <div class="carousel-item">
-                  <img src={element.image3} class="d-block w-100  " alt="..." />
+                  <img src={rigoImageUrl} class="d-block w-100  " alt="..." />
                 </div>
               </div>
             </div>

@@ -55,7 +55,7 @@ def add_newuser():
              return jsonify(f"User already exists"), 500
         
         else:
-             newU=User ( name=request_body['name'], email=request_body['email'],password= request_body[2] )
+             newU=User ( name=request_body['full_name'], email=request_body['email'],password= request_body['password'],phone= request_body['phone'] )
              db.session.add(newU)
              db.session.commit()
              return jsonify(f"Success"), 200
@@ -80,17 +80,17 @@ def get_user_property(id):
 
 
 
-@api.route('/user/delete/property/<idP>', methods=['DELETE'])
-def remove_Property(idP):
-        request_body=request.json
-        
-        get_property= Property.query.get(idP)
-        db.session.delete(get_property)
-        db.session.commit()
-        return jsonify(f"Success"), 200
+@api.route('/user/<id>/delete/property/<idP>', methods=['DELETE'])
+def remove_Property(id, idP):
+    request_body=request.json
+    
+    get_property= Property.query.get(idP)
+    db.session.delete(get_property)
+    db.session.commit()
+    get_property= Property.query.filter_by(user_id=id)
+    all_property= list(map(lambda x: x.serialize(), get_property))
 
-
-
+    return jsonify(all_property), 200
 
 
 # Bulk add properties below
