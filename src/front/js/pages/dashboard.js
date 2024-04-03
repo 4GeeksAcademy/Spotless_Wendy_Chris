@@ -10,6 +10,10 @@ export const Dashboard = () => {
     const { currentUser, myProperties, setMyProperties, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
 
     const navigate = useNavigate();
+    const [listingNote, setListingNote] = useState('');
+    const [listingDate, setListingDate] = useState('');
+    const [listingId, setListingId] = useState(null);
+
 
 
 	useEffect(() => {
@@ -74,11 +78,67 @@ function delete_property(id_to_delete){
 
 
 
+function pop_modal_function(id_of_property){
+  const dialog = document.getElementById('modal');
+  dialog.showModal();
+  setListingId(id_of_property);
+}
+
+
+function close_modal_function(){
+  console.log('Close Function was called');
+  const dialog = document.getElementById('modal');
+  setListingId(null);
+  dialog.close();
+}
+
+
+function get_specialNote_function(val){
+let note= val.target.value;
+setListingNote(note)
+
+}
+
+function get_date_needed_function(val){
+let date_needed= val.target.value;
+setListingDate(date_needed);
+
+}
+
+function save_modal_function(id){
+  let new_listing= {property_id: listingId, special_note:listingNote, date_needed: listingDate};
+fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
+   {
+       method: 'POST',
+       body:JSON.stringify(new_listing),
+       headers: {
+           'Content-Type': 'application/json'
+       }
+   })
+   .then(res => {
+       if (!res.ok) console.log(res.statusText);
+       return res.json();
+   })
+   .then(response => {
+       console.log(response)
+
+   })
+
+   .catch(error => console.log(error));
+setListingDate('');
+setListingNote('');
+   const dialog = document.getElementById('modal');
+   dialog.close();
+}
+
+
 	return (
     <div> 
       <div className="add_property_class_div">
       <button class="button-24" role="button" onClick={()=>navigate("/")}>Add New Property</button>
       </div>
+
+      
 <div class="product-list-container">
 
 
@@ -118,7 +178,7 @@ function delete_property(id_to_delete){
     <p class="card-text">Address: {element.address}<br/>
       City: {element.city}</p>
       <div>
-      <button class="button-24" role="button" >Add to Listing</button>
+      <button class="button-24" role="button" onClick={()=>pop_modal_function(element.id)}>Add to Listing</button>
       <button className="btn" onClick={() =>delete_property(element.id)}> 
                <i className="fas fa-trash-alt fa-bounce fa-xl" />
                    </button> 
@@ -135,6 +195,28 @@ function delete_property(id_to_delete){
 
 
 </div>
+
+
+<dialog id="modal" className="container container-sm"> 
+
+
+<form>
+  <div class="form-group ">
+    <label for="exampleFormControlInput1">Date needed</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" value={listingDate} placeholder="Date needed" onChange={(e)=>get_date_needed_function(e)}/>
+  </div>
+  
+ 
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Example textarea</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={listingNote} onChange={(e)=>get_specialNote_function(e)}></textarea>
+  </div>
+</form>
+
+
+  <button className="btn btn-secondary" onClick={()=>close_modal_function()}>Close</button>
+  <button className="button-24" onClick={()=>save_modal_function()}>Save </button>
+</dialog>
 </div>
 	);
 };
