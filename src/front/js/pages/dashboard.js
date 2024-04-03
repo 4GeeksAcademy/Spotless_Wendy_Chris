@@ -7,8 +7,8 @@ import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-do
 
 export const Dashboard = () => {
 
-	const { store, actions } = useContext(Context);
-    const { currentUser, myProperties, setMyProperties, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
+  const { store, actions } = useContext(Context);
+  const { currentUser, myProperties, setMyProperties, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
 
 
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ export const Dashboard = () => {
 
 
   function delete_property(id_to_delete) {
-    fetch(process.env.BACKEND_URL + "/api/user/delete/property/" + id_to_delete,
+    fetch(process.env.BACKEND_URL + `/api/user/${currentUser.id}/delete/property/` + id_to_delete,
       {
         method: 'DELETE',
         body: id_to_delete,
@@ -64,12 +64,29 @@ export const Dashboard = () => {
         return res.json();
       })
       .then(response => {
+        console.log("This is the response")
         console.log(response)
 
+        let newArray = [...response];
+        let finalProperty = [];
+
+        newArray.forEach((el) => {
+          let each_property = {};
+          let all_img = el.img.split("  ");
+          // console.log(all_img)
+          each_property = el;
+          each_property.image1 = all_img[0];
+          each_property.image2 = all_img[1];
+          each_property.image3 = all_img[2];
+          finalProperty.push(each_property);
+          console.log('test begins here')
+          console.log(finalProperty);
+
+        })
+        setMyProperties(finalProperty);
       })
 
       .catch(error => console.log(error));
-
   }
 
 

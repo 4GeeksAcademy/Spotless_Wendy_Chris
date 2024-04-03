@@ -13,7 +13,9 @@ import { Dashboard } from "./dashboard";
 
 
 export const Landing = () => {
-    const { currentUser, setCurrentUser, token, setToken, role, setRole, } = useContext(AppContext);
+    const { currentUser, setCurrentUser, token, setToken, role, setRole,
+        displayAddProperty, setDisplayAddProperty
+    } = useContext(AppContext);
 
     const navigate = useNavigate();
 
@@ -26,9 +28,6 @@ export const Landing = () => {
     const [signupEffect, setSignupEffect] = useState('')
 
     const [menu, setMenu] = useState('listings')
-
-    const [displayAddProperty, setDisplayAddProperty] = useState(false)
-
 
 
     if (currentUser) {

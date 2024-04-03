@@ -30,6 +30,7 @@ const Layout = () => {
     const basename = process.env.BASENAME || "";
 
     const [myListings, setMyListings] = useState([])
+    const [displayAddProperty, setDisplayAddProperty] = useState(false)
     const [myProperties, setMyProperties] = useState([])
     const [currentUser, setCurrentUser] = useState({
         email: "dmeasor1@cisco.com",
@@ -46,6 +47,8 @@ const Layout = () => {
 
     const [token, setToken] = useState("")
 
+
+
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
     return (
@@ -55,7 +58,7 @@ const Layout = () => {
                 {
                     currentUser, setCurrentUser, token, setToken,
                     myListings, setMyListings, myProperties, setMyProperties,
-                    role, setRole
+                    role, setRole, displayAddProperty, setDisplayAddProperty
                 }
             }>
                 <BrowserRouter basename={basename}>
