@@ -6,13 +6,14 @@ import "../../styles/home.css";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../layout";
 import { AddProperty } from "../component/add_prop";
+import { Dashboard } from "./dashboard";
 
 
 
 
 
 export const Landing = () => {
-    const { currentUser, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
+    const { currentUser, setCurrentUser, token, setToken, role, setRole, } = useContext(AppContext);
 
     const navigate = useNavigate();
 
@@ -111,20 +112,23 @@ export const Landing = () => {
                         <div className="col-10 text-center dashComponents fs-3"
                             style={menu == "properties" ? { display: "block" } : { display: "none" }}
                         >
-                            <div className="row d-flex justify-content-center pt-1">
+                            <div className="row d-flex justify-content-center pt-1 mb-2">
                                 <div className="col-3"></div>
                                 <div className="col-6">My Properties</div>
-                                <div className="col-3"><span className="myButton2 me-3"
+                                <div className="col-3"><span className="button-24 me-3 mt-1"
                                     style={displayAddProperty ? { display: "none" } : { display: "block" }}
                                     onClick={() => setDisplayAddProperty(!displayAddProperty)}
                                 >Add new property</span>
-                                    <span className="myButton2 me-3"
+                                    <span className="button-24 me-3 mt-1"
                                         style={displayAddProperty ? { display: "block" } : { display: "none" }}
                                         onClick={() => setDisplayAddProperty(!displayAddProperty)}
                                     >Back to properties</span></div>
                                 <div className="col-12"
                                     style={displayAddProperty ? { display: "block" } : { display: "none" }}
                                 ><AddProperty /></div>
+                                <div className="col-12"
+                                    style={displayAddProperty ? { display: "none" } : { display: "block" }}
+                                ><Dashboard /></div>
                             </div>
                         </div>
                         <div className="col-10 text-center dashComponents fs-3"
