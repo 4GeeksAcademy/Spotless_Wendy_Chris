@@ -65,7 +65,7 @@ def add_newuser():
 @api.route('/user/<id>/property/all', methods=['GET'])
 def get_user_property(id):
     get_property= Property.query.filter_by(user_id=id)
-    all_property= list(map(lambda x: x.serialize, get_property))
+    all_property= list(map(lambda x: x.serialize(), get_property))
 
     return jsonify(all_property), 200
 

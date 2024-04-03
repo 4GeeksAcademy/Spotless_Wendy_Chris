@@ -13,6 +13,11 @@
 	box-sizing: border-box;
 }
 
+.carousel_img{
+	height: 150px;
+	width: 100px;
+}
+
 body {
 	background: #f6f5f7;
 	display: flex;
