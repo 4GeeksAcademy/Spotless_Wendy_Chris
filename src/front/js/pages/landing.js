@@ -69,10 +69,11 @@ export const Landing = () => {
                 <div className="col text-center border-bottom"
                     style={role == "User" ? { display: "block" } : { display: "none" }}
                 >Main User Dashboard</div>
-                <div className="col text-center fs-3 pt-2 border-bottom"
+                <div className="col text-center border-bottom"
                     style={role == "Worker" ? { display: "block" } : { display: "none" }}
                 >Main Worker Dashboard</div>
             </div>
+
             {/* The div below conditionally renders the "User" dashboard */}
             <div style={role == "User" ? { display: "block" } : { display: "none" }}>
                 <div className="row d-flex justify-content-center pt-3">
@@ -107,11 +108,28 @@ export const Landing = () => {
                     </div>
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "listings" ? { display: "block" } : { display: "none" }}
-                    >My Active Listings
-                        <p>Map all active listings</p>
-                        <p>Green = Listing has booked worker</p>
-                        <p>Yellow = Listing is active and looking for worker</p>
-                        <p>Red = Listing is about to run out of time and needs emergency boost</p>
+                    >
+                        <div className="row d-flex justify-content-center pt-1 mb-2">
+                            <div className="col-3"></div>
+                            <div className="col-6">My Active Listings</div>
+                            <div className="col-3">
+                                <div className="dropdown">
+                                    <button className="btn button-24 dropdown-toggle me-3 mt-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Filter Listings
+                                    </button>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li className="myListLink">Status Pairing</li>
+                                        <li className="myListLink">Status Scheduled</li>
+                                        <li className="myListLink">Status Warning!</li>
+                                    </ul>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div className="col-12">
+                            <MyListings />
+                        </div>
                     </div>
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "properties" ? { display: "block" } : { display: "none" }}
@@ -152,6 +170,7 @@ export const Landing = () => {
 
                 </div>
             </div>
+
             {/* The div below conditionally renders the "Worker" dashboard */}
             <div style={role == "Worker" ? { display: "block" } : { display: "none" }}>
                 <div className="row d-flex justify-content-center pt-3">
@@ -182,7 +201,7 @@ export const Landing = () => {
                     </div>
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "listings" ? { display: "block" } : { display: "none" }}
-                    >Available listings will populate and filter below
+                    >Available Listings
                     </div>
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "properties" ? { display: "block" } : { display: "none" }}
@@ -202,9 +221,6 @@ export const Landing = () => {
                     </div>
                 </div>
             </div>
-
-
-
 
         </>
     );
