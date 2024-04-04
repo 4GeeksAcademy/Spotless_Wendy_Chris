@@ -55,7 +55,7 @@ def add_newuser():
              return jsonify(f"User already exists"), 500
         
         else:
-             newU=User ( name=request_body['name'], email=request_body['email'],password= request_body[2] )
+             newU=User ( name=request_body['full_name'], email=request_body['email'],password= request_body['password'],phone= request_body['phone'] )
              db.session.add(newU)
              db.session.commit()
              return jsonify(f"Success"), 200
@@ -77,17 +77,31 @@ def get_user_property(id):
 #     return jsonify(all_listing), 200
 
 
+<<<<<<< HEAD
+
+
+
 @api.route('/user/<id>/delete/property/<idP>', methods=['DELETE'])
 def remove_Property(id, idP):
+    request_body=request.json
+    
+=======
+@api.route('/user/<id>/delete/property/<idP>', methods=['DELETE'])
+def remove_Property(id, idP):
+>>>>>>> f68b2f866b6d88ebbf7a9ca954f55c2dd50feb09
     get_property= Property.query.get(idP)
     db.session.delete(get_property)
     db.session.commit()
     get_property= Property.query.filter_by(user_id=id)
     all_property= list(map(lambda x: x.serialize(), get_property))
+<<<<<<< HEAD
+=======
     return jsonify(all_property), 200
 
 
+>>>>>>> f68b2f866b6d88ebbf7a9ca954f55c2dd50feb09
 
+    return jsonify(all_property), 200
 
 
 # Bulk add properties below
@@ -111,15 +125,15 @@ def add_newproperty_load():
 # Add a new listing for specific user below
 @api.route('/user/property/listing/new', methods=['POST'])
 def add_user_listing():
-    request_body=request.json
-    for el in request_body:
-        test_listing= Listing.query.filter_by(property_id=el['property_id'],date_needed=el['date_needed']).first()
-        if test_listing:
-            print('This one Already exist')
-        else:
-            newL=Listing(property_id=el['property_id'], date_needed= el['date_needed'], special_note=el['special_note'],status=el['status'])
-            db.session.add(newL)
-            db.session.commit()
+    listing_request=request.json
+    
+    test_listing= Listing.query.filter_by(property_id=listing_request['property_id'],date_needed=listing_request['date_needed']).first()
+    if test_listing:
+        print('This one Already exist')
+    else:
+        newL=Listing(property_id=listing_request['property_id'], date_needed= listing_request['date_needed'], special_note=listing_request['special_note'])
+        db.session.add(newL)
+        db.session.commit()
     return jsonify(f"Success"), 200
 
 
