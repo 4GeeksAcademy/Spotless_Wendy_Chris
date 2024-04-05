@@ -2,7 +2,9 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Worker, Property, Payment, Listing
+from api.models import db, User, Worker, Property, Payment, Listing, Property2, Worker2
+from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import relationship, attributes
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 
@@ -69,41 +71,26 @@ def get_user_property(id):
 
     return jsonify(all_property), 200
 
-# @api.route('/user/<id>/listing/all', methods=['GET'])
-# def get_user_listing():
-#     get_listing= Listing.query.filter_by(property_id=id)
-#     all_listing= list(map(lambda x: x.serialize, get_listing))
 
-#     return jsonify(all_listing), 200
+@api.route('/worker/listing/all', methods=['GET'])
+def get_all_available_listing_for_worker():
+    get_listing= Listing.query.filter_by(status=True)
+    all_listing= list(map(lambda x: x.serialize(), get_listing))
 
-
-<<<<<<< HEAD
-
+    return jsonify(all_listing), 200
 
 
 @api.route('/user/<id>/delete/property/<idP>', methods=['DELETE'])
 def remove_Property(id, idP):
-    request_body=request.json
-    
-=======
-@api.route('/user/<id>/delete/property/<idP>', methods=['DELETE'])
-def remove_Property(id, idP):
->>>>>>> f68b2f866b6d88ebbf7a9ca954f55c2dd50feb09
     get_property= Property.query.get(idP)
     db.session.delete(get_property)
     db.session.commit()
     get_property= Property.query.filter_by(user_id=id)
     all_property= list(map(lambda x: x.serialize(), get_property))
-<<<<<<< HEAD
-=======
-    return jsonify(all_property), 200
+    return (all_property),200
 
 
->>>>>>> f68b2f866b6d88ebbf7a9ca954f55c2dd50feb09
-
-    return jsonify(all_property), 200
-
-
+    
 # Bulk add properties below
 @api.route('property/new/load', methods=['POST'])
 def add_newproperty_load():
@@ -136,6 +123,51 @@ def add_user_listing():
     return jsonify(f"Success"), 200
        
 
+
+
+
+@api.route('/update/profile/<id>', methods=['PUT'])
+def update_user_or_worker(id):
+    request_body=request.json
+    if request_body['role']=='worker':
+         
+        test_token= Worker.query.filter_by(email=request_body, password=request_body['password'])
+        if test_token:
+            db.session.query(Worker).get(id).update({"full_name":request_body['full_name'], "email":request_body['email'],"phone": request_body['phone']})
+            db.session.commit()
+            return jsonify(f"Success"), 200
+        else:
+            return (f"Password incorrect"),410
+    else:
+         test_token= User.query.filter_by(email=request_body['email'], password=request_body['password']).first()
+         if test_token:
+            db.session.query(User).filter_by(email=request_body['email'], password=request_body['password']).update({"full_name":request_body['full_name'], "email":request_body['email'],"phone": request_body['phone'], "password":request_body['new_password']})
+            db.session.commit()
+            return jsonify(f"Success"), 200
+         else:
+            return (f"Password incorrect"),410
+     
+         
+         
+             
+
 # generated data from Mock
+
+
+
+
+
+
+
+
+# test new mock table, don't worry about this part, i'm testing something. please disregard
+
+@api.route('/test/worker2', methods=['GET'])
+def test_worker():
+    get_property= Property2.query.filter_by(worker_id=1).all()
+
+    all_listing= list(map(lambda x: x.serialize(), get_property))
+    
+    return jsonify(all_listing), 200
 
 

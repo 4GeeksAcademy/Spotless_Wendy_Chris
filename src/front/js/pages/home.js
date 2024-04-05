@@ -113,6 +113,11 @@ export const Home = () => {
 
 </Link>
 
+<Link to='/editprofile'>
+	<button type="button" className="btn btn-secondary" >a Link to edit profile</button><br/><br/><br/>
+
+</Link>
+
 
 <Link to='/addlisting'>
 	<button type="button" className="btn btn-secondary" >Go to listing</button>

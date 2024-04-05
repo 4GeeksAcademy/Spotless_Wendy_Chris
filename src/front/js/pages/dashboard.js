@@ -76,7 +76,7 @@ export const Dashboard = () => {
 
         newArray.forEach((el) => {
           let each_property = {};
-          let all_img = el.img.split("  ");
+          let all_img = el.img.split("");
           // console.log(all_img)
           each_property = el;
           each_property.image1 = all_img[0];
@@ -96,7 +96,7 @@ export const Dashboard = () => {
 
 
 function pop_modal_function(id_of_property){
-  const dialog = document.getElementById('modal');
+  const dialog = document.getElementById('modal_dialog');
   dialog.showModal();
   setListingId(id_of_property);
 }
@@ -104,7 +104,7 @@ function pop_modal_function(id_of_property){
 
 function close_modal_function(){
   console.log('Close Function was called');
-  const dialog = document.getElementById('modal');
+  const dialog = document.getElementById('modal_dialog');
   setListingId(null);
   dialog.close();
 }
@@ -158,18 +158,18 @@ setListingNote('');
       
 <div class="product-list-container">
 
-
         {myProperties.map((element, index) =>
-
-
 
           <div class="card text-secondary" style={{ width: "18rem" }}>
 
 
-
-
             <div id="carouselExampleSlidesOnly" class="carousel slide h-50" data-bs-ride="carousel">
               <div class="carousel-inner" style={{ height: "10rem" }}>
+                <div className="jump_div">
+                  <Link to='/'>
+                  <span><i class="fa-solid fa-arrow-up-right-from-square fa-xl"></i></span>
+                  </Link>
+                  </div>
                 <div class="carousel-item active">
                   <img src={element.image1} class="d-block w-100 " alt="..." />
                 </div>
@@ -181,13 +181,6 @@ setListingNote('');
                 </div>
               </div>
             </div>
-
-
-
-
-
-
-
 
  
   <div class="card-body">
@@ -204,35 +197,27 @@ setListingNote('');
   </div>
 </div>
 
-
         )}
-
-
-
 
 
 </div>
 
 
-<dialog id="modal" className="container container-sm"> 
-
-
+<dialog id="modal_dialog" className="modal"> 
 <form>
   <div class="form-group ">
     <label for="exampleFormControlInput1">Date needed</label>
     <input type="email" class="form-control" id="exampleFormControlInput1" value={listingDate} placeholder="Date needed" onChange={(e)=>get_date_needed_function(e)}/>
   </div>
-  
- 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Example textarea</label>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={listingNote} onChange={(e)=>get_specialNote_function(e)}></textarea>
   </div>
 </form>
 
-
   <button className="btn btn-secondary" onClick={()=>close_modal_function()}>Close</button>
   <button className="button-24" onClick={()=>save_modal_function()}>Save </button>
+
 </dialog>
 </div>
 	);
