@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
+import rigoImage from "../../img/how-to.png";
 import "../../styles/home.css";
 import { AppContext } from "../layout";
 import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom";
@@ -10,8 +11,11 @@ export const Dashboard = () => {
   const { store, actions } = useContext(Context);
   const { currentUser, myProperties, setMyProperties, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
 
-
   const navigate = useNavigate();
+  const [listingNote, setListingNote] = useState('');
+  const [listingDate, setListingDate] = useState('');
+  const [listingId, setListingId] = useState(null);
+
 
 
   useEffect(() => {
@@ -30,7 +34,7 @@ export const Dashboard = () => {
         newArray.forEach((el) => {
           let each_property = {};
           let all_img = el.img.split("  ");
-          // console.log(all_img)
+
           each_property = el;
           each_property.image1 = all_img[0];
           each_property.image2 = all_img[1];
@@ -85,10 +89,8 @@ export const Dashboard = () => {
         setMyProperties(finalProperty);
       })
 
-      .catch(error => console.log(error)); git
+      .catch(error => console.log(error));
   }
-
-
 
 
   function pop_modal_function(id_of_property) {
@@ -157,132 +159,61 @@ export const Dashboard = () => {
   }
 
 
-
-
-
   return (
-
-    <div class="product-list-container">
-
-
-      {myProperties.map((element, index) =>
-
+    <div>
+      <div className="add_property_class_div">
+        <button class="button-24" role="button" onClick={() => navigate("/")}>Add New Property</button>
+      </div>
 
 
+      <div class="product-list-container">
 
+        {myProperties.map((element) =>
 
-        <div class="card text-secondary" style={{ width: "18rem" }}>
-
-
+          <div class="card text-secondary" style={{ width: "18rem" }}>
 
 
 
-          <div id="slideshow">
-            <div className="jump_div">
-              <Link to='/demo'>
-                <span><i class="fa-solid fa-arrow-up-right-from-square fa-xl"></i></span>
-              </Link>
+
+            <div id="slideshow">
+              <div className="jump_div">
+                <Link to='/demo'>
+                  <span><i class="fa-solid fa-arrow-up-right-from-square fa-xl"></i></span>
+                </Link>
+              </div>
+
+              <div class="slide-wrapper">
+
+                <div class="slide"><img src={element.image1} class="slide-number w-100" /></div>
+                <div class="slide"><img src={element.image2} class="slide-number w-100" /></div>
+                <div class="slide"><img src={element.image3} class="slide-number w-100" /></div>
+                <div class="slide"><img src={element.image1} class="slide-number w-100" /></div>
+
+
+              </div>
             </div>
 
-            <div class="slide-wrapper">
-
-              <div class="slide"><img src={element.image1} class="slide-number w-100" /></div>
-              <div class="slide"><img src={element.image2} class="slide-number w-100" /></div>
-              <div class="slide"><img src={element.image3} class="slide-number w-100" /></div>
-              <div class="slide"><img src={element.image1} class="slide-number w-100" /></div>
 
 
-            </div>
-          </div>
-
-
-
-          <div class="card-body">
-            <h5 class="card-title">{element.name}</h5>
-            <p class="card-text">Address: {element.address}<br />
-              City: {element.city}</p>
-            <div className="d-flex justify-content-between">
-              <button class="button-24" role="button" onClick={() => pop_modal_function(element.id)}>Add to Listing</button>
-              <button className="btn" onClick={() => delete_property(element.id)}>
-                <i className="fas fa-trash-alt fa-bounce fa-xl" />
-              </button>
-            </div>
-
-          </div>
-        </div>
-      )}
-
-      {/* <div id="carouselExampleSlidesOnly" class="carousel slide h-50" data-bs-ride="carousel">
-        <div class="carousel-inner" style={{ height: "10rem" }}>
-          <div class="carousel-item active">
-            <img src={element.image1} class="d-block w-100 " alt="..." />
-          </div>
-          <div class="carousel-item">
-            <img src={element.image2} class="d-block w-100 " alt="..." />
-          </div>
-          <div class="carousel-item">
-            <img src={element.image3} class="d-block w-100  " alt="..." />
-          </div>
-        </div>
-      </div> */}
-      {/* 
-      <div class="card-body">
-        <h5 class="card-title">{element.name}</h5>
-        <p class="card-text">Address: {element.address}<br />
-          City: {element.city}</p>
-        <div>
-          <button class="button-24" role="button" >Add to Listing</button>
-          <button className="btn" onClick={() => delete_property(element.id)}>
-            <i className="fas fa-trash-alt fa-bounce fa-xl" />
-          </button>
-        </div>
-      </div> */}
-
-
-      {/* <dialog id="modal_dialog"  class="card-body border-light rounded"> 
-            <div class="row gx-3 mb-3">
-
-            <div class="col-2 d-flex align-items-center">
-                    <label class="medium mb-1" for="inputFirstName">Date</label>
-                   </div>
-                <div class="col-10">
-                
-                    <input class="form-control" id="inputFirstName" type="text" onChange={(e) => { get_date_needed_function(e) }} placeholder="Enter your first name" value={listingDate} />
-                </div>
+            <div class="card-body">
+              <h5 class="card-title">{element.name}</h5>
+              <p class="card-text">Address: {element.address}<br />
+                City: {element.city}</p>
+              <div className="d-flex justify-content-between">
+                <button class="button-24" role="button" onClick={() => pop_modal_function(element.id)}>Add to Listing</button>
+                <button className="btn" onClick={() => delete_property(element.id)}>
+                  <i className="fas fa-trash-alt fa-bounce fa-xl" />
+                </button>
+              </div>
 
             </div>
           </div>
 
+        )}
 
 
-        
+      </div>
 
-
-            <div className="row mb-3">
-            <div class="col-2 d-flex align-items-center">
-            <label class="medium mb-1" for="inputnote">Note</label>
-                   </div>
-            
-            <div class="col-10">
-                
-                <textarea class="form-control" id="inputnote" type="email" onChange={(e) => { get_specialNote_function(e) }} placeholder="Enter your note" value={listingNote}  textarea/>
-            </div>
-            </div>
-
-
-            <div className="row mb-3">
-            <div class="col d-flex align-items-center">
-            <button className="btn btn-secondary text-md" onClick={()=>close_modal_function()}>Close</button>
-           
-                   </div>
-                   <div className="col"></div>
-            
-            <div class="col">
-            <button className="button-24" onClick={()=>save_modal_function()}>Save </button> 
-                </div>
-            </div>        
-</dialog> */}
     </div>
   );
-
 };

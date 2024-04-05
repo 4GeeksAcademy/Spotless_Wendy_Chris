@@ -118,7 +118,6 @@ class Schedule(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     listing_id = db.Column(db.Integer, db.ForeignKey('listing.id'), nullable=False)
     worker_id = db.Column(db.Integer, db.ForeignKey('worker.id'), nullable=False)
-
     date_time = db.Column(db.String(120), nullable=False)
    
     paid_status = db.Column(db.Boolean, default=False)
@@ -165,49 +164,5 @@ class Payment(db.Model):
             # do not serialize the password, its a security breach
         }
     
-
-
-
-class Worker2(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    full_name = db.Column(db.String(120), unique=True, nullable=False)
-    
-    def __repr__(self):
-        return self.email
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "email": self.email,
-            "full_name": self.full_name
-           
-            # do not serialize the password, its a security breach
-        }
-    
-
-class Property2(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True, nullable=False)
-    worker_id = db.Column(db.Integer, db.ForeignKey('worker2.id'))
-    #work_link =db.relationship(Worker2, back_populates="worker2")
-    worker = db.relationship('Worker2')
-    
-    #worker_link = db.relationship(Worker2, backref="property2", lazy=True)
-
-    
-    def __repr__(self):
-        return self.name
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "worker_id": self.worker_id
-          
-            # do not serialize the password, its a security breach
-        }
-    
-
     
 

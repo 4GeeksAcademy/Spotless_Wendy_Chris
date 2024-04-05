@@ -79,3 +79,23 @@
     background-color: rgba(237, 237, 237, 0.405);
     cursor: pointer;
 }
+
+.star {
+    color: rgb(255, 232, 27);
+    text-shadow: 0 0 9px #ffffff;
+}
+
+.star:hover {
+    color: rgb(255, 232, 27);
+    text-shadow: 0 0 9px #ababab;
+}
+
+.starRating {
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 3px #ffffff;
+}
+
+.starRating:hover {
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 3px #000000;
+}

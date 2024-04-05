@@ -9,6 +9,7 @@ import { Login } from "./pages/login";
 import { Single } from "./pages/single";
 import { Landing } from "./pages/landing";
 import { Dashboard } from "./pages/dashboard";
+import { StaticProfile } from "./component/staticprofile";
 
 import { WDashboard } from "./pages/workerdashboard";
 import { EditProfile } from "./pages/editprofile";

@@ -5,7 +5,7 @@ import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../layout";
 
 
-export const EditProfile = () => {
+export const StaticProfile = () => {
     const { currentUser, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
     const navigate = useNavigate();
 
@@ -116,9 +116,8 @@ export const EditProfile = () => {
                 <div class="col-2 d-flex align-items-center">
                     <label class="medium mb-1" for="inputFirstName">Full Name</label>
                 </div>
-                <div class="col-10">
-
-                    <input class="form-control" id="inputFirstName" type="text" onChange={(e) => { get_full_name(e) }} placeholder="Enter your first name" value={tempF} />
+                <div class="col-10 d-flex align-items-start">
+                    {currentUser.full_name}
                 </div>
 
 
@@ -129,66 +128,19 @@ export const EditProfile = () => {
                     <label class="medium mb-1" for="inputEmailAddress">Email address</label>
                 </div>
 
-                <div class="col-10">
-
-                    <input class="form-control" id="inputEmailAddress" type="email" onChange={(e) => { get_email(e) }} placeholder="Enter your email address" value={tempE} />
+                <div class="col-10 d-flex align-items-start">
+                    {currentUser.email}
                 </div>
             </div>
             <div className="row mb-3">
                 <div class="col-2 d-flex align-items-center">
                     <label class="medium mb-1" for="inputEmailAddress">Phone</label>
                 </div>
-
-                <div class="col-10">
-
-                    <input class="form-control" id="inputphone" type="email" onChange={(e) => { get_phone(e) }} placeholder="Enter your phone " value={tempP} />
+                <div class="col-10 d-flex align-items-start">
+                    {currentUser.phone}
                 </div>
             </div>
-
-
-            <div className="row mb-3">
-                <div class="col-2 d-flex align-items-center">
-                    <label class="medium mb-1" for="inputpassword">Current password</label>
-                </div>
-
-                <div class="col-10">
-
-                    <input class="form-control text-lg" type="password" id="inputpassword" onChange={(e) => { get_current_password(e) }} placeholder="Enter your current password " value={tempPA} />
-                </div>
-            </div>
-
-
-            <div className="row mb-3">
-                <div class="col-2 d-flex align-items-center">
-                    <label class="medium mb-1" for="inputpassword">New password</label>
-                </div>
-
-                <div class="col-10">
-
-                    <input class="form-control" id="inputpassword" type="password" onChange={(e) => { get_new_password(e) }} placeholder="Enter your new password " value={tempNPA} />
-                </div>
-            </div>
-
-
-
-
-            <div className="row">
-                <div className="col-4"></div>
-                <div className="col"> <button class="btn btn-secondary h-100" type="button" onClick={() => { cancel_update_function() }}>Cancel </button> <button class="button-24" type="button" onClick={() => { save_update_function() }}>Save Changes </button></div>
-
-                <div className="col-4"></div>
-            </div>
-
-
-
-
 
         </div>
-
-
-
-
-
-
     );
 };
