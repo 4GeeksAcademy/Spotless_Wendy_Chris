@@ -13,10 +13,59 @@
 	box-sizing: border-box;
 }
 
+
+body {
+	font-family: Helvetica, sans-serif;
+	padding: 5%;
+  
+  }
+  
+  #slideshow {
+	text-align: center;
+	overflow: hidden;
+	height: 200px;
+	width: 18rem;
+	margin: 0 auto;
+  }
+  
+  .slide-wrapper {
+	width: 54rem;
+	-webkit-animation: slide 10s ease infinite;
+  }
+  
+  .slide {
+	float: left;
+	height: 200px;
+	width: 18rem;
+  }
+  
+ 
+  
+  
+  .slide-number {
+	color: #000;
+	text-align: center;
+	font-size: 10em;
+  }
+  
+  @-webkit-keyframes slide {
+	20% {margin-left: 0px;}
+	30% {margin-left: -728px;}
+	50% {margin-left: -728px;}
+	60% {margin-left: -1456px;}
+	
+  }
+  
+
 input{
 	font-size: 75px;
 	font-weight: bold;
 }
+
+
+
+
+
 
 span{
 	cursor:pointer;

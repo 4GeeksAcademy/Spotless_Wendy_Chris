@@ -39,7 +39,7 @@ export const Demo = () => {
       
 <div class="product-list-container">
 
-   <h1>Test</h1>
+   <h1>Nothing to show yet</h1>
    
   </div>
 </div>

@@ -53,35 +53,13 @@ export const WDashboard = () => {
         console.log("This is the response")
         console.log(response)
 
-        let newArray = [...response];
-        let finalProperty = [];
-
-        newArray.forEach((el) => {
-          let each_property = {};
-          let all_img = el.img.split("  ");
-         
-          each_property = el;
-          each_property.image1 = all_img[0];
-          each_property.image2 = all_img[1];
-          each_property.image3 = all_img[2];
-          finalProperty.push(each_property);
-          console.log('test begins here')
-          console.log(finalProperty);
-
-        })
-        setMyProperties(finalProperty);
+      
       })
 
       .catch(error => console.log(error));
   }
 
 
-
-function pop_modal_function(id_of_property){
-  const dialog = document.getElementById('modal');
-  dialog.showModal();
-  setListingId(id_of_property);
-}
 
 
 
@@ -117,56 +95,10 @@ fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
       </div>
 
       
-<div class="product-list-container">
+<div class="listing_container">
 
-
-        {myProperties.map((element, index) =>
-
-
-
-          <div class="card text-secondary" style={{ width: "18rem" }}>
-
-
-
-
-            <div id="carouselExampleSlidesOnly" class="carousel slide h-50" data-bs-ride="carousel">
-              <div class="carousel-inner" style={{ height: "10rem" }}>
-                <div class="carousel-item active">
-                  <img src={element.image1} class="d-block w-100 " alt="..." />
-                </div>
-                <div class="carousel-item">
-                  <img src={rigoImage} class="d-block w-100 " alt="..." />
-                </div>
-                <div class="carousel-item">
-                  <img src={rigoImage} class="d-block w-100  " alt="..." />
-                </div>
-              </div>
-            </div>
-
-
-
-
-
-
-
-
- 
-  <div class="card-body">
-    <h5 class="card-title">{element.name}</h5>
-    <p class="card-text">Address: {element.address}<br/>
-      City: {element.city}</p>
-      <div>
-      <button class="button-24" role="button" onClick={()=>pop_modal_function(element.id)}>Add to Listing</button>
-      <button className="btn" onClick={() =>delete_property(element.id)}> 
-               <i className="fas fa-trash-alt fa-bounce fa-xl" />
-                   </button> 
-      </div>
    
-  </div>
-</div>
-
-
-        )}
+  <h1>Nothing to show yet</h1>
 
 </div>
 

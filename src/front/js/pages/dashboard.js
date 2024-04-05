@@ -95,6 +95,7 @@ export const Dashboard = () => {
 
 
 function pop_modal_function(id_of_property){
+  console.log('this function was called')
   const dialog = document.getElementById('modal_dialog');
   dialog.showModal();
   setListingId(id_of_property);
@@ -122,6 +123,10 @@ setListingDate(date_needed);
 }
 
 function save_modal_function(id){
+
+  if( listingDate.length>5){
+
+ 
   let new_listing= {property_id: listingId, special_note:listingNote, date_needed: listingDate};
 fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
    {
@@ -145,6 +150,13 @@ setListingDate('');
 setListingNote('');
    const dialog = document.getElementById('modal');
    dialog.close();
+
+
+  }
+  else{
+    const dialog = document.getElementById('modal');
+   dialog.close();
+  }
 }
 
 
@@ -157,29 +169,28 @@ setListingNote('');
       
 <div class="product-list-container">
 
-        {myProperties.map((element, index) =>
+        {myProperties.map((element) =>
 
           <div class="card text-secondary" style={{ width: "18rem" }}>
 
 
-            <div id="carouselExampleSlidesOnly" class="carousel slide h-50" data-bs-ride="carousel">
-              <div class="carousel-inner" style={{ height: "10rem" }}>
-                <div className="jump_div">
+        
+
+            <div id="slideshow">
+            <div className="jump_div">
                   <Link to='/demo'>
                   <span><i class="fa-solid fa-arrow-up-right-from-square fa-xl"></i></span>
                   </Link>
                   </div>
-                <div class="carousel-item active">
-                  <img src={element.image1} class="d-block w-100 " alt="..." />
-                </div>
-                <div class="carousel-item">
-                  <img src={rigoImage} class="d-block w-100 " alt="..." />
-                </div>
-                <div class="carousel-item">
-                  <img src={rigoImageUrl} class="d-block w-100  " alt="..." />
-                </div>
-              </div>
-            </div>
+  <div class="slide-wrapper">
+    
+    <div class="slide"><img src={element.image1} class="slide-number w-100"/></div>
+    <div class="slide"><img src={element.image2} class="slide-number w-100"/></div>
+    <div class="slide"><img src={element.image3} class="slide-number w-100"/></div>
+   
+  </div>
+</div>
+
 
  
   <div class="card-body">
@@ -202,20 +213,44 @@ setListingNote('');
 </div>
 
 
-<dialog id="modal_dialog" className="modal"> 
-<form>
-  <div class="form-group ">
-    <label for="exampleFormControlInput1">Date needed</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" value={listingDate} placeholder="Date needed" onChange={(e)=>get_date_needed_function(e)}/>
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Example textarea</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={listingNote} onChange={(e)=>get_specialNote_function(e)}></textarea>
-  </div>
-</form>
+<dialog id="modal_dialog"  class="card-body border-light rounded"> 
+            <div class="row gx-3 mb-3">
 
-  <button className="btn btn-secondary" onClick={()=>close_modal_function()}>Close</button>
-  <button className="button-24" onClick={()=>save_modal_function()}>Save </button>
+            <div class="col-2 d-flex align-items-center">
+                    <label class="medium mb-1" for="inputFirstName">Date</label>
+                   </div>
+                <div class="col-10">
+                
+                    <input class="form-control" id="inputFirstName" type="text" onChange={(e) => { get_date_needed_function(e) }} placeholder="Enter your first name" value={listingDate} />
+                </div>
+
+
+            </div>
+
+            <div className="row mb-3">
+            <div class="col-2 d-flex align-items-center">
+            <label class="medium mb-1" for="inputnote">Note</label>
+                   </div>
+            
+            <div class="col-10">
+                
+                <textarea class="form-control" id="inputnote" type="email" onChange={(e) => { get_specialNote_function(e) }} placeholder="Enter your note" value={listingNote}  textarea/>
+            </div>
+            </div>
+
+            <div className="row mb-3">
+            <div class="col d-flex align-items-center">
+            <button className="btn btn-secondary text-md" onClick={()=>close_modal_function()}>Close</button>
+           
+                   </div>
+                   <div className="col"></div>
+            
+            <div class="col">
+            <button className="button-24" onClick={()=>save_modal_function()}>Save </button> 
+                </div>
+            </div>
+            
+
 
 </dialog>
 </div>
