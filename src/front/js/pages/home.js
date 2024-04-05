@@ -115,6 +115,17 @@ export const Home = () => {
 				<button type="button" className="btn btn-secondary" >a Link to MyListings</button><br /><br /><br />
 			</Link>
 
+<Link to='/editprofile'>
+	<button type="button" className="btn btn-secondary" >a Link to edit profile</button><br/><br/><br/>
+
+</Link>
+
+
+<Link to='/wdashboard'>
+	<button type="button" className="btn btn-secondary" >a Link to worker dashboard</button><br/><br/><br/>
+
+</Link>
+
 
 
 
