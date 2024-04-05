@@ -165,7 +165,7 @@ setListingNote('');
             <div id="carouselExampleSlidesOnly" class="carousel slide h-50" data-bs-ride="carousel">
               <div class="carousel-inner" style={{ height: "10rem" }}>
                 <div className="jump_div">
-                  <Link to='/'>
+                  <Link to='/demo'>
                   <span><i class="fa-solid fa-arrow-up-right-from-square fa-xl"></i></span>
                   </Link>
                   </div>
@@ -186,7 +186,7 @@ setListingNote('');
     <h5 class="card-title">{element.name}</h5>
     <p class="card-text">Address: {element.address}<br/>
       City: {element.city}</p>
-      <div>
+      <div className="d-flex justify-content-between">
       <button class="button-24" role="button" onClick={()=>pop_modal_function(element.id)}>Add to Listing</button>
       <button className="btn" onClick={() =>delete_property(element.id)}> 
                <i className="fas fa-trash-alt fa-bounce fa-xl" />
