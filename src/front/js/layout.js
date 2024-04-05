@@ -9,8 +9,12 @@ import { Login } from "./pages/login";
 import { Single } from "./pages/single";
 import { Landing } from "./pages/landing";
 import { Dashboard } from "./pages/dashboard";
+
 import { WDashboard } from "./pages/workerdashboard";
 import { EditProfile } from "./pages/editprofile";
+
+import { MyListings } from "./component/mylistings";
+
 
 import { AddListing } from "./pages/addlisting";
 import injectContext from "./store/appContext";
@@ -33,8 +37,9 @@ const Layout = () => {
     const basename = process.env.BASENAME || "";
 
     const [myListings, setMyListings] = useState([])
-    const [displayAddProperty, setDisplayAddProperty] = useState(false)
+    const [display, setDisplay] = useState("")
     const [myProperties, setMyProperties] = useState([])
+    const [filterListings, setFilterListings] = useState(true)
     const [currentUser, setCurrentUser] = useState({
         email: "dmeasor1@cisco.com",
         full_name: "Dov Measor",
@@ -51,7 +56,6 @@ const Layout = () => {
     const [token, setToken] = useState("")
 
 
-
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
     return (
@@ -61,7 +65,7 @@ const Layout = () => {
                 {
                     currentUser, setCurrentUser, token, setToken,
                     myListings, setMyListings, myProperties, setMyProperties,
-                    role, setRole, displayAddProperty, setDisplayAddProperty
+                    role, setRole, display, setDisplay, filterListings, setFilterListings
                 }
             }>
                 <BrowserRouter basename={basename}>
@@ -75,6 +79,7 @@ const Layout = () => {
                             <Route element={<EditProfile />} path="/editprofile" />
                             <Route element={<Landing />} path="/landing" />
                             <Route element={<AddListing />} path="/addlisting" />
+                            <Route element={<MyListings />} path="/mylistings" />
                             <Route element={<AddProperty />} path="/addproperty" />
                             <Route element={<Demo />} path="/demo" />
                             <Route element={<Single />} path="/single/:theid" />

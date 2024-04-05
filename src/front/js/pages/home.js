@@ -99,19 +99,21 @@ export const Home = () => {
 			})
 
 			.catch(error => console.log(error));
-}
+	}
 	return (
 
-<div className="container">
-	<h1>test</h1>
-	<button type="button" className="btn btn-secondary" onClick={()=>fetch_listing()}>Fetch api</button><br/><br/><br/>
-	<button type="button" className="btn btn-secondary" onClick={()=>load_property()}>Test property</button><br/><br/><br/>
-	<button type="button" className="btn btn-secondary" onClick={()=>load_listing()}>Add Listing randomly</button><br/><br/><br/>
+		<div className="container">
+			<h1>test</h1>
+			<button type="button" className="btn btn-secondary" onClick={() => fetch_listing()}>Fetch api</button><br /><br /><br />
+			<button type="button" className="btn btn-secondary" onClick={() => load_property()}>Test property</button><br /><br /><br />
+			<button type="button" className="btn btn-secondary" onClick={() => load_listing()}>Add Listing randomly</button><br /><br /><br />
 
-    <Link to='/dashboard'>
-	<button type="button" className="btn btn-secondary" >a Link to Dashboard</button><br/><br/><br/>
-
-</Link>
+			<Link to='/dashboard'>
+				<button type="button" className="btn btn-secondary" >a Link to Dashboard</button><br /><br /><br />
+			</Link>
+			<Link to='/mylistings'>
+				<button type="button" className="btn btn-secondary" >a Link to MyListings</button><br /><br /><br />
+			</Link>
 
 <Link to='/editprofile'>
 	<button type="button" className="btn btn-secondary" >a Link to edit profile</button><br/><br/><br/>
@@ -125,9 +127,12 @@ export const Home = () => {
 </Link>
 
 
-<Link to='/addlisting'>
-	<button type="button" className="btn btn-secondary" >Go to listing</button>
-</Link>
+
+
+
+			<Link to='/addlisting'>
+				<button type="button" className="btn btn-secondary" >Go to listing</button>
+			</Link>
 
 
 		</div>
