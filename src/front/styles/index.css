@@ -69,3 +69,13 @@
     background-color: rgb(97, 97, 97);
     color: rgb(255, 255, 255);
 }
+
+.myListLink {
+    background-color: rgb(252, 252, 252);
+    padding: 3px 0px;
+}
+
+.myListLink:hover {
+    background-color: rgba(237, 237, 237, 0.405);
+    cursor: pointer;
+}
