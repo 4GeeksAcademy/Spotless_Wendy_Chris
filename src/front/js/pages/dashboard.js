@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
+import rigoImage from "../../img/how-to.png";
 import "../../styles/home.css";
 import { AppContext } from "../layout";
 import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom";
@@ -10,8 +11,11 @@ export const Dashboard = () => {
   const { store, actions } = useContext(Context);
   const { currentUser, myProperties, setMyProperties, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
 
+    const navigate = useNavigate();
+    const [listingNote, setListingNote] = useState('');
+    const [listingDate, setListingDate] = useState('');
+    const [listingId, setListingId] = useState(null);
 
-  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -85,9 +89,8 @@ export const Dashboard = () => {
         setMyProperties(finalProperty);
       })
 
-      .catch(error => console.log(error)); git
+      .catch(error => console.log(error));
   }
-
 
 
 
@@ -157,21 +160,18 @@ setListingNote('');
 }
 
 
+	return (
+    <div> 
+      <div className="add_property_class_div">
+      <button class="button-24" role="button" onClick={()=>navigate("/")}>Add New Property</button>
+      </div>
 
+      
+<div class="product-list-container">
 
         {myProperties.map((element) =>
 
-  return (
-    <div>
-      <div class="product-list-container">
-
-
-        {myProperties.map((element, index) =>
-
-
-
           <div class="card text-secondary" style={{ width: "18rem" }}>
-
 
 
         
@@ -215,42 +215,6 @@ setListingNote('');
 </div>
 
 
-
-            <div id="carouselExampleSlidesOnly" class="carousel slide h-50" data-bs-ride="carousel">
-              <div class="carousel-inner" style={{ height: "10rem" }}>
-                <div class="carousel-item active">
-                  <img src={element.image1} class="d-block w-100 " alt="..." />
-                </div>
-                <div class="carousel-item">
-                  <img src={element.image2} class="d-block w-100 " alt="..." />
-                </div>
-                <div class="carousel-item">
-                  <img src={element.image3} class="d-block w-100  " alt="..." />
-                </div>
-              </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-            <div class="card-body">
-              <h5 class="card-title">{element.name}</h5>
-              <p class="card-text">Address: {element.address}<br />
-                City: {element.city}</p>
-              <div>
-                <button class="button-24" role="button" >Add to Listing</button>
-                <button className="btn" onClick={() => delete_property(element.id)}>
-                  <i className="fas fa-trash-alt fa-bounce fa-xl" />
-                </button>
-              </div>
-
-
 <dialog id="modal_dialog"  class="card-body border-light rounded"> 
             <div class="row gx-3 mb-3">
 
@@ -261,13 +225,6 @@ setListingNote('');
                 
                     <input class="form-control" id="inputFirstName" type="text" onChange={(e) => { get_date_needed_function(e) }} placeholder="Enter your first name" value={listingDate} />
                 </div>
-
-            </div>
-          </div>
-
-
-
-        )}
 
 
             </div>
@@ -282,7 +239,6 @@ setListingNote('');
                 <textarea class="form-control" id="inputnote" type="email" onChange={(e) => { get_specialNote_function(e) }} placeholder="Enter your note" value={listingNote}  textarea/>
             </div>
             </div>
-
 
             <div className="row mb-3">
             <div class="col d-flex align-items-center">
@@ -301,13 +257,6 @@ setListingNote('');
 </dialog>
 </div>
 	);
-
-
-
-      </div>
-    </div>
-  );
-
 };
 
 
