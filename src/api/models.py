@@ -92,7 +92,6 @@ class Property(db.Model):
 class Listing(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     property_id = db.Column(db.Integer, db.ForeignKey('property.id'), nullable=False)
-
     date_needed = db.Column(db.String(120), nullable=False)
     special_note = db.Column(db.String(300), nullable=True)
     status = db.Column(db.Boolean, default=True)
