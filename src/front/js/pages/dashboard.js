@@ -187,6 +187,8 @@ setListingNote('');
     <div class="slide"><img src={element.image1} class="slide-number w-100"/></div>
     <div class="slide"><img src={element.image2} class="slide-number w-100"/></div>
     <div class="slide"><img src={element.image3} class="slide-number w-100"/></div>
+    <div class="slide"><img src={element.image1} class="slide-number w-100"/></div>
+   
    
   </div>
 </div>

@@ -30,7 +30,7 @@ body {
   
   .slide-wrapper {
 	width: 54rem;
-	-webkit-animation: slide 10s ease infinite;
+	-webkit-animation: slide 15s ease infinite;
   }
   
   .slide {
@@ -40,19 +40,16 @@ body {
   }
   
  
-  
-  
-  .slide-number {
-	color: #000;
-	text-align: center;
-	font-size: 10em;
-  }
+
   
   @-webkit-keyframes slide {
 	20% {margin-left: 0px;}
-	30% {margin-left: -728px;}
-	50% {margin-left: -728px;}
-	60% {margin-left: -1456px;}
+	30% {margin-left: -18rem;}
+	50% {margin-left: -18rem;}
+	60% {margin-left: -54rem;}
+	70% {margin-left: -54rem;}
+	80% {margin-left: -72rem;}
+
 	
   }
   
@@ -101,8 +98,7 @@ span{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
-	row-gap: 5px;
-	gap: 10px;
+	gap: 15px;
   }
 
 

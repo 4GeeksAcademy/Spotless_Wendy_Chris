@@ -17,7 +17,7 @@ export const WDashboard = () => {
 
   useEffect(() => {
 
-    fetch(process.env.BACKEND_URL + "api/worker/listing/all")
+    fetch(process.env.BACKEND_URL + "api/worker/listing/all2")
       .then(res => {
         if (!res.ok) throw Error(res.statusText);
         return res.json();
@@ -36,37 +36,12 @@ export const WDashboard = () => {
   }, []);
 
 
-  function delete_property(id_to_delete) {
-    fetch(process.env.BACKEND_URL + `/api/user/${currentUser.id}/delete/property/` + id_to_delete,
-      {
-        method: 'DELETE',
-        body: id_to_delete,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(res => {
-        if (!res.ok) console.log(res.statusText);
-        return res.json();
-      })
-      .then(response => {
-        console.log("This is the response")
-        console.log(response)
-
-      
-      })
-
-      .catch(error => console.log(error));
-  }
-
-
-
 
 
 
 function accept_gig_function(id){
   let new_schedule= {listing_id: listingId, worker_id:1};
-fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
+fetch(process.env.BACKEND_URL + "/api/worker/schedule/new",
    {
        method: 'POST',
        body:JSON.stringify(new_schedule),
@@ -89,18 +64,51 @@ fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
 
 
 	return (
-    <div> 
+    <div className="block"> 
       <div className="add_property_class_div">
       <button class="button-24" role="button" onClick={()=>navigate("/")}>See my schedule</button>
       </div>
 
       
-<div class="listing_container">
+<div class="row style-alt">
+			<div class="col-sm-6 col-md-4">
+				<div class="widget">
+					<div class="widget-simple">
+						<a href="#">
+							<img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" class="widget-image img-circle pull-left animation-fadeIn"/>
+						</a>
+						<h4 class="widget-content text-right">
+							<a href="#"><strong>Name</strong></a><br/>
+							<span class="btn-group">
+								<a href="javascript:void(0)" class="btn btn-xs btn-default" data-toggle="tooltip" title="" data-original-title="Category">Follow</a>
+								<a href="javascript:void(0)" class="btn btn-xs btn-primary" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+							</span>
+						</h4>
+					</div>
+				</div>
+			</div>
+      </div>
 
-   
-  <h1>Nothing to show yet</h1>
 
-</div>
+         
+<div class="row style-alt">
+			<div class="col-sm-6 col-md-4">
+				<div class="widget">
+					<div class="widget-simple">
+						<a href="#">
+							<img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" class="widget-image img-circle pull-left animation-fadeIn"/>
+						</a>
+						<h4 class="widget-content text-right">
+							<a href="#"><strong>Name</strong></a><br/>
+							<span class="btn-group">
+								<a href="javascript:void(0)" class="btn btn-xs btn-default" data-toggle="tooltip" title="" data-original-title="Category">Follow</a>
+								<a href="javascript:void(0)" class="btn btn-xs btn-primary" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+							</span>
+						</h4>
+					</div>
+				</div>
+			</div>
+      </div>
 
 
 </div>
