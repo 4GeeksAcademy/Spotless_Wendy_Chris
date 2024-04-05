@@ -33,6 +33,7 @@ const Layout = () => {
     const [myListings, setMyListings] = useState([])
     const [display, setDisplay] = useState("")
     const [myProperties, setMyProperties] = useState([])
+    const [filterListings, setFilterListings] = useState(true)
     const [currentUser, setCurrentUser] = useState({
         email: "dmeasor1@cisco.com",
         full_name: "Dov Measor",
@@ -49,7 +50,6 @@ const Layout = () => {
     const [token, setToken] = useState("")
 
 
-
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
     return (
@@ -59,7 +59,7 @@ const Layout = () => {
                 {
                     currentUser, setCurrentUser, token, setToken,
                     myListings, setMyListings, myProperties, setMyProperties,
-                    role, setRole, display, setDisplay
+                    role, setRole, display, setDisplay, filterListings, setFilterListings
                 }
             }>
                 <BrowserRouter basename={basename}>

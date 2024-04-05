@@ -15,7 +15,7 @@ import { MyListings } from "../component/mylistings";
 
 export const Landing = () => {
     const { currentUser, setCurrentUser, token, setToken, role, setRole,
-        display, setDisplay
+        display, setDisplay, filterListings, setFilterListings
     } = useContext(AppContext);
 
     const navigate = useNavigate();
@@ -111,16 +111,30 @@ export const Landing = () => {
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
                             <div className="col-3"></div>
-                            <div className="col-6">My Active Listings</div>
+                            <div className="col-6"
+                                style={filterListings == true ? { display: "block" } : { display: "none" }}
+                            >My Pairing Listings</div>
+                            <div className="col-6"
+                                style={filterListings == false ? { display: "block" } : { display: "none" }}
+                            >My Scheduled Listings</div>
+                            <div className="col-6"
+                                style={filterListings == "warning" ? { display: "block" } : { display: "none" }}
+                            >My URGENT Listings</div>
                             <div className="col-3">
                                 <div className="dropdown">
                                     <button className="btn button-24 dropdown-toggle me-3 mt-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         Filter Listings
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li className="myListLink">Status Pairing</li>
-                                        <li className="myListLink">Status Scheduled</li>
-                                        <li className="myListLink">Status Warning!</li>
+                                        <li className="myListLink"
+                                            onClick={() => setFilterListings(true)}
+                                        >Status Pairing</li>
+                                        <li className="myListLink"
+                                            onClick={() => setFilterListings(false)}
+                                        >Status Scheduled</li>
+                                        <li className="myListLink"
+                                            onClick={() => setFilterListings("warning")}
+                                        >Status Warning!</li>
                                     </ul>
                                 </div>
 

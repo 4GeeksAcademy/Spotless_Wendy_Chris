@@ -10,7 +10,7 @@ export const MyListings = () => {
     const { store, actions } = useContext(Context);
     const { currentUser, myProperties, setMyProperties,
         setCurrentUser, token, setToken, role, setRole,
-        myListings, setMyListings
+        myListings, setMyListings, filterListings, setFilterListings
 
     } = useContext(AppContext);
 
@@ -72,8 +72,6 @@ export const MyListings = () => {
                     finalProperty.push(each_property);
                 })
                 setMyListings(finalProperty);
-
-
             })
 
             .catch(error => console.log(error));
@@ -99,14 +97,15 @@ export const MyListings = () => {
         })
     })
 
-    const results = listingArray.filter((elm) => elm.status == false || true);
+    const results = listingArray.filter((elm) => elm.status == filterListings);
     console.log("filter results:")
     console.log(results)
+    console.log(filterListings)
 
     return (
         <div>
             <div className="product-list-container">{
-                listingArray.map((element) => {
+                results.map((element) => {
                     return (
                         <div className="card text-secondary" style={{ width: "18rem" }} key={element.id}>
                             <div id="carouselExampleSlidesOnly" className="carousel slide h-50" data-bs-ride="carousel">
@@ -130,31 +129,16 @@ export const MyListings = () => {
                                         <i className="fa-solid fa-circle text-success fs-3"></i> Cleaning Scheduled
                                     </p>
                                     <p className="button-24">Cancel Cleaning</p>
-
                                 </p>
                             </div>
                         </div>
                     )
                 })
-
             }
-
-
-
-
-
-
             </div>
         </div>
-
-
     )
-
 }
-
-
-
-
 
 
 // tempArray = [...element]
