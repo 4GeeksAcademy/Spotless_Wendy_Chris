@@ -7,7 +7,7 @@ import { Context } from "../store/appContext";
 export const AddProperty = () => {
 
     const { currentUser, setCurrentUser, role, setRole, myProperties, setMyProperties,
-        displayAddProperty, setDisplayAddProperty
+        display, setDisplay
     } = useContext(AppContext);
 
     const [name, setName] = useState("")
@@ -64,6 +64,13 @@ export const AddProperty = () => {
                     console.log(finalProperty);
                 })
                 setMyProperties(finalProperty)
+                setName("")
+                setState("")
+                setCity("")
+                setBeds(0)
+                setBath(0)
+                setImg("")
+                setAddress("")
             })
             .catch(error => console.error(error));
     }
@@ -106,7 +113,7 @@ export const AddProperty = () => {
                 type="submit" onClick={(event) => {
                     event.preventDefault();
                     handleSave()
-                    setDisplayAddProperty(!displayAddProperty)
+                    setDisplay("propMain")
                 }} >Save New Property</button>
 
         </form>

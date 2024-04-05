@@ -254,12 +254,7 @@ def delete_user_property(id, idp):
 
 
 
-@app.route('/user/<int:id>/listing', methods=['GET'])
-def get_user_listing(id):
-    get_listing= Listing.query.filter_by(user_id=id)
-    all_listing= list(map(lambda x: x.serialize(), get_listing))
 
-    return jsonify(all_listing), 200
 
 
 # @app.route('/user/property/<idp>/listing/new', methods=['POST'])
