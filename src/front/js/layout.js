@@ -17,6 +17,7 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { useState } from "react";
 import { AddProperty } from "./component/add_prop";
+import { History } from "./component/history";
 
 
 export const AppContext = React.createContext(null);
@@ -71,6 +72,7 @@ const Layout = () => {
                             <Route element={<Landing />} path="/landing" />
                             <Route element={<AddListing />} path="/addlisting" />
                             <Route element={<AddProperty />} path="/addproperty" />
+                            <Route element={<History />} path="/history" />
                             <Route element={<Demo />} path="/demo" />
                             <Route element={<Single />} path="/single/:theid" />
                             <Route element={<h1>Not found!</h1>} />

@@ -77,29 +77,16 @@ def get_user_property(id):
 #     return jsonify(all_listing), 200
 
 
-<<<<<<< HEAD
-
-
-
 @api.route('/user/<id>/delete/property/<idP>', methods=['DELETE'])
 def remove_Property(id, idP):
-    request_body=request.json
-    
-=======
-@api.route('/user/<id>/delete/property/<idP>', methods=['DELETE'])
-def remove_Property(id, idP):
->>>>>>> f68b2f866b6d88ebbf7a9ca954f55c2dd50feb09
     get_property= Property.query.get(idP)
     db.session.delete(get_property)
     db.session.commit()
     get_property= Property.query.filter_by(user_id=id)
     all_property= list(map(lambda x: x.serialize(), get_property))
-<<<<<<< HEAD
-=======
     return jsonify(all_property), 200
 
 
->>>>>>> f68b2f866b6d88ebbf7a9ca954f55c2dd50feb09
 
     return jsonify(all_property), 200
 
