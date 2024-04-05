@@ -4,7 +4,8 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 import rigoImage from "../../img/how-to.png";
 import "../../styles/home.css";
 import { AppContext } from "../layout";
-import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 export const Dashboard = () => {
 
@@ -15,7 +16,7 @@ export const Dashboard = () => {
     const [listingNote, setListingNote] = useState('');
     const [listingDate, setListingDate] = useState('');
     const [listingId, setListingId] = useState(null);
-
+    const [dateN, setDateN] = useState('');
 
 
   useEffect(() => {
@@ -103,7 +104,6 @@ function pop_modal_function(id_of_property){
 
 
 function close_modal_function(){
-  console.log('Close Function was called');
   const dialog = document.getElementById('modal_dialog');
   setListingId(null);
   dialog.close();
@@ -118,6 +118,7 @@ setListingNote(note)
 
 function get_date_needed_function(val){
 let date_needed= val.target.value;
+console.log('THis our test : '+date_needed)
 setListingDate(date_needed);
 
 }
@@ -158,6 +159,7 @@ setListingNote('');
    dialog.close();
   }
 }
+
 
 
 	return (
@@ -219,11 +221,16 @@ setListingNote('');
             <div class="row gx-3 mb-3">
 
             <div class="col-2 d-flex align-items-center">
-                    <label class="medium mb-1" for="inputFirstName">Date</label>
+                    <label class="medium mb-1" for="inputdate">Date</label>
                    </div>
-                <div class="col-10">
+                <div class="col-3">
+                 
                 
-                    <input class="form-control" id="inputFirstName" type="text" onChange={(e) => { get_date_needed_function(e) }} placeholder="Enter your first name" value={listingDate} />
+                     {/* <input class="form-control" id="inputdate" type="text" onChange={(e) => { get_date_needed_function(e) }} placeholder="Enter your first name" value={listingDate} /> */}
+
+                     <input type="date" name="dateofbirth" id="dateofbirth" onChange={(e) => { get_date_needed_function(e)}}/>
+
+
                 </div>
 
 
@@ -234,10 +241,11 @@ setListingNote('');
             <label class="medium mb-1" for="inputnote">Note</label>
                    </div>
             
-            <div class="col-10">
+            <div class="col-5">
                 
                 <textarea class="form-control" id="inputnote" type="email" onChange={(e) => { get_specialNote_function(e) }} placeholder="Enter your note" value={listingNote}  textarea/>
             </div>
+            <div class="col"> </div>
             </div>
 
             <div className="row mb-3">

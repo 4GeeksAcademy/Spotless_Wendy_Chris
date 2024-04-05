@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Worker, Property, Payment, Listing, Property2, Worker2
+from api.models import db, User, Worker, Property, Payment, Listing
 from sqlalchemy.orm import joinedload
 from sqlalchemy.orm import relationship, attributes
 from api.utils import generate_sitemap, APIException
@@ -72,11 +72,14 @@ def get_user_property(id):
     return jsonify(all_property), 200
 
 
+# This endpoint was written today at 6h25pm. 
 @api.route('/worker/listing/all', methods=['GET'])
 def get_all_available_listing_for_worker():
     get_listing= Listing.query.filter_by(status=True)
     all_listing= list(map(lambda x: x.serialize(), get_listing))
 
+    get_listing= db.session.execute("SELECT Listing.id, Listing.date_needed, Listing.special_note, Property.address, Property.city FROM Listing join Property ON Property.id=Listing.property_id;")
+    all_listing= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3],city=row[4] ) for row in get_listing.fetchall()]
     return jsonify(all_listing), 200
 
 
@@ -146,8 +149,16 @@ def get_user_listing(id):
     final_listings = list(map(lambda x: x.serialize(), user_listings))
 
     return jsonify(final_listings), 200
-       
 
+
+# Hey Chris! Below is the right version of the endpoint above with the right syntax to get listing of the current user. 
+       
+# @api.route('/user/<idc>/listing', methods=['GET'])
+# def get_user_listing(idc):
+#     get_property_of_user=db.session.query(Property.id).filter_by(user_id=idc).subquery()
+#     get_listing= Listing.query.filter(Listing.property_id.in_(get_property_of_user))
+#     all_listing= list(map(lambda x: x.serialize(), get_listing))
+#     return jsonify(all_listing), 200
 
 
 
@@ -173,26 +184,8 @@ def update_user_or_worker(id):
             return (f"Password incorrect"),410
      
          
-         
-             
-
-# generated data from Mock
 
 
 
-
-
-
-
-
-# test new mock table, don't worry about this part, i'm testing something. please disregard
-
-@api.route('/test/worker2', methods=['GET'])
-def test_worker():
-    get_property= Property2.query.filter_by(worker_id=1).all()
-
-    all_listing= list(map(lambda x: x.serialize(), get_property))
-    
-    return jsonify(all_listing), 200
 
 

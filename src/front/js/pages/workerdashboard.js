@@ -25,8 +25,23 @@ export const WDashboard = () => {
       .then(response => {
 
         console.log(response)
-        // let newArray = [...response];
-        // let finalProperty = [];       
+        let newArray = [...response];
+        let finalProperty = [];
+
+        newArray.forEach((el) => {
+          let each_listing = {};
+          let all_img = el.img.split(" ");
+       
+          each_listing = el;
+          each_listing.image1 = all_img[0];
+          each_listing.image2 = all_img[1];
+          each_listing.image3 = all_img[2];
+          finalProperty.push(each_property);
+          console.log('test begins here')
+          console.log(finalProperty);
+
+        })
+        setMyProperties(finalProperty);    
 
 
       })
@@ -40,7 +55,7 @@ export const WDashboard = () => {
 
 
 function accept_gig_function(id){
-  let new_schedule= {listing_id: listingId, worker_id:1};
+  let new_schedule= {listing_id: id, worker_id:currentUser.id};
 fetch(process.env.BACKEND_URL + "/api/worker/schedule/new",
    {
        method: 'POST',
@@ -64,52 +79,58 @@ fetch(process.env.BACKEND_URL + "/api/worker/schedule/new",
 
 
 	return (
-    <div className="block"> 
-      <div className="add_property_class_div">
-      <button class="button-24" role="button" onClick={()=>navigate("/")}>See my schedule</button>
-      </div>
+    <div> 
+    <div className="add_property_class_div">
+    <button class="button-24" role="button" onClick={()=>navigate("/")}>See my Schedule</button>
+    </div>
+
+    
+<div class="product-list-container">
+
+      {all_listing.map((element) =>
+
+        <div class="card text-secondary" style={{ width: "18rem" }}>
+
 
       
-<div class="row style-alt">
-			<div class="col-sm-6 col-md-4">
-				<div class="widget">
-					<div class="widget-simple">
-						<a href="#">
-							<img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" class="widget-image img-circle pull-left animation-fadeIn"/>
-						</a>
-						<h4 class="widget-content text-right">
-							<a href="#"><strong>Name</strong></a><br/>
-							<span class="btn-group">
-								<a href="javascript:void(0)" class="btn btn-xs btn-default" data-toggle="tooltip" title="" data-original-title="Category">Follow</a>
-								<a href="javascript:void(0)" class="btn btn-xs btn-primary" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-							</span>
-						</h4>
-					</div>
-				</div>
-			</div>
-      </div>
+
+          <div id="slideshow">
+          <div className="jump_div">
+                <Link to='/demo'>
+                <span><i class="fa-solid fa-arrow-up-right-from-square fa-xl"></i></span>
+                </Link>
+                </div>
+<div class="slide-wrapper">
+  
+  <div class="slide"><img src={element.image1} class="slide-number w-100"/></div>
+  <div class="slide"><img src={element.image2} class="slide-number w-100"/></div>
+  <div class="slide"><img src={element.image3} class="slide-number w-100"/></div>
+  <div class="slide"><img src={element.image1} class="slide-number w-100"/></div>
+ 
+ 
+</div>
+</div>
 
 
-         
-<div class="row style-alt">
-			<div class="col-sm-6 col-md-4">
-				<div class="widget">
-					<div class="widget-simple">
-						<a href="#">
-							<img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" class="widget-image img-circle pull-left animation-fadeIn"/>
-						</a>
-						<h4 class="widget-content text-right">
-							<a href="#"><strong>Name</strong></a><br/>
-							<span class="btn-group">
-								<a href="javascript:void(0)" class="btn btn-xs btn-default" data-toggle="tooltip" title="" data-original-title="Category">Follow</a>
-								<a href="javascript:void(0)" class="btn btn-xs btn-primary" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-							</span>
-						</h4>
-					</div>
-				</div>
-			</div>
-      </div>
 
+<div class="card-body">
+  <h5 class="card-title">{element.name}</h5>
+  <p class="card-text">Address: {element.address}<br/>
+    City: {element.city}</p>
+    <div className="d-flex justify-content-between">
+    <button class="button-24" role="button" onClick={()=>accept_offer_function(element.id)}>Accept Gig</button>
+    <button className="btn" onClick={() =>delete_property(element.id)}> 
+             <i className="fas fa-trash-alt fa-bounce fa-xl" />
+                 </button> 
+    </div>
+ 
+</div>
+</div>
+
+      )}
+
+
+</div>
 
 </div>
 	);
