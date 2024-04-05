@@ -91,167 +91,155 @@ export const Dashboard = () => {
 
 
 
-function pop_modal_function(id_of_property){
-  console.log('this function was called')
-  const dialog = document.getElementById('modal_dialog');
-  dialog.showModal();
-  setListingId(id_of_property);
-}
+  function pop_modal_function(id_of_property) {
+    console.log('this function was called')
+    const dialog = document.getElementById('modal_dialog');
+    dialog.showModal();
+    setListingId(id_of_property);
+  }
 
 
-function close_modal_function(){
-  console.log('Close Function was called');
-  const dialog = document.getElementById('modal_dialog');
-  setListingId(null);
-  dialog.close();
-}
+  function close_modal_function() {
+    console.log('Close Function was called');
+    const dialog = document.getElementById('modal_dialog');
+    setListingId(null);
+    dialog.close();
+  }
 
 
-function get_specialNote_function(val){
-let note= val.target.value;
-setListingNote(note)
-
-}
-
-function get_date_needed_function(val){
-let date_needed= val.target.value;
-setListingDate(date_needed);
-
-}
-
-function save_modal_function(id){
-
-  if( listingDate.length>5){
-
- 
-  let new_listing= {property_id: listingId, special_note:listingNote, date_needed: listingDate};
-fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
-   {
-       method: 'POST',
-       body:JSON.stringify(new_listing),
-       headers: {
-           'Content-Type': 'application/json'
-       }
-   })
-   .then(res => {
-       if (!res.ok) console.log(res.statusText);
-       return res.json();
-   })
-   .then(response => {
-       console.log(response)
-
-   })
-
-   .catch(error => console.log(error));
-setListingDate('');
-setListingNote('');
-   const dialog = document.getElementById('modal');
-   dialog.close();
-
+  function get_specialNote_function(val) {
+    let note = val.target.value;
+    setListingNote(note)
 
   }
-  else{
-    const dialog = document.getElementById('modal');
-   dialog.close();
+
+  function get_date_needed_function(val) {
+    let date_needed = val.target.value;
+    setListingDate(date_needed);
+
   }
-}
+
+  function save_modal_function(id) {
+
+    if (listingDate.length > 5) {
+
+
+      let new_listing = { property_id: listingId, special_note: listingNote, date_needed: listingDate };
+      fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
+        {
+          method: 'POST',
+          body: JSON.stringify(new_listing),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(res => {
+          if (!res.ok) console.log(res.statusText);
+          return res.json();
+        })
+        .then(response => {
+          console.log(response)
+
+        })
+
+        .catch(error => console.log(error));
+      setListingDate('');
+      setListingNote('');
+      const dialog = document.getElementById('modal');
+      dialog.close();
+
+
+    }
+    else {
+      const dialog = document.getElementById('modal');
+      dialog.close();
+    }
+  }
 
 
 
 
-        {myProperties.map((element) =>
 
   return (
-    <div>
-      <div class="product-list-container">
+
+    <div class="product-list-container">
 
 
-        {myProperties.map((element, index) =>
-
-
-
-          <div class="card text-secondary" style={{ width: "18rem" }}>
+      {myProperties.map((element, index) =>
 
 
 
-        
 
-            <div id="slideshow">
+
+        <div class="card text-secondary" style={{ width: "18rem" }}>
+
+
+
+
+
+          <div id="slideshow">
             <div className="jump_div">
-                  <Link to='/demo'>
-                  <span><i class="fa-solid fa-arrow-up-right-from-square fa-xl"></i></span>
-                  </Link>
-                  </div>
-  <div class="slide-wrapper">
-    
-    <div class="slide"><img src={element.image1} class="slide-number w-100"/></div>
-    <div class="slide"><img src={element.image2} class="slide-number w-100"/></div>
-    <div class="slide"><img src={element.image3} class="slide-number w-100"/></div>
-    <div class="slide"><img src={element.image1} class="slide-number w-100"/></div>
-   
-   
-  </div>
-</div>
-
-
- 
-  <div class="card-body">
-    <h5 class="card-title">{element.name}</h5>
-    <p class="card-text">Address: {element.address}<br/>
-      City: {element.city}</p>
-      <div className="d-flex justify-content-between">
-      <button class="button-24" role="button" onClick={()=>pop_modal_function(element.id)}>Add to Listing</button>
-      <button className="btn" onClick={() =>delete_property(element.id)}> 
-               <i className="fas fa-trash-alt fa-bounce fa-xl" />
-                   </button> 
-      </div>
-   
-  </div>
-</div>
-
-        )}
-
-
-</div>
-
-
-
-            <div id="carouselExampleSlidesOnly" class="carousel slide h-50" data-bs-ride="carousel">
-              <div class="carousel-inner" style={{ height: "10rem" }}>
-                <div class="carousel-item active">
-                  <img src={element.image1} class="d-block w-100 " alt="..." />
-                </div>
-                <div class="carousel-item">
-                  <img src={element.image2} class="d-block w-100 " alt="..." />
-                </div>
-                <div class="carousel-item">
-                  <img src={element.image3} class="d-block w-100  " alt="..." />
-                </div>
-              </div>
+              <Link to='/demo'>
+                <span><i class="fa-solid fa-arrow-up-right-from-square fa-xl"></i></span>
+              </Link>
             </div>
 
+            <div class="slide-wrapper">
+
+              <div class="slide"><img src={element.image1} class="slide-number w-100" /></div>
+              <div class="slide"><img src={element.image2} class="slide-number w-100" /></div>
+              <div class="slide"><img src={element.image3} class="slide-number w-100" /></div>
+              <div class="slide"><img src={element.image1} class="slide-number w-100" /></div>
+
+
+            </div>
+          </div>
 
 
 
+          <div class="card-body">
+            <h5 class="card-title">{element.name}</h5>
+            <p class="card-text">Address: {element.address}<br />
+              City: {element.city}</p>
+            <div className="d-flex justify-content-between">
+              <button class="button-24" role="button" onClick={() => pop_modal_function(element.id)}>Add to Listing</button>
+              <button className="btn" onClick={() => delete_property(element.id)}>
+                <i className="fas fa-trash-alt fa-bounce fa-xl" />
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
+
+      {/* <div id="carouselExampleSlidesOnly" class="carousel slide h-50" data-bs-ride="carousel">
+        <div class="carousel-inner" style={{ height: "10rem" }}>
+          <div class="carousel-item active">
+            <img src={element.image1} class="d-block w-100 " alt="..." />
+          </div>
+          <div class="carousel-item">
+            <img src={element.image2} class="d-block w-100 " alt="..." />
+          </div>
+          <div class="carousel-item">
+            <img src={element.image3} class="d-block w-100  " alt="..." />
+          </div>
+        </div>
+      </div> */}
+      {/* 
+      <div class="card-body">
+        <h5 class="card-title">{element.name}</h5>
+        <p class="card-text">Address: {element.address}<br />
+          City: {element.city}</p>
+        <div>
+          <button class="button-24" role="button" >Add to Listing</button>
+          <button className="btn" onClick={() => delete_property(element.id)}>
+            <i className="fas fa-trash-alt fa-bounce fa-xl" />
+          </button>
+        </div>
+      </div> */}
 
 
-
-
-
-
-            <div class="card-body">
-              <h5 class="card-title">{element.name}</h5>
-              <p class="card-text">Address: {element.address}<br />
-                City: {element.city}</p>
-              <div>
-                <button class="button-24" role="button" >Add to Listing</button>
-                <button className="btn" onClick={() => delete_property(element.id)}>
-                  <i className="fas fa-trash-alt fa-bounce fa-xl" />
-                </button>
-              </div>
-
-
-<dialog id="modal_dialog"  class="card-body border-light rounded"> 
+      {/* <dialog id="modal_dialog"  class="card-body border-light rounded"> 
             <div class="row gx-3 mb-3">
 
             <div class="col-2 d-flex align-items-center">
@@ -267,10 +255,8 @@ setListingNote('');
 
 
 
-        )}
+        
 
-
-            </div>
 
             <div className="row mb-3">
             <div class="col-2 d-flex align-items-center">
@@ -294,27 +280,9 @@ setListingNote('');
             <div class="col">
             <button className="button-24" onClick={()=>save_modal_function()}>Save </button> 
                 </div>
-            </div>
-            
-
-
-</dialog>
-</div>
-	);
-
-
-
-      </div>
+            </div>        
+</dialog> */}
     </div>
   );
 
 };
-
-
-
-
-
-
-
-
-
