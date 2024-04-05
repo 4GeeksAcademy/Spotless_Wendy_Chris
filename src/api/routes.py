@@ -84,11 +84,9 @@ def remove_Property(id, idP):
     db.session.commit()
     get_property= Property.query.filter_by(user_id=id)
     all_property= list(map(lambda x: x.serialize(), get_property))
+    
     return jsonify(all_property), 200
 
-
-
-    return jsonify(all_property), 200
 
 
 # Bulk add properties below
@@ -98,7 +96,8 @@ def add_newproperty_load():
     print('function works')
     test_property= Property.query.filter_by(name=property_request['name']).first()
     if(test_property):
-        print(f"This one already exists")
+        msg = "This property already exists!"
+        return jsonify(msg), 500
     else:
         newP=Property(user_id= property_request['user_id'], name=property_request['name'], city=property_request['city'], state=property_request['state'], beds= property_request['beds'], bath= property_request['bath'], address=property_request['address'], img=property_request['img']  )
         db.session.add(newP)
@@ -121,6 +120,27 @@ def add_user_listing():
         db.session.add(newL)
         db.session.commit()
     return jsonify(f"Success"), 200
+
+
+# Get listings for a single user 
+@api.route('/user/<int:id>/listing', methods=['GET'])
+def get_user_listing(id):
+    get_user_properties = Property.query.filter_by(user_id=id)
+    properties = list(map(lambda x: x.serialize(), get_user_properties))
+    get_all_listings = Listing.query.all()
+    all_listings = list(map(lambda x: x.serialize(), get_all_listings))
+    id_list = []
+    user_listings = []
+    for listing in all_listings:         
+         property_id = listing["property_id"]
+         for property in properties:
+              if property["id"] == property_id:
+                   id_list.append(property["id"])
+                   single_listing= Listing.query.filter_by(property_id=property["id"]).first()
+                   user_listings.append(single_listing)
+    final_listings = list(map(lambda x: x.serialize(), user_listings))
+
+    return jsonify(final_listings), 200
        
 
 # generated data from Mock
