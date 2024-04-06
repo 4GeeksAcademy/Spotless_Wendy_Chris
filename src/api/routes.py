@@ -72,7 +72,7 @@ def get_user_property(id):
     return jsonify(all_property), 200
 
 
-# This endpoint was written today at 6h25pm. 
+# This endpoint was written today, 4/5/2024 at 6h25pm. 
 @api.route('/worker/listing/all', methods=['GET'])
 def get_all_available_listing_for_worker():
     get_listing= Listing.query.filter_by(status=True)

@@ -25,7 +25,7 @@ class User(db.Model):
             "img": self.img,
             "billing": self.billing,
             "address": self.address
-            # do not serialize the password, its a security breach
+          
         }
     
 class Worker(db.Model):
@@ -52,7 +52,7 @@ class Worker(db.Model):
             "banking_info": self.banking_info,
             "address": self.address,
             "ranking": self.ranking
-            # do not serialize the password, its a security breach
+            
         }
     
 class Property(db.Model):
