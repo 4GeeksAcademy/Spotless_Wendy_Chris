@@ -78,8 +78,8 @@ def get_all_available_listing_for_worker():
     get_listing= Listing.query.filter_by(status=True)
     all_listing= list(map(lambda x: x.serialize(), get_listing))
 
-    get_listing= db.session.execute("SELECT Listing.id, Listing.date_needed, Listing.special_note, Property.address, Property.city FROM Listing join Property ON Property.id=Listing.property_id;")
-    all_listing= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3],city=row[4] ) for row in get_listing.fetchall()]
+    get_listing= db.session.execute("SELECT Listing.id, Listing.date_needed, Listing.special_note, Property.address, Property.city,  Property.img FROM Listing join Property ON Property.id=Listing.property_id;")
+    all_listing= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3],city=row[4], img=row[5] ) for row in get_listing.fetchall()]
     return jsonify(all_listing), 200
 
 

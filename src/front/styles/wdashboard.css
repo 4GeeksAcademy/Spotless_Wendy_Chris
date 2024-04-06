@@ -1,22 +1,12 @@
 
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.dropdown>.dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}
 
 .test {
   
@@ -34,6 +24,8 @@
     cursor: pointer;
     overflow: hidden;
   }
+
+  
   .test:before {
     content: '';
     position: absolute;
@@ -59,3 +51,57 @@
     opacity: 1;
   }
   
+
+  
+ul {
+  list-style: none; 
+  margin: 0px;
+  padding: 0px; 
+}
+.img_listing{
+  width: 200px;
+height: 80px;
+}
+
+
+
+.listing_div {
+  background: #31363F;
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  width: 80%;
+  display: flex;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 15px;
+  cursor: pointer;
+
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: capitalize; 
+  letter-spacing: 1px;
+
+  border-right: 8px solid  #FF4742;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-sizing:  border-box;
+}
+
+.accept_div{
+  display: flex;
+ align-items: center; 
+}
+
+
+
+.listing_div h2 span{
+  display: block;
+  font-size: 11px;
+  font-weight: normal;
+  color: #bdc3c7;
+}
+
+
+
+

@@ -105,15 +105,15 @@ function get_date_needed_function(val){
 
 
 <form>
-  <div class="form-group ">
+  <div className="form-group ">
     <label for="exampleFormControlInput1">Date needed</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" value={listingDate} placeholder="Date needed" onChange={(e)=>get_date_needed_function(e)}/>
+    <input type="email" className="form-control" id="exampleFormControlInput1" value={listingDate} placeholder="Date needed" onChange={(e)=>get_date_needed_function(e)}/>
   </div>
   
  
-  <div class="form-group">
+  <div className="form-group">
     <label for="exampleFormControlTextarea1">Example textarea</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={listingNote} onChange={(e)=>get_specialNote_function(e)}></textarea>
+    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" value={listingNote} onChange={(e)=>get_specialNote_function(e)}></textarea>
   </div>
 </form>
 
