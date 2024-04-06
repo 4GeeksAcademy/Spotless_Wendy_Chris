@@ -13,6 +13,7 @@ export const WDashboard = () => {
   const navigate = useNavigate();
   const [listingNote, setListingNote] = useState('');
   const [rating, setRating] = useState(0)
+  const [hover, setHover] = useState(0)
 
   useEffect(() => {
 
@@ -62,6 +63,45 @@ export const WDashboard = () => {
   }
 
 
+  // const handleOneClick = () => {
+  //   if (rating < 1) {
+  //     setRating(1)
+  //   }
+  //   if (rating >= 1) {
+  //     setRating(0)
+  //   }
+  // }
+
+  // const handleTwoClick = () => {
+  //   if (rating < 2) {
+  //     setRating(2)
+  //   }
+  //   if (rating >= 2) {
+  //     setRating(1)
+  //   }
+  // }
+
+  // const handleThreeClick = () => {
+  //   if (rating < 3) {
+  //     setRating(3)
+  //   }
+  //   if (rating >= 3) {
+  //     setRating(2)
+  //   }
+  // }
+
+  // const handleFourClick = () => {
+  //   if (rating < 4) {
+  //     setRating(4)
+  //   }
+  //   if (rating >= 4) {
+  //     setRating(3)
+  //   }
+  // }
+
+
+
+
   return (
     <div className="block">
       <div className="add_property_class_div">
@@ -81,40 +121,81 @@ export const WDashboard = () => {
                 <span className="text-left fs-5">
                   Rating<span className="">
                     <i className="fa-solid fa-star ps-2 fs-4 starRating"
-                      style={rating < 1 ? { display: "inline" } : { display: "none" }}
+                      style={rating < 1 && hover < 1 ? { display: "inline" } :
+                        { display: "none" }}
                       onClick={() => setRating(1)}
+                      onMouseEnter={() => setHover(1)}
+                      onMouseLeave={() => setHover(0)}
                     ></i>
                     <i className="fa-solid fa-star ps-2 fs-4 star"
-                      style={rating < 1 ? { display: "none" } : { display: "inline" }}
-                      onClick={() => setRating(0)}></i>
+                      style={
+                        rating >= 1 || hover >= 1 ? { display: "inline" } :
+                          { display: "none" }}
+                      onClick={() => setRating(1)}
+                      onMouseEnter={() => setHover(1)}
+                      onMouseLeave={() => setHover(0)}
+                    ></i>
                     <i className="fa-solid fa-star ps-2 fs-4 starRating"
-                      style={rating < 2 ? { display: "inline" } : { display: "none" }}
+                      style={rating < 2 && hover < 2 ? { display: "inline" } :
+                        { display: "none" }}
                       onClick={() => setRating(2)}
+                      onMouseEnter={() => setHover(2)}
+                      onMouseLeave={() => setHover(0)}
                     ></i>
                     <i className="fa-solid fa-star ps-2 fs-4 star"
-                      style={rating < 2 ? { display: "none" } : { display: "inline" }}
-                      onClick={() => setRating(1)}></i>
+                      style={
+                        rating >= 2 || hover >= 2 ? { display: "inline" } :
+                          { display: "none" }}
+                      onClick={() => setRating(2)}
+                      onMouseEnter={() => setHover(2)}
+                      onMouseLeave={() => setHover(0)}
+                    ></i>
                     <i className="fa-solid fa-star ps-2 fs-4 starRating"
-                      style={rating < 3 ? { display: "inline" } : { display: "none" }}
+                      style={rating < 3 && hover < 3 ? { display: "inline" } :
+                        { display: "none" }}
                       onClick={() => setRating(3)}
+                      onMouseEnter={() => setHover(3)}
+                      onMouseLeave={() => setHover(0)}
                     ></i>
                     <i className="fa-solid fa-star ps-2 fs-4 star"
-                      style={rating < 3 ? { display: "none" } : { display: "inline" }}
-                      onClick={() => setRating(2)}></i>
+                      style={
+                        rating >= 3 || hover >= 3 ? { display: "inline" } :
+                          { display: "none" }}
+                      onClick={() => setRating(3)}
+                      onMouseEnter={() => setHover(3)}
+                      onMouseLeave={() => setHover(0)}
+                    ></i>
                     <i className="fa-solid fa-star ps-2 fs-4 starRating"
-                      style={rating < 4 ? { display: "inline" } : { display: "none" }}
+                      style={rating < 4 && hover < 4 ? { display: "inline" } :
+                        { display: "none" }}
                       onClick={() => setRating(4)}
+                      onMouseEnter={() => setHover(4)}
+                      onMouseLeave={() => setHover(0)}
                     ></i>
                     <i className="fa-solid fa-star ps-2 fs-4 star"
-                      style={rating < 4 ? { display: "none" } : { display: "inline" }}
-                      onClick={() => setRating(3)}></i>
-                    <i className="fa-solid fa-star ps-2 fs-4 starRating pe-2"
-                      style={rating < 5 ? { display: "inline" } : { display: "none" }}
-                      onClick={() => setRating(5)}
+                      style={
+                        rating >= 4 || hover >= 4 ? { display: "inline" } :
+                          { display: "none" }}
+                      onClick={() => setRating(4)}
+                      onMouseEnter={() => setHover(4)}
+                      onMouseLeave={() => setHover(0)}
                     ></i>
-                    <i className="fa-solid fa-star ps-2 fs-4 star pe-2"
-                      style={rating < 5 ? { display: "none" } : { display: "inline" }}
-                      onClick={() => setRating(4)}></i>
+                    <i className="fa-solid fa-star ps-2 fs-4 starRating"
+                      style={rating < 5 && hover < 5 ? { display: "inline" } :
+                        { display: "none" }}
+                      onClick={() => setRating(5)}
+                      onMouseEnter={() => setHover(5)}
+                      onMouseLeave={() => setHover(0)}
+                    ></i>
+                    <i className="fa-solid fa-star ps-2 fs-4 star"
+                      style={
+                        rating >= 5 || hover >= 5 ? { display: "inline" } :
+                          { display: "none" }}
+                      onClick={() => setRating(5)}
+                      onMouseEnter={() => setHover(5)}
+                      onMouseLeave={() => setHover(0)}
+                    ></i>
+
                     {rating}
                   </span>
                 </span>
