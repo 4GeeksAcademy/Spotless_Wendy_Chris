@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 848d2a325b88
+Revision ID: 1104408ad2ec
 Revises: 
-Create Date: 2024-04-03 16:28:56.523359
+Create Date: 2024-04-07 20:39:13.631716
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '848d2a325b88'
+revision = '1104408ad2ec'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,10 +27,7 @@ def upgrade():
     sa.Column('address', sa.String(length=120), nullable=True),
     sa.Column('img', sa.String(length=300), nullable=True),
     sa.Column('billing', sa.String(length=300), nullable=True),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('billing'),
-    sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('phone')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('worker',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -42,12 +39,7 @@ def upgrade():
     sa.Column('img', sa.String(length=300), nullable=True),
     sa.Column('banking_info', sa.String(length=300), nullable=True),
     sa.Column('ranking', sa.Float(), nullable=True),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('banking_info'),
-    sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('full_name'),
-    sa.UniqueConstraint('img'),
-    sa.UniqueConstraint('phone')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('property',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -58,18 +50,16 @@ def upgrade():
     sa.Column('beds', sa.Integer(), nullable=False),
     sa.Column('bath', sa.Integer(), nullable=False),
     sa.Column('img', sa.String(length=10000), nullable=True),
-    sa.Column('address', sa.String(length=120), nullable=False),
+    sa.Column('address', sa.String(length=120), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('img'),
-    sa.UniqueConstraint('name')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('listing',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('property_id', sa.Integer(), nullable=False),
     sa.Column('date_needed', sa.String(length=120), nullable=False),
     sa.Column('special_note', sa.String(length=300), nullable=True),
-    sa.Column('status', sa.Boolean(), nullable=True),
+    sa.Column('status', sa.String(length=130), nullable=True),
     sa.ForeignKeyConstraint(['property_id'], ['property.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -77,8 +67,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('listing_id', sa.Integer(), nullable=False),
     sa.Column('worker_id', sa.Integer(), nullable=False),
-    sa.Column('date_time', sa.String(length=120), nullable=False),
-    sa.Column('paid_status', sa.Boolean(), nullable=True),
+    sa.Column('status', sa.String(length=120), nullable=True),
     sa.Column('review', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['listing_id'], ['listing.id'], ),
     sa.ForeignKeyConstraint(['worker_id'], ['worker.id'], ),

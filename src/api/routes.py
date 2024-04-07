@@ -74,12 +74,12 @@ def get_user_property(id):
 
 # This endpoint was written today, 4/5/2024 at 6h25pm. 
 @api.route('/worker/listing/all', methods=['GET'])
-def get_all_available_listing_for_worker():
+def get_available_listing_for_worker():
     get_listing= Listing.query.filter_by(status="Active")
     all_listing= list(map(lambda x: x.serialize(), get_listing))
 
-    get_listing= db.session.execute("SELECT Listing.id, Listing.date_needed, Listing.special_note, Property.address, Property.city,  Property.img FROM Listing join Property ON Property.id=Listing.property_id;")
-    all_listing= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3],city=row[4], img=row[5] ) for row in get_listing.fetchall()]
+    get_listing= db.session.execute("SELECT Listing.id, Listing.date_needed, Listing.special_note, Property.address, Property.city,  Property.img, Listing.rate FROM Listing join Property ON Property.id=Listing.property_id where Listing.status='Active';")
+    all_listing= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3],city=row[4], img=row[5], rate=row[6] ) for row in get_listing.fetchall()]
     return jsonify(all_listing), 200
 
 
@@ -120,9 +120,9 @@ def add_user_listing():
     
     test_listing= Listing.query.filter_by(property_id=listing_request['property_id'],date_needed=listing_request['date_needed']).first()
     if test_listing:
-        print('This one Already exist')
+       return jsonify(f"THis one already exists")
     else:
-        newL=Listing(property_id=listing_request['property_id'], date_needed= listing_request['date_needed'], special_note=listing_request['special_note'])
+        newL=Listing(property_id=listing_request['property_id'], date_needed= listing_request['date_needed'], special_note=listing_request['special_note'], rate= listing_request['rate'])
         db.session.add(newL)
         db.session.commit()
     return jsonify(f"Success"), 200

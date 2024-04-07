@@ -95,6 +95,7 @@ class Listing(db.Model):
     date_needed = db.Column(db.String(120), nullable=False)
     special_note = db.Column(db.String(300), nullable=True)
     status = db.Column(db.String(130), default="Active")
+    rate = db.Column(db.Integer, nullable=True)
     property_link = db.relationship('Property', backref='listing', lazy=True)
         
 
@@ -107,7 +108,8 @@ class Listing(db.Model):
             "property_id": self.property_id,
             "date_needed": self.date_needed,
             "special_note": self.special_note,
-            "status": self.status
+            "status": self.status,
+            "rate": self.rate
             # do not serialize the password, its a security breach
         }
     
@@ -119,7 +121,6 @@ class Schedule(db.Model):
     listing_id = db.Column(db.Integer, db.ForeignKey('listing.id'), nullable=False)
     worker_id = db.Column(db.Integer, db.ForeignKey('worker.id'), nullable=False)
    
-    paid_status = db.Column(db.Boolean, default=False)
     status = db.Column(db.String(120), default="Pending")
     review= db.Column(db.Integer, nullable=True)
 
@@ -137,7 +138,7 @@ class Schedule(db.Model):
             "listing_id": self.listing_id,
             "worker_id": self.worker_id,
             "date_time": self.date_time,
-            "paid_status": self.paid_status,
+            
             "status": self.status,
             "review": self.review
             # do not serialize the password, its a security breach

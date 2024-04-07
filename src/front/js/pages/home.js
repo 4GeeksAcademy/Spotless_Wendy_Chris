@@ -58,7 +58,7 @@ export const Home = () => {
 					each_house.city = cityR[r];
 					each_house.state = stateR[r];
 					each_house.address = el.address;
-					each_house.images = el.images[0] + '   ' + el.images[1] + '  ' + el.images[2] + ' ' + el.images[3] + " " + el.images[4];
+					each_house.images = el.images[0] + '  ' + el.images[1] + '  ' + el.images[2] + '  ' + el.images[3] + " " + el.images[4];
 
 					test2.push(each_house);
 
@@ -100,6 +100,7 @@ export const Home = () => {
 
 			.catch(error => console.log(error));
 	}
+
 	return (
 
 		<div className="container">
@@ -122,13 +123,9 @@ export const Home = () => {
 
 
 <Link to='/wdashboard'>
-	<button type="button" className="btn btn-secondary" >a Link to worker dashboard</button><br/><br/><br/>
+	<button type="button" className="btn btn-secondary" >Link to worker dashboard</button><br/><br/><br/>
 
 </Link>
-
-
-
-
 
 			<Link to='/addlisting'>
 				<button type="button" className="btn btn-secondary" >Go to listing</button>

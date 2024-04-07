@@ -109,7 +109,7 @@ else {
     data-mdb-toggle="dropdown"
     aria-expanded="false"
   >
- <i className="fa-solid fa-arrow-down-a-z fa-2xl"></i>
+ <i class="fa-solid fa-sliders fa-2xl"></i>
   </button>
   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <li><span className="dropdown-item" onClick={(e)=>filter_listing_function(e)}>City (A-Z)</span></li>
@@ -140,7 +140,7 @@ else {
         </div>
 
         <div className="price_div">
-     78.5$
+   <span>{element.rate}</span>
         </div>
 
         </div>
