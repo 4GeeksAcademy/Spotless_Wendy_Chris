@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import "../../styles/footer.css";
 
-export const Footer = () => (
-	<footer className="footer py-3 text-center mt-5">
-		<p>
-			test
-		</p>
-	</footer>
-);
+
+
+export const Footer = () => { 
+	
+	return (
+	<div><h1>Nothing to show yet</h1></div>
+)};

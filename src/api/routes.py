@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Worker, Property, Payment, Listing
+from api.models import db, User, Worker, Property, Payment, Listing, Schedule
 from sqlalchemy.orm import joinedload
 from sqlalchemy.orm import relationship, attributes
 from api.utils import generate_sitemap, APIException
@@ -75,7 +75,7 @@ def get_user_property(id):
 # This endpoint was written today, 4/5/2024 at 6h25pm. 
 @api.route('/worker/listing/all', methods=['GET'])
 def get_all_available_listing_for_worker():
-    get_listing= Listing.query.filter_by(status=True)
+    get_listing= Listing.query.filter_by(status="Active")
     all_listing= list(map(lambda x: x.serialize(), get_listing))
 
     get_listing= db.session.execute("SELECT Listing.id, Listing.date_needed, Listing.special_note, Property.address, Property.city,  Property.img FROM Listing join Property ON Property.id=Listing.property_id;")
@@ -93,8 +93,6 @@ def remove_Property(id, idP):
 
     
     return jsonify(all_property), 200
-
-
 
     
 # Bulk add properties below
@@ -130,6 +128,7 @@ def add_user_listing():
     return jsonify(f"Success"), 200
 
 
+
 # Get listings for a single user 
 @api.route('/user/<int:id>/listing', methods=['GET'])
 def get_user_listing(id):
@@ -161,7 +160,7 @@ def get_user_listing(id):
 #     return jsonify(all_listing), 200
 
 
-
+# Update user or worker endpoint
 @api.route('/update/profile/<id>', methods=['PUT'])
 def update_user_or_worker(id):
     request_body=request.json
@@ -184,6 +183,34 @@ def update_user_or_worker(id):
             return (f"Password incorrect"),410
      
          
+
+# Add a new schedule for a specific worker below
+@api.route('/worker/<id>/schedule/all', methods=['GET'])
+def get_worker_schedule(id):
+    get_schedule= Schedule.query.filter_by(status="Pending", worker_id=id)
+    all_schedule= list(map(lambda x: x.serialize(), get_schedule))
+    return jsonify(all_schedule), 200
+
+
+
+# Add a new schedule for a specific worker below
+@api.route('/worker/schedule/new', methods=['POST'])
+def add_to_schedule():
+    schedule_request=request.json
+    newS=Schedule(listing_id=schedule_request['listing_id'], worker_id=schedule_request['worker_id'])
+    db.session.add(newS)
+    db.session.commit()
+    return jsonify(f"Success"), 200
+
+
+# Add a new schedule for a specific worker below
+@api.route('/worker/schedule/<ids>/delete', methods=['DELETE'])
+def cancel_schedule(ids):
+    db.session.query(Schedule).get(ids).update({"status":'Cancelled'})
+    db.session.commit()
+     
+    
+    return jsonify(f"Success"), 200
 
 
 

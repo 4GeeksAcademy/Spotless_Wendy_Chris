@@ -81,7 +81,7 @@ export const Home = () => {
 		console.log('the thing below is my local storage : ');
 		console.log(test);
 
-		fetch(process.env.BACKEND_URL + "/api/property/new/load",
+		fetch(process.env.BACKEND_URL + "/api/property/new/load22",
 			{
 				method: 'POST',
 				body: test2,

@@ -52,7 +52,7 @@ export const WDashboard = () => {
 
 function accept_offer_function(id){
   let new_schedule= {listing_id: id, worker_id:currentUser.id};
-console.log('Accept offer function was called')
+ console.log('Accept offer function was called');
 // fetch(process.env.BACKEND_URL + "/api/worker/schedule/new",
 //    {
 //        method: 'POST',
@@ -147,7 +147,7 @@ else {
 
         <div className="accept_div">
 
-        <button className="test"  onClick={()=>accept_offer_function()}>Accept</button>
+        <button className="test"  onClick={()=>accept_offer_function(element.id)}>Accept</button>
         </div>
       
       </div>

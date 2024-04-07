@@ -92,10 +92,9 @@ class Property(db.Model):
 class Listing(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     property_id = db.Column(db.Integer, db.ForeignKey('property.id'), nullable=False)
-
     date_needed = db.Column(db.String(120), nullable=False)
     special_note = db.Column(db.String(300), nullable=True)
-    status = db.Column(db.Boolean, default=True)
+    status = db.Column(db.String(130), default="Active")
     property_link = db.relationship('Property', backref='listing', lazy=True)
         
 
@@ -119,10 +118,9 @@ class Schedule(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     listing_id = db.Column(db.Integer, db.ForeignKey('listing.id'), nullable=False)
     worker_id = db.Column(db.Integer, db.ForeignKey('worker.id'), nullable=False)
-
-    date_time = db.Column(db.String(120), nullable=False)
    
     paid_status = db.Column(db.Boolean, default=False)
+    status = db.Column(db.String(120), default="Pending")
     review= db.Column(db.Integer, nullable=True)
 
     listing_link = db.relationship('Listing', backref='schedule', lazy=True)
@@ -140,6 +138,7 @@ class Schedule(db.Model):
             "worker_id": self.worker_id,
             "date_time": self.date_time,
             "paid_status": self.paid_status,
+            "status": self.status,
             "review": self.review
             # do not serialize the password, its a security breach
         }
@@ -150,7 +149,6 @@ class Schedule(db.Model):
 class Payment(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     schedule_id = db.Column(db.Integer, db.ForeignKey('schedule.id'), nullable=False)
-
     amount= db.Column(db.Integer, nullable=False)
     schedule_link = db.relationship('Schedule', backref='payment', lazy=True)
    
