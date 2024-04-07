@@ -10,6 +10,7 @@ import { Single } from "./pages/single";
 import { Landing } from "./pages/landing";
 import { Dashboard } from "./pages/dashboard";
 import { StaticProfile } from "./component/staticprofile";
+import { Ratings } from "./component/ratings";
 
 import { WDashboard } from "./pages/workerdashboard";
 import { EditProfile } from "./pages/editprofile";
@@ -79,6 +80,7 @@ const Layout = () => {
                             <Route element={<WDashboard />} path="/wdashboard" />
                             <Route element={<EditProfile />} path="/editprofile" />
                             <Route element={<Landing />} path="/landing" />
+                            <Route element={<Ratings />} path="ratings" />
                             <Route element={<AddListing />} path="/addlisting" />
                             <Route element={<MyListings />} path="/mylistings" />
                             <Route element={<AddProperty />} path="/addproperty" />
