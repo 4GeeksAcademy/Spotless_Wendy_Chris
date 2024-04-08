@@ -40,9 +40,10 @@ const Layout = () => {
     const basename = process.env.BASENAME || "";
 
     const [myListings, setMyListings] = useState([])
+    const [workerListings, setWorkerListings] = useState([])
     const [display, setDisplay] = useState("")
     const [myProperties, setMyProperties] = useState([])
-    const [filterListings, setFilterListings] = useState(true)
+    const [filterListings, setFilterListings] = useState("Active")
     const [currentUser, setCurrentUser] = useState({
         email: "test@test.com",
         full_name: "Host1",
@@ -68,7 +69,8 @@ const Layout = () => {
                 {
                     currentUser, setCurrentUser, token, setToken,
                     myListings, setMyListings, myProperties, setMyProperties,
-                    role, setRole, display, setDisplay, filterListings, setFilterListings
+                    role, setRole, display, setDisplay, filterListings, setFilterListings,
+                    workerListings, setWorkerListings
                 }
             }>
                 <BrowserRouter basename={basename}>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
@@ -13,15 +13,21 @@ import { StaticProfile } from "../component/staticprofile";
 import { WDashboard } from "./workerdashboard";
 
 
-
-
-
 export const Landing = () => {
+
+
+
+
+
     const { currentUser, setCurrentUser, token, setToken, role, setRole,
         display, setDisplay, filterListings, setFilterListings
     } = useContext(AppContext);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setRole(currentUser.role)
+    }, []);
 
 
 
@@ -119,13 +125,13 @@ export const Landing = () => {
                         <div className="row d-flex justify-content-center pt-1 mb-2">
                             <div className="col-3"></div>
                             <div className="col-6"
-                                style={filterListings == true ? { display: "block" } : { display: "none" }}
+                                style={filterListings == "Active" ? { display: "block" } : { display: "none" }}
                             >My Pairing Listings</div>
                             <div className="col-6"
-                                style={filterListings == false ? { display: "block" } : { display: "none" }}
+                                style={filterListings == "Scheduled" ? { display: "block" } : { display: "none" }}
                             >My Scheduled Listings</div>
                             <div className="col-6"
-                                style={filterListings == "warning" ? { display: "block" } : { display: "none" }}
+                                style={filterListings == "Warning" ? { display: "block" } : { display: "none" }}
                             >My URGENT Listings</div>
                             <div className="col-3">
                                 <div className="dropdown">
@@ -134,13 +140,13 @@ export const Landing = () => {
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         <li className="myListLink"
-                                            onClick={() => setFilterListings(true)}
+                                            onClick={() => setFilterListings("Active")}
                                         >Status Pairing</li>
                                         <li className="myListLink"
-                                            onClick={() => setFilterListings(false)}
+                                            onClick={() => setFilterListings("Scheduled")}
                                         >Status Scheduled</li>
                                         <li className="myListLink"
-                                            onClick={() => setFilterListings("warning")}
+                                            onClick={() => setFilterListings("Warning")}
                                         >Status Warning!</li>
                                     </ul>
                                 </div>

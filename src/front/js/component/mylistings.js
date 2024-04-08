@@ -56,23 +56,24 @@ export const MyListings = () => {
                 return res.json();
             })
             .then(responseAsJson => {
-
+                console.log("response for listing from backend:")
                 console.log(responseAsJson)
-                let newArray = [...responseAsJson];
-                let finalProperty = [];
+                setMyListings(responseAsJson)
+                // let newArray = [...responseAsJson];
+                // let finalProperty = [];
 
-                newArray.forEach((el) => {
-                    let each_property = {};
-                    // let all_img = el.img.split("  ");
-                    // console.log(all_img)
-                    each_property = el;
-                    // each_property.image1 = all_img[0];
-                    // each_property.image2 = all_img[1];
-                    // each_property.image3 = all_img[2];
-                    finalProperty.push(each_property);
-                })
-                setMyListings(finalProperty);
+                // newArray.forEach((el) => {
+                //     let each_property = {};
+                //     // let all_img = el.img.split("  ");
+                //     // console.log(all_img)
+                //     each_property = el;
+                //     // each_property.image1 = all_img[0];
+                //     // each_property.image2 = all_img[1];
+                //     // each_property.image3 = all_img[2];
+                //     finalProperty.push(each_property);
             })
+
+
 
             .catch(error => console.log(error));
 
@@ -86,11 +87,12 @@ export const MyListings = () => {
     myProperties.map((element) => {
         myListings.forEach((elm) => {
             if (elm.property_id == element.id) {
-                let tempObj = element
-                tempObj.special_note = elm.special_note
-                tempObj.date_needed = elm.date_needed
-                tempObj.status = elm.status
+                let tempObj = { ...element };
+                tempObj.special_note = elm.special_note;
+                tempObj.date_needed = elm.date_needed;
+                tempObj.status = elm.status;
                 listingArray.push(tempObj)
+                console.log("tempObj", tempObj);
                 console.log("the matching elements")
                 console.log(listingArray)
             }
@@ -100,6 +102,7 @@ export const MyListings = () => {
     const results = listingArray.filter((elm) => elm.status == filterListings);
     console.log("filter results:")
     console.log(results)
+    console.log("Status result:")
     console.log(filterListings)
 
     return (
@@ -121,15 +124,15 @@ export const MyListings = () => {
                                     {element.date_needed}</p>
                                 <p className="card-text"><u>Special Instructions:</u><br />
                                     {element.special_note}</p>
-                                <p className="card-text">
-                                    <p className="card-text" style={element.status == true ? { display: "block" } : { display: "none" }}>
+                                <div className="card-text">
+                                    <p className="card-text" style={element.status == "Active" ? { display: "block" } : { display: "none" }}>
                                         <i className="fa-solid fa-circle text-warning fs-3"></i> Pairing with Cleaner
                                     </p>
-                                    <p className="card-text" style={element.status == false ? { display: "block" } : { display: "none" }}>
+                                    <p className="card-text" style={element.status == "Scheduled" ? { display: "block" } : { display: "none" }}>
                                         <i className="fa-solid fa-circle text-success fs-3"></i> Cleaning Scheduled
                                     </p>
                                     <p className="button-24">Cancel Cleaning</p>
-                                </p>
+                                </div>
                             </div>
                         </div>
                     )
