@@ -1,5 +1,6 @@
 """empty message
 
+<<<<<<< HEAD:migrations/versions/1104408ad2ec_.py
 <<<<<<<< HEAD:migrations/versions/8499a4e15fbd_.py
 Revision ID: 8499a4e15fbd
 Revises: 
@@ -9,6 +10,11 @@ Revision ID: 1104408ad2ec
 Revises: 
 Create Date: 2024-04-07 20:39:13.631716
 >>>>>>>> ac4331016b69c8b9a7f68442a4cceaa83d18461b:migrations/versions/1104408ad2ec_.py
+=======
+Revision ID: e63125723749
+Revises: 
+Create Date: 2024-04-08 14:30:12.557984
+>>>>>>> 00b37ec1ac04f67ce02fa4759fc521b11b6204cd:migrations/versions/e63125723749_.py
 
 """
 from alembic import op
@@ -16,11 +22,15 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
+<<<<<<< HEAD:migrations/versions/1104408ad2ec_.py
 <<<<<<<< HEAD:migrations/versions/8499a4e15fbd_.py
 revision = '8499a4e15fbd'
 ========
 revision = '1104408ad2ec'
 >>>>>>>> ac4331016b69c8b9a7f68442a4cceaa83d18461b:migrations/versions/1104408ad2ec_.py
+=======
+revision = 'e63125723749'
+>>>>>>> 00b37ec1ac04f67ce02fa4759fc521b11b6204cd:migrations/versions/e63125723749_.py
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -46,6 +56,7 @@ def upgrade():
     sa.Column('full_name', sa.String(length=120), nullable=False),
     sa.Column('phone', sa.String(length=120), nullable=False),
     sa.Column('address', sa.String(length=120), nullable=True),
+    sa.Column('default_city', sa.String(length=120), nullable=True),
     sa.Column('img', sa.String(length=300), nullable=True),
     sa.Column('banking_info', sa.String(length=300), nullable=True),
     sa.Column('ranking', sa.Float(), nullable=True),
@@ -69,7 +80,8 @@ def upgrade():
     sa.Column('property_id', sa.Integer(), nullable=False),
     sa.Column('date_needed', sa.String(length=120), nullable=False),
     sa.Column('special_note', sa.String(length=300), nullable=True),
-    sa.Column('status', sa.String(length=130), nullable=True),
+    sa.Column('status', sa.String(length=300), nullable=True),
+    sa.Column('rate', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['property_id'], ['property.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -77,6 +89,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('listing_id', sa.Integer(), nullable=False),
     sa.Column('worker_id', sa.Integer(), nullable=False),
+    sa.Column('date_time', sa.String(length=120), nullable=False),
     sa.Column('status', sa.String(length=120), nullable=True),
     sa.Column('review', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['listing_id'], ['listing.id'], ),

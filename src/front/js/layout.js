@@ -10,6 +10,8 @@ import { Single } from "./pages/single";
 import { Landing } from "./pages/landing";
 import { Dashboard } from "./pages/dashboard";
 import { WSchedule } from "./pages/wschedule";
+import { StaticProfile } from "./component/staticprofile";
+import { Ratings } from "./component/ratings";
 
 import { WDashboard } from "./pages/workerdashboard";
 import { EditProfile } from "./pages/editprofile";
@@ -43,12 +45,12 @@ const Layout = () => {
     const [myProperties, setMyProperties] = useState([])
     const [filterListings, setFilterListings] = useState(true)
     const [currentUser, setCurrentUser] = useState({
-        email: "dmeasor1@cisco.com",
-        full_name: "Dov Measor",
+        email: "test@test.com",
+        full_name: "Host1",
         id: 1,
-        phone: "(410) 4690235",
-        token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMjA2NTYzNSwianRpIjoiNjU3YTJjNDQtMjE5Yy00NmI0LThkMTItZDk3NDRhNzFkODFiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MiwibmJmIjoxNzEyMDY1NjM1LCJjc3JmIjoiYWY3NDg2MmEtMjRkMC00ZTk1LWJlYjUtYjAwNjFhZjQ3N2NlIiwiZXhwIjoxNzEyMDY2NTM1fQ.PiFqu7nYF7sVFxUTpUsOazRhkK3frQWwBa0jsB32gmc"
+        phone: "6789995555",
+        role: "User",
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMjU4Nzg3NSwianRpIjoiYWIwNTc0YzQtNTk3OC00YzRkLTllZjctNTliZDlhOTJhMjYyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzEyNTg3ODc1LCJjc3JmIjoiODYxNzljMDgtOGUwYy00YjkxLTgwYTMtODRlMjFkNDhlNjE0IiwiZXhwIjoxNzEyNTg4Nzc1fQ.k9DLEkXCshOoZzOGZap18OnbNbm-aMg5KmETWiDPRlY"
     })
 
 
@@ -81,6 +83,7 @@ const Layout = () => {
                             <Route element={<WSchedule />} path="/wschedule" />
                             <Route element={<EditProfile />} path="/editprofile" />
                             <Route element={<Landing />} path="/landing" />
+                            <Route element={<Ratings />} path="ratings" />
                             <Route element={<AddListing />} path="/addlisting" />
                             <Route element={<MyListings />} path="/mylistings" />
                             <Route element={<AddProperty />} path="/addproperty" />
@@ -89,7 +92,7 @@ const Layout = () => {
                             <Route element={<Single />} path="/single/:theid" />
                             <Route element={<h1>Not found!</h1>} />
                         </Routes>
-                        <Footer/>
+                        <Footer />
                     </ScrollToTop>
                 </BrowserRouter>
             </AppContext.Provider>
