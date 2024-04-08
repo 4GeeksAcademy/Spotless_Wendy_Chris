@@ -72,6 +72,7 @@ function accept_offer_function(id){
 
 }
 
+
 function filter_listing_function(val){
 let which_filter= val.currentTarget.innerText;
 if(which_filter=='City (A-Z)'){

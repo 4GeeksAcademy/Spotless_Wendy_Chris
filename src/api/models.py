@@ -8,6 +8,7 @@ class User(db.Model):
     full_name = db.Column(db.String(120), unique=False, nullable=False)
     phone = db.Column(db.String(120), unique=False, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
+    default_city = db.Column(db.String(120),unique=False,  nullable=True)
     address = db.Column(db.String(120), unique=False, nullable=True)
     img = db.Column(db.String(300), unique=False, nullable=True)
     billing = db.Column(db.String(300), unique=False)
@@ -22,6 +23,7 @@ class User(db.Model):
             "email": self.email,
             "full_name": self.full_name,
             "phone": self.phone,
+              "default": self.default_city,
             "img": self.img,
             "billing": self.billing,
             "address": self.address
@@ -137,8 +139,6 @@ class Schedule(db.Model):
             "id": self.id,
             "listing_id": self.listing_id,
             "worker_id": self.worker_id,
-            "date_time": self.date_time,
-            
             "status": self.status,
             "review": self.review
             # do not serialize the password, its a security breach

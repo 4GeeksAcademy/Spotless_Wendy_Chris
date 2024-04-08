@@ -203,7 +203,7 @@ def add_to_schedule():
 
 
 # Add a new schedule for a specific worker below
-@api.route('/worker/schedule/<ids>/delete', methods=['DELETE'])
+@api.route('/worker/schedule/<ids>/cancel', methods=[''])
 def cancel_schedule(ids):
     db.session.query(Schedule).get(ids).update({"status":'Cancelled'})
     db.session.commit()

@@ -37,7 +37,7 @@ const[mySchedule, setMySchedule]= useState([]);
 function cancel_schedule_function(id){
   let cancel_schedule= {listing_id: id, worker_id:currentUser.id};
  console.log('Accept offer function was called');
-// fetch(process.env.BACKEND_URL + "/api/worker/schedule/new",
+// fetch(process.env.BACKEND_URL + "/api/worker/schedule/cancel",
 //    {
 //        method: 'PUT',
 //        body:JSON.stringify(cancel_schedule),
@@ -68,11 +68,6 @@ function cancel_schedule_function(id){
       <button className="test button-24"  onClick={()=>navigate("/")}>Listing</button>
       </div>
     
-     
-   
-       
-    
-   
      <div>
   
   <ul>
