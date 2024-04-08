@@ -8,7 +8,7 @@ import { AppContext } from "../layout";
 
 
 export const Login = () => {
-	const { user, setUser, token, setToken } = useContext(AppContext);
+	const { currentUser, setCurrentUser, token, setToken } = useContext(AppContext);
 
 	const navigate = useNavigate();
 
@@ -56,7 +56,7 @@ export const Login = () => {
 				// navigate('/home')
 				console.log("This is the login response:")
 				console.log(responseAsJson)
-				setUser(responseAsJson)
+				setCurrentUser(responseAsJson)
 				var token = responseAsJson.token
 				setToken(token)
 
