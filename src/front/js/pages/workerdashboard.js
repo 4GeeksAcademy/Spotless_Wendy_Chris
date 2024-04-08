@@ -73,7 +73,6 @@ export const WDashboard = () => {
 
   }
 
-
   function filter_listing_function(val) {
     let which_filter = val.currentTarget.innerText;
     if (which_filter == 'City (A-Z)') {
@@ -83,7 +82,6 @@ export const WDashboard = () => {
       console.log(test)
     }
     else if (which_filter == 'Price: (High to Low)') {
-
 
     }
     else {
