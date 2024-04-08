@@ -58,7 +58,7 @@ export const Home = () => {
 					each_house.city = cityR[r];
 					each_house.state = stateR[r];
 					each_house.address = el.address;
-					each_house.images = el.images[0] + '   ' + el.images[1] + '  ' + el.images[2] + ' ' + el.images[3] + " " + el.images[4];
+					each_house.images = el.images[0] + '  ' + el.images[1] + '  ' + el.images[2] + '  ' + el.images[3] + " " + el.images[4];
 
 					test2.push(each_house);
 
@@ -81,7 +81,7 @@ export const Home = () => {
 		console.log('the thing below is my local storage : ');
 		console.log(test);
 
-		fetch(process.env.BACKEND_URL + "/api/property/new/load",
+		fetch(process.env.BACKEND_URL + "/api/property/new/load22",
 			{
 				method: 'POST',
 				body: test2,
@@ -100,6 +100,7 @@ export const Home = () => {
 
 			.catch(error => console.log(error));
 	}
+
 	return (
 
 		<div className="container">
@@ -121,17 +122,23 @@ export const Home = () => {
 			</Link>
 
 
+<<<<<<< HEAD
 			<Link to='/wdashboard'>
 				<button type="button" className="btn btn-secondary" >a Link to worker dashboard</button><br /><br /><br />
+=======
+<Link to='/wdashboard'>
+	<button type="button" className="btn btn-secondary" >Link to worker dashboard</button><br/><br/><br/>
+>>>>>>> ac4331016b69c8b9a7f68442a4cceaa83d18461b
 
 			</Link>
 
-
-
-
-
 			<Link to='/addlisting'>
-				<button type="button" className="btn btn-secondary" >Go to listing</button>
+				<button type="button" className="btn btn-secondary" >Go to listing</button><br/><br/><br/>
+
+			</Link>
+
+			<Link to='/wschedule'>
+				<button type="button" className="btn btn-secondary" >Go to schedule</button>
 			</Link>
 
 
