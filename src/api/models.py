@@ -152,7 +152,6 @@ class Payment(db.Model):
     schedule_id = db.Column(db.Integer, db.ForeignKey('schedule.id'), nullable=False)
     amount= db.Column(db.Integer, nullable=False)
     schedule_link = db.relationship('Schedule', backref='payment', lazy=True)
-   
 
     def __repr__(self):
         return f'Schedule: {self.id}'

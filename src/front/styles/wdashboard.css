@@ -8,6 +8,18 @@
     pointer-events: none;
 }
 
+span, p{
+  color: #f5eded;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size:15px;
+}
+
+h4{
+  font-weight: bold;
+  color: #FF4742;
+  font-size: 17px;
+}
+
 .test {
   
     background: #FF4742;

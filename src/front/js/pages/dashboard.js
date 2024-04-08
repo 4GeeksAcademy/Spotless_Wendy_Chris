@@ -35,7 +35,6 @@ export const Dashboard = () => {
         newArray.forEach((el) => {
           let each_property = {};
           let all_img = el.img.split("  ");
-       
           each_property = el;
           each_property.image1 = all_img[0];
           each_property.image2 = all_img[1];
@@ -44,8 +43,6 @@ export const Dashboard = () => {
        
         })
         setMyProperties(finalProperty);
-
-
       })
 
       .catch(error => console.log(error));
@@ -90,15 +87,12 @@ export const Dashboard = () => {
       .catch(error => console.log(error));
   }
 
-
-
 function pop_modal_function(property_obj){
  
   const dialog = document.getElementById('modal_dialog');
   dialog.showModal();
   setListingId(property_obj);
 }
-
 
 function close_modal_function(){
   const dialog = document.getElementById('modal_dialog');
@@ -109,19 +103,9 @@ function close_modal_function(){
 }
 
 
-function get_specialNote_function(val){
-let note= val.target.value;
 
-setListingNote(note)
 
-}
 
-function get_date_needed_function(val){
-let date_needed= val.target.value;
-
-setListingDate(date_needed);
-
-}
 
 function save_modal_function(id){
 
@@ -176,27 +160,20 @@ setListingNote('');
 
           <div class="card text-secondary" style={{ width: "18rem" }}>
 
-
-        
-
             <div id="slideshow">
             <div className="jump_div">
                   <Link to='/demo'>
                   <span><i class="fa-solid fa-arrow-up-right-from-square fa-fade fa-xl"></i></span>
                   </Link>
                   </div>
+
   <div class="slide-wrapper">
-    
     <div class="slide"><img src={element.image1} class="slide-number w-100"/></div>
     <div class="slide"><img src={element.image2} class="slide-number w-100"/></div>
     <div class="slide"><img src={element.image3} class="slide-number w-100"/></div>
-    <div class="slide"><img src={element.image1} class="slide-number w-100"/></div>
-   
-   
+    <div class="slide"><img src={element.image1} class="slide-number w-100"/></div> 
   </div>
 </div>
-
-
  
   <div class="card-body">
     <h5 class="card-title">{element.name}</h5>
@@ -212,7 +189,7 @@ setListingNote('');
   </div>
 </div>
 
-        )}
+    )}
 
 
 </div>
@@ -220,17 +197,13 @@ setListingNote('');
 
 <dialog id="modal_dialog"  class="card-body border-light rounded"> 
             <div class="row gx-3 mb-3">
-
             <div class="col-2 d-flex align-items-center">
                     <label class="medium mb-1" for="inputdate">Date</label>
                    </div>
+
                 <div class="col-9">             
-                
-                     <input class="form-control" id="inputdate" type="text" onChange={(e) => { get_date_needed_function(e) }} placeholder="Enter your date" value={listingDate} />
-
+                     <input class="form-control" id="inputdate" type="text" onChange={(e) => { setListingDate(e.target.value) }} placeholder="Enter your date" value={listingDate} />
                 </div>
-
-
             </div>
 
             <div className="row mb-3">
@@ -240,7 +213,7 @@ setListingNote('');
             
             <div class="col-9">
                  
-                <textarea class="form-control" id="inputnote" type="text" onChange={(e) => { get_specialNote_function(e) }} placeholder="Enter your note" value={listingNote}/>
+                <textarea class="form-control" id="inputnote" type="text" onChange={(e) => { setListingNote(e.target.value) }} placeholder="Enter your note" value={listingNote}/>
             </div>
             <div class="col"> </div>
             </div>
@@ -257,9 +230,9 @@ setListingNote('');
                 </div>
             </div>
             
-
-
 </dialog>
+
+
 </div>
 
 	);

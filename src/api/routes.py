@@ -75,9 +75,6 @@ def get_user_property(id):
 # This endpoint was written today, 4/5/2024 at 6h25pm. 
 @api.route('/worker/listing/all', methods=['GET'])
 def get_available_listing_for_worker():
-    get_listing= Listing.query.filter_by(status="Active")
-    all_listing= list(map(lambda x: x.serialize(), get_listing))
-
     get_listing= db.session.execute("SELECT Listing.id, Listing.date_needed, Listing.special_note, Property.address, Property.city,  Property.img, Listing.rate FROM Listing join Property ON Property.id=Listing.property_id where Listing.status='Active';")
     all_listing= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3],city=row[4], img=row[5], rate=row[6] ) for row in get_listing.fetchall()]
     return jsonify(all_listing), 200
@@ -187,8 +184,10 @@ def update_user_or_worker(id):
 # Add a new schedule for a specific worker below
 @api.route('/worker/<id>/schedule/all', methods=['GET'])
 def get_worker_schedule(id):
-    get_schedule= Schedule.query.filter_by(status="Pending", worker_id=id)
-    all_schedule= list(map(lambda x: x.serialize(), get_schedule))
+
+    get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Listing.special_note, Property.address, Property.city, Listing.rate FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property on Listing.property_id=Property.id where Listing.status='Active';")
+    all_schedule= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3], city=row[4], rate=row[5] ) for row in get_schedule.fetchall()]
+   
     return jsonify(all_schedule), 200
 
 

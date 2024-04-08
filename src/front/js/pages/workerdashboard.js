@@ -36,11 +36,9 @@ export const WDashboard = () => {
         
 
         })
-        console.log(' Listing test begins here')
-        console.log( formatted_Listing);
-        // setListing( formatted_Listing);   
+       
         setMyListings(formatted_Listing); 
-
+        console.log(formatted_Listing);
 
       })
 
@@ -111,7 +109,7 @@ else {
   >
  <i class="fa-solid fa-sliders fa-2xl"></i>
   </button>
-  <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <ul className="dropdown-menu text-lg" aria-labelledby="dropdownMenuButton">
     <li><span className="dropdown-item" onClick={(e)=>filter_listing_function(e)}>City (A-Z)</span></li>
     <li><span className="dropdown-item" onClick={(e)=>filter_listing_function(e)}>Price: (High to Low)</span></li>
     <li><span className="dropdown-item" onClick={(e)=>filter_listing_function(e)}>Something A-Z</span></li>
@@ -130,17 +128,21 @@ else {
     
         <div className="listing_div">
 
-<div className="d-flex">
+<div className="d-flex  justify-content-between ">
 
       <img src={element.image1} className="img_listing"/>
 
-      <div className="city_address_div mx-2">
-      <h2>{element.city}</h2>
-      <p>{element.address}</p>
+      <div className="city_address_div mx-2 mr-2 pt-2 ">
+      <h4>{element.city}</h4>
+      <span> {element.address}</span>
         </div>
 
-        <div className="price_div">
-   <span>{element.rate}</span>
+        <div className="mx-4 mr-4 ">
+   <span>{element.date_needed}</span>
+        </div>
+
+        <div className="mx-4 mr-4">
+      <span>Quote : {element.rate}$</span>
         </div>
 
         </div>
