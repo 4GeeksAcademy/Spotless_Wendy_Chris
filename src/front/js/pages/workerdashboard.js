@@ -11,7 +11,7 @@ export const WDashboard = () => {
 
   const { store, actions } = useContext(Context);
 
-  const { currentUser, myProperties, setMyProperties, myListings, setMyListings, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
+  const { currentUser, myProperties, setMyProperties, workerListings, setWorkerListings, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
   const navigate = useNavigate();
 
 
@@ -38,7 +38,8 @@ export const WDashboard = () => {
 
         })
 
-        setMyListings(formatted_Listing);
+        setWorkerListings(formatted_Listing);
+        console.log("Worker Dashboard custom listing")
         console.log(formatted_Listing);
 
       })
@@ -162,9 +163,9 @@ export const WDashboard = () => {
 
         <ul>
 
-          {myListings.map((element) =>
+          {workerListings.map((element) =>
 
-            <li>
+            <li key={element.id}>
 
               <div className="listing_div">
 

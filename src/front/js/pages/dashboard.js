@@ -38,7 +38,7 @@ export const Dashboard = () => {
           let each_property = {};
           let all_img = el.img.split("  ");
 
-          each_property = el;
+          each_property = { ...el };
           each_property.image1 = all_img[0];
           each_property.image2 = all_img[1];
           each_property.image3 = all_img[2];
@@ -161,7 +161,7 @@ export const Dashboard = () => {
 
         {myProperties.map((element) =>
 
-          <div class="card text-secondary" style={{ width: "18rem" }}>
+          <div class="card text-secondary" style={{ width: "18rem" }} key={element.id}>
 
             <div id="slideshow">
               <div className="jump_div">
