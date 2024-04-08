@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import "../../styles/footer.css";
 
 
+export const Footer = () => {
 
-export const Footer = () => { 
-	
 	return (
-	<div></div>
-)};
+		<div></div>
+	)
+};

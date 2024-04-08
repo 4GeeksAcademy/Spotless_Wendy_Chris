@@ -8,6 +8,9 @@ import { AppContext } from "../layout";
 import { AddProperty } from "../component/add_prop";
 import { Dashboard } from "./dashboard";
 import { MyListings } from "../component/mylistings";
+import { EditProfile } from "./editprofile";
+import { StaticProfile } from "../component/staticprofile";
+import { WDashboard } from "./workerdashboard";
 
 
 
@@ -93,7 +96,11 @@ export const Landing = () => {
                             >My Properties</div>
                             <div className={`col-12 border-bottom border-dark
                             ${menu == "profile" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("profile")}
+                                onClick={() => {
+                                    setDisplay("myProfile")
+                                    setMenu("profile")
+                                }
+                                }
                             >My Profile</div>
                             <div className={`col-12 border-bottom border-dark
                             ${menu == "history" ? "activeMenu" : "myMenu"}`}
@@ -169,8 +176,25 @@ export const Landing = () => {
                     </div>
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "profile" ? { display: "block" } : { display: "none" }}
-                    >My Profile
-                        <div>Email: {currentUser.email}</div>
+                    >
+                        <div className="row d-flex justify-content-center pt-1 mb-2">
+                            <div className="col-3"></div>
+                            <div className="col-6">My Profile</div>
+                            <div className="col-3"><span className="button-24 me-3 mt-1"
+                                style={display == "myProfile" ? { display: "block" } : { display: "none" }}
+                                onClick={() => setDisplay("editProfile")}
+                            >Edit Profile</span>
+                                <span className="button-24 me-3 mt-1"
+                                    style={display == "editProfile" ? { display: "block" } : { display: "none" }}
+                                    onClick={() => setDisplay("myProfile")}
+                                >My Profile</span></div>
+                        </div>
+                        <div
+                            style={display == "editProfile" ? { display: "block" } : { display: "none" }}
+                        ><EditProfile /></div>
+                        <div
+                            style={display == "myProfile" ? { display: "block" } : { display: "none" }}
+                        ><StaticProfile /></div>
                     </div>
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "history" ? { display: "block" } : { display: "none" }}
@@ -215,7 +239,7 @@ export const Landing = () => {
                     </div>
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "listings" ? { display: "block" } : { display: "none" }}
-                    >Available Listings
+                    ><WDashboard />
                     </div>
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "properties" ? { display: "block" } : { display: "none" }}
