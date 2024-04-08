@@ -13,7 +13,7 @@ export const WDashboard = () => {
 
   const { currentUser, myProperties, setMyProperties, workerListings, setWorkerListings, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
   const navigate = useNavigate();
-
+ 
 
   useEffect(() => {
 
@@ -48,86 +48,66 @@ export const WDashboard = () => {
 
   }, []);
 
+	const sortCity = (a, b) => {
+		let cityA = a.city.toUpperCase();
+		let cityB = b.city.toUpperCase();
+		if (cityA < cityB) return -1;
+		if (cityA > cityB) return 1;
+	}
+
+  const sortPrice = (a, b) => b.rate - a.rate ;
+    
+  function filter_listing_function(val) {
+
+    let which_filter = val.currentTarget.innerText;
+    if (which_filter == 'City (A-Z)') {
+      let test = [...myListings];
+    let final=  test.toSorted(sortCity);
+     setMyListings(final);
+     
+    }
+    else if (which_filter == 'Price: (High to Low)') {
+      let test = [...myListings];
+      let final=  test.toSorted(sortPrice);
+       setMyListings(final);
+    }
+    else {
+      console.log('Nothing to do yet')
+
+    }
+
+  }
+
 
 
   function accept_offer_function(id) {
     let new_schedule = { listing_id: id, worker_id: currentUser.id };
     console.log('Accept offer function was called');
-    // fetch(process.env.BACKEND_URL + "/api/worker/schedule/new",
-    //    {
-    //        method: 'POST',
-    //        body:JSON.stringify(new_schedule),
-    //        headers: {
-    //            'Content-Type': 'application/json'
-    //        }
-    //    })
-    //    .then(res => {
-    //        if (!res.ok) console.log(res.statusText);
-    //        return res.json();
-    //    })
-    //    .then(response => {
-    //        console.log(response)
+    fetch(process.env.BACKEND_URL + "/api/worker/schedule/new",
+       {
+           method: 'POST',
+           body:JSON.stringify(new_schedule),
+           headers: {
+               'Content-Type': 'application/json'
+           }
+       })
+       .then(res => {
+           if (!res.ok) console.log(res.statusText);
+           return res.json();
+       })
+       .then(response => {
+           console.log(response)
+           let test= workerListings.filter((el)=>el.id!=id);
+           setWorkerListings(test);
 
-    //    })
+       })
 
-    //    .catch(error => console.log(error));
-
-  }
-
-  function filter_listing_function(val) {
-    let which_filter = val.currentTarget.innerText;
-    if (which_filter == 'City (A-Z)') {
-      let test = [...myListings];
-      test.sort((a, b) => a.city - b.city);
-      console.log('This the test result: ')
-      console.log(test)
-    }
-    else if (which_filter == 'Price: (High to Low)') {
-
-    }
-    else {
-
-    }
-
+       .catch(error => console.log(error));
 
   }
 
 
-  // const handleOneClick = () => {
-  //   if (rating < 1) {
-  //     setRating(1)
-  //   }
-  //   if (rating >= 1) {
-  //     setRating(0)
-  //   }
-  // }
-
-  // const handleTwoClick = () => {
-  //   if (rating < 2) {
-  //     setRating(2)
-  //   }
-  //   if (rating >= 2) {
-  //     setRating(1)
-  //   }
-  // }
-
-  // const handleThreeClick = () => {
-  //   if (rating < 3) {
-  //     setRating(3)
-  //   }
-  //   if (rating >= 3) {
-  //     setRating(2)
-  //   }
-  // }
-
-  // const handleFourClick = () => {
-  //   if (rating < 4) {
-  //     setRating(4)
-  //   }
-  //   if (rating >= 4) {
-  //     setRating(3)
-  //   }
-  // }
+  
 
 
 
@@ -136,7 +116,7 @@ export const WDashboard = () => {
     <div>
 
       <div className="add_property_class_div">
-        <button className="test button-24" onClick={() => navigate("/")}>My Schedule</button>
+        <button className="test button-24" onClick={() => navigate("/wschedule")}>My Schedule</button>
       </div>
 
 

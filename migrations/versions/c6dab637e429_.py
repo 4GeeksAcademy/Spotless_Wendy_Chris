@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: e63125723749
+Revision ID: c6dab637e429
 Revises: 
-Create Date: 2024-04-08 14:30:12.557984
+Create Date: 2024-04-08 17:27:57.668606
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e63125723749'
+revision = 'c6dab637e429'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -60,7 +60,7 @@ def upgrade():
     sa.Column('property_id', sa.Integer(), nullable=False),
     sa.Column('date_needed', sa.String(length=120), nullable=False),
     sa.Column('special_note', sa.String(length=300), nullable=True),
-    sa.Column('status', sa.String(length=300), nullable=True),
+    sa.Column('status', sa.String(length=100), nullable=True),
     sa.Column('rate', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['property_id'], ['property.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -69,7 +69,6 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('listing_id', sa.Integer(), nullable=False),
     sa.Column('worker_id', sa.Integer(), nullable=False),
-    sa.Column('date_time', sa.String(length=120), nullable=False),
     sa.Column('status', sa.String(length=120), nullable=True),
     sa.Column('review', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['listing_id'], ['listing.id'], ),

@@ -8,6 +8,7 @@ class User(db.Model):
     full_name = db.Column(db.String(120), unique=False, nullable=False)
     phone = db.Column(db.String(120), unique=False, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
+
     address = db.Column(db.String(120), unique=False, nullable=True)
     img = db.Column(db.String(300), unique=False, nullable=True)
     billing = db.Column(db.String(300), unique=False)
@@ -22,6 +23,7 @@ class User(db.Model):
             "email": self.email,
             "full_name": self.full_name,
             "phone": self.phone,
+           
             "img": self.img,
             "billing": self.billing,
             "address": self.address
@@ -93,9 +95,15 @@ class Property(db.Model):
 class Listing(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     property_id = db.Column(db.Integer, db.ForeignKey('property.id'), nullable=False)
+<<<<<<< HEAD
+    date_needed = db.Column(db.String(120), nullable=False)
+    special_note = db.Column(db.String(300), nullable=True)
+    status = db.Column(db.String(100), nullable=True, default="Active")
+=======
     status = db.Column(db.String(300), nullable=True, default="Active")
     date_needed = db.Column(db.String(120), nullable=False)
     special_note = db.Column(db.String(300), nullable=True)    
+>>>>>>> d8300206424536604f72a460e4c0882e60508522
     rate = db.Column(db.Integer, nullable=True)
     property_link = db.relationship('Property', backref='listing', lazy=True)
         
@@ -119,8 +127,7 @@ class Listing(db.Model):
 class Schedule(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     listing_id = db.Column(db.Integer, db.ForeignKey('listing.id'), nullable=False)
-    worker_id = db.Column(db.Integer, db.ForeignKey('worker.id'), nullable=False)
-    date_time = db.Column(db.String(120), nullable=False)   
+    worker_id = db.Column(db.Integer, db.ForeignKey('worker.id'), nullable=False)  
     status = db.Column(db.String(120), default="Pending")
     review= db.Column(db.Integer, nullable=True)
     listing_link = db.relationship('Listing', backref='schedule', lazy=True)
@@ -135,8 +142,6 @@ class Schedule(db.Model):
             "id": self.id,
             "listing_id": self.listing_id,
             "worker_id": self.worker_id,
-            "date_time": self.date_time,
-            
             "status": self.status,
             "review": self.review
             # do not serialize the password, its a security breach
