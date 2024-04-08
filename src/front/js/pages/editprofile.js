@@ -65,7 +65,7 @@ export const EditProfile = () => {
         //let current_role= currentUser.role;
 
 
-        if (tempF.length > 5 && tempE.length > 5 && tempP.length > 8) {
+        if (tempF.length > 3 && tempE.length > 3 && tempP.length > 3) {
 
             let testObj = {
                 full_name: tempF,
@@ -169,12 +169,12 @@ export const EditProfile = () => {
             <div className="row mb-3">
 
                 <div className="col-2 d-flex align-items-center">
-                    <label className="medium mb-1" for="inputpassword">New password</label>
+                    <label className="medium mb-1" for="inputNewPassword">New password</label>
                 </div>
 
                 <div className="col-10">
 
-                    <input className="form-control" id="inputpassword" type="password" onChange={(e) => { get_new_password(e) }} placeholder="Enter your new password " value={tempNPA} />
+                    <input className="form-control" id="inputNewPassword" type="password" onChange={(e) => { get_new_password(e) }} placeholder="Enter your new password " value={tempNPA} />
                 </div>
 
             </div>
