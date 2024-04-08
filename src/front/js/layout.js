@@ -40,6 +40,7 @@ const Layout = () => {
     const basename = process.env.BASENAME || "";
 
     const [myListings, setMyListings] = useState([])
+    const [workerListings, setWorkerListings] = useState([])
     const [display, setDisplay] = useState("")
     const [myProperties, setMyProperties] = useState([])
     const [filterListings, setFilterListings] = useState(true)
@@ -67,7 +68,7 @@ const Layout = () => {
             <AppContext.Provider value={
                 {
                     currentUser, setCurrentUser, token, setToken,
-                    myListings, setMyListings, myProperties, setMyProperties,
+                    myListings, setMyListings,workerListings, setWorkerListings, myProperties, setMyProperties,
                     role, setRole, display, setDisplay, filterListings, setFilterListings
                 }
             }>

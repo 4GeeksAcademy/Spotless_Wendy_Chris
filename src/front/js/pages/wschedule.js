@@ -9,7 +9,7 @@ export const WSchedule= () => {
 
   const { store, actions } = useContext(Context);
  
-  const { currentUser, myProperties, setMyProperties, myListings, setMyListings, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
+  const { currentUser, myProperties, setMyProperties,workerListings, setWorkerListings, myListings, setMyListings, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
     const navigate = useNavigate();
 const[mySchedule, setMySchedule]= useState([]);
 
@@ -22,9 +22,10 @@ const[mySchedule, setMySchedule]= useState([]);
         return res.json();
       })
       .then(response => {
+        console.log('this is the  schedule we got')
+        console.log(response)
        
         setMySchedule(response); 
-        console.log(formatted_schedule);
 
       })
 
@@ -34,27 +35,24 @@ const[mySchedule, setMySchedule]= useState([]);
 
 
 
-function cancel_schedule_function(id){
-  let cancel_schedule= {listing_id: id, worker_id:currentUser.id};
- console.log('Accept offer function was called');
-// fetch(process.env.BACKEND_URL + "/api/worker/schedule/cancel",
-//    {
-//        method: 'PUT',
-//        body:JSON.stringify(cancel_schedule),
-//        headers: {
-//            'Content-Type': 'application/json'
-//        }
-//    })
-//    .then(res => {
-//        if (!res.ok) console.log(res.statusText);
-//        return res.json();
-//    })
-//    .then(response => {
-//        console.log(response)
+function cancel_schedule_function(schedule_id, listing_id){
 
-//    })
 
-//    .catch(error => console.log(error));
+fetch(process.env.BACKEND_URL + "/api/worker/schedule/"+schedule_id+"/cancel/"+listing_id,
+   {
+       method: 'POST'
+   })
+   .then(res => {
+       if (!res.ok) console.log(res.statusText);
+       return res.json();
+   })
+   .then(response => {
+    let test= mySchedule.filter((el)=>el.id!=schedule_id);
+       setMySchedule(test); 
+
+   })
+
+   .catch(error => console.log(error));
 
 }
 
@@ -65,7 +63,7 @@ function cancel_schedule_function(id){
     <div> 
 
 <div className="add_property_class_div">
-      <button className="test button-24"  onClick={()=>navigate("/")}>Listing</button>
+      <button className="test button-24"  onClick={()=>navigate("/wdashboard")}>Listing</button>
       </div>
     
      <div>
@@ -100,7 +98,7 @@ function cancel_schedule_function(id){
 
         <div className="accept_div">
 
-        <button className="test"  onClick={()=>cancel_schedule_function(element.id)}>Cancel</button>
+        <button className="test" onClick={()=>cancel_schedule_function(element.id, element.listing_id)}>Cancel</button>
         </div>
       
       </div>
