@@ -13,6 +13,84 @@
 	box-sizing: border-box;
 }
 
+#dateofbirth{
+	
+		border: 1px solid #009793;
+		border-radius: 5px;
+		background-color: #fff;
+		padding: 5px 10px;
+		box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+		
+		height: 30px;
+	
+}
+
+
+
+body {
+	font-family: Helvetica, sans-serif;
+	padding: 5%;
+  
+  }
+  
+  #slideshow {
+	text-align: center;
+	overflow: hidden;
+	height: 200px;
+	width: 18rem;
+	margin: 0 auto;
+  }
+  
+  .slide-wrapper {
+	width: 54rem;
+	-webkit-animation: slide 15s ease infinite;
+  }
+  
+  .slide {
+	float: left;
+	height: 200px;
+	width: 18rem;
+  }
+  
+ 
+
+  
+  @-webkit-keyframes slide {
+	20% {margin-left: 0px;}
+	30% {margin-left: -18rem;}
+	50% {margin-left: -18rem;}
+	60% {margin-left: -54rem;}
+	70% {margin-left: -54rem;}
+	80% {margin-left: -72rem;}
+
+	
+  }
+  
+
+input{
+	font-size: 75px;
+	font-weight: bold;
+}
+
+
+
+
+
+
+span{
+	cursor:pointer;
+}
+.jump_div{
+	
+	position: relative;
+	height:1px;
+	display:flex;
+	justify-content: end;
+	color:black;
+	z-index: 5;
+	margin-right: 5px;
+}
+
 .dialog_container{
 	position:absolute;
 	margin-top:30px;
@@ -32,9 +110,8 @@
 .product-list-container {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
-	row-gap: 5px;
-	gap: 10px;
+	justify-content: space-around;
+	gap: 15px;
   }
 
 
@@ -176,16 +253,17 @@ input {
 }
 
 .form-container {
-	position: absolute;
-	top: 0;
-	height: 100%;
-	transition: all 0.6s ease-in-out;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+    overflow-y: auto; 
 }
 
 .sign-in-container {
-	left: 0;
-	width: 50%;
-	z-index: 2;
+    left: 0;
+    width: 50%;
+    z-index: 2;
 }
 
 .container.right-panel-active .sign-in-container {
@@ -193,10 +271,10 @@ input {
 }
 
 .sign-up-container {
-	left: 0;
-	width: 50%;
-	opacity: 0;
-	z-index: 1;
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
 }
 
 .container.right-panel-active .sign-up-container {

@@ -9,7 +9,13 @@ import { Login } from "./pages/login";
 import { Single } from "./pages/single";
 import { Landing } from "./pages/landing";
 import { Dashboard } from "./pages/dashboard";
+import { WSchedule } from "./pages/wschedule";
+
+import { WDashboard } from "./pages/workerdashboard";
+import { EditProfile } from "./pages/editprofile";
+
 import { MyListings } from "./component/mylistings";
+
 
 import { AddListing } from "./pages/addlisting";
 import injectContext from "./store/appContext";
@@ -19,6 +25,7 @@ import { Footer } from "./component/footer";
 import { useState } from "react";
 import { AddProperty } from "./component/add_prop";
 import { History } from "./component/history";
+
 
 
 export const AppContext = React.createContext(null);
@@ -70,6 +77,9 @@ const Layout = () => {
                             <Route element={<Login />} path="/login" />
                             <Route element={<Home />} path="/" />
                             <Route element={<Dashboard />} path="/dashboard" />
+                            <Route element={<WDashboard />} path="/wdashboard" />
+                            <Route element={<WSchedule />} path="/wschedule" />
+                            <Route element={<EditProfile />} path="/editprofile" />
                             <Route element={<Landing />} path="/landing" />
                             <Route element={<AddListing />} path="/addlisting" />
                             <Route element={<MyListings />} path="/mylistings" />
@@ -79,6 +89,7 @@ const Layout = () => {
                             <Route element={<Single />} path="/single/:theid" />
                             <Route element={<h1>Not found!</h1>} />
                         </Routes>
+                        <Footer/>
                     </ScrollToTop>
                 </BrowserRouter>
             </AppContext.Provider>

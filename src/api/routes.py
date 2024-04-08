@@ -2,7 +2,9 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Worker, Property, Payment, Listing
+from api.models import db, User, Worker, Property, Payment, Listing, Schedule
+from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import relationship, attributes
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 
@@ -69,12 +71,13 @@ def get_user_property(id):
 
     return jsonify(all_property), 200
 
-# @api.route('/user/<id>/listing/all', methods=['GET'])
-# def get_user_listing():
-#     get_listing= Listing.query.filter_by(property_id=id)
-#     all_listing= list(map(lambda x: x.serialize, get_listing))
 
-#     return jsonify(all_listing), 200
+# This endpoint was written today, 4/5/2024 at 6h25pm. 
+@api.route('/worker/listing/all', methods=['GET'])
+def get_available_listing_for_worker():
+    get_listing= db.session.execute("SELECT Listing.id, Listing.date_needed, Listing.special_note, Property.address, Property.city,  Property.img, Listing.rate FROM Listing join Property ON Property.id=Listing.property_id where Listing.status='Active';")
+    all_listing= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3],city=row[4], img=row[5], rate=row[6] ) for row in get_listing.fetchall()]
+    return jsonify(all_listing), 200
 
 
 @api.route('/user/<id>/delete/property/<idP>', methods=['DELETE'])
@@ -84,11 +87,11 @@ def remove_Property(id, idP):
     db.session.commit()
     get_property= Property.query.filter_by(user_id=id)
     all_property= list(map(lambda x: x.serialize(), get_property))
+
     
     return jsonify(all_property), 200
 
-
-
+    
 # Bulk add properties below
 @api.route('property/new/load', methods=['POST'])
 def add_newproperty_load():
@@ -114,12 +117,13 @@ def add_user_listing():
     
     test_listing= Listing.query.filter_by(property_id=listing_request['property_id'],date_needed=listing_request['date_needed']).first()
     if test_listing:
-        print('This one Already exist')
+       return jsonify(f"THis one already exists")
     else:
-        newL=Listing(property_id=listing_request['property_id'], date_needed= listing_request['date_needed'], special_note=listing_request['special_note'])
+        newL=Listing(property_id=listing_request['property_id'], date_needed= listing_request['date_needed'], special_note=listing_request['special_note'], rate= listing_request['rate'])
         db.session.add(newL)
         db.session.commit()
     return jsonify(f"Success"), 200
+
 
 
 # Get listings for a single user 
@@ -141,8 +145,78 @@ def get_user_listing(id):
     final_listings = list(map(lambda x: x.serialize(), user_listings))
 
     return jsonify(final_listings), 200
-       
 
-# generated data from Mock
+
+# Hey Chris! Below is the right version of the endpoint above with the right syntax to get listing of the current user. 
+       
+# @api.route('/user/<idc>/listing', methods=['GET'])
+# def get_user_listing(idc):
+#     get_property_of_user=db.session.query(Property.id).filter_by(user_id=idc).subquery()
+#     get_listing= Listing.query.filter(Listing.property_id.in_(get_property_of_user))
+#     all_listing= list(map(lambda x: x.serialize(), get_listing))
+#     return jsonify(all_listing), 200
+
+
+# Update user or worker endpoint
+@api.route('/update/profile/<id>', methods=['PUT'])
+def update_user_or_worker(id):
+    request_body=request.json
+    if request_body['role']=='worker':
+         
+        test_token= Worker.query.filter_by(email=request_body, password=request_body['password'])
+        if test_token:
+            db.session.query(Worker).get(id).update({"full_name":request_body['full_name'], "email":request_body['email'],"phone": request_body['phone']})
+            db.session.commit()
+            return jsonify(f"Success"), 200
+        else:
+            return (f"Password incorrect"),410
+    else:
+         test_token= User.query.filter_by(email=request_body['email'], password=request_body['password']).first()
+         if test_token:
+            db.session.query(User).filter_by(email=request_body['email'], password=request_body['password']).update({"full_name":request_body['full_name'], "email":request_body['email'],"phone": request_body['phone'], "password":request_body['new_password']})
+            db.session.commit()
+            return jsonify(f"Success"), 200
+         else:
+            return (f"Password incorrect"),410
+     
+         
+
+# Add a new schedule for a specific worker below
+@api.route('/worker/<id>/schedule/all', methods=['GET'])
+def get_worker_schedule(id):
+
+    get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Listing.special_note, Property.address, Property.city, Listing.rate FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property on Listing.property_id=Property.id where Listing.status='Active';")
+    all_schedule= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3], city=row[4], rate=row[5] ) for row in get_schedule.fetchall()]
+   
+    return jsonify(all_schedule), 200
+
+
+
+# Add a new schedule for a specific worker below
+@api.route('/worker/schedule/new', methods=['POST'])
+def add_to_schedule():
+    schedule_request=request.json
+    newS=Schedule(listing_id=schedule_request['listing_id'], worker_id=schedule_request['worker_id'])
+    db.session.add(newS)
+    db.session.commit()
+    return jsonify(f"Success"), 200
+
+
+# Add a new schedule for a specific worker below
+@api.route('/worker/schedule/<ids>/delete', methods=['DELETE'])
+def cancel_schedule(ids):
+    db.session.query(Schedule).get(ids).update({"status":'Cancelled'})
+    db.session.commit()
+     
+    
+    return jsonify(f"Success"), 200
+
+@api.route('/api/worker/jobs/completed', methods=['POST'])
+def get_completed_jobs():
+    data = request.json
+    user_id = data.get('userId')
+    completed_jobs = db.session.query(Listing).join(Schedule, Listing.id == Schedule.listing_id).filter(Schedule.worker_id == user_id, Schedule.status == 'Completed').all()
+    serialized_jobs = [job.serialize() for job in completed_jobs]
+    return jsonify(serialized_jobs), 200
 
 
