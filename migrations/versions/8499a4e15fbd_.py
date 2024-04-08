@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 848d2a325b88
+Revision ID: 8499a4e15fbd
 Revises: 
-Create Date: 2024-04-03 16:28:56.523359
+Create Date: 2024-04-05 15:14:08.002450
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '848d2a325b88'
+revision = '8499a4e15fbd'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,10 +27,7 @@ def upgrade():
     sa.Column('address', sa.String(length=120), nullable=True),
     sa.Column('img', sa.String(length=300), nullable=True),
     sa.Column('billing', sa.String(length=300), nullable=True),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('billing'),
-    sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('phone')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('worker',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -42,12 +39,7 @@ def upgrade():
     sa.Column('img', sa.String(length=300), nullable=True),
     sa.Column('banking_info', sa.String(length=300), nullable=True),
     sa.Column('ranking', sa.Float(), nullable=True),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('banking_info'),
-    sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('full_name'),
-    sa.UniqueConstraint('img'),
-    sa.UniqueConstraint('phone')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('property',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -58,11 +50,9 @@ def upgrade():
     sa.Column('beds', sa.Integer(), nullable=False),
     sa.Column('bath', sa.Integer(), nullable=False),
     sa.Column('img', sa.String(length=10000), nullable=True),
-    sa.Column('address', sa.String(length=120), nullable=False),
+    sa.Column('address', sa.String(length=120), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('img'),
-    sa.UniqueConstraint('name')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('listing',
     sa.Column('id', sa.Integer(), nullable=False),
