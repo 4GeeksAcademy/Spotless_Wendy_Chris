@@ -25,7 +25,7 @@ class User(db.Model):
             "img": self.img,
             "billing": self.billing,
             "address": self.address
-            # do not serialize the password, its a security breach
+          
         }
     
 class Worker(db.Model):
@@ -52,7 +52,7 @@ class Worker(db.Model):
             "banking_info": self.banking_info,
             "address": self.address,
             "ranking": self.ranking
-            # do not serialize the password, its a security breach
+            
         }
     
 class Property(db.Model):
@@ -92,10 +92,10 @@ class Property(db.Model):
 class Listing(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     property_id = db.Column(db.Integer, db.ForeignKey('property.id'), nullable=False)
-
     date_needed = db.Column(db.String(120), nullable=False)
     special_note = db.Column(db.String(300), nullable=True)
-    status = db.Column(db.Boolean, default=True)
+    status = db.Column(db.String(130), default="Active")
+    rate = db.Column(db.Integer, nullable=True)
     property_link = db.relationship('Property', backref='listing', lazy=True)
         
 
@@ -108,7 +108,8 @@ class Listing(db.Model):
             "property_id": self.property_id,
             "date_needed": self.date_needed,
             "special_note": self.special_note,
-            "status": self.status
+            "status": self.status,
+            "rate": self.rate
             # do not serialize the password, its a security breach
         }
     
@@ -119,10 +120,8 @@ class Schedule(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     listing_id = db.Column(db.Integer, db.ForeignKey('listing.id'), nullable=False)
     worker_id = db.Column(db.Integer, db.ForeignKey('worker.id'), nullable=False)
-
-    date_time = db.Column(db.String(120), nullable=False)
    
-    paid_status = db.Column(db.Boolean, default=False)
+    status = db.Column(db.String(120), default="Pending")
     review= db.Column(db.Integer, nullable=True)
 
     listing_link = db.relationship('Listing', backref='schedule', lazy=True)
@@ -139,7 +138,8 @@ class Schedule(db.Model):
             "listing_id": self.listing_id,
             "worker_id": self.worker_id,
             "date_time": self.date_time,
-            "paid_status": self.paid_status,
+            
+            "status": self.status,
             "review": self.review
             # do not serialize the password, its a security breach
         }
@@ -150,10 +150,8 @@ class Schedule(db.Model):
 class Payment(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     schedule_id = db.Column(db.Integer, db.ForeignKey('schedule.id'), nullable=False)
-
     amount= db.Column(db.Integer, nullable=False)
     schedule_link = db.relationship('Schedule', backref='payment', lazy=True)
-   
 
     def __repr__(self):
         return f'Schedule: {self.id}'
@@ -169,46 +167,9 @@ class Payment(db.Model):
 
 
 
-class Worker2(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    full_name = db.Column(db.String(120), unique=True, nullable=False)
-    
-    def __repr__(self):
-        return self.email
 
-    def serialize(self):
-        return {
-            "id": self.id,
-            "email": self.email,
-            "full_name": self.full_name
-           
-            # do not serialize the password, its a security breach
-        }
-    
 
-class Property2(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True, nullable=False)
-    worker_id = db.Column(db.Integer, db.ForeignKey('worker2.id'))
-    #work_link =db.relationship(Worker2, back_populates="worker2")
-    worker = db.relationship('Worker2')
-    
-    #worker_link = db.relationship(Worker2, backref="property2", lazy=True)
 
-    
-    def __repr__(self):
-        return self.name
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "worker_id": self.worker_id
-          
-            # do not serialize the password, its a security breach
-        }
-    
 
     
 

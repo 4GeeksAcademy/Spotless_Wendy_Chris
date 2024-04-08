@@ -9,6 +9,7 @@ import { Login } from "./pages/login";
 import { Single } from "./pages/single";
 import { Landing } from "./pages/landing";
 import { Dashboard } from "./pages/dashboard";
+import { WSchedule } from "./pages/wschedule";
 
 import { WDashboard } from "./pages/workerdashboard";
 import { EditProfile } from "./pages/editprofile";
@@ -76,6 +77,7 @@ const Layout = () => {
                             <Route element={<Home />} path="/" />
                             <Route element={<Dashboard />} path="/dashboard" />
                             <Route element={<WDashboard />} path="/wdashboard" />
+                            <Route element={<WSchedule />} path="/wschedule" />
                             <Route element={<EditProfile />} path="/editprofile" />
                             <Route element={<Landing />} path="/landing" />
                             <Route element={<AddListing />} path="/addlisting" />
@@ -85,6 +87,7 @@ const Layout = () => {
                             <Route element={<Single />} path="/single/:theid" />
                             <Route element={<h1>Not found!</h1>} />
                         </Routes>
+                        <Footer/>
                     </ScrollToTop>
                 </BrowserRouter>
             </AppContext.Provider>
