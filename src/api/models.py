@@ -35,6 +35,7 @@ class Worker(db.Model):
     full_name = db.Column(db.String(120), unique=False, nullable=False)
     phone = db.Column(db.String(120), unique=False, nullable=False)
     address = db.Column(db.String(120), unique=False, nullable=True)
+    default_city = db.Column(db.String(120), unique=False, nullable=True)
     img = db.Column(db.String(300), unique=False, nullable=True)
     banking_info = db.Column(db.String(300), unique=False, nullable=True)   
     ranking = db.Column(db.Float, nullable=True)
@@ -51,14 +52,14 @@ class Worker(db.Model):
             "img": self.img,
             "banking_info": self.banking_info,
             "address": self.address,
+            "default_city": self.default_city,
             "ranking": self.ranking
             
         }
     
 class Property(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)    
     name = db.Column(db.String(120), unique=False, nullable=False)
     city = db.Column(db.String(120), nullable=False)
     state = db.Column(db.String(120), nullable=False)
@@ -94,7 +95,7 @@ class Listing(db.Model):
     property_id = db.Column(db.Integer, db.ForeignKey('property.id'), nullable=False)
     date_needed = db.Column(db.String(120), nullable=False)
     special_note = db.Column(db.String(300), nullable=True)
-    status = db.Column(db.String(130), default="Active")
+    status = db.Column(db.String(300), nullable=True, default="Active")
     rate = db.Column(db.Integer, nullable=True)
     property_link = db.relationship('Property', backref='listing', lazy=True)
         
@@ -120,17 +121,11 @@ class Schedule(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     listing_id = db.Column(db.Integer, db.ForeignKey('listing.id'), nullable=False)
     worker_id = db.Column(db.Integer, db.ForeignKey('worker.id'), nullable=False)
-<<<<<<< HEAD
-    date_time = db.Column(db.String(120), nullable=False)
-=======
->>>>>>> ac4331016b69c8b9a7f68442a4cceaa83d18461b
-   
+    date_time = db.Column(db.String(120), nullable=False)   
     status = db.Column(db.String(120), default="Pending")
     review= db.Column(db.Integer, nullable=True)
-
     listing_link = db.relationship('Listing', backref='schedule', lazy=True)
-    worker_link = db.relationship('Worker', backref='schedule', lazy=True)
-    
+    worker_link = db.relationship('Worker', backref='schedule', lazy=True)    
         
 
     def __repr__(self):
@@ -168,15 +163,6 @@ class Payment(db.Model):
             # do not serialize the password, its a security breach
         }
     
-<<<<<<< HEAD
-=======
 
-
-
-
-
-
-
->>>>>>> ac4331016b69c8b9a7f68442a4cceaa83d18461b
     
 

@@ -56,17 +56,33 @@ def create_token():
     user = User.query.filter_by(email=email, password=password).first()
 
     if user is None:
-        # The user was not found on the database
-        return jsonify({"msg": "Bad username or password"}), 401
-    
 
-   # Create a new token with the user id inside
-    access_token = create_access_token(identity=user.id)
-    return jsonify({"msg": "successfully authenticated",
+        worker = Worker.query.filter_by(email=email, password=password).first()
+        if worker is None:
+        # The user or worker was not found on the database
+            return jsonify({"msg": "Bad username or password"}), 401
+        
+        else:
+            # Create a new token with the user id inside
+            access_token = create_access_token(identity=worker.id)
+            return jsonify({"msg": "Worker successfully authenticated",
+                            "token": access_token,
+                            "id": worker.id,
+                            "email": worker.email,
+                            "phone": worker.phone, "full_name": worker.full_name,
+                             "role": "Worker"
+                              }), 200            
+    
+    else:
+        # Create a new token with the user id inside
+        access_token = create_access_token(identity=user.id)
+        return jsonify({"msg": "User successfully authenticated",
                     "token": access_token,
                     "id": user.id,
                     "email": user.email,
-                     "phone": user.phone, "full_name": user.full_name })
+                     "phone": user.phone, "full_name": user.full_name,
+                      "role": "User"
+                       }), 200
 
 
 

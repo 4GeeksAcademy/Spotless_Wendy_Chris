@@ -122,18 +122,15 @@ export const Home = () => {
 			</Link>
 
 
-<<<<<<< HEAD
+
 			<Link to='/wdashboard'>
-				<button type="button" className="btn btn-secondary" >a Link to worker dashboard</button><br /><br /><br />
-=======
-<Link to='/wdashboard'>
-	<button type="button" className="btn btn-secondary" >Link to worker dashboard</button><br/><br/><br/>
->>>>>>> ac4331016b69c8b9a7f68442a4cceaa83d18461b
+				<button type="button" className="btn btn-secondary" >Link to worker dashboard</button><br /><br /><br />
+
 
 			</Link>
 
 			<Link to='/addlisting'>
-				<button type="button" className="btn btn-secondary" >Go to listing</button><br/><br/><br/>
+				<button type="button" className="btn btn-secondary" >Go to listing</button><br /><br /><br />
 
 			</Link>
 

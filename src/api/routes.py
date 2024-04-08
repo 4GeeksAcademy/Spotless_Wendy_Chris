@@ -2,11 +2,9 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-<<<<<<< HEAD
-from api.models import db, User, Worker, Property, Payment, Listing
-=======
+
 from api.models import db, User, Worker, Property, Payment, Listing, Schedule
->>>>>>> ac4331016b69c8b9a7f68442a4cceaa83d18461b
+
 from sqlalchemy.orm import joinedload
 from sqlalchemy.orm import relationship, attributes
 from api.utils import generate_sitemap, APIException

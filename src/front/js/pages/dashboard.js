@@ -12,19 +12,13 @@ export const Dashboard = () => {
   const { store, actions } = useContext(Context);
   const { currentUser, myProperties, setMyProperties, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
 
-<<<<<<< HEAD
+
   const navigate = useNavigate();
   const [listingNote, setListingNote] = useState('');
   const [listingDate, setListingDate] = useState('');
-  const [listingId, setListingId] = useState(null);
+  const [listingId, setListingId] = useState({});
+  const [dateN, setDateN] = useState('');
 
-=======
-    const navigate = useNavigate();
-    const [listingNote, setListingNote] = useState('');
-    const [listingDate, setListingDate] = useState('');
-    const [listingId, setListingId] = useState({});
-    const [dateN, setDateN] = useState('');
->>>>>>> ac4331016b69c8b9a7f68442a4cceaa83d18461b
 
 
   useEffect(() => {
@@ -43,16 +37,13 @@ export const Dashboard = () => {
         newArray.forEach((el) => {
           let each_property = {};
           let all_img = el.img.split("  ");
-<<<<<<< HEAD
 
-=======
->>>>>>> ac4331016b69c8b9a7f68442a4cceaa83d18461b
           each_property = el;
           each_property.image1 = all_img[0];
           each_property.image2 = all_img[1];
           each_property.image3 = all_img[2];
           finalProperty.push(each_property);
-       
+
         })
         setMyProperties(finalProperty);
       })
@@ -90,7 +81,7 @@ export const Dashboard = () => {
           each_property.image2 = all_img[1];
           each_property.image3 = all_img[2];
           finalProperty.push(each_property);
-        
+
 
         })
         setMyProperties(finalProperty);
@@ -99,102 +90,35 @@ export const Dashboard = () => {
       .catch(error => console.log(error));
   }
 
-<<<<<<< HEAD
 
-  function pop_modal_function(id_of_property) {
-    console.log('this function was called')
+  function pop_modal_function(property_obj) {
+
     const dialog = document.getElementById('modal_dialog');
     dialog.showModal();
-    setListingId(id_of_property);
+    setListingId(property_obj);
   }
 
-
   function close_modal_function() {
-    console.log('Close Function was called');
     const dialog = document.getElementById('modal_dialog');
-    setListingId(null);
+    setListingDate('');
+    setListingNote('');
+    setListingId({});
     dialog.close();
   }
 
 
-  function get_specialNote_function(val) {
-    let note = val.target.value;
-    setListingNote(note)
 
-  }
 
-  function get_date_needed_function(val) {
-    let date_needed = val.target.value;
-    setListingDate(date_needed);
 
-  }
 
   function save_modal_function(id) {
 
+
     if (listingDate.length > 5) {
-=======
-function pop_modal_function(property_obj){
- 
-  const dialog = document.getElementById('modal_dialog');
-  dialog.showModal();
-  setListingId(property_obj);
-}
 
-function close_modal_function(){
-  const dialog = document.getElementById('modal_dialog');
-  setListingDate('');
-  setListingNote('');
-  setListingId({});
-  dialog.close();
-}
+      let price_for_listing = (listingId.bath * 15) + (listingId.beds * 10);
+      let new_listing = { property_id: listingId.id, special_note: listingNote, date_needed: listingDate, rate: price_for_listing };
 
-
-
-
-
-
-function save_modal_function(id){
-
-
- if( listingDate.length>5){
-
- let price_for_listing= (listingId.bath * 15)+(listingId.beds * 10);
-let new_listing= {property_id: listingId.id, special_note:listingNote, date_needed: listingDate, rate : price_for_listing};
- 
-fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
-   {
-       method: 'POST',
-       body:JSON.stringify(new_listing),
-       headers: {
-           'Content-Type': 'application/json'
-       }
-   })
-   .then(res => {
-       if (!res.ok) console.log(res.statusText);
-       return res.json();
-   })
-   .then(response => {
-       console.log(response)
-
-   })
-
-   .catch(error => console.log(error));
-setListingDate('');
-setListingNote('');
-   const dialog = document.getElementById('modal_dialog');
-   dialog.close();
-
-  }
-  else{
-    const dialog = document.getElementById('modal_dialog');
-   dialog.close();
-  }
-
-  }
->>>>>>> ac4331016b69c8b9a7f68442a4cceaa83d18461b
-
-
-      let new_listing = { property_id: listingId, special_note: listingNote, date_needed: listingDate };
       fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
         {
           method: 'POST',
@@ -215,17 +139,16 @@ setListingNote('');
         .catch(error => console.log(error));
       setListingDate('');
       setListingNote('');
-      const dialog = document.getElementById('modal');
+      const dialog = document.getElementById('modal_dialog');
       dialog.close();
-
 
     }
     else {
-      const dialog = document.getElementById('modal');
+      const dialog = document.getElementById('modal_dialog');
       dialog.close();
     }
-  }
 
+  }
 
   return (
     <div>
@@ -240,36 +163,27 @@ setListingNote('');
 
           <div class="card text-secondary" style={{ width: "18rem" }}>
 
-<<<<<<< HEAD
-
-
-
             <div id="slideshow">
               <div className="jump_div">
                 <Link to='/demo'>
-                  <span><i class="fa-solid fa-arrow-up-right-from-square fa-xl"></i></span>
+                  <span><i class="fa-solid fa-arrow-up-right-from-square fa-fade fa-xl"></i></span>
                 </Link>
               </div>
 
               <div class="slide-wrapper">
-
                 <div class="slide"><img src={element.image1} class="slide-number w-100" /></div>
                 <div class="slide"><img src={element.image2} class="slide-number w-100" /></div>
                 <div class="slide"><img src={element.image3} class="slide-number w-100" /></div>
                 <div class="slide"><img src={element.image1} class="slide-number w-100" /></div>
-
-
               </div>
             </div>
-
-
 
             <div class="card-body">
               <h5 class="card-title">{element.name}</h5>
               <p class="card-text">Address: {element.address}<br />
                 City: {element.city}</p>
               <div className="d-flex justify-content-between">
-                <button class="button-24" role="button" onClick={() => pop_modal_function(element.id)}>Add to Listing</button>
+                <button class="button-24" role="button" onClick={() => pop_modal_function(element)}>Add to Listing</button>
                 <button className="btn" onClick={() => delete_property(element.id)}>
                   <i className="fas fa-trash-alt fa-bounce fa-xl" />
                 </button>
@@ -277,91 +191,52 @@ setListingNote('');
 
             </div>
           </div>
-=======
-            <div id="slideshow">
-            <div className="jump_div">
-                  <Link to='/demo'>
-                  <span><i class="fa-solid fa-arrow-up-right-from-square fa-fade fa-xl"></i></span>
-                  </Link>
-                  </div>
 
-  <div class="slide-wrapper">
-    <div class="slide"><img src={element.image1} class="slide-number w-100"/></div>
-    <div class="slide"><img src={element.image2} class="slide-number w-100"/></div>
-    <div class="slide"><img src={element.image3} class="slide-number w-100"/></div>
-    <div class="slide"><img src={element.image1} class="slide-number w-100"/></div> 
-  </div>
-</div>
- 
-  <div class="card-body">
-    <h5 class="card-title">{element.name}</h5>
-    <p class="card-text">Address: {element.address}<br/>
-      City: {element.city}</p>
-      <div className="d-flex justify-content-between">
-      <button class="button-24" role="button" onClick={()=>pop_modal_function(element)}>Add to Listing</button>
-      <button className="btn" onClick={() =>delete_property(element.id)}> 
-               <i className="fas fa-trash-alt fa-bounce fa-xl" />
-                   </button> 
+        )}
+
+
       </div>
-   
-  </div>
-</div>
->>>>>>> ac4331016b69c8b9a7f68442a4cceaa83d18461b
-
-    )}
 
 
-<<<<<<< HEAD
-      </div>
+      <dialog id="modal_dialog" class="card-body border-light rounded">
+        <div class="row gx-3 mb-3">
+          <div class="col-2 d-flex align-items-center">
+            <label class="medium mb-1" for="inputdate">Date</label>
+          </div>
+
+          <div class="col-9">
+            <input class="form-control" id="inputdate" type="text" onChange={(e) => { setListingDate(e.target.value) }} placeholder="Enter your date" value={listingDate} />
+          </div>
+        </div>
+
+        <div className="row mb-3">
+          <div class="col-2 d-flex align-items-center">
+            <label class="medium mb-1" for="inputnote">Note</label>
+          </div>
+
+          <div class="col-9">
+
+            <textarea class="form-control" id="inputnote" type="text" onChange={(e) => { setListingNote(e.target.value) }} placeholder="Enter your note" value={listingNote} />
+          </div>
+          <div class="col"> </div>
+        </div>
+
+        <div className="row mb-3">
+          <div class="col d-flex align-items-center">
+            <button className="btn btn-secondary text-md" onClick={() => close_modal_function()}>Close</button>
+
+          </div>
+          <div className="col"></div>
+
+          <div class="col">
+            <button className="button-24" onClick={() => save_modal_function()}>Save </button>
+          </div>
+        </div>
+
+      </dialog>
+
 
     </div>
+
   );
 };
-=======
-</div>
-
-
-<dialog id="modal_dialog"  class="card-body border-light rounded"> 
-            <div class="row gx-3 mb-3">
-            <div class="col-2 d-flex align-items-center">
-                    <label class="medium mb-1" for="inputdate">Date</label>
-                   </div>
-
-                <div class="col-9">             
-                     <input class="form-control" id="inputdate" type="text" onChange={(e) => { setListingDate(e.target.value) }} placeholder="Enter your date" value={listingDate} />
-                </div>
-            </div>
-
-            <div className="row mb-3">
-            <div class="col-2 d-flex align-items-center">
-            <label class="medium mb-1" for="inputnote">Note</label>
-                   </div>
-            
-            <div class="col-9">
-                 
-                <textarea class="form-control" id="inputnote" type="text" onChange={(e) => { setListingNote(e.target.value) }} placeholder="Enter your note" value={listingNote}/>
-            </div>
-            <div class="col"> </div>
-            </div>
-
-            <div className="row mb-3">
-            <div class="col d-flex align-items-center">
-            <button className="btn btn-secondary text-md" onClick={()=>close_modal_function()}>Close</button>
-           
-                   </div>
-                   <div className="col"></div>
-            
-            <div class="col">
-            <button className="button-24" onClick={()=>save_modal_function()}>Save </button> 
-                </div>
-            </div>
-            
-</dialog>
-
-
-</div>
-
-	);
-};
-
->>>>>>> ac4331016b69c8b9a7f68442a4cceaa83d18461b
