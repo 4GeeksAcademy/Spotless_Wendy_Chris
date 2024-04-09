@@ -12,6 +12,7 @@ import { EditProfile } from "./editprofile";
 import { StaticProfile } from "../component/staticprofile";
 import { WDashboard } from "./workerdashboard";
 import { WSchedule } from "./wschedule";
+import { MyPayments } from "../component/mypayments";
 
 
 export const Landing = () => {
@@ -23,7 +24,7 @@ export const Landing = () => {
     const { currentUser, setCurrentUser, token, setToken, role, setRole,
         myProperties, setMyProperties,
         display, setDisplay, filterListings, setFilterListings,
-        menu, setMenu
+        menu, setMenu, myListings, setMyListings
 
     } = useContext(AppContext);
 
@@ -59,6 +60,16 @@ export const Landing = () => {
         setRole("Worker")
 
     }
+
+
+    const scheduledPaymentDue = myListings.filter((elm) => elm.status == "Scheduled");
+    console.log("scheduledPayment Due filter results:")
+    console.log(scheduledPaymentDue)
+    console.log("Status result:")
+    console.log(filterListings)
+
+
+
 
 
     return (
@@ -119,7 +130,11 @@ export const Landing = () => {
                             >My History</div>
                             <div className={`col-12 border-bottom border-dark
                             ${menu == "payments" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("payments")}
+                                onClick={() => {
+                                    setDisplay("payments")
+                                    setMenu("payments")
+                                }
+                                }
                             >My Payments</div>
                         </div>
                     </div>
@@ -129,7 +144,19 @@ export const Landing = () => {
                         style={menu == "listings" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
-                            <div className="col-3"></div>
+                            <div className="col-3">
+                                <span className="paymentAlert"
+                                    style={scheduledPaymentDue.length >= 1 ? { display: "block" } : { display: "none" }}
+                                    onClick={() => {
+                                        setDisplay("payments")
+                                        setMenu("payments")
+                                    }
+                                    }
+
+                                >
+                                    <i class="fa-solid fa-bell px-3"></i>Payments due!
+                                </span>
+                            </div>
                             <div className="col-6"
                             >My Listings</div>
                             <div className="col-3">
@@ -145,8 +172,8 @@ export const Landing = () => {
                                             onClick={() => setFilterListings("Scheduled")}
                                         >Status Scheduled</li>
                                         <li className="myListLink"
-                                            onClick={() => setFilterListings("Warning")}
-                                        >Status Warning!</li>
+                                            onClick={() => setFilterListings("Complete")}
+                                        >Status Complete</li>
                                     </ul>
                                 </div>
 
@@ -214,7 +241,25 @@ export const Landing = () => {
                     {/* Payments Body for "User" Below  */}
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "payments" ? { display: "block" } : { display: "none" }}
-                    >My Payments
+                    >
+                        <div className="row d-flex justify-content-center pt-1 mb-2">
+                            <div className="col-3"></div>
+                            <div className="col-6">My Payments</div>
+                            <div className="col-3"><span className="button-24 me-3 mt-1"
+                                style={display == "payments" ? { display: "block" } : { display: "none" }}
+                                onClick={() => setDisplay("paymentHistory")}
+                            >Payment History</span>
+                                <span className="button-24 me-3 mt-1"
+                                    style={display == "paymentHistory" ? { display: "block" } : { display: "none" }}
+                                    onClick={() => setDisplay("payments")}
+                                >Back to My Payments</span></div>
+                        </div>
+                        <div
+                            style={display == "payments" ? { display: "block" } : { display: "none" }}
+                        ><MyPayments /></div>
+                        <div
+                            style={display == "paymentHistory" ? { display: "block" } : { display: "none" }}
+                        >Payment History Will Go Here</div>
                     </div>
                 </div>
             </div>

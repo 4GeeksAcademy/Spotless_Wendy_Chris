@@ -64,15 +64,15 @@ export const WDashboard = () => {
 
     let which_filter = val.currentTarget.innerText;
     if (which_filter == 'City (A-Z)') {
-      let test = [...myListings];
+      let test = [...workerListings];
       let final = test.toSorted(sortCity);
-      setMyListings(final);
+      setWorkerListings(final);
 
     }
     else if (which_filter == 'Price: (High to Low)') {
-      let test = [...myListings];
+      let test = [...workerListings];
       let final = test.toSorted(sortPrice);
-      setMyListings(final);
+      setWorkerListings(final);
     }
     else {
       console.log('Nothing to do yet')
@@ -128,7 +128,7 @@ export const WDashboard = () => {
       </div>
 
 
-      <div className="dropdown mb-3 ">
+      <div className="dropdown mb-3 text-start">
         <button
           className="btn btn-secondary mb-2 dropdown-toggle"
           type="button"

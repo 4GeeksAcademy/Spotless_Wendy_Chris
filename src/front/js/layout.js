@@ -12,6 +12,7 @@ import { Dashboard } from "./pages/dashboard";
 import { WSchedule } from "./pages/wschedule";
 import { StaticProfile } from "./component/staticprofile";
 import { Ratings } from "./component/ratings";
+import { MyPayments } from "./component/mypayments";
 
 import { WDashboard } from "./pages/workerdashboard";
 import { EditProfile } from "./pages/editprofile";
@@ -51,7 +52,7 @@ const Layout = () => {
         "billing": null,
         "email": "test@test.com",
         "full_name": "test",
-        "id": 2,
+        "id": 1,
         "img": null,
         "phone": "9994445555"
     })
@@ -90,6 +91,7 @@ const Layout = () => {
                             <Route element={<Ratings />} path="ratings" />
                             <Route element={<AddListing />} path="/addlisting" />
                             <Route element={<MyListings />} path="/mylistings" />
+                            <Route element={<MyPayments />} path="/mypayments" />
                             <Route element={<AddProperty />} path="/addproperty" />
                             <Route element={<Demo />} path="/demo" />
                             <Route element={<Single />} path="/single/:theid" />
