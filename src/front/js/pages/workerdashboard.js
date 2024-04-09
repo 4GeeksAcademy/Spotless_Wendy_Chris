@@ -11,7 +11,10 @@ export const WDashboard = () => {
 
   const { store, actions } = useContext(Context);
 
-  const { currentUser, myProperties, setMyProperties, workerListings, setWorkerListings, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
+  const { currentUser, myProperties, setMyProperties, workerListings, setWorkerListings, setCurrentUser, token, setToken, role, setRole,
+    display, setDisplay, menu, setMenu
+
+  } = useContext(AppContext);
   const navigate = useNavigate();
 
 
@@ -116,7 +119,12 @@ export const WDashboard = () => {
     <div>
 
       <div className="add_property_class_div">
-        <button className="test button-24" onClick={() => navigate("/wschedule")}>My Schedule</button>
+        <button className="test button-24"
+          onClick={() => {
+            setDisplay("mySchedule")
+            setMenu("mySchedule")
+          }}
+        >My Schedule</button>
       </div>
 
 

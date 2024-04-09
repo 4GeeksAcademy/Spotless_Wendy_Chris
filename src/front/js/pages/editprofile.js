@@ -6,7 +6,10 @@ import { AppContext } from "../layout";
 
 
 export const EditProfile = () => {
-    const { currentUser, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
+    const { currentUser, setCurrentUser, token, setToken, role, setRole,
+        display, setDisplay
+
+    } = useContext(AppContext);
     const navigate = useNavigate();
 
     const [tempF, setTempF] = useState('');
@@ -77,11 +80,13 @@ export const EditProfile = () => {
 
             }
 
-            setTempE('');
-            setTempP('');
-            setTempF('');
+            // setTempE('');
+            // setTempP('');
+            // setTempF('');
             setTempPA('');
             setTempNPA('');
+            setDisplay("myProfile")
+
 
             let url_enpoint = "/api/update/profile/" + currentUser.id;
 
@@ -110,10 +115,6 @@ export const EditProfile = () => {
 
 
         <div className="card-body">
-
-
-            <div className="d-flex justify-content-end"> <button className="button-24" onClick={() => { navigate('/') }}>Back to my dashboard</button> </div>
-
             <div className="row gx-3 mb-3">
 
                 <div className="col-2 d-flex align-items-center">
