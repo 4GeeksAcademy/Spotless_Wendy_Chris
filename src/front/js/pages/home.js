@@ -129,8 +129,8 @@ export const Home = () => {
 
 			</Link>
 
-			<Link to='/addlisting'>
-				<button type="button" className="btn btn-secondary" >Go to listing</button><br /><br /><br />
+			<Link to='/whistory'>
+				<button type="button" className="btn btn-secondary" >worker History</button><br /><br /><br />
 
 			</Link>
 

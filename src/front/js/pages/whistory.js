@@ -5,13 +5,13 @@ import "../../styles/wdashboard.css";
 import { AppContext } from "../layout";
 import {  Link, useNavigate } from "react-router-dom";
 
-export const WSchedule= () => {
+export const WHistory= () => {
 
-  const { store, actions } = useContext(Context);
+  const { store, actions} = useContext(Context);
  
   const { currentUser, myProperties, setMyProperties,workerListings, setWorkerListings, myListings, setMyListings, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
-    const navigate = useNavigate();
-const[wSchedule, setWSchedule]= useState([]);
+  const navigate = useNavigate();
+  const[myWHistory, setMyWHistory]= useState([]);
 
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const[wSchedule, setWSchedule]= useState([]);
       .then(response => {
         console.log('this is the history we got for this worker : ')
         console.log(response)
-        setWSchedule(response); 
+        setMyWHistory(response); 
 
       })
 
@@ -39,14 +39,17 @@ const[wSchedule, setWSchedule]= useState([]);
     <div> 
 
 <div className="add_property_class_div">
-      <button className="test button-24"  onClick={()=>navigate("/wdashboard")}>Listing</button>
+      <button className="test button-24"  onClick={()=>navigate("/schedule")}>Schedule</button>
       </div>
     
      <div>
+      <div className="d-flex justify-content-center">
+        <h3>Activity</h3>
+      </div>
   
   <ul>
 
-  {WSchedule.map((element) =>
+  {myWHistory.map((element) =>
 
     <li>
     
@@ -54,7 +57,7 @@ const[wSchedule, setWSchedule]= useState([]);
 
 <div className=" d-flex  justify-content-between pt-2 ">
 
-      <div className="city_address_div mx-2  ">
+      <div className="city_address_div mx-4  ">
       <h4>{element.city}</h4>
       <span> {element.address}</span>
         </div>
@@ -62,12 +65,12 @@ const[wSchedule, setWSchedule]= useState([]);
         <div className="date_div mx-4 pr-4 ">
    <span>{element.date_needed}</span>
         </div>
+
         <div className="note_rate_div mx-4 pr-2">
-   <span>{element.special_note}</span><br/>
    <span>Quote : {element.rate}$</span>
         </div>
 
-        <div className="d-flex align-items-center mx-4 mr-2">
+        <div className="d-flex align-items-center mx-4">
             <span>Status: Completed</span>
              </div>
 
@@ -76,8 +79,7 @@ const[wSchedule, setWSchedule]= useState([]);
           
       </div>
        
-      
-     
+    
     </li>
   )}
   

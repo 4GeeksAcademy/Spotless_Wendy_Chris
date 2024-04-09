@@ -1,3 +1,6 @@
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+
+
 
 .dropdown:hover>.dropdown-menu {
   display: block;
@@ -7,7 +10,10 @@
   /*Without this, clicking will make it sticky*/
     pointer-events: none;
 }
+*{
+  font-family: "Pacifico", cursive;
 
+}
 
 .city_address_div{
   width: 25%;

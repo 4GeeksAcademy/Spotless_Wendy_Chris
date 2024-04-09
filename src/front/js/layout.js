@@ -18,6 +18,7 @@ import { WDashboard } from "./pages/workerdashboard";
 import { EditProfile } from "./pages/editprofile";
 
 import { MyListings } from "./component/mylistings";
+import { WHistory } from "./pages/whistory";
 
 
 import { AddListing } from "./pages/addlisting";
@@ -89,6 +90,7 @@ const Layout = () => {
                             <Route element={<EditProfile />} path="/editprofile" />
                             <Route element={<Landing />} path="/landing" />
                             <Route element={<Ratings />} path="ratings" />
+                            <Route element={<WHistory />} path="/whistory" />
                             <Route element={<AddListing />} path="/addlisting" />
                             <Route element={<MyListings />} path="/mylistings" />
                             <Route element={<MyPayments />} path="/mypayments" />

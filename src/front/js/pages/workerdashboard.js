@@ -35,14 +35,12 @@ export const WDashboard = () => {
           each_listing = el;
           let all_img = el.img.split(" ");
           each_listing.image1 = all_img[0];
-
           formatted_Listing.push(each_listing);
-
 
         })
 
         setWorkerListings(formatted_Listing);
-        console.log("Worker Dashboard custom listing")
+        console.log("Worker Dashboard  listing below : ")
         console.log(formatted_Listing);
 
       })
@@ -145,8 +143,6 @@ export const WDashboard = () => {
         </ul>
       </div>
 
-
-
       <div>
 
         <ul>
@@ -182,8 +178,6 @@ export const WDashboard = () => {
                 </div>
 
               </div>
-
-
 
             </li>
           )}
