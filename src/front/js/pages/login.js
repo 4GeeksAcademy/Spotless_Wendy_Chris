@@ -40,7 +40,7 @@ export const Login = () => {
 			password: userP
 		}
 
-		fetch('https://crispy-computing-machine-x99vw9x6gvjf94v-3001.app.github.dev/token', {
+		fetch(process.env.BACKEND_URL + "/token", {
 			method: 'POST',
 			body: JSON.stringify(log_info),
 			headers: {
