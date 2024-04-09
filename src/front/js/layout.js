@@ -45,12 +45,13 @@ const Layout = () => {
     const [myProperties, setMyProperties] = useState([])
     const [filterListings, setFilterListings] = useState("Active")
     const [currentUser, setCurrentUser] = useState({
-        email: "test@test.com",
-        full_name: "Host1",
-        id: 1,
-        phone: "6789995555",
-        role: "User",
-        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMjU4Nzg3NSwianRpIjoiYWIwNTc0YzQtNTk3OC00YzRkLTllZjctNTliZDlhOTJhMjYyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzEyNTg3ODc1LCJjc3JmIjoiODYxNzljMDgtOGUwYy00YjkxLTgwYTMtODRlMjFkNDhlNjE0IiwiZXhwIjoxNzEyNTg4Nzc1fQ.k9DLEkXCshOoZzOGZap18OnbNbm-aMg5KmETWiDPRlY"
+        "address": null,
+        "billing": null,
+        "email": "test@test.com",
+        "full_name": "test",
+        "id": 1,
+        "img": null,
+        "phone": "9994445555"
     })
 
 
