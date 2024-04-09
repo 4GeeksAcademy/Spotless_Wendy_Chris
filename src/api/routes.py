@@ -187,6 +187,7 @@ def add_to_schedule():
 
 
 
+
 # Cancel schedule for a specific worker below
 @api.route('/worker/schedule/<ids>/cancel/<idl>', methods=['POST'])
 def cancel_schedule(ids,idl):
@@ -197,8 +198,6 @@ def cancel_schedule(ids,idl):
     return jsonify(f"Success")
    
      
-
-
 
 # Complete schedule 
 @api.route('/worker/schedule/<ids>/complete/<idl>', methods=['POST'])

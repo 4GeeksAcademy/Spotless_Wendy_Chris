@@ -35,14 +35,12 @@ export const WDashboard = () => {
           each_listing = el;
           let all_img = el.img.split(" ");
           each_listing.image1 = all_img[0];
-
           formatted_Listing.push(each_listing);
-
 
         })
 
         setWorkerListings(formatted_Listing);
-        console.log("Worker Dashboard custom listing")
+        console.log("Worker Dashboard  listing below : ")
         console.log(formatted_Listing);
 
       })
@@ -64,15 +62,15 @@ export const WDashboard = () => {
 
     let which_filter = val.currentTarget.innerText;
     if (which_filter == 'City (A-Z)') {
-      let test = [...myListings];
+      let test = [...workerListings];
       let final = test.toSorted(sortCity);
-      setMyListings(final);
+      setWorkerListings(final);
 
     }
     else if (which_filter == 'Price: (High to Low)') {
-      let test = [...myListings];
+      let test = [...workerListings];
       let final = test.toSorted(sortPrice);
-      setMyListings(final);
+      setWorkerListings(final);
     }
     else {
       console.log('Nothing to do yet')
@@ -145,8 +143,6 @@ export const WDashboard = () => {
         </ul>
       </div>
 
-
-
       <div>
 
         <ul>
@@ -182,8 +178,6 @@ export const WDashboard = () => {
                 </div>
 
               </div>
-
-
 
             </li>
           )}
