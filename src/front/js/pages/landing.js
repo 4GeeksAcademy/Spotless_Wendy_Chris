@@ -129,7 +129,10 @@ export const Landing = () => {
                         style={menu == "listings" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
-                            <div className="col-3"></div>
+                            <div className="col-3"><span className="paymentAlert">
+                                <i class="fa-solid fa-bell px-3"></i>Payments due!
+                            </span>
+                            </div>
                             <div className="col-6"
                             >My Listings</div>
                             <div className="col-3">
