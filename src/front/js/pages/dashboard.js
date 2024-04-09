@@ -113,7 +113,6 @@ export const Dashboard = () => {
 
   function save_modal_function(id) {
 
-
     if (listingDate.length > 5) {
 
       let price_for_listing = (listingId.bath * 15) + (listingId.beds * 10);
@@ -151,6 +150,7 @@ export const Dashboard = () => {
   }
 
   return (
+    
     <div>
 
       <div class="product-list-container">
