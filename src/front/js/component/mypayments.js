@@ -115,22 +115,29 @@ export const MyPayments = () => {
                                 return (<>
                                     <ul>
                                         <li key={elm.id}>
-                                            <div className="listing_div">
-                                                <div className="d-flex  justify-content-between ">
-                                                    <img src={elm.image1} className="img_listing" />
-                                                    <div className="">
-                                                        <h4>{elm.city}</h4>
-                                                        <span> {elm.address}</span>
+                                            <div className="payments_div mt-2">
+                                                <div className="row d-flex  justify-content-between">
+                                                    <div className="col-3">
+                                                        <img src={elm.image1} className="img_payments" />
                                                     </div>
-                                                    <div className="">
-                                                        <span>{elm.date_needed}</span>
-                                                    </div>
-                                                    <div className="">
-                                                        <button className="button-24" onClick={() => { }}>Pay ${elm.rate}</button>
+                                                    <div className="col-9">
+                                                        <div className="row">
+                                                            <div className="col-6 pt-1">
+                                                                <h4>{elm.city}</h4>
+                                                            </div>
+                                                            <div className="col-6 pt-1">
+                                                                <span>Scheduled Date: {elm.date_needed}</span>
+                                                            </div>
+                                                            <div className="col-6 pt-2 fs-3">{elm.name}</div>
+                                                            <div className="col-6 pt-2 fs-3">
+                                                                <button className="button-24 payment_button" onClick={() => { }}>Pay ${elm.rate}</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </li></ul>
+
+                                        </li></ul >
                                 </>
                                 )
                             }) : <div>There are no payments due</div>
@@ -138,6 +145,6 @@ export const MyPayments = () => {
                     }
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
