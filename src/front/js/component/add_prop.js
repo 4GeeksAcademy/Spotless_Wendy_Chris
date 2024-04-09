@@ -13,7 +13,7 @@ export const AddProperty = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [state, setState] = useState("")
-    const [img, setImg] = useState("")
+    const [img, setImg] = useState("https://cdn.pixabay.com/photo/2022/08/03/16/26/prairie-7362991_1280.jpg")
     const [bath, setBath] = useState(0)
     const [beds, setBeds] = useState(0)
     const [address, setAddress] = useState("")
@@ -63,7 +63,7 @@ export const AddProperty = () => {
                     console.log('test begins here')
                     console.log(finalProperty);
                 })
-                setMyProperties(finalProperty)
+                // setMyProperties(finalProperty)
                 setName("")
                 setState("")
                 setCity("")

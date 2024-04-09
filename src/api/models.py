@@ -67,7 +67,7 @@ class Property(db.Model):
     state = db.Column(db.String(120), nullable=False)
     beds = db.Column(db.Integer, nullable=False)
     bath = db.Column(db.Integer, nullable=False)
-    img = db.Column(db.String(10000), unique=False, nullable=True)
+    img = db.Column(db.String(10000), unique=False, nullable=True, default="https://cdn.pixabay.com/photo/2018/05/31/15/06/see-no-evil-3444212_1280.jpg")
     address = db.Column(db.String(120), unique=False, nullable=True)
     user_link = db.relationship('User')
         
@@ -95,15 +95,9 @@ class Property(db.Model):
 class Listing(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     property_id = db.Column(db.Integer, db.ForeignKey('property.id'), nullable=False)
-<<<<<<< HEAD
     date_needed = db.Column(db.String(120), nullable=False)
     special_note = db.Column(db.String(300), nullable=True)
     status = db.Column(db.String(100), nullable=True, default="Active")
-=======
-    status = db.Column(db.String(300), nullable=True, default="Active")
-    date_needed = db.Column(db.String(120), nullable=False)
-    special_note = db.Column(db.String(300), nullable=True)    
->>>>>>> d8300206424536604f72a460e4c0882e60508522
     rate = db.Column(db.Integer, nullable=True)
     property_link = db.relationship('Property', backref='listing', lazy=True)
         
