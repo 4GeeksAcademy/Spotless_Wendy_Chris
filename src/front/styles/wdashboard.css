@@ -8,10 +8,23 @@
     pointer-events: none;
 }
 
+
+.city_address_div{
+  width: 25%;
+}
+
+.note_rate_div{
+  width: 55%;
+}
+
+.date_div{
+  width: 35%;
+}
+
 span, p{
   color: #f5eded;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size:15px;
+  font-size:20px;
 }
 
 h4{
@@ -55,6 +68,11 @@ h4{
     transform: translateX(5px);
     opacity: 1;
   }
+
+ h4:hover{
+  transform: scale(1.1)
+ }
+
   .test:hover {
     color: #262a2b;
   }
@@ -72,7 +90,7 @@ ul {
 }
 .img_listing{
   width: 200px;
-height: 80px;
+height: 100%;
 }
 
 
@@ -81,7 +99,7 @@ height: 80px;
   background: #31363F;
   display: flex;
   justify-content: space-between;
-  height: 80px;
+  height: 100px;
   width: 80%;
   display: flex;
   margin-left: 10%;
