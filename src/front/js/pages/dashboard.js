@@ -38,14 +38,14 @@ export const Dashboard = () => {
           let each_property = {};
           let all_img = el.img.split("  ");
 
-          each_property = el;
+          each_property = { ...el };
           each_property.image1 = all_img[0];
           each_property.image2 = all_img[1];
           each_property.image3 = all_img[2];
           finalProperty.push(each_property);
 
         })
-        setMyProperties(finalProperty);
+        // setMyProperties(finalProperty);
       })
 
       .catch(error => console.log(error));
@@ -152,16 +152,12 @@ export const Dashboard = () => {
 
   return (
     <div>
-      <div className="add_property_class_div">
-        <button class="button-24" role="button" onClick={() => navigate("/")}>Add New Property</button>
-      </div>
-
 
       <div class="product-list-container">
 
         {myProperties.map((element) =>
 
-          <div class="card text-secondary" style={{ width: "18rem" }}>
+          <div class="card text-secondary" style={{ width: "18rem" }} key={element.id}>
 
             <div id="slideshow">
               <div className="jump_div">

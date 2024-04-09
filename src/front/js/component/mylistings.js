@@ -26,7 +26,7 @@ export const MyListings = () => {
                 return res.json();
             })
             .then(response => {
-
+                console.log("Property all fetch response:")
                 console.log(response)
                 let newArray = [...response];
                 let finalProperty = [];
@@ -35,7 +35,7 @@ export const MyListings = () => {
                     let each_property = {};
                     let all_img = el.img.split("  ");
                     // console.log(all_img)
-                    each_property = el;
+                    each_property = { ...el };
                     each_property.image1 = all_img[0];
                     each_property.image2 = all_img[1];
                     each_property.image3 = all_img[2];
@@ -56,23 +56,24 @@ export const MyListings = () => {
                 return res.json();
             })
             .then(responseAsJson => {
-
+                console.log("response for listing from backend:")
                 console.log(responseAsJson)
-                let newArray = [...responseAsJson];
-                let finalProperty = [];
+                setMyListings(responseAsJson)
+                // let newArray = [...responseAsJson];
+                // let finalProperty = [];
 
-                newArray.forEach((el) => {
-                    let each_property = {};
-                    // let all_img = el.img.split("  ");
-                    // console.log(all_img)
-                    each_property = el;
-                    // each_property.image1 = all_img[0];
-                    // each_property.image2 = all_img[1];
-                    // each_property.image3 = all_img[2];
-                    finalProperty.push(each_property);
-                })
-                setMyListings(finalProperty);
+                // newArray.forEach((el) => {
+                //     let each_property = {};
+                //     // let all_img = el.img.split("  ");
+                //     // console.log(all_img)
+                //     each_property = el;
+                //     // each_property.image1 = all_img[0];
+                //     // each_property.image2 = all_img[1];
+                //     // each_property.image3 = all_img[2];
+                //     finalProperty.push(each_property);
             })
+
+
 
             .catch(error => console.log(error));
 
@@ -86,11 +87,12 @@ export const MyListings = () => {
     myProperties.map((element) => {
         myListings.forEach((elm) => {
             if (elm.property_id == element.id) {
-                let tempObj = element
-                tempObj.special_note = elm.special_note
-                tempObj.date_needed = elm.date_needed
-                tempObj.status = elm.status
+                let tempObj = { ...element };
+                tempObj.special_note = elm.special_note;
+                tempObj.date_needed = elm.date_needed;
+                tempObj.status = elm.status;
                 listingArray.push(tempObj)
+                console.log("tempObj", tempObj);
                 console.log("the matching elements")
                 console.log(listingArray)
             }
@@ -100,40 +102,83 @@ export const MyListings = () => {
     const results = listingArray.filter((elm) => elm.status == filterListings);
     console.log("filter results:")
     console.log(results)
+    console.log("Status result:")
     console.log(filterListings)
 
     return (
         <div>
             <div className="product-list-container">{
-                results.map((element) => {
-                    return (
-                        <div className="card text-secondary" style={{ width: "18rem" }} key={element.id}>
+                results.length < 1 && filterListings == "Active" ?
+                    listingArray.map((elm) => {
+                        return (<div className="card text-secondary" style={{ width: "18rem" }} key={elm.id}>
                             <div id="carouselExampleSlidesOnly" className="carousel slide h-50" data-bs-ride="carousel">
                                 <div className="carousel-inner" style={{ height: "10rem" }}>
+                                    <p className="card-text" style={elm.status == "Active" ? { display: "block" } : { display: "none" }}>
+                                        <i className="fa-solid fa-circle text-warning fs-3"></i> Pairing with Cleaner
+                                    </p>
+                                    <p className="card-text" style={elm.status == "Scheduled" ? { display: "block" } : { display: "none" }}>
+                                        <i className="fa-solid fa-circle text-success fs-3"></i> Cleaning Scheduled
+                                    </p>
                                     <div className="carousel-item active">
-                                        <img src={element.image1} className="d-block w-100 " alt="..." />
+                                        <img src={elm.image1} className="d-block w-100 " alt="..." />
                                     </div>
                                 </div>
                             </div>
                             <div className="card-body">
-                                <p className="card-title fs-5">{element.name}</p>
+                                <p className="card-title fs-5">{elm.name}</p>
                                 <p className="card-text"><u>Date Needed:</u><br />
-                                    {element.date_needed}</p>
+                                    {elm.date_needed}</p>
                                 <p className="card-text"><u>Special Instructions:</u><br />
-                                    {element.special_note}</p>
-                                <p className="card-text">
-                                    <p className="card-text" style={element.status == true ? { display: "block" } : { display: "none" }}>
-                                        <i className="fa-solid fa-circle text-warning fs-3"></i> Pairing with Cleaner
-                                    </p>
-                                    <p className="card-text" style={element.status == false ? { display: "block" } : { display: "none" }}>
-                                        <i className="fa-solid fa-circle text-success fs-3"></i> Cleaning Scheduled
-                                    </p>
+                                    {elm.special_note}</p>
+                                <div className="card-text">
                                     <p className="button-24">Cancel Cleaning</p>
-                                </p>
+                                </div>
                             </div>
+                        </div>)
+                    })
+
+                    :
+
+                    results.length < 1 && filterListings == "Warning" ?
+                        <div>
+                            <h3 className="py-2">You have no Urgent Listings</h3>
+                            <img className="my-3"
+                                src="https://media.tenor.com/Drpnp9bsTc4AAAAM/scrubs-elliot-reid.gif" />
                         </div>
-                    )
-                })
+
+                        :
+
+                        results.map((element) => {
+                            return (
+                                <div className="card text-secondary" style={{ width: "18rem" }} key={element.id}>
+                                    <div id="carouselExampleSlidesOnly" className="carousel slide h-50" data-bs-ride="carousel">
+                                        <div className="carousel-inner" style={{ height: "10rem" }}>
+                                            <div>
+                                                <p className="card-text" style={element.status == "Active" ? { display: "block" } : { display: "none" }}>
+                                                    <i className="fa-solid fa-circle text-warning fs-5"></i> Pairing with Cleaner
+                                                </p>
+                                                <p className="card-text" style={element.status == "Scheduled" ? { display: "block" } : { display: "none" }}>
+                                                    <i className="fa-solid fa-circle text-success fs-5"></i> Cleaning Scheduled
+                                                </p>
+                                            </div>
+                                            <div className="carousel-item active">
+                                                <img src={element.image1} className="d-block w-100 " alt="..." />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="card-body">
+                                        <p className="card-title fs-5">{element.name}</p>
+                                        <p className="card-text"><u>Date Needed:</u><br />
+                                            {element.date_needed}</p>
+                                        <p className="card-text"><u>Special Instructions:</u><br />
+                                            {element.special_note}</p>
+                                        <div className="card-text">
+                                            <p className="button-24">Cancel Cleaning</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
             }
             </div>
         </div>

@@ -126,37 +126,13 @@ def add_user_listing():
         db.session.commit()
     return jsonify(f"Success"), 200
 
-
-
-# Get listings for a single user 
-@api.route('/user/<int:id>/listing', methods=['GET'])
-def get_user_listing(id):
-    get_user_properties = Property.query.filter_by(user_id=id)
-    properties = list(map(lambda x: x.serialize(), get_user_properties))
-    get_all_listings = Listing.query.all()
-    all_listings = list(map(lambda x: x.serialize(), get_all_listings))
-    id_list = []
-    user_listings = []
-    for listing in all_listings:         
-         property_id = listing["property_id"]
-         for property in properties:
-              if property["id"] == property_id:
-                   id_list.append(property["id"])
-                   single_listing= Listing.query.filter_by(property_id=property["id"]).first()
-                   user_listings.append(single_listing)
-    final_listings = list(map(lambda x: x.serialize(), user_listings))
-
-    return jsonify(final_listings), 200
-
-
-# Hey Chris! Below is the right version of the endpoint above with the right syntax to get listing of the current user. 
-       
-# @api.route('/user/<idc>/listing', methods=['GET'])
-# def get_user_listing(idc):
-#     get_property_of_user=db.session.query(Property.id).filter_by(user_id=idc).subquery()
-#     get_listing= Listing.query.filter(Listing.property_id.in_(get_property_of_user))
-#     all_listing= list(map(lambda x: x.serialize(), get_listing))
-#     return jsonify(all_listing), 200
+      
+@api.route('/user/<idc>/listing', methods=['GET'])
+def get_user_listing(idc):
+    get_property_of_user=db.session.query(Property.id).filter_by(user_id=idc).subquery()
+    get_listing= Listing.query.filter(Listing.property_id.in_(get_property_of_user))
+    all_listing= list(map(lambda x: x.serialize(), get_listing))
+    return jsonify(all_listing), 200
 
 
 # Update user or worker endpoint
@@ -183,32 +159,37 @@ def update_user_or_worker(id):
      
          
 
-# Add a new schedule for a specific worker below
+#Add a new schedule for a specific worker below
 @api.route('/worker/<id>/schedule/all', methods=['GET'])
 def get_worker_schedule(id):
 
-    get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Listing.special_note, Property.address, Property.city, Listing.rate FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property on Listing.property_id=Property.id where Listing.status='Active';")
-    all_schedule= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3], city=row[4], rate=row[5] ) for row in get_schedule.fetchall()]
-   
+    get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Listing.special_note, Property.address, Property.city, Listing.rate, Listing.id FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property on Listing.property_id=Property.id where Schedule.status='Pending';")
+    all_schedule= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3], city=row[4], rate=row[5], listing_id=row[6] ) for row in get_schedule.fetchall()]   
     return jsonify(all_schedule), 200
-
 
 
 # Add a new schedule for a specific worker below
 @api.route('/worker/schedule/new', methods=['POST'])
 def add_to_schedule():
     schedule_request=request.json
+    db.session.query(Listing).filter_by(id=schedule_request['listing_id']).update({"status":'Scheduled'})
+    db.session.commit()
     newS=Schedule(listing_id=schedule_request['listing_id'], worker_id=schedule_request['worker_id'])
     db.session.add(newS)
     db.session.commit()
+   
     return jsonify(f"Success"), 200
 
 
 # Add a new schedule for a specific worker below
-@api.route('/worker/schedule/<ids>/delete', methods=['DELETE'])
-def cancel_schedule(ids):
-    db.session.query(Schedule).get(ids).update({"status":'Cancelled'})
+@api.route('/worker/schedule/<ids>/cancel/<idl>', methods=['POST'])
+def cancel_schedule(ids,idl):
+    db.session.query(Listing).filter_by(id=idl).update({"status":'Active'})
     db.session.commit()
+    db.session.query(Schedule).filter_by(id=ids).update({"status":'Cancelled'})
+    db.session.commit()
+    return jsonify(f"Success")
+   
      
     
     return jsonify(f"Success"), 200

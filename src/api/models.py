@@ -8,6 +8,7 @@ class User(db.Model):
     full_name = db.Column(db.String(120), unique=False, nullable=False)
     phone = db.Column(db.String(120), unique=False, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
+
     address = db.Column(db.String(120), unique=False, nullable=True)
     img = db.Column(db.String(300), unique=False, nullable=True)
     billing = db.Column(db.String(300), unique=False)
@@ -22,6 +23,7 @@ class User(db.Model):
             "email": self.email,
             "full_name": self.full_name,
             "phone": self.phone,
+           
             "img": self.img,
             "billing": self.billing,
             "address": self.address
@@ -65,7 +67,7 @@ class Property(db.Model):
     state = db.Column(db.String(120), nullable=False)
     beds = db.Column(db.Integer, nullable=False)
     bath = db.Column(db.Integer, nullable=False)
-    img = db.Column(db.String(10000), unique=False, nullable=True)
+    img = db.Column(db.String(10000), unique=False, nullable=True, default="https://cdn.pixabay.com/photo/2018/05/31/15/06/see-no-evil-3444212_1280.jpg")
     address = db.Column(db.String(120), unique=False, nullable=True)
     user_link = db.relationship('User')
         
@@ -95,7 +97,7 @@ class Listing(db.Model):
     property_id = db.Column(db.Integer, db.ForeignKey('property.id'), nullable=False)
     date_needed = db.Column(db.String(120), nullable=False)
     special_note = db.Column(db.String(300), nullable=True)
-    status = db.Column(db.String(300), nullable=True, default="Active")
+    status = db.Column(db.String(100), nullable=True, default="Active")
     rate = db.Column(db.Integer, nullable=True)
     property_link = db.relationship('Property', backref='listing', lazy=True)
         
@@ -112,16 +114,14 @@ class Listing(db.Model):
             "status": self.status,
             "rate": self.rate
             # do not serialize the password, its a security breach
-        }
-    
+        }    
     
 
 
 class Schedule(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     listing_id = db.Column(db.Integer, db.ForeignKey('listing.id'), nullable=False)
-    worker_id = db.Column(db.Integer, db.ForeignKey('worker.id'), nullable=False)
-    date_time = db.Column(db.String(120), nullable=False)   
+    worker_id = db.Column(db.Integer, db.ForeignKey('worker.id'), nullable=False)  
     status = db.Column(db.String(120), default="Pending")
     review= db.Column(db.Integer, nullable=True)
     listing_link = db.relationship('Listing', backref='schedule', lazy=True)
@@ -136,8 +136,6 @@ class Schedule(db.Model):
             "id": self.id,
             "listing_id": self.listing_id,
             "worker_id": self.worker_id,
-            "date_time": self.date_time,
-            
             "status": self.status,
             "review": self.review
             # do not serialize the password, its a security breach

@@ -8,7 +8,7 @@ import { AppContext } from "../layout";
 
 
 export const Login = () => {
-	const { currentUser, setCurrentUser, token, setToken } = useContext(AppContext);
+	const { currentUser, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
 
 	const navigate = useNavigate();
 
@@ -62,21 +62,11 @@ export const Login = () => {
 
 			})
 			.then(() => {
-				navigate('/landing')
+				navigate('/landing');
+
 			})
 			.catch(error => console.log(error));
-
-		// }
-
-		// else {
-		//     alert('Please enter a valid username and/or password')
-		//     setUserE('')
-		//     setUserP('')
-		// }
-
-
 	}
-
 
 	function get_username(val) {
 		let test = val.target.value;
