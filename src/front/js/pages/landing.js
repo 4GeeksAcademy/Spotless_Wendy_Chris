@@ -20,6 +20,7 @@ export const Landing = () => {
 
 
     const { currentUser, setCurrentUser, token, setToken, role, setRole,
+        myProperties, setMyProperties,
         display, setDisplay, filterListings, setFilterListings
     } = useContext(AppContext);
 
@@ -125,14 +126,7 @@ export const Landing = () => {
                         <div className="row d-flex justify-content-center pt-1 mb-2">
                             <div className="col-3"></div>
                             <div className="col-6"
-                                style={filterListings == "Active" ? { display: "block" } : { display: "none" }}
-                            >My Pairing Listings</div>
-                            <div className="col-6"
-                                style={filterListings == "Scheduled" ? { display: "block" } : { display: "none" }}
-                            >My Scheduled Listings</div>
-                            <div className="col-6"
-                                style={filterListings == "Warning" ? { display: "block" } : { display: "none" }}
-                            >My URGENT Listings</div>
+                            >My Listings</div>
                             <div className="col-3">
                                 <div className="dropdown">
                                     <button className="btn button-24 dropdown-toggle me-3 mt-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

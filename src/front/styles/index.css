@@ -99,3 +99,7 @@
     color: rgb(255, 255, 255);
     text-shadow: 0 0 3px #000000;
 }
+
+.status {
+    padding: 1px 1px;
+}
