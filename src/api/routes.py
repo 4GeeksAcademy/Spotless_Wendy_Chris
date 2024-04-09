@@ -187,7 +187,6 @@ def add_to_schedule():
 
 
 
-
 # Cancel schedule for a specific worker below
 @api.route('/worker/schedule/<ids>/cancel/<idl>', methods=['POST'])
 def cancel_schedule(ids,idl):
@@ -209,8 +208,19 @@ def complete_schedule(ids,idl):
     return jsonify(f"Success")
    
 
+@api.route('/user/<idh>/schedule/history', methods=['GET'])
+def get_host_history(idh):
+    get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Property.name, Listing.rate, Listing.id, User.email FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property ON Listing.property_id=Property.id join user ON Property.user_id=User.id where Schedule.status='Complete' and User.id="+idh+" ;")
+    all_schedule= [dict(id=row[0], date_needed=row[1], name=row[2], rate=row[3], listing_id=row[4], email=row[5]) for row in get_schedule.fetchall()]   
+    return jsonify(all_schedule), 200
+     
 
-
+@api.route('/user/schedule/<ids>/review/new/<score>', methods=['GET'])
+def give_review_to_worker(ids, score):
+    db.session.query(Schedule).filter_by(id=ids).update({"review": score})
+    db.session.commit()
+    return jsonify(f"Success"), 200
+     
 
  
 # @api.route('/user/<idc>/listing/complete', methods=['GET'])
