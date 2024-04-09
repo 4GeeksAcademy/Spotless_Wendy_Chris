@@ -39,6 +39,8 @@ const Layout = () => {
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
 
+
+    const [menu, setMenu] = useState('listings')
     const [myListings, setMyListings] = useState([])
     const [workerListings, setWorkerListings] = useState([])
     const [display, setDisplay] = useState("")
@@ -71,7 +73,7 @@ const Layout = () => {
                     currentUser, setCurrentUser, token, setToken,
                     myListings, setMyListings, myProperties, setMyProperties,
                     role, setRole, display, setDisplay, filterListings, setFilterListings,
-                    workerListings, setWorkerListings
+                    workerListings, setWorkerListings, menu, setMenu
                 }
             }>
                 <BrowserRouter basename={basename}>
