@@ -28,8 +28,10 @@ export const History = () => {
     }, [currentUser.id]);
 
     return (
-        <div>
-            <h1>Completed Jobs</h1>
+        <div> 
+            <div className="card" style={{ width: "18rem" }}></div>
+            <div className="card-body"></div>
+            <h1 className="card-title">Completed Jobs</h1>
             {isLoading ? (
                 <p>Loading...</p>
             ) : (
@@ -46,3 +48,5 @@ export const History = () => {
         </div>
     );
 };
+
+
