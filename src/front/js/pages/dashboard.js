@@ -151,6 +151,7 @@ export const Dashboard = () => {
   }
 
   return (
+    
     <div>
       <div className="add_property_class_div">
         <button class="button-24" role="button" onClick={() => navigate("/")}>Add New Property</button>
