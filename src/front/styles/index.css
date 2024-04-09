@@ -140,3 +140,9 @@
   .paymentAlert:active {
 	opacity: .5;
   }
+
+
+  ul {
+    list-style-type: none;
+  }
+  
