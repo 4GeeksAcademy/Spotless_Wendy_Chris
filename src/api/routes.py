@@ -196,6 +196,25 @@ def cancel_schedule(ids,idl):
     db.session.query(Schedule).filter_by(id=ids).update({"status":'Cancelled'})
     db.session.commit()
     return jsonify(f"Success")
+
+
+# Mark Listing as Paid for a specific listing below
+@api.route('user/<idc>/listing/<idl>/paid', methods=['PUT'])
+def paid_listing(idc,idl):    
+    db.session.query(Listing).filter_by(id=idl).update({"status":'Paid'})
+    db.session.commit()  
+    get_property_of_user=db.session.query(Property.id).filter_by(user_id=idc).subquery()
+    get_listing= Listing.query.filter(Listing.property_id.in_(get_property_of_user))
+    all_listing= list(map(lambda x: x.serialize(), get_listing))
+    return jsonify(
+        {
+            "msg": "Successfully marked as paid",
+            "my_listings": all_listing
+        }
+        )
+
+
+
    
      
 

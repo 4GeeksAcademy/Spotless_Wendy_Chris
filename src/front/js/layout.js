@@ -12,6 +12,8 @@ import { Dashboard } from "./pages/dashboard";
 import { WSchedule } from "./pages/wschedule";
 import { StaticProfile } from "./component/staticprofile";
 import { Ratings } from "./component/ratings";
+import { MyPayments } from "./component/mypayments";
+import { HostHistory } from "./component/hosthistory";
 
 import { WDashboard } from "./pages/workerdashboard";
 import { EditProfile } from "./pages/editprofile";
@@ -27,6 +29,7 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { useState } from "react";
 import { AddProperty } from "./component/add_prop";
+import { History } from "./component/history";
 
 
 
@@ -84,6 +87,7 @@ const Layout = () => {
                             <Route element={<Login />} path="/login" />
                             <Route element={<Home />} path="/" />
                             <Route element={<Dashboard />} path="/dashboard" />
+                            <Route element={<HostHistory />} path="/hosthistory" />
                             <Route element={<WDashboard />} path="/wdashboard" />
                             <Route element={<WSchedule />} path="/wschedule" />
                             <Route element={<EditProfile />} path="/editprofile" />
@@ -92,7 +96,9 @@ const Layout = () => {
                             <Route element={<WHistory />} path="/whistory" />
                             <Route element={<AddListing />} path="/addlisting" />
                             <Route element={<MyListings />} path="/mylistings" />
+                            <Route element={<MyPayments />} path="/mypayments" />
                             <Route element={<AddProperty />} path="/addproperty" />
+                            <Route element={<History />} path="/history" />
                             <Route element={<Demo />} path="/demo" />
                             <Route element={<Single />} path="/single/:theid" />
                             <Route element={<h1>Not found!</h1>} />

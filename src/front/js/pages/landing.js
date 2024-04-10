@@ -12,6 +12,9 @@ import { EditProfile } from "./editprofile";
 import { StaticProfile } from "../component/staticprofile";
 import { WDashboard } from "./workerdashboard";
 import { WSchedule } from "./wschedule";
+import { MyPayments } from "../component/mypayments";
+import { WHistory } from "./whistory";
+import { HostHistory } from "../component/hosthistory";
 
 
 export const Landing = () => {
@@ -23,7 +26,7 @@ export const Landing = () => {
     const { currentUser, setCurrentUser, token, setToken, role, setRole,
         myProperties, setMyProperties,
         display, setDisplay, filterListings, setFilterListings,
-        menu, setMenu
+        menu, setMenu, myListings, setMyListings
 
     } = useContext(AppContext);
 
@@ -59,6 +62,16 @@ export const Landing = () => {
         setRole("Worker")
 
     }
+
+
+    const scheduledPaymentDue = myListings.filter((elm) => elm.status == "Scheduled");
+    console.log("scheduledPayment Due filter results:")
+    console.log(scheduledPaymentDue)
+    console.log("Status result:")
+    console.log(filterListings)
+
+
+
 
 
     return (
@@ -119,7 +132,11 @@ export const Landing = () => {
                             >My History</div>
                             <div className={`col-12 border-bottom border-dark
                             ${menu == "payments" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("payments")}
+                                onClick={() => {
+                                    setDisplay("payments")
+                                    setMenu("payments")
+                                }
+                                }
                             >My Payments</div>
                         </div>
                     </div>
@@ -129,7 +146,19 @@ export const Landing = () => {
                         style={menu == "listings" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
-                            <div className="col-3"></div>
+                            <div className="col-3 ps-5">
+                                <span className="paymentAlert ms-5"
+                                    style={scheduledPaymentDue.length >= 1 ? { display: "block" } : { display: "none" }}
+                                    onClick={() => {
+                                        setDisplay("payments")
+                                        setMenu("payments")
+                                    }
+                                    }
+
+                                >
+                                    <i class="fa-solid fa-bell fa-shake px-1 fs-3"></i>{scheduledPaymentDue.length}
+                                </span>
+                            </div>
                             <div className="col-6"
                             >My Listings</div>
                             <div className="col-3">
@@ -145,8 +174,8 @@ export const Landing = () => {
                                             onClick={() => setFilterListings("Scheduled")}
                                         >Status Scheduled</li>
                                         <li className="myListLink"
-                                            onClick={() => setFilterListings("Warning")}
-                                        >Status Warning!</li>
+                                            onClick={() => setFilterListings("Complete")}
+                                        >Status Complete</li>
                                     </ul>
                                 </div>
 
@@ -208,20 +237,38 @@ export const Landing = () => {
                     {/* History body for "User" Below  */}
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "history" ? { display: "block" } : { display: "none" }}
-                    >My History
+                    >
+                        <div className="row d-flex justify-content-center pt-1 mb-2">
+                            <div className="col-3"></div>
+                            <div className="col-6">My History</div>
+                            <div className="col-3"></div>
+                        </div>
+                        <div><HostHistory /></div>
+
                     </div>
 
                     {/* Payments Body for "User" Below  */}
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "payments" ? { display: "block" } : { display: "none" }}
-                    >My Payments
+                    >
+                        <div className="row d-flex justify-content-center pt-1 mb-2">
+                            <div className="col-3"></div>
+                            <div className="col-6">My Payments</div>
+                            <div className="col-3"></div>
+                        </div>
+                        <div
+                            style={display == "payments" ? { display: "block" } : { display: "none" }}
+                        ><MyPayments /></div>
+                        <div
+                            style={display == "paymentHistory" ? { display: "block" } : { display: "none" }}
+                        >Payment History Will Go Here</div>
                     </div>
                 </div>
             </div>
 
-            {/* ///////////////////////////////////////////  */}
-            {/* The div below conditionally renders the "Worker" dashboard */}
-            {/* ///////////////////////////////////////////  */}
+            {/* ///////////////////////////////////////////////////////////////////////////////////////////////////  */}
+            {/*                         The div below conditionally renders the "Worker" dashboard          */}
+            {/* ///////////////////////////////////////////////////////////////////////////////////////////////////  */}
 
             <div style={role == "Worker" ? { display: "block" } : { display: "none" }}>
                 <div className="row d-flex justify-content-center pt-3">
@@ -250,12 +297,11 @@ export const Landing = () => {
                             >My Profile</div>
                             <div className={`col-12 border-bottom border-dark
                             ${menu == "history" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("history")}
-                            >My History</div>
-                            <div className={`col-12 border-bottom border-dark
-                            ${menu == "payments" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("payments")}
-                            >My Payments</div>
+                                onClick={() => {
+                                    setDisplay("history")
+                                    setMenu("history")
+                                }}
+                            >My Work History</div>
                         </div>
                     </div>
 
@@ -317,14 +363,15 @@ export const Landing = () => {
 
                     {/* Worker History Body Below  */}
                     <div className="col-10 text-center dashComponents fs-3"
-                        style={menu == "history" ? { display: "block" } : { display: "none" }}
-                    >My History
-                    </div>
+                        style={menu == "history" ? { display: "block" } : { display: "none" }}                    >
+                        <div className="row d-flex justify-content-center pt-1 mb-2">
+                            <div className="col-3"></div>
+                            <div className="col-6">My Work History</div>
+                            <div className="col-3">
+                            </div>
+                        </div>
+                        <div><WHistory /></div>
 
-                    {/* Worker Payments Below  */}
-                    <div className="col-10 text-center dashComponents fs-3"
-                        style={menu == "payments" ? { display: "block" } : { display: "none" }}
-                    >My Payments
                     </div>
                 </div>
             </div>

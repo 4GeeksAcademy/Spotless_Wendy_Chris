@@ -135,7 +135,7 @@ export const WDashboard = () => {
       </div>
 
 
-      <div className="dropdown mb-3 ">
+      <div className="dropdown mb-3 text-start">
         <button
           className="btn btn-secondary mb-2 dropdown-toggle"
           type="button"

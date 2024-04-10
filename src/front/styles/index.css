@@ -103,3 +103,89 @@
 .status {
     padding: 1px 1px;
 }
+
+
+.paymentAlert {
+    width: 69px;
+	background: #FF4742;
+	border: 1px solid #FF4742;
+	border-radius: 6px;
+	box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+	box-sizing: border-box;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 11px;
+	min-height: 27px;
+	outline: 0;
+	padding: 11px 7px;
+	text-align: center;
+	text-rendering: geometricprecision;
+	text-transform: none;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	vertical-align: middle;
+  }
+  
+  .paymentAlert:hover,
+  .paymentAlert:active {
+	background-color: initial;
+	background-position: 0 0;
+	color: #FF4742;
+  }
+  
+  .paymentAlert:active {
+	opacity: .5;
+  }
+
+
+  ul {
+    list-style-type: none;
+  }
+  .img_payments{
+    width: 169px;
+  height: 100px;
+  }
+
+  .payments_div {
+    background: #31363F;
+   
+    height: 100px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 15px;
+  
+    font-size: 11px;
+    font-weight: 700;
+     
+    
+  
+    border-right: 8px solid  #FF4742;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-sizing:  border-box;
+  }
+  
+  /* .accept_div{
+    display: flex;
+   align-items: center; 
+  } */
+  
+  
+  
+  .payments_div h2 span{
+    display: block;
+    font-size: 11px;
+    font-weight: normal;
+    color: #bdc3c7;
+  }
+
+  .payment_button {
+    width:69%;
+  }
+  
