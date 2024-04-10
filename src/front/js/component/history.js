@@ -7,10 +7,8 @@ export const History = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        setIsLoading(true);
-        fetch(process.env.BACKEND_URL + `/api/worker/jobs/completed`, {
-            method: "POST",
-            body: JSON.stringify({ userId: currentUser.id }),
+        fetch(process.env.BACKEND_URL + `api/user/${currentUser.id}/listing`, {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json"
             }
@@ -25,10 +23,10 @@ export const History = () => {
             })
             .catch(error => console.error("Error fetching completed jobs:", error))
             .finally(() => setIsLoading(false));
-    }, [currentUser.id]);
+    }, []);
 
     return (
-        <div> 
+        <div>
             <div className="card" style={{ width: "18rem" }}></div>
             <div className="card-body"></div>
             <h1 className="card-title">Completed Jobs</h1>

@@ -14,6 +14,7 @@ import { WDashboard } from "./workerdashboard";
 import { WSchedule } from "./wschedule";
 import { MyPayments } from "../component/mypayments";
 import { WHistory } from "./whistory";
+import { HostHistory } from "../component/hosthistory";
 
 
 export const Landing = () => {
@@ -236,7 +237,14 @@ export const Landing = () => {
                     {/* History body for "User" Below  */}
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "history" ? { display: "block" } : { display: "none" }}
-                    >My History
+                    >
+                        <div className="row d-flex justify-content-center pt-1 mb-2">
+                            <div className="col-3"></div>
+                            <div className="col-6">My History</div>
+                            <div className="col-3"></div>
+                        </div>
+                        <div><HostHistory /></div>
+
                     </div>
 
                     {/* Payments Body for "User" Below  */}

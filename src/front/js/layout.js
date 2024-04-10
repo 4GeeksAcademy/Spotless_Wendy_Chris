@@ -13,6 +13,7 @@ import { WSchedule } from "./pages/wschedule";
 import { StaticProfile } from "./component/staticprofile";
 import { Ratings } from "./component/ratings";
 import { MyPayments } from "./component/mypayments";
+import { HostHistory } from "./component/hosthistory";
 
 import { WDashboard } from "./pages/workerdashboard";
 import { EditProfile } from "./pages/editprofile";
@@ -86,6 +87,7 @@ const Layout = () => {
                             <Route element={<Login />} path="/login" />
                             <Route element={<Home />} path="/" />
                             <Route element={<Dashboard />} path="/dashboard" />
+                            <Route element={<HostHistory />} path="/hosthistory" />
                             <Route element={<WDashboard />} path="/wdashboard" />
                             <Route element={<WSchedule />} path="/wschedule" />
                             <Route element={<EditProfile />} path="/editprofile" />
