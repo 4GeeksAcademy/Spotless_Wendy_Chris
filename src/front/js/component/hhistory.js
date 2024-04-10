@@ -6,7 +6,7 @@ import { AppContext } from "../layout";
 import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom";
 import { Ratings } from "./ratings";
 
-export const HostHistory = () => {
+export const HHistory = () => {
 
     const [rating, setRating] = useState(0)
 
@@ -15,6 +15,8 @@ export const HostHistory = () => {
         setCurrentUser, token, setToken, role, setRole,
         myListings, setMyListings, filterListings, setFilterListings,
     } = useContext(AppContext);
+
+    const [hHistory, setHHistory] = ([""]);
 
 
     const navigate = useNavigate();
@@ -52,7 +54,7 @@ export const HostHistory = () => {
     //   fetch all listings via schedule and store in myListings below 
     useEffect(() => {
 
-        fetch(process.env.BACKEND_URL + `api/user/${currentUser.id}/listing`)
+        fetch(process.env.BACKEND_URL + `api/user/${currentUser.id}/schedule/history`)
             .then(res => {
                 if (!res.ok) throw Error(res.statusText);
                 return res.json();
@@ -60,7 +62,7 @@ export const HostHistory = () => {
             .then(responseAsJson => {
                 console.log("response for listing from backend:")
                 console.log(responseAsJson)
-                setMyListings(responseAsJson)
+                // setHHistory(responseAsJson)
 
             })
 
@@ -129,8 +131,8 @@ export const HostHistory = () => {
             <div className="row">
                 <div className="col-12">
                     {
-                        listingHistory.length >= 1 ?
-                            listingHistory.map((elm) => {
+                        hHistory.length >= 1 ?
+                            hHistory.map((elm) => {
                                 return (<>
                                     <ul>
                                         <li key={elm.id}>
