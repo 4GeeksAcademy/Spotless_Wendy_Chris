@@ -184,4 +184,9 @@
   .payment_button {
     width:69%;
   }
+
+  .staticStar {
+    color: rgb(255, 232, 27);
+    text-shadow: 0 0 9px #ffffff;
+}
   

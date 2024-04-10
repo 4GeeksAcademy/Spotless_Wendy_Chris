@@ -8,7 +8,7 @@ import { Ratings } from "./ratings";
 
 export const HHistory = () => {
 
-    const [rating, setRating] = useState(0)
+    const [localRating, setLocalRating] = useState(0)
 
     const { store, actions } = useContext(Context);
     const { currentUser, myProperties, setMyProperties,
@@ -51,7 +51,7 @@ export const HHistory = () => {
     }, []);
 
 
-    //   fetch all listings via schedule and store in myListings below 
+    //   fetch all listings via schedule and store in hHistory below 
     useEffect(() => {
 
         fetch(process.env.BACKEND_URL + `api/user/${currentUser.id}/schedule/history`)
@@ -80,7 +80,7 @@ export const HHistory = () => {
             body: JSON.stringify(
                 {
                     "worker_id": worker_id,
-                    "score": rating
+                    "score": localRating
                 }
 
             ), // data can be a 'string' or an {object} which comes from somewhere further above in our application
@@ -151,11 +151,14 @@ export const HHistory = () => {
                                                             <div className="col-3 pt-1">
                                                                 <h4>Paid ${elm.rate} in full</h4>
                                                             </div>
-                                                            <div className="row pt-3">
+                                                            <div className="row pt-3"
+                                                                style={elm.review < 0 ? { display: "block" }
+                                                                    : { display: "none" }}
+                                                            >
                                                                 <div className="col-9">
                                                                     <Ratings
-                                                                        setRating={setRating}
-                                                                        rating={rating} />
+                                                                        setLocalRating={setLocalRating}
+                                                                        localRating={localRating} />
                                                                 </div>
                                                                 <div className="col-3">
                                                                     <span className="button-24"
@@ -163,6 +166,15 @@ export const HHistory = () => {
                                                                             handleSubmitRating(elm.id, elm.worker_id)
                                                                         }}
                                                                     >Submit Rating</span></div>
+                                                            </div>
+                                                            <div className="row pt-3 text-light text-center"
+                                                                style={elm.review > 0 ? { display: "block" }
+                                                                    : { display: "none" }}
+                                                            >
+                                                                <div className="col-12 fs-3">
+                                                                    You rated this job a: {elm.review}
+                                                                </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -172,7 +184,7 @@ export const HHistory = () => {
                                     </ul >
                                 </>
                                 )
-                            }) : <div>There are no payments due</div>
+                            }) : <div>You have no listing history</div>
 
                     }
                 </div>

@@ -236,11 +236,11 @@ def get_host_history(idh):
     .join(User, Property.user_id==User.id)\
     .filter(Schedule.status=='Complete', User.id==idh)\
     .with_entities(Schedule.id, Listing.special_note, Listing.date_needed, Listing.rate, Listing.id, Property.img,
-                   Worker.id ).all()
-     all_schedule= [dict(id=row[0], special_note=row[1], date_needed=row[2], rate=row[3], listing_id=row[4], property_img=row[5], worker_id=row[6]) for row in get_schedule]
+                   Worker.id, Schedule.review ).all()
+     all_schedule= [dict(id=row[0], special_note=row[1], date_needed=row[2], rate=row[3], listing_id=row[4], property_img=row[5], worker_id=row[6], review=row[7]) for row in get_schedule]
      return (all_schedule), 200
 
-# Give Review for completed schedule
+# Give Review for completed schedule in host history below
 
 @api.route('/schedule/<ids>/review/new', methods=['PUT'])
 def give_review_to_worker(ids):
@@ -254,7 +254,7 @@ def give_review_to_worker(ids):
     new_ranking= average_ranking[0]['sum_review'] / average_ranking[0]['total_review']
     db.session.query(Worker).filter_by(id=review_request['worker_id']).update({"ranking":new_ranking})
     db.session.commit()
-    return jsonify("Great job! this your new ranking "+ str(new_ranking)),200     
+    return jsonify("Great job! Your new ranking is:"+ str(new_ranking)),200     
 
  
 # @api.route('/user/<idc>/listing/complete', methods=['GET'])
