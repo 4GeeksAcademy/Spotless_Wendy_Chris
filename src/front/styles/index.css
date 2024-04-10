@@ -155,16 +155,12 @@
     background: #31363F;
    
     height: 100px;
-    width: 80%;
-    margin-left: 10%;
+    width: 95%;
+    margin-left: 3%;
     margin-right: 10%;
-    margin-bottom: 15px;
-  
+    margin-bottom: 15px;  
     font-size: 11px;
-    font-weight: 700;
-     
-    
-  
+    font-weight: 700;   
     border-right: 8px solid  #FF4742;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
