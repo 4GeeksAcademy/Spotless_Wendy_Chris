@@ -41,8 +41,7 @@ def login_test():
                     
                 return jsonify(test)
             else:
-                return jsonify(f"Incorrect email or password"), 400
-                 
+                return jsonify(f"Incorrect email or password"), 400            
                        
         else:
               return jsonify(f"Incorrect email or password"), 400
@@ -51,10 +50,8 @@ def login_test():
 
 @api.route('/user/new', methods=['POST'])
 def add_newuser():
-        request_body=request.json
-        
+        request_body=request.json  
         test_user= User.query.filter_by(email=request_body['email']).first()
-    
         if(test_user):
              return jsonify(f"User already exists"), 500
         
@@ -70,8 +67,8 @@ def add_newuser():
 def get_user_property(id):
     get_property= Property.query.filter_by(user_id=id)
     all_property= list(map(lambda x: x.serialize(), get_property))
-
     return jsonify(all_property), 200
+
 
 
 # This endpoint was written today, 4/5/2024 at 6h25pm. 
@@ -82,6 +79,7 @@ def get_available_listing_for_worker():
     return jsonify(all_listing), 200
 
 
+
 @api.route('/user/<id>/delete/property/<idP>', methods=['DELETE'])
 def remove_Property(id, idP):
     get_property= Property.query.get(idP)
@@ -89,9 +87,8 @@ def remove_Property(id, idP):
     db.session.commit()
     get_property= Property.query.filter_by(user_id=id)
     all_property= list(map(lambda x: x.serialize(), get_property))
-
-    
     return jsonify(all_property), 200
+
 
     
 # Bulk add properties below
@@ -126,6 +123,7 @@ def add_user_listing():
         db.session.commit()
     return jsonify(f"Success"), 200
 
+
       
 @api.route('/user/<idc>/listing', methods=['GET'])
 def get_user_listing(idc):
@@ -157,15 +155,23 @@ def update_user_or_worker(id):
          else:
             return (f"Password incorrect"),410
      
-         
 
-#Add a new schedule for a specific worker below
-@api.route('/worker/<id>/schedule/all', methods=['GET'])
-def get_worker_schedule(id):
-
-    get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Listing.special_note, Property.address, Property.city, Listing.rate, Listing.id FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property on Listing.property_id=Property.id where Schedule.status='Pending';")
+  #get history for a specific worker below not done
+@api.route('/worker/<idw>/schedule/history', methods=['GET'])
+def get_worker_history(idw):
+    get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Listing.special_note, Property.address, Property.city, Listing.rate, Listing.id FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property on Listing.property_id=Property.id where Schedule.status='Complete' AND Schedule.worker_id="+idw+";")
     all_schedule= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3], city=row[4], rate=row[5], listing_id=row[6] ) for row in get_schedule.fetchall()]   
     return jsonify(all_schedule), 200
+     
+
+
+#get schedule for a specific worker below
+@api.route('/worker/<idw>/schedule/all', methods=['GET'])
+def get_worker_schedule(idw):
+    get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Listing.special_note, Property.address, Property.city, Listing.rate, Listing.id FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property on Listing.property_id=Property.id where Schedule.status='Pending' AND Schedule.worker_id="+idw+";")
+    all_schedule= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3], city=row[4], rate=row[5], listing_id=row[6] ) for row in get_schedule.fetchall()]   
+    return jsonify(all_schedule), 200
+
 
 
 # Add a new schedule for a specific worker below
@@ -177,18 +183,37 @@ def add_to_schedule():
     newS=Schedule(listing_id=schedule_request['listing_id'], worker_id=schedule_request['worker_id'])
     db.session.add(newS)
     db.session.commit()
-   
     return jsonify(f"Success"), 200
 
 
-# Add a new schedule for a specific worker below
-@api.route('/worker/schedule/<ids>/cancel/<idl>', methods=['POST'])
+
+# Cancel schedule for a specific worker below
+@api.route('/worker/schedule/<ids>/cancel/<idl>', methods=['PUT'])
 def cancel_schedule(ids,idl):
     db.session.query(Listing).filter_by(id=idl).update({"status":'Active'})
     db.session.commit()
     db.session.query(Schedule).filter_by(id=ids).update({"status":'Cancelled'})
     db.session.commit()
     return jsonify(f"Success")
+
+
+# Mark Listing as Paid for a specific listing below
+@api.route('user/<idc>/listing/<idl>/paid', methods=['PUT'])
+def paid_listing(idc,idl):    
+    db.session.query(Listing).filter_by(id=idl).update({"status":'Paid'})
+    db.session.commit()  
+    get_property_of_user=db.session.query(Property.id).filter_by(user_id=idc).subquery()
+    get_listing= Listing.query.filter(Listing.property_id.in_(get_property_of_user))
+    all_listing= list(map(lambda x: x.serialize(), get_listing))
+    return jsonify(
+        {
+            "msg": "Successfully marked as paid",
+            "my_listings": all_listing
+        }
+        )
+
+
+
    
      
     

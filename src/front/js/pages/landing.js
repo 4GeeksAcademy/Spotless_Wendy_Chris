@@ -11,6 +11,9 @@ import { MyListings } from "../component/mylistings";
 import { EditProfile } from "./editprofile";
 import { StaticProfile } from "../component/staticprofile";
 import { WDashboard } from "./workerdashboard";
+import { WSchedule } from "./wschedule";
+import { MyPayments } from "../component/mypayments";
+import { WHistory } from "./whistory";
 
 
 export const Landing = () => {
@@ -21,13 +24,16 @@ export const Landing = () => {
 
     const { currentUser, setCurrentUser, token, setToken, role, setRole,
         myProperties, setMyProperties,
-        display, setDisplay, filterListings, setFilterListings
+        display, setDisplay, filterListings, setFilterListings,
+        menu, setMenu, myListings, setMyListings
+
     } = useContext(AppContext);
 
     const navigate = useNavigate();
 
     useEffect(() => {
         setRole(currentUser.role)
+        setDisplay("listings")
     }, []);
 
 
@@ -38,7 +44,7 @@ export const Landing = () => {
     const [userP, setUserP] = useState('')
     const [signupEffect, setSignupEffect] = useState('')
 
-    const [menu, setMenu] = useState('listings')
+
 
 
     if (currentUser) {
@@ -55,6 +61,16 @@ export const Landing = () => {
         setRole("Worker")
 
     }
+
+
+    const scheduledPaymentDue = myListings.filter((elm) => elm.status == "Scheduled");
+    console.log("scheduledPayment Due filter results:")
+    console.log(scheduledPaymentDue)
+    console.log("Status result:")
+    console.log(filterListings)
+
+
+
 
 
     return (
@@ -115,16 +131,33 @@ export const Landing = () => {
                             >My History</div>
                             <div className={`col-12 border-bottom border-dark
                             ${menu == "payments" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("payments")}
+                                onClick={() => {
+                                    setDisplay("payments")
+                                    setMenu("payments")
+                                }
+                                }
                             >My Payments</div>
                         </div>
-
                     </div>
+                    {/* End left navigation for "User" start main body of landing dashboard for "User" */}
+                    {/* Listings Body below  */}
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "listings" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
-                            <div className="col-3"></div>
+                            <div className="col-3 ps-5">
+                                <span className="paymentAlert ms-5"
+                                    style={scheduledPaymentDue.length >= 1 ? { display: "block" } : { display: "none" }}
+                                    onClick={() => {
+                                        setDisplay("payments")
+                                        setMenu("payments")
+                                    }
+                                    }
+
+                                >
+                                    <i class="fa-solid fa-bell fa-shake px-1 fs-3"></i>{scheduledPaymentDue.length}
+                                </span>
+                            </div>
                             <div className="col-6"
                             >My Listings</div>
                             <div className="col-3">
@@ -140,8 +173,8 @@ export const Landing = () => {
                                             onClick={() => setFilterListings("Scheduled")}
                                         >Status Scheduled</li>
                                         <li className="myListLink"
-                                            onClick={() => setFilterListings("Warning")}
-                                        >Status Warning!</li>
+                                            onClick={() => setFilterListings("Complete")}
+                                        >Status Complete</li>
                                     </ul>
                                 </div>
 
@@ -152,6 +185,7 @@ export const Landing = () => {
                             <MyListings />
                         </div>
                     </div>
+                    {/* Properties body for "User" below  */}
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "properties" ? { display: "block" } : { display: "none" }}
                     >
@@ -174,6 +208,8 @@ export const Landing = () => {
                             ><Dashboard /></div>
                         </div>
                     </div>
+
+                    {/* Profile Body for "User" below  */}
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "profile" ? { display: "block" } : { display: "none" }}
                     >
@@ -196,66 +232,138 @@ export const Landing = () => {
                             style={display == "myProfile" ? { display: "block" } : { display: "none" }}
                         ><StaticProfile /></div>
                     </div>
+
+                    {/* History body for "User" Below  */}
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "history" ? { display: "block" } : { display: "none" }}
                     >My History
                     </div>
+
+                    {/* Payments Body for "User" Below  */}
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "payments" ? { display: "block" } : { display: "none" }}
-                    >My Payments
+                    >
+                        <div className="row d-flex justify-content-center pt-1 mb-2">
+                            <div className="col-3"></div>
+                            <div className="col-6">My Payments</div>
+                            <div className="col-3"></div>
+                        </div>
+                        <div
+                            style={display == "payments" ? { display: "block" } : { display: "none" }}
+                        ><MyPayments /></div>
+                        <div
+                            style={display == "paymentHistory" ? { display: "block" } : { display: "none" }}
+                        >Payment History Will Go Here</div>
                     </div>
-
-
                 </div>
             </div>
 
-            {/* The div below conditionally renders the "Worker" dashboard */}
+            {/* ///////////////////////////////////////////////////////////////////////////////////////////////////  */}
+            {/*                         The div below conditionally renders the "Worker" dashboard          */}
+            {/* ///////////////////////////////////////////////////////////////////////////////////////////////////  */}
+
             <div style={role == "Worker" ? { display: "block" } : { display: "none" }}>
                 <div className="row d-flex justify-content-center pt-3">
                     <div className="col-2 text-center">
                         <div className="row">
                             <div className={`col-12 border-bottom border-dark
                             ${menu == "listings" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("listings")}
+                                onClick={() => {
+                                    setDisplay("listings")
+                                    setMenu("listings")
+                                }}
                             ><i class="fa-solid fa-house"></i></div>
                             <div className={`col-12 border-bottom border-dark
-                            ${menu == "properties" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("properties")}
-                            >My Properties</div>
+                            ${menu == "mySchedule" ? "activeMenu" : "myMenu"}`}
+                                onClick={() => {
+                                    setDisplay("mySchedule")
+                                    setMenu("mySchedule")
+                                }}
+                            >My Schedule</div>
                             <div className={`col-12 border-bottom border-dark
-                            ${menu == "profile" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("profile")}
+                            ${menu == "myProfile" ? "activeMenu" : "myMenu"}`}
+                                onClick={() => {
+                                    setDisplay("myProfile")
+                                    setMenu("myProfile")
+                                }}
                             >My Profile</div>
                             <div className={`col-12 border-bottom border-dark
                             ${menu == "history" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("history")}
-                            >My History</div>
-                            <div className={`col-12 border-bottom border-dark
-                            ${menu == "payments" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("payments")}
-                            >My Payments</div>
+                                onClick={() => {
+                                    setDisplay("history")
+                                    setMenu("history")
+                                }}
+                            >My Work History</div>
                         </div>
-
                     </div>
+
+                    {/* End left navigation for "Worker" start main body of landing dashboard for "Worker" */}
+                    {/* Listings Body "WorkerDashboard" below  */}
                     <div className="col-10 text-center dashComponents fs-3"
                         style={menu == "listings" ? { display: "block" } : { display: "none" }}
-                    ><WDashboard />
+                    >
+                        <div className="row d-flex justify-content-center pt-1 mb-2">
+                            <div className="col-3"></div>
+                            <div className="col-6">Available Jobs</div>
+                            <div className="col-3"></div>
+                        </div>
+                        <div
+                            style={display == "listings" ? { display: "block" } : { display: "none" }}
+                        ><WDashboard /></div>
                     </div>
+
+                    {/* Worker Schedule Body Below  */}
                     <div className="col-10 text-center dashComponents fs-3"
-                        style={menu == "properties" ? { display: "block" } : { display: "none" }}
-                    >My Properties
+                        style={menu == "mySchedule" ? { display: "block" } : { display: "none" }}
+                    >
+                        <div className="row d-flex justify-content-center pt-1 mb-2">
+                            <div className="col-3"></div>
+                            <div className="col-6">My Schedule</div>
+                            <div className="col-3"></div>
+                        </div>
+                        <div
+                            style={display == "mySchedule" ? { display: "block" } : { display: "none" }}
+                        ><WSchedule /></div>
                     </div>
+
+
+
+
+                    {/* Worker Profile Body Below  */}
                     <div className="col-10 text-center dashComponents fs-3"
-                        style={menu == "profile" ? { display: "block" } : { display: "none" }}
-                    >My Profile
+                        style={menu == "myProfile" ? { display: "block" } : { display: "none" }}
+                    >
+                        <div className="row d-flex justify-content-center pt-1 mb-2">
+                            <div className="col-3"></div>
+                            <div className="col-6">My Profile</div>
+                            <div className="col-3"><span className="button-24 me-3 mt-1"
+                                style={display == "myProfile" ? { display: "block" } : { display: "none" }}
+                                onClick={() => setDisplay("editProfile")}
+                            >Edit Profile</span>
+                                <span className="button-24 me-3 mt-1"
+                                    style={display == "editProfile" ? { display: "block" } : { display: "none" }}
+                                    onClick={() => setDisplay("myProfile")}
+                                >Back to My Profile</span></div>
+                        </div>
+                        <div
+                            style={display == "editProfile" ? { display: "block" } : { display: "none" }}
+                        ><EditProfile /></div>
+                        <div
+                            style={display == "myProfile" ? { display: "block" } : { display: "none" }}
+                        ><StaticProfile /></div>
                     </div>
+
+                    {/* Worker History Body Below  */}
                     <div className="col-10 text-center dashComponents fs-3"
-                        style={menu == "history" ? { display: "block" } : { display: "none" }}
-                    >My History
-                    </div>
-                    <div className="col-10 text-center dashComponents fs-3"
-                        style={menu == "payments" ? { display: "block" } : { display: "none" }}
-                    >My Payments
+                        style={menu == "history" ? { display: "block" } : { display: "none" }}                    >
+                        <div className="row d-flex justify-content-center pt-1 mb-2">
+                            <div className="col-3"></div>
+                            <div className="col-6">My Work History</div>
+                            <div className="col-3">
+                            </div>
+                        </div>
+                        <div><WHistory /></div>
+
                     </div>
                 </div>
             </div>

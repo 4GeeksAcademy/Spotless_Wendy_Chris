@@ -12,11 +12,13 @@ import { Dashboard } from "./pages/dashboard";
 import { WSchedule } from "./pages/wschedule";
 import { StaticProfile } from "./component/staticprofile";
 import { Ratings } from "./component/ratings";
+import { MyPayments } from "./component/mypayments";
 
 import { WDashboard } from "./pages/workerdashboard";
 import { EditProfile } from "./pages/editprofile";
 
 import { MyListings } from "./component/mylistings";
+import { WHistory } from "./pages/whistory";
 
 
 import { AddListing } from "./pages/addlisting";
@@ -40,6 +42,8 @@ const Layout = () => {
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
 
+
+    const [menu, setMenu] = useState('listings')
     const [myListings, setMyListings] = useState([])
     const [workerListings, setWorkerListings] = useState([])
     const [display, setDisplay] = useState("")
@@ -72,7 +76,7 @@ const Layout = () => {
                     currentUser, setCurrentUser, token, setToken,
                     myListings, setMyListings, myProperties, setMyProperties,
                     role, setRole, display, setDisplay, filterListings, setFilterListings,
-                    workerListings, setWorkerListings
+                    workerListings, setWorkerListings, menu, setMenu
                 }
             }>
                 <BrowserRouter basename={basename}>
@@ -87,8 +91,10 @@ const Layout = () => {
                             <Route element={<EditProfile />} path="/editprofile" />
                             <Route element={<Landing />} path="/landing" />
                             <Route element={<Ratings />} path="ratings" />
+                            <Route element={<WHistory />} path="/whistory" />
                             <Route element={<AddListing />} path="/addlisting" />
                             <Route element={<MyListings />} path="/mylistings" />
+                            <Route element={<MyPayments />} path="/mypayments" />
                             <Route element={<AddProperty />} path="/addproperty" />
                             <Route element={<History />} path="/history" />
                             <Route element={<Demo />} path="/demo" />

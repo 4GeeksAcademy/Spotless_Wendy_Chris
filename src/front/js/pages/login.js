@@ -40,7 +40,11 @@ export const Login = () => {
 			password: userP
 		}
 
+<<<<<<< HEAD
 		fetch(process.env.BACKEND_URL + "/token", {
+=======
+		fetch(process.env.BACKEND_URL + '/token', {
+>>>>>>> 21c85593a37dba67a99e220d99a9bed3f3039673
 			method: 'POST',
 			body: JSON.stringify(log_info),
 			headers: {
