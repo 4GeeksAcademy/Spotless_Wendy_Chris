@@ -230,16 +230,19 @@ def complete_schedule(ids,idl):
 
 @api.route('/user/<idh>/schedule/history', methods=['GET'])
 def get_host_history(idh):
-    idh= str(idh)
-    get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Property.name, Listing.rate, Listing.id FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property ON Listing.property_id=Property.id join User ON Property.user_id=User.id where Schedule.status='Complete' and User.id="+idh+" ;")
-    all_schedule= [dict(id=row[0], date_needed=row[1], name=row[2], rate=row[3], listing_id=row[4]) for row in get_schedule.fetchall()]   
-    #return jsonify(all_schedule), 200
-   # return jsonify(f"This is a response from the back-end")
+     get_schedule = db.session.query(Schedule)\
+    .join(Listing, Schedule.listing_id==Listing.id)\
+    .join(Property, Listing.property_id== Property.id)\
+    .join(User, Property.user_id==User.id)\
+    .filter(Schedule.status=='Complete', User.id==idh)\
+    .with_entities(Schedule.id, Listing.special_note, Listing.date_needed, Listing.rate, Listing.id, Property.img ).all()
+     all_schedule= [dict(id=row[0], special_note=row[1], date_needed=row[2], rate=row[3], listing_id=row[4], property_img=row[5]) for row in get_schedule]   
+     return (all_schedule), 200
      
 
 @api.route('/schedule/<ids>/review/new', methods=['POST'])
 def give_review_to_worker(ids):
-    # this request.json  from the frontend should come as an object with those two keys worker_id and score
+    #this request.json  from the frontend should come as an object with those two keys worker_id and score
     review_request=request.json
     db.session.query(Schedule).filter_by(id=ids).update({"review": review_request['score']})
     db.session.commit()
@@ -249,7 +252,6 @@ def give_review_to_worker(ids):
     new_ranking= average_ranking[0]['sum_review'] / average_ranking[0]['total_review']
     db.session.query(Worker).filter_by(id=review_request['worker_id']).update({"ranking":new_ranking})
     db.session.commit()
-
     return jsonify("Great job! this your new ranking "+ str(new_ranking)),200
    
      
