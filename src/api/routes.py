@@ -220,7 +220,7 @@ def get_host_history(idh):
 
 @api.route('/schedule/<ids>/review/new', methods=['POST'])
 def give_review_to_worker(ids):
-    # this object from the frontend should come as an object with those two keys worker_id and score
+    # this request.json  from the frontend should come as an object with those two keys worker_id and score
     review_request=request.json
     db.session.query(Schedule).filter_by(id=ids).update({"review": review_request['score']})
     db.session.commit()
