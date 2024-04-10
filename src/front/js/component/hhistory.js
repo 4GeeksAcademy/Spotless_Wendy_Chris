@@ -6,7 +6,7 @@ import { AppContext } from "../layout";
 import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom";
 import { Ratings } from "./ratings";
 
-export const HostHistory = () => {
+export const HHistory = () => {
 
     const [rating, setRating] = useState(0)
 
@@ -15,6 +15,8 @@ export const HostHistory = () => {
         setCurrentUser, token, setToken, role, setRole,
         myListings, setMyListings, filterListings, setFilterListings,
     } = useContext(AppContext);
+
+    const [hHistory, setHHistory] = useState([""]);
 
 
     const navigate = useNavigate();
@@ -52,7 +54,7 @@ export const HostHistory = () => {
     //   fetch all listings via schedule and store in myListings below 
     useEffect(() => {
 
-        fetch(process.env.BACKEND_URL + `api/user/${currentUser.id}/listing`)
+        fetch(process.env.BACKEND_URL + `api/user/${currentUser.id}/schedule/history`)
             .then(res => {
                 if (!res.ok) throw Error(res.statusText);
                 return res.json();
@@ -60,7 +62,7 @@ export const HostHistory = () => {
             .then(responseAsJson => {
                 console.log("response for listing from backend:")
                 console.log(responseAsJson)
-                setMyListings(responseAsJson)
+                setHHistory(responseAsJson)
 
             })
 
@@ -69,15 +71,16 @@ export const HostHistory = () => {
 
     }, []);
 
+    // submit rating below
 
-    const handleSubmitRating = (idl) => {
+    const handleSubmitRating = (id, worker_id) => {
 
-        fetch('https://example.com/users', {
+        fetch(process.env.BACKEND_URL + `api/schedule/${id}/review/new`, {
             method: 'PUT',
             body: JSON.stringify(
                 {
-                    "listing_id": idl,
-                    "rating": rating
+                    "worker_id": worker_id,
+                    "score": rating
                 }
 
             ), // data can be a 'string' or an {object} which comes from somewhere further above in our application
@@ -129,15 +132,15 @@ export const HostHistory = () => {
             <div className="row">
                 <div className="col-12">
                     {
-                        listingHistory.length >= 1 ?
-                            listingHistory.map((elm) => {
+                        hHistory.length >= 1 ?
+                            hHistory.map((elm) => {
                                 return (<>
                                     <ul>
                                         <li key={elm.id}>
                                             <div className="payments_div mt-2">
                                                 <div className="row d-flex  justify-content-between">
                                                     <div className="col-2">
-                                                        <img src={elm.image1} className="img_payments" />
+                                                        <img src={elm.property_img} className="img_payments" />
                                                     </div>
                                                     <div className="col-10">
                                                         <div className="row">
@@ -157,7 +160,7 @@ export const HostHistory = () => {
                                                                 <div className="col-3">
                                                                     <span className="button-24"
                                                                         onClick={() => {
-                                                                            handleSubmitRating(elm.listing_id)
+                                                                            handleSubmitRating(elm.id, elm.worker_id)
                                                                         }}
                                                                     >Submit Rating</span></div>
                                                             </div>

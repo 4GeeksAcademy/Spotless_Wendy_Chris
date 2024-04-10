@@ -6,23 +6,28 @@ import "../../styles/home.css";
 import { AppContext } from "../layout";
 import { Link, useNavigate } from "react-router-dom";
 
-export const Ratings = () => {
+export const Ratings = ({ setRating, rating }) => {
 
     const { store, actions } = useContext(Context);
-    const { currentUser, myProperties, setMyProperties, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
+    const { currentUser, myProperties, setMyProperties, setCurrentUser, token, setToken, role, setRole,
+
+    } = useContext(AppContext);
 
     const navigate = useNavigate();
     const [listingNote, setListingNote] = useState('');
-    const [rating, setRating] = useState(0)
     const [hover, setHover] = useState(0)
 
 
+
+
+
+
     return (
-        <div className="block">
-            <div class="row style-alt">
-                <div class="col-sm-6 col-md-4">
-                    <span className="text-left fs-5">
-                        Rating<span className="">
+        <>
+            <div class="row">
+                <div class="col">
+                    <span className="fs-5">
+                        Please Leave a Rating:<span className="">
                             <i className="fa-solid fa-star ps-2 fs-4 starRating"
                                 style={rating < 1 && hover < 1 ? { display: "inline" } :
                                     { display: "none" }}
@@ -104,6 +109,6 @@ export const Ratings = () => {
                     </span>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
