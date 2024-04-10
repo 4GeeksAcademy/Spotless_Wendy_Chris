@@ -16,7 +16,7 @@ export const HHistory = () => {
         myListings, setMyListings, filterListings, setFilterListings,
     } = useContext(AppContext);
 
-    const [hHistory, setHHistory] = ([""]);
+    const [hHistory, setHHistory] = useState([""]);
 
 
     const navigate = useNavigate();
@@ -62,7 +62,7 @@ export const HHistory = () => {
             .then(responseAsJson => {
                 console.log("response for listing from backend:")
                 console.log(responseAsJson)
-                // setHHistory(responseAsJson)
+                setHHistory(responseAsJson)
 
             })
 
@@ -71,15 +71,16 @@ export const HHistory = () => {
 
     }, []);
 
+    // submit rating below
 
-    const handleSubmitRating = (idl) => {
+    const handleSubmitRating = (id, worker_id) => {
 
-        fetch('https://example.com/users', {
+        fetch(process.env.BACKEND_URL + `api/schedule/${id}/review/new`, {
             method: 'PUT',
             body: JSON.stringify(
                 {
-                    "listing_id": idl,
-                    "rating": rating
+                    "worker_id": worker_id,
+                    "score": rating
                 }
 
             ), // data can be a 'string' or an {object} which comes from somewhere further above in our application
@@ -139,7 +140,7 @@ export const HHistory = () => {
                                             <div className="payments_div mt-2">
                                                 <div className="row d-flex  justify-content-between">
                                                     <div className="col-2">
-                                                        <img src={elm.image1} className="img_payments" />
+                                                        <img src={elm.property_img} className="img_payments" />
                                                     </div>
                                                     <div className="col-10">
                                                         <div className="row">
@@ -159,7 +160,7 @@ export const HHistory = () => {
                                                                 <div className="col-3">
                                                                     <span className="button-24"
                                                                         onClick={() => {
-                                                                            handleSubmitRating(elm.listing_id)
+                                                                            handleSubmitRating(elm.id, elm.worker_id)
                                                                         }}
                                                                     >Submit Rating</span></div>
                                                             </div>
