@@ -240,7 +240,7 @@ def get_host_history(idh):
      return (all_schedule), 200
      
 
-@api.route('/schedule/<ids>/review/new', methods=['POST'])
+@api.route('/schedule/<ids>/review/new', methods=['PUT'])
 def give_review_to_worker(ids):
     #this request.json  from the frontend should come as an object with those two keys worker_id and score
     review_request=request.json
