@@ -7,6 +7,7 @@ from api.models import db, User, Worker, Property, Payment, Listing, Schedule
 
 from sqlalchemy.orm import joinedload
 from sqlalchemy.orm import relationship, attributes
+from sqlalchemy.sql import label
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 
