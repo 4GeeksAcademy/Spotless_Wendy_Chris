@@ -42,9 +42,9 @@ export const WSchedule = () => {
   function cancel_schedule_function(schedule_id, listing_id) {
 
 
-    fetch(process.env.BACKEND_URL + "/api/worker/schedule/" + schedule_id + "/cancel/" + listing_id,
+    fetch(process.env.BACKEND_URL + "api/worker/schedule/" + schedule_id + "/cancel/" + listing_id,
       {
-        method: 'POST'
+        method: 'PUT'
       })
       .then(res => {
         if (!res.ok) console.log(res.statusText);
