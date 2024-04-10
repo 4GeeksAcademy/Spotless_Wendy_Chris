@@ -7,6 +7,7 @@ from api.models import db, User, Worker, Property, Payment, Listing, Schedule
 
 from sqlalchemy.orm import joinedload
 from sqlalchemy.orm import relationship, attributes
+from sqlalchemy.sql import label
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 
@@ -188,7 +189,7 @@ def add_to_schedule():
 
 
 # Cancel schedule for a specific worker below
-@api.route('/worker/schedule/<ids>/cancel/<idl>', methods=['POST'])
+@api.route('/worker/schedule/<ids>/cancel/<idl>', methods=['PUT'])
 def cancel_schedule(ids,idl):
     db.session.query(Listing).filter_by(id=idl).update({"status":'Active'})
     db.session.commit()
@@ -210,16 +211,30 @@ def complete_schedule(ids,idl):
 
 @api.route('/user/<idh>/schedule/history', methods=['GET'])
 def get_host_history(idh):
-    get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Property.name, Listing.rate, Listing.id, User.email FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property ON Listing.property_id=Property.id join User ON Property.user_id=User.id where Schedule.status='Complete' and User.id="+idh+" ;")
-    all_schedule= [dict(id=row[0], date_needed=row[1], name=row[2], rate=row[3], listing_id=row[4], email=row[5]) for row in get_schedule.fetchall()]   
-    return jsonify(all_schedule), 200
+    idh= str(idh)
+    get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Property.name, Listing.rate, Listing.id FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property ON Listing.property_id=Property.id join User ON Property.user_id=User.id where Schedule.status='Complete' and User.id="+idh+" ;")
+    all_schedule= [dict(id=row[0], date_needed=row[1], name=row[2], rate=row[3], listing_id=row[4]) for row in get_schedule.fetchall()]   
+    #return jsonify(all_schedule), 200
+   # return jsonify(f"This is a response from the back-end")
      
 
-@api.route('/user/schedule/<ids>/review/new/<score>', methods=['GET'])
-def give_review_to_worker(ids, score):
-    db.session.query(Schedule).filter_by(id=ids).update({"review": score})
+@api.route('/schedule/<ids>/review/new', methods=['POST'])
+def give_review_to_worker(ids):
+    # this object from the frontend should come as an object with those two keys worker_id and score
+    review_request=request.json
+    db.session.query(Schedule).filter_by(id=ids).update({"review": review_request['score']})
     db.session.commit()
-    return jsonify(f"Success"), 200
+    idw= str(review_request['worker_id'])
+    get_t_review= db.session.execute("SELECT sum(review) , count(review) from Schedule where worker_id="+idw+" and status='Complete' and review is not null ;")
+    average_ranking= [dict(sum_review=row[0], total_review=row[1]) for row in get_t_review.fetchall()]  
+    new_ranking= average_ranking[0]['sum_review'] / average_ranking[0]['total_review']
+    db.session.query(Worker).filter_by(id=review_request['worker_id']).update({"ranking":new_ranking})
+    db.session.commit()
+
+    return jsonify("Great job! this your new ranking "+ str(new_ranking)),200
+   
+     
+
      
 
  

@@ -43,7 +43,7 @@ class Worker(db.Model):
     ranking = db.Column(db.Float, nullable=True)
 
     def __repr__(self):
-        return f'<Worker {self.email}>'
+        return  self.email
 
     def serialize(self):
         return {

@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
 
-from api.models import db, User, Worker, Property, Listing
+from api.models import db, User, Worker, Property, Listing, Schedule, Payment
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
@@ -154,6 +154,17 @@ def get_all_host():
     final= list(map(lambda x: x.serialize(), all_user))
    
     return  jsonify(final)
+
+
+
+@app.route('/schedule/all', methods=['GET'])
+def get_all_schedule():
+
+    all_schedule =Schedule.query.all()
+    final= list(map(lambda x: x.serialize(), all_schedule))
+   
+    return  jsonify(final)
+
 
 
 @app.route('/worker/all', methods=['GET'])
