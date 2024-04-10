@@ -34,6 +34,15 @@ export const WHistory= () => {
   }, []);
 
 
+  const sortDate = (a, b) => {
+    let dateA = a.date_needed.toUpperCase();
+    let dateB = b.date_needed.toUpperCase();
+    if (dateA < dateB) return -1;
+    if (dateA > dateB) return 1;
+  }
+
+
+
 
 	return (
     <div> 

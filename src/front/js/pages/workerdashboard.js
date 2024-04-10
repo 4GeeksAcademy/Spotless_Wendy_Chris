@@ -56,6 +56,13 @@ export const WDashboard = () => {
     if (cityA > cityB) return 1;
   }
 
+  const sortDate = (a, b) => {
+    let dateA = a.date_needed.toUpperCase();
+    let dateB = b.date_needed.toUpperCase();
+    if (dateA < dateB) return -1;
+    if (dateA > dateB) return 1;
+  }
+
   const sortPrice = (a, b) => b.rate - a.rate;
 
   function filter_listing_function(val) {
@@ -73,8 +80,10 @@ export const WDashboard = () => {
       setWorkerListings(final);
     }
     else {
-      console.log('Nothing to do yet')
-
+      
+      let test = [...workerListings];
+      let final = test.toSorted(sortDate);
+      setWorkerListings(final);
     }
 
   }
@@ -139,7 +148,7 @@ export const WDashboard = () => {
         <ul className="dropdown-menu text-lg" aria-labelledby="dropdownMenuButton">
           <li><span className="dropdown-item" onClick={(e) => filter_listing_function(e)}>City (A-Z)</span></li>
           <li><span className="dropdown-item" onClick={(e) => filter_listing_function(e)}>Price: (High to Low)</span></li>
-          <li><span className="dropdown-item" onClick={(e) => filter_listing_function(e)}>Something A-Z</span></li>
+          <li><span className="dropdown-item" onClick={(e) => filter_listing_function(e)}>Date</span></li>
         </ul>
       </div>
 

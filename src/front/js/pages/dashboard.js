@@ -45,7 +45,7 @@ export const Dashboard = () => {
           finalProperty.push(each_property);
 
         })
-        // setMyProperties(finalProperty);
+         setMyProperties(finalProperty);
       })
 
       .catch(error => console.log(error));
@@ -75,7 +75,7 @@ export const Dashboard = () => {
 
         newArray.forEach((el) => {
           let each_property = {};
-          let all_img = el.img.split("");
+          let all_img = el.img.split("  ");
           each_property = el;
           each_property.image1 = all_img[0];
           each_property.image2 = all_img[1];
@@ -105,9 +105,6 @@ export const Dashboard = () => {
     setListingId({});
     dialog.close();
   }
-
-
-
 
 
 
@@ -194,27 +191,32 @@ export const Dashboard = () => {
       </div>
 
 
-      <dialog id="modal_dialog" class="card-body border-light rounded">
+      <dialog id="modal_dialog" class=" rounded">
+
         <div class="row gx-3 mb-3">
           <div class="col-2 d-flex align-items-center">
             <label class="medium mb-1" for="inputdate">Date</label>
           </div>
 
-          <div class="col-9">
-            <input class="form-control" id="inputdate" type="text" onChange={(e) => { setListingDate(e.target.value) }} placeholder="Enter your date" value={listingDate} />
+          <div class="col-10">
+           <input type="datetime-local" value={listingDate} id="Test_DatetimeLocal" onChange={(e) => {setListingDate(e.target.value) }}/>
           </div>
+
         </div>
+     
+
 
         <div className="row mb-3">
+
           <div class="col-2 d-flex align-items-center">
             <label class="medium mb-1" for="inputnote">Note</label>
           </div>
 
-          <div class="col-9">
+          <div class="col-8">
 
             <textarea class="form-control" id="inputnote" type="text" onChange={(e) => { setListingNote(e.target.value) }} placeholder="Enter your note" value={listingNote} />
           </div>
-          <div class="col"> </div>
+        
         </div>
 
         <div className="row mb-3">

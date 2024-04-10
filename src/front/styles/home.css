@@ -73,9 +73,15 @@ input{
 }
 
 
+#Test_DatetimeLocal{
+	font-size: 20px;
+	padding: 5px 5px 5px 5px;
+	
+}
 
-
-
+textarea{
+	width: 100%;
+}
 
 span{
 	cursor:pointer;

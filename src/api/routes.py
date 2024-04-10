@@ -210,7 +210,7 @@ def complete_schedule(ids,idl):
 
 @api.route('/user/<idh>/schedule/history', methods=['GET'])
 def get_host_history(idh):
-    get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Property.name, Listing.rate, Listing.id, User.email FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property ON Listing.property_id=Property.id join user ON Property.user_id=User.id where Schedule.status='Complete' and User.id="+idh+" ;")
+    get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Property.name, Listing.rate, Listing.id, User.email FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property ON Listing.property_id=Property.id join User ON Property.user_id=User.id where Schedule.status='Complete' and User.id="+idh+" ;")
     all_schedule= [dict(id=row[0], date_needed=row[1], name=row[2], rate=row[3], listing_id=row[4], email=row[5]) for row in get_schedule.fetchall()]   
     return jsonify(all_schedule), 200
      
