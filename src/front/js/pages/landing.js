@@ -246,14 +246,7 @@ export const Landing = () => {
                         <div className="row d-flex justify-content-center pt-1 mb-2">
                             <div className="col-3"></div>
                             <div className="col-6">My Payments</div>
-                            <div className="col-3"><span className="button-24 me-3 mt-1"
-                                style={display == "payments" ? { display: "block" } : { display: "none" }}
-                                onClick={() => setDisplay("paymentHistory")}
-                            >Payment History</span>
-                                <span className="button-24 me-3 mt-1"
-                                    style={display == "paymentHistory" ? { display: "block" } : { display: "none" }}
-                                    onClick={() => setDisplay("payments")}
-                                >Back to My Payments</span></div>
+                            <div className="col-3"></div>
                         </div>
                         <div
                             style={display == "payments" ? { display: "block" } : { display: "none" }}
