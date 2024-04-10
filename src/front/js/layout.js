@@ -28,6 +28,7 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { useState } from "react";
 import { AddProperty } from "./component/add_prop";
+import { History } from "./component/history";
 
 
 
@@ -95,6 +96,7 @@ const Layout = () => {
                             <Route element={<MyListings />} path="/mylistings" />
                             <Route element={<MyPayments />} path="/mypayments" />
                             <Route element={<AddProperty />} path="/addproperty" />
+                            <Route element={<History />} path="/history" />
                             <Route element={<Demo />} path="/demo" />
                             <Route element={<Single />} path="/single/:theid" />
                             <Route element={<h1>Not found!</h1>} />
