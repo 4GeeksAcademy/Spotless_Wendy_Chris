@@ -5,6 +5,7 @@ import "../../styles/home.css";
 import { AppContext } from "../layout";
 import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom";
 import { Ratings } from "./ratings";
+import { StaticRating } from "./staticrating";
 
 export const HHistory = () => {
 
@@ -152,7 +153,7 @@ export const HHistory = () => {
                                                                 <h4>Paid ${elm.rate} in full</h4>
                                                             </div>
                                                             <div className="row pt-3"
-                                                                style={elm.review < 0 ? { display: "block" }
+                                                                style={elm.review <= 0 ? { display: "block" }
                                                                     : { display: "none" }}
                                                             >
                                                                 <div className="col-9">
@@ -172,7 +173,9 @@ export const HHistory = () => {
                                                                     : { display: "none" }}
                                                             >
                                                                 <div className="col-12 fs-3">
-                                                                    You rated this job a: {elm.review}
+                                                                    You rated this job: <StaticRating
+                                                                        ratingValue={elm.review}
+                                                                    />
                                                                 </div>
 
                                                             </div>

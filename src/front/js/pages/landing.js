@@ -15,7 +15,8 @@ import { WSchedule } from "./wschedule";
 import { MyPayments } from "../component/mypayments";
 import { WHistory } from "./whistory";
 import { HostHistory } from "../component/hosthistory";
-
+import { WorkerProfile } from "../component/workerprofile";
+import { HHistory } from "../component/hhistory";
 
 export const Landing = () => {
 
@@ -243,7 +244,7 @@ export const Landing = () => {
                             <div className="col-6">My History</div>
                             <div className="col-3"></div>
                         </div>
-                        <div><HostHistory /></div>
+                        <div><HHistory /></div>
 
                     </div>
 
@@ -358,7 +359,7 @@ export const Landing = () => {
                         ><EditProfile /></div>
                         <div
                             style={display == "myProfile" ? { display: "block" } : { display: "none" }}
-                        ><StaticProfile /></div>
+                        ><WorkerProfile /></div>
                     </div>
 
                     {/* Worker History Body Below  */}
@@ -374,7 +375,7 @@ export const Landing = () => {
 
                     </div>
                 </div>
-            </div>
+            </div >
 
         </>
     );

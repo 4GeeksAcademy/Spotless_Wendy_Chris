@@ -45,7 +45,7 @@ export const Dashboard = () => {
           finalProperty.push(each_property);
 
         })
-         setMyProperties(finalProperty);
+        setMyProperties(finalProperty);
       })
 
       .catch(error => console.log(error));
@@ -55,10 +55,10 @@ export const Dashboard = () => {
 
   const ComparedDate = () => {
     const today = new Date()
-    if (listingDate  <=  today ) { //first date is in future, or it is today
+    if (listingDate <= today) { //first date is in future, or it is today
       return false
     }
-  
+
     return true
   }
 
@@ -119,52 +119,52 @@ export const Dashboard = () => {
 
 
   function save_modal_function(id) {
-    let format_date= listingDate.replace("T", " ");
-    let today= new Date();
-    console.log("check today :"+ today)
-    console.log("check if the date was formatted :"+ format_date)
+    let format_date = listingDate.replace("T", " ");
+    let today = new Date();
+    console.log("check today :" + today)
+    console.log("check if the date was formatted :" + format_date)
 
-    let test= ComparedDate();
-    console.log('Check if the date is in the past : '+test);
+    let test = ComparedDate();
+    console.log('Check if the date is in the past : ' + test);
 
-    // if (listingDate.length > 5) {
+    if (listingDate.length > 5) {
 
-    //   let price_for_listing = (listingId.bath * 15) + (listingId.beds * 10);
-    //   let new_listing = { property_id: listingId.id, special_note: listingNote, date_needed: listingDate, rate: price_for_listing };
+      let price_for_listing = (listingId.bath * 15) + (listingId.beds * 10);
+      let new_listing = { property_id: listingId.id, special_note: listingNote, date_needed: listingDate, rate: price_for_listing };
 
-    //   fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
-    //     {
-    //       method: 'POST',
-    //       body: JSON.stringify(new_listing),
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       }
-    //     })
-    //     .then(res => {
-    //       if (!res.ok) console.log(res.statusText);
-    //       return res.json();
-    //     })
-    //     .then(response => {
-    //       console.log(response)
+      fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
+        {
+          method: 'POST',
+          body: JSON.stringify(new_listing),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(res => {
+          if (!res.ok) console.log(res.statusText);
+          return res.json();
+        })
+        .then(response => {
+          console.log(response)
 
-    //     })
+        })
 
-    //     .catch(error => console.log(error));
-    //   setListingDate('');
-    //   setListingNote('');
-    //   const dialog = document.getElementById('modal_dialog');
-    //   dialog.close();
+        .catch(error => console.log(error));
+      setListingDate('');
+      setListingNote('');
+      const dialog = document.getElementById('modal_dialog');
+      dialog.close();
 
-    // }
-    // else {
-    //   const dialog = document.getElementById('modal_dialog');
-    //   dialog.close();
-    // }
+    }
+    else {
+      const dialog = document.getElementById('modal_dialog');
+      dialog.close();
+    }
 
   }
 
   return (
-    
+
     <div>
 
       <div class="product-list-container">
@@ -216,11 +216,11 @@ export const Dashboard = () => {
           </div>
 
           <div class="col-10">
-           <input type="datetime-local" value={listingDate} id="Test_DatetimeLocal" onChange={(e) => {setListingDate(e.target.value) }}/>
+            <input type="datetime-local" value={listingDate} id="Test_DatetimeLocal" onChange={(e) => { setListingDate(e.target.value) }} />
           </div>
 
         </div>
-     
+
         <div className="row mb-3">
 
           <div class="col-2 d-flex align-items-center">
@@ -231,7 +231,7 @@ export const Dashboard = () => {
 
             <textarea class="form-control" id="inputnote" type="text" onChange={(e) => { setListingNote(e.target.value) }} placeholder="Enter your note" value={listingNote} />
           </div>
-        
+
         </div>
 
         <div className="row mb-3">
