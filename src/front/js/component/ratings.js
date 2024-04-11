@@ -6,7 +6,7 @@ import "../../styles/home.css";
 import { AppContext } from "../layout";
 import { Link, useNavigate } from "react-router-dom";
 
-export const Ratings = ({ setRating, rating }) => {
+export const Ratings = ({ localRating, setLocalRating }) => {
 
     const { store, actions } = useContext(Context);
     const { currentUser, myProperties, setMyProperties, setCurrentUser, token, setToken, role, setRole,
@@ -16,8 +16,15 @@ export const Ratings = ({ setRating, rating }) => {
     const navigate = useNavigate();
     const [listingNote, setListingNote] = useState('');
     const [hover, setHover] = useState(0)
+    const [rating, setRating] = useState(0)
 
 
+    var currentRating = 0
+    const setCurrentRating = (value) => {
+        currentRating = value
+        console.log("rating updated:")
+        console.log(currentRating)
+    }
 
 
 
@@ -31,7 +38,10 @@ export const Ratings = ({ setRating, rating }) => {
                             <i className="fa-solid fa-star ps-2 fs-4 starRating"
                                 style={rating < 1 && hover < 1 ? { display: "inline" } :
                                     { display: "none" }}
-                                onClick={() => setRating(1)}
+                                onClick={() => {
+                                    setRating(1)
+                                    setLocalRating(1)
+                                }}
                                 onMouseEnter={() => setHover(1)}
                                 onMouseLeave={() => setHover(0)}
                             ></i>
@@ -39,14 +49,20 @@ export const Ratings = ({ setRating, rating }) => {
                                 style={
                                     rating >= 1 || hover >= 1 ? { display: "inline" } :
                                         { display: "none" }}
-                                onClick={() => setRating(1)}
+                                onClick={() => {
+                                    setRating(1)
+                                    setLocalRating(1)
+                                }}
                                 onMouseEnter={() => setHover(1)}
                                 onMouseLeave={() => setHover(0)}
                             ></i>
                             <i className="fa-solid fa-star ps-2 fs-4 starRating"
                                 style={rating < 2 && hover < 2 ? { display: "inline" } :
                                     { display: "none" }}
-                                onClick={() => setRating(2)}
+                                onClick={() => {
+                                    setRating(2)
+                                    setLocalRating(2)
+                                }}
                                 onMouseEnter={() => setHover(2)}
                                 onMouseLeave={() => setHover(0)}
                             ></i>
@@ -54,14 +70,20 @@ export const Ratings = ({ setRating, rating }) => {
                                 style={
                                     rating >= 2 || hover >= 2 ? { display: "inline" } :
                                         { display: "none" }}
-                                onClick={() => setRating(2)}
+                                onClick={() => {
+                                    setRating(2)
+                                    setLocalRating(2)
+                                }}
                                 onMouseEnter={() => setHover(2)}
                                 onMouseLeave={() => setHover(0)}
                             ></i>
                             <i className="fa-solid fa-star ps-2 fs-4 starRating"
                                 style={rating < 3 && hover < 3 ? { display: "inline" } :
                                     { display: "none" }}
-                                onClick={() => setRating(3)}
+                                onClick={() => {
+                                    setRating(3)
+                                    setLocalRating(3)
+                                }}
                                 onMouseEnter={() => setHover(3)}
                                 onMouseLeave={() => setHover(0)}
                             ></i>
@@ -69,14 +91,20 @@ export const Ratings = ({ setRating, rating }) => {
                                 style={
                                     rating >= 3 || hover >= 3 ? { display: "inline" } :
                                         { display: "none" }}
-                                onClick={() => setRating(3)}
+                                onClick={() => {
+                                    setRating(3)
+                                    setLocalRating(3)
+                                }}
                                 onMouseEnter={() => setHover(3)}
                                 onMouseLeave={() => setHover(0)}
                             ></i>
                             <i className="fa-solid fa-star ps-2 fs-4 starRating"
                                 style={rating < 4 && hover < 4 ? { display: "inline" } :
                                     { display: "none" }}
-                                onClick={() => setRating(4)}
+                                onClick={() => {
+                                    setRating(4)
+                                    setLocalRating(4)
+                                }}
                                 onMouseEnter={() => setHover(4)}
                                 onMouseLeave={() => setHover(0)}
                             ></i>
@@ -84,14 +112,20 @@ export const Ratings = ({ setRating, rating }) => {
                                 style={
                                     rating >= 4 || hover >= 4 ? { display: "inline" } :
                                         { display: "none" }}
-                                onClick={() => setRating(4)}
+                                onClick={() => {
+                                    setRating(4)
+                                    setLocalRating(4)
+                                }}
                                 onMouseEnter={() => setHover(4)}
                                 onMouseLeave={() => setHover(0)}
                             ></i>
                             <i className="fa-solid fa-star ps-2 fs-4 starRating"
                                 style={rating < 5 && hover < 5 ? { display: "inline" } :
                                     { display: "none" }}
-                                onClick={() => setRating(5)}
+                                onClick={() => {
+                                    setRating(5)
+                                    setLocalRating(5)
+                                }}
                                 onMouseEnter={() => setHover(5)}
                                 onMouseLeave={() => setHover(0)}
                             ></i>
@@ -99,7 +133,10 @@ export const Ratings = ({ setRating, rating }) => {
                                 style={
                                     rating >= 5 || hover >= 5 ? { display: "inline" } :
                                         { display: "none" }}
-                                onClick={() => setRating(5)}
+                                onClick={() => {
+                                    setRating(5)
+                                    setLocalRating(5)
+                                }}
                                 onMouseEnter={() => setHover(5)}
                                 onMouseLeave={() => setHover(0)}
                             ></i>
