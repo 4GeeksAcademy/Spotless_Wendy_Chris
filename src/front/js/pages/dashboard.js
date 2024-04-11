@@ -53,16 +53,17 @@ export const Dashboard = () => {
   }, []);
 
 
+
+ 
+
+
   const ComparedDate = () => {
     const today = new Date()
     if (listingDate  <=  today ) { //first date is in future, or it is today
       return false
     }
-  
     return true
   }
-
-
 
   function delete_property(id_to_delete) {
     fetch(process.env.BACKEND_URL + `/api/user/${currentUser.id}/delete/property/` + id_to_delete,
@@ -127,39 +128,39 @@ export const Dashboard = () => {
     let test= ComparedDate();
     console.log('Check if the date is in the past : '+test);
 
-    // if (listingDate.length > 5) {
+    if (listingDate.length > 5) {
 
-    //   let price_for_listing = (listingId.bath * 15) + (listingId.beds * 10);
-    //   let new_listing = { property_id: listingId.id, special_note: listingNote, date_needed: listingDate, rate: price_for_listing };
+      let price_for_listing = (listingId.bath * 15) + (listingId.beds * 10);
+      let new_listing = { property_id: listingId.id, special_note: listingNote, date_needed: listingDate, rate: price_for_listing };
 
-    //   fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
-    //     {
-    //       method: 'POST',
-    //       body: JSON.stringify(new_listing),
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       }
-    //     })
-    //     .then(res => {
-    //       if (!res.ok) console.log(res.statusText);
-    //       return res.json();
-    //     })
-    //     .then(response => {
-    //       console.log(response)
+      fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
+        {
+          method: 'POST',
+          body: JSON.stringify(new_listing),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(res => {
+          if (!res.ok) console.log(res.statusText);
+          return res.json();
+        })
+        .then(response => {
+          console.log(response)
 
-    //     })
+        })
 
-    //     .catch(error => console.log(error));
-    //   setListingDate('');
-    //   setListingNote('');
-    //   const dialog = document.getElementById('modal_dialog');
-    //   dialog.close();
+        .catch(error => console.log(error));
+      setListingDate('');
+      setListingNote('');
+      const dialog = document.getElementById('modal_dialog');
+      dialog.close();
 
-    // }
-    // else {
-    //   const dialog = document.getElementById('modal_dialog');
-    //   dialog.close();
-    // }
+    }
+    else {
+      const dialog = document.getElementById('modal_dialog');
+      dialog.close();
+    }
 
   }
 
@@ -169,13 +170,14 @@ export const Dashboard = () => {
 
       <div class="product-list-container">
 
-        {myProperties.map((element) =>
+        {myProperties.map((element,index) =>
 
           <div class="card text-secondary" style={{ width: "18rem" }} key={element.id}>
 
             <div id="slideshow">
               <div className="jump_div">
-                <Link to='/demo'>
+              <Link to={`/demo`} state={element}>
+
                   <span><i class="fa-solid fa-arrow-up-right-from-square fa-fade fa-xl"></i></span>
                 </Link>
               </div>

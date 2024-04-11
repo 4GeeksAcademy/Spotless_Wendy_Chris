@@ -47,7 +47,7 @@ export const WHistory= () => {
 	return (
     <div> 
 
-<div className="add_property_class_div">
+<div className="go_back_div">
       <button className="test button-24"  onClick={()=>navigate("/schedule")}>Schedule</button>
       </div>
     

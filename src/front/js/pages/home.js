@@ -101,6 +101,12 @@ export const Home = () => {
 			.catch(error => console.log(error));
 	}
 
+
+
+	  
+
+
+
 	return (
 
 		<div className="container">
@@ -135,9 +141,12 @@ export const Home = () => {
 			</Link>
 
 			<Link to='/wschedule'>
-				<button type="button" className="btn btn-secondary" >Go to schedule</button>
+				<button type="button" className="btn btn-secondary" >Go to schedule</button><br /><br />
 			</Link>
 
+				<button type="button" className="btn btn-secondary" onClick={()=> asyncCall()}>Test async function</button>
+
+	
 
 		</div>
 

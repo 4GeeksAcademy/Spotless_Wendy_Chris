@@ -11,6 +11,7 @@
 
 * {
 	box-sizing: border-box;
+	color: black;
 }
 
 #dateofbirth{
@@ -24,12 +25,16 @@
 		height: 30px;
 	
 }
+li:hover{
+	transform: scale(1.05);
 
+}
 
 
 body {
 	font-family: Helvetica, sans-serif;
 	padding: 5%;
+	
   
   }
   
@@ -107,12 +112,13 @@ span{
 }
 
 
-.add_property_class_div{
+.go_back_div{
 	text-align: right;
 	margin-bottom: 10px;
 	margin-top: 20px;
 	
 }
+
 .product-list-container {
 	display: flex;
 	flex-wrap: wrap;
