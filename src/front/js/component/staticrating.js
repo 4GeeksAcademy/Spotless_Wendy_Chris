@@ -6,7 +6,7 @@ import "../../styles/home.css";
 import { AppContext } from "../layout";
 import { Link, useNavigate } from "react-router-dom";
 
-export const StaticRating = ({ ratingValue }) => {
+export const StaticRating = ({ rating }) => {
 
     const { store, actions } = useContext(Context);
     const { currentUser, myProperties, setMyProperties, setCurrentUser, token, setToken, role, setRole,
@@ -15,7 +15,9 @@ export const StaticRating = ({ ratingValue }) => {
 
     const navigate = useNavigate();
     const [listingNote, setListingNote] = useState('');
-    const [rating, setRating] = useState(ratingValue)
+    // const [rating, setRating] = useState(ratingValue)
+
+
 
 
     var currentRating = 0
