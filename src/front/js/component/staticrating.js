@@ -37,7 +37,7 @@ export const StaticRating = ({ ratingValue }) => {
                         rating >= 1 ? { display: "inline" } :
                             { display: "none" }}
                 ></i>
-                <i className="fa-solid fa-star ps-2 fs-4 starRating"
+                <i className="fa-solid fa-star ps-2 fs-4 staticStarRating"
                     style={rating < 2 ? { display: "inline" } :
                         { display: "none" }}
                 ></i>
@@ -46,7 +46,7 @@ export const StaticRating = ({ ratingValue }) => {
                         rating >= 2 ? { display: "inline" } :
                             { display: "none" }}
                 ></i>
-                <i className="fa-solid fa-star ps-2 fs-4 starRating"
+                <i className="fa-solid fa-star ps-2 fs-4 staticStarRating"
                     style={rating < 3 ? { display: "inline" } :
                         { display: "none" }}
                 ></i>
@@ -55,7 +55,7 @@ export const StaticRating = ({ ratingValue }) => {
                         rating >= 3 ? { display: "inline" } :
                             { display: "none" }}
                 ></i>
-                <i className="fa-solid fa-star ps-2 fs-4 starRating"
+                <i className="fa-solid fa-star ps-2 fs-4 staticStarRating"
                     style={rating < 4 ? { display: "inline" } :
                         { display: "none" }}
                 ></i>
@@ -64,7 +64,7 @@ export const StaticRating = ({ ratingValue }) => {
                         rating >= 4 ? { display: "inline" } :
                             { display: "none" }}
                 ></i>
-                <i className="fa-solid fa-star ps-2 fs-4 starRating"
+                <i className="fa-solid fa-star ps-2 fs-4 staticStarRating"
                     style={rating < 5 ? { display: "inline" } :
                         { display: "none" }}
                 ></i>

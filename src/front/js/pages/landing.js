@@ -50,8 +50,14 @@ export const Landing = () => {
 
 
     if (currentUser) {
-        var trunc_email = currentUser.email.split("@")
-        var name = trunc_email[0]
+        if (currentUser.email.includes("@")) {
+            var trunc_email = currentUser.email.split("@")
+            var name = trunc_email[0]
+        }
+        else {
+            var name = currentUser.email
+        }
+
     }
 
     const handleUser = () => {

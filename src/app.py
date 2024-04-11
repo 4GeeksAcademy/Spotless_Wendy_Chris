@@ -72,6 +72,7 @@ def create_token():
                             "phone": worker.phone,
                             "full_name": worker.full_name,
                             "rating": worker.ranking,
+                            "img": worker.img,
                              "role": "Worker"
                               }), 200            
     
