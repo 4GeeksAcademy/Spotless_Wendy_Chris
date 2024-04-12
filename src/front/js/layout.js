@@ -51,6 +51,7 @@ const Layout = () => {
     const [display, setDisplay] = useState("")
     const [myProperties, setMyProperties] = useState([])
     const [filterListings, setFilterListings] = useState("Active")
+    const [mySchedule, setMySchedule] = useState([]);
     const [currentUser, setCurrentUser] = useState({
         "address": null,
         "billing": null,
@@ -78,7 +79,7 @@ const Layout = () => {
                     currentUser, setCurrentUser, token, setToken,
                     myListings, setMyListings, myProperties, setMyProperties,
                     role, setRole, display, setDisplay, filterListings, setFilterListings,
-                    workerListings, setWorkerListings, menu, setMenu
+                    workerListings, setWorkerListings, menu, setMenu, mySchedule, setMySchedule
                 }
             }>
                 <BrowserRouter basename={basename}>
@@ -96,7 +97,7 @@ const Layout = () => {
                             <Route element={<Ratings />} path="ratings" />
                             <Route element={<StaticRating />} path="staticrating" />
                             <Route element={<WHistory />} path="/whistory" />
-                              <Route element={<MyListings />} path="/mylistings" />
+                            <Route element={<MyListings />} path="/mylistings" />
                             <Route element={<MyPayments />} path="/mypayments" />
                             <Route element={<AddProperty />} path="/addproperty" />
                             <Route element={<History />} path="/history" />

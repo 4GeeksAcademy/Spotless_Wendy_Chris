@@ -184,12 +184,22 @@ def get_worker_schedule(idw):
 @api.route('/worker/schedule/new', methods=['POST'])
 def add_to_schedule():
     schedule_request=request.json
+    idw = schedule_request['worker_id']
     db.session.query(Listing).filter_by(id=schedule_request['listing_id']).update({"status":'Scheduled'})
     db.session.commit()
-    newS=Schedule(listing_id=schedule_request['listing_id'], worker_id=schedule_request['worker_id'])
+    newS=Schedule(listing_id=schedule_request['listing_id'], worker_id=schedule_request['worker_id'])    
     db.session.add(newS)
     db.session.commit()
-    return jsonify(f"Success"), 200
+
+    get_listing= db.session.execute("SELECT Listing.id, Listing.date_needed, Listing.special_note, Property.address, Property.city,  Property.img, Listing.rate FROM Listing join Property ON Property.id=Listing.property_id where Listing.status='Active';")
+    all_listing= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3],city=row[4], img=row[5], rate=row[6] ) for row in get_listing.fetchall()]
+    
+    get_schedule = Schedule.query.filter_by(worker_id=idw)
+    all_schedule= list(map(lambda x: x.serialize(), get_schedule))
+    return jsonify({
+        "worker_schedule": all_schedule,
+        "available_listings": all_listing
+    }), 200
 
 
 
