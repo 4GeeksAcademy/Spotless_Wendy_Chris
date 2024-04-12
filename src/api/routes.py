@@ -114,7 +114,8 @@ def add_newproperty_load():
 @api.route('/user/property/listing/new', methods=['POST'])
 def add_user_listing():
     listing_request=request.json
-    
+    idc = listing_request['user_id']
+
     test_listing= Listing.query.filter_by(property_id=listing_request['property_id'],date_needed=listing_request['date_needed']).first()
     if test_listing:
        return jsonify(f"This one already exists")
@@ -122,7 +123,11 @@ def add_user_listing():
         newL=Listing(property_id=listing_request['property_id'], date_needed= listing_request['date_needed'], special_note=listing_request['special_note'], rate= listing_request['rate'])
         db.session.add(newL)
         db.session.commit()
-    return jsonify(f"Success"), 200
+
+    get_property_of_user=db.session.query(Property.id).filter_by(user_id=idc).subquery()
+    get_listing= Listing.query.filter(Listing.property_id.in_(get_property_of_user))
+    all_listing= list(map(lambda x: x.serialize(), get_listing))
+    return jsonify(all_listing), 200
 
 
       
@@ -144,9 +149,15 @@ def update_user_or_worker(id):
     else:
          test_token= User.query.filter_by(email=request_body['email'], password=request_body['password']).first()
          if test_token:
+            user = User.query.filter_by(email=request_body['email'], password=request_body['password']).first()
             db.session.query(User).filter_by(email=request_body['email'], password=request_body['password']).update({"full_name":request_body['full_name'], "email":request_body['email'],"phone": request_body['phone'], "password":request_body['new_password']})
             db.session.commit()
-            return jsonify(f"Success"), 200
+            return jsonify({"msg": "User info successfully updated",
+                    "id": user.id,
+                    "email": user.email,
+                     "phone": user.phone, "full_name": user.full_name,
+                      "role": "User"
+                       }), 200
          else:
             return (f"Password incorrect"),410
      
@@ -173,12 +184,22 @@ def get_worker_schedule(idw):
 @api.route('/worker/schedule/new', methods=['POST'])
 def add_to_schedule():
     schedule_request=request.json
+    idw = schedule_request['worker_id']
     db.session.query(Listing).filter_by(id=schedule_request['listing_id']).update({"status":'Scheduled'})
     db.session.commit()
-    newS=Schedule(listing_id=schedule_request['listing_id'], worker_id=schedule_request['worker_id'])
+    newS=Schedule(listing_id=schedule_request['listing_id'], worker_id=schedule_request['worker_id'])    
     db.session.add(newS)
     db.session.commit()
-    return jsonify(f"Success"), 200
+
+    get_listing= db.session.execute("SELECT Listing.id, Listing.date_needed, Listing.special_note, Property.address, Property.city,  Property.img, Listing.rate FROM Listing join Property ON Property.id=Listing.property_id where Listing.status='Active';")
+    all_listing= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3],city=row[4], img=row[5], rate=row[6] ) for row in get_listing.fetchall()]
+    
+    get_schedule = Schedule.query.filter_by(worker_id=idw)
+    all_schedule= list(map(lambda x: x.serialize(), get_schedule))
+    return jsonify({
+        "worker_schedule": all_schedule,
+        "available_listings": all_listing
+    }), 200
 
 
 
@@ -234,18 +255,23 @@ def get_user_listing(idc):
     return jsonify(all_listing), 200
 
 # User can cancel his listing
-@api.route('/user/cancel/listing/<idl>', methods=['PUT'])
-def cancel_listing_by_user(idl):
+@api.route('/user/<idc>/cancel/listing/<idl>', methods=['PUT'])
+def cancel_listing_by_user(idl, idc):
     # you only need the id of the listing you want to cancel in the endpoint.
     db.session.query(Listing).filter_by(id=idl).update({"status":'Canceled'})
     db.session.commit()
 
+    get_property_of_user=db.session.query(Property.id).filter_by(user_id=idc).subquery()
+    get_listing= Listing.query.filter(Listing.property_id.in_(get_property_of_user))
+    all_listing= list(map(lambda x: x.serialize(), get_listing))
+
     checkIfScheduleExist= Schedule.query.filter_by(listing_id=idl).first()
     if checkIfScheduleExist:
         db.session.query(Schedule).filter_by(listing_id=idl).update({"status":'Canceled'})
-
-        db.session.commit()
-    return jsonify(f"Successfully canceled listing number:", idl), 200
+        db.session.commit()        
+    return jsonify(
+        all_listing
+        ), 200
    
 
 

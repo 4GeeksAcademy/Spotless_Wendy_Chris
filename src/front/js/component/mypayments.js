@@ -81,7 +81,7 @@ export const MyPayments = () => {
 
 
     const handlePayment = (idl) => {
-        var fetchedlistings = []
+        var fetchedListings = []
 
         fetch(process.env.BACKEND_URL + `api/user/${currentUser.id}/listing/${idl}/paid`, {
             method: 'PUT', // or 'POST'
@@ -96,10 +96,10 @@ export const MyPayments = () => {
             })
             .then(responseAsJson => {
                 console.log('Success:', responseAsJson),
-                    responseAsJson.my_listings.map((elm) => fetchedlistings.push(elm))
+                    responseAsJson.my_listings.map((elm) => fetchedListings.push(elm))
             }
             )
-            .then(() => setMyListings(fetchedlistings))
+            .then(() => setMyListings(fetchedListings))
             .catch(error => console.error(error));
 
     }

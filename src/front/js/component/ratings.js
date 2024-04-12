@@ -138,8 +138,6 @@ export const Ratings = ({ localRating, setLocalRating }) => {
                         onMouseEnter={() => setHover(5)}
                         onMouseLeave={() => setHover(0)}
                     ></i>
-
-                    {rating}
                 </span>
             </span>
         </>

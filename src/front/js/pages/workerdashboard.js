@@ -12,13 +12,13 @@ export const WDashboard = () => {
   const { store, actions } = useContext(Context);
 
   const { currentUser, myProperties, setMyProperties, workerListings, setWorkerListings, setCurrentUser, token, setToken, role, setRole,
-    display, setDisplay, menu, setMenu
+    display, setDisplay, menu, setMenu, mySchedule, setMySchedule
 
   } = useContext(AppContext);
-  const [eachCity, setEachCity]= useState([]);
+  const [eachCity, setEachCity] = useState([]);
   const navigate = useNavigate();
 
-
+  // Fetch all listings for worker 
   useEffect(() => {
 
     fetch(process.env.BACKEND_URL + "api/worker/listing/all")
@@ -47,7 +47,7 @@ export const WDashboard = () => {
       })
 
       .catch(error => console.log(error));
-  
+
 
   }, []);
 
@@ -84,7 +84,7 @@ export const WDashboard = () => {
       setWorkerListings(final);
     }
     else {
-      
+
       let test = [...workerListings];
       let final = test.toSorted(sortDate);
       setWorkerListings(final);
@@ -110,19 +110,15 @@ export const WDashboard = () => {
         return res.json();
       })
       .then(response => {
-        console.log(response)
-        let test = workerListings.filter((el) => el.id != id);
-        setWorkerListings(test);
+        console.log("Successfully accepted listing, work schedule is:", response)
+        setMySchedule(response.worker_schedule);
+        setWorkerListings(response.available_listings)
 
       })
 
       .catch(error => console.log(error));
 
   }
-
-
-
-
 
 
 
