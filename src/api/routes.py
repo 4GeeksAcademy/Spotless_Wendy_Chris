@@ -250,8 +250,8 @@ def get_host_history(idh):
     .join(User, Property.user_id==User.id)\
     .filter(Schedule.status=='Complete', User.id==idh)\
     .with_entities(Schedule.id, Listing.special_note, Listing.date_needed, Listing.rate, Listing.id, Property.img,
-                   Worker.id, Schedule.review ).all()
-     all_schedule= [dict(id=row[0], special_note=row[1], date_needed=row[2], rate=row[3], listing_id=row[4], property_img=row[5], worker_id=row[6], review=row[7]) for row in get_schedule]
+                   Worker.id, Schedule.review, Property.name ).all()
+     all_schedule= [dict(id=row[0], special_note=row[1], date_needed=row[2], rate=row[3], listing_id=row[4], property_img=row[5], worker_id=row[6], review=row[7], name=row[8]) for row in get_schedule]
      return (all_schedule), 200
 
 

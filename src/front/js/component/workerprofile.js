@@ -118,7 +118,7 @@ export const WorkerProfile = () => {
                     <div className="col-12 text-start ps-1  pb-4">
                         Rating:<span className="ps-3">
                             <StaticRating
-                                ratingValue={currentUser.rating}
+                                rating={currentUser.rating}
                             /></span>
                     </div>
                     <div className="col-12 text-start ps-1  pb-4">
