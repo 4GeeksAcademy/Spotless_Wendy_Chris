@@ -55,9 +55,10 @@ export const WHistory = () => {
 
     }
     else {
-      let test = [...HHistory];
+      
+      let test = [...myWHistory];
       let final = test.toSorted(sortReview);
-      setWorkerListings(final);
+      setMyWHistory(final);
     }
 
 
@@ -78,7 +79,21 @@ export const WHistory = () => {
         <div className="d-flex justify-content-center">
           <h3>Activity</h3>
         </div>
-
+        <div className="dropdown mb-3 text-start">
+        <button
+          className="btn btn-secondary mb-2 dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="fa-solid fa-sliders fa-2xl"></i>
+        </button>
+        <ul className="dropdown-menu text-lg" aria-labelledby="dropdownMenuButton">
+          <li><span className="dropdown-item " onClick={() => filter_listing_function(1)}>By date</span></li>
+          <li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>By review</span></li>
+          </ul>
+      </div>
 
 
         <ul>

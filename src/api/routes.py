@@ -227,6 +227,7 @@ def complete_schedule(ids,idl):
     db.session.commit()
     return jsonify(f"Success"), 200
 
+
 @api.route('/user/cancel/listing/<idl>', methods=['PUT'])
 def cancel_listing_by_user(idl):
     # you only need the id of the listing you want to cancel in the endpoint.
@@ -236,9 +237,10 @@ def cancel_listing_by_user(idl):
     if checkIfScheduleExist:
         db.session.query(Schedule).filter_by(id=idl).update({"status":'Cancel'})
         db.session.commit()
-
     return jsonify(f"Success"), 200
    
+
+
 #  Get completed schedule history for host below 
 @api.route('/user/<idh>/schedule/history', methods=['GET'])
 def get_host_history(idh):
@@ -252,8 +254,9 @@ def get_host_history(idh):
      all_schedule= [dict(id=row[0], special_note=row[1], date_needed=row[2], rate=row[3], listing_id=row[4], property_img=row[5], worker_id=row[6], review=row[7]) for row in get_schedule]
      return (all_schedule), 200
 
-# Give Review for completed schedule in host history below
 
+
+# Give Review for completed schedule in host history below
 @api.route('/schedule/<ids>/review/new', methods=['PUT'])
 def give_review_to_worker(ids):
     #this request.json  from the frontend should come as an object with those two keys worker_id and score
