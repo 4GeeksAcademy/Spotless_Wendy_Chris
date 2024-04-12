@@ -125,7 +125,7 @@ export const WHistory = () => {
                   <div className="row">
                     <div className="col">
                       <StaticRating
-                        ratingValue={element.review}
+                        rating={element.review}
                       /></div>
                   </div>
 

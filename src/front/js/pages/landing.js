@@ -13,6 +13,7 @@ import { StaticProfile } from "../component/staticprofile";
 import { WDashboard } from "./workerdashboard";
 import { WSchedule } from "./wschedule";
 import { MyPayments } from "../component/mypayments";
+import { PaymentHistory } from "../component/paymenthistory";
 import { WHistory } from "./whistory";
 import { HostHistory } from "../component/hosthistory";
 import { WorkerProfile } from "../component/workerprofile";
@@ -198,7 +199,19 @@ export const Landing = () => {
                         style={menu == "properties" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
-                            <div className="col-3"></div>
+                            <div className="col-3 ps-5">
+                                <span className="paymentAlert ms-5"
+                                    style={scheduledPaymentDue.length >= 1 ? { display: "block" } : { display: "none" }}
+                                    onClick={() => {
+                                        setDisplay("payments")
+                                        setMenu("payments")
+                                    }
+                                    }
+
+                                >
+                                    <i class="fa-solid fa-bell fa-shake px-1 fs-3"></i>{scheduledPaymentDue.length}
+                                </span>
+                            </div>
                             <div className="col-6">My Properties</div>
                             <div className="col-3"><span className="button-24 me-3 mt-1"
                                 style={display == "addProp" ? { display: "none" } : { display: "block" }}
@@ -222,7 +235,19 @@ export const Landing = () => {
                         style={menu == "profile" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
-                            <div className="col-3"></div>
+                            <div className="col-3 ps-5">
+                                <span className="paymentAlert ms-5"
+                                    style={scheduledPaymentDue.length >= 1 ? { display: "block" } : { display: "none" }}
+                                    onClick={() => {
+                                        setDisplay("payments")
+                                        setMenu("payments")
+                                    }
+                                    }
+
+                                >
+                                    <i class="fa-solid fa-bell fa-shake px-1 fs-3"></i>{scheduledPaymentDue.length}
+                                </span>
+                            </div>
                             <div className="col-6">My Profile</div>
                             <div className="col-3"><span className="button-24 me-3 mt-1"
                                 style={display == "myProfile" ? { display: "block" } : { display: "none" }}
@@ -246,7 +271,19 @@ export const Landing = () => {
                         style={menu == "history" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
-                            <div className="col-3"></div>
+                            <div className="col-3 ps-5">
+                                <span className="paymentAlert ms-5"
+                                    style={scheduledPaymentDue.length >= 1 ? { display: "block" } : { display: "none" }}
+                                    onClick={() => {
+                                        setDisplay("payments")
+                                        setMenu("payments")
+                                    }
+                                    }
+
+                                >
+                                    <i class="fa-solid fa-bell fa-shake px-1 fs-3"></i>{scheduledPaymentDue.length}
+                                </span>
+                            </div>
                             <div className="col-6">My History</div>
                             <div className="col-3"></div>
                         </div>
@@ -259,16 +296,35 @@ export const Landing = () => {
                         style={menu == "payments" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
-                            <div className="col-3"></div>
+                            <div className="col-3 ps-5">
+                                <span className="paymentAlert ms-5"
+                                    style={scheduledPaymentDue.length >= 1 ? { display: "block" } : { display: "none" }}
+                                    onClick={() => {
+                                        setDisplay("payments")
+                                        setMenu("payments")
+                                    }
+                                    }
+
+                                >
+                                    <i class="fa-solid fa-bell fa-shake px-1 fs-3"></i>{scheduledPaymentDue.length}
+                                </span>
+                            </div>
                             <div className="col-6">My Payments</div>
-                            <div className="col-3"></div>
+                            <div className="col-3"><span className="button-24 me-3 mt-1"
+                                style={display == "payments" ? { display: "block" } : { display: "none" }}
+                                onClick={() => setDisplay("paymentHistory")}
+                            >Paymeny History</span>
+                                <span className="button-24 me-3 mt-1"
+                                    style={display == "paymentHistory" ? { display: "block" } : { display: "none" }}
+                                    onClick={() => setDisplay("payments")}
+                                >Make Payments</span></div>
                         </div>
                         <div
                             style={display == "payments" ? { display: "block" } : { display: "none" }}
                         ><MyPayments /></div>
                         <div
                             style={display == "paymentHistory" ? { display: "block" } : { display: "none" }}
-                        >Payment History Will Go Here</div>
+                        ><PaymentHistory /></div>
                     </div>
                 </div>
             </div>
@@ -324,7 +380,9 @@ export const Landing = () => {
                         </div>
                         <div
                             style={display == "listings" ? { display: "block" } : { display: "none" }}
-                        ><WDashboard /></div>
+                        >
+                            {/* Add logic for when there are no avaible listings here or in WDashboard  */}
+                            <WDashboard /></div>
                     </div>
 
                     {/* Worker Schedule Body Below  */}

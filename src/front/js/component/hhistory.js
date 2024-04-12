@@ -72,9 +72,29 @@ export const HHistory = () => {
 
     }, []);
 
+
+    const getHostHistory = () => {
+        fetch(process.env.BACKEND_URL + `api/user/${currentUser.id}/schedule/history`)
+            .then(res => {
+                if (!res.ok) throw Error(res.statusText);
+                return res.json();
+            })
+            .then(responseAsJson => {
+                console.log("response for listing from backend:")
+                console.log(responseAsJson)
+                setHHistory(responseAsJson)
+
+            })
+
+
+            .catch(error => console.log(error));
+
+    }
+
+
     // submit rating below
 
-    const handleSubmitRating = (id, worker_id) => {
+    const handleSubmitRating = (id, worker_id, index) => {
 
         fetch(process.env.BACKEND_URL + `api/schedule/${id}/review/new`, {
             method: 'PUT',
@@ -93,7 +113,14 @@ export const HHistory = () => {
                 if (!res.ok) throw Error(res.statusText);
                 return res.json();
             })
-            .then(response => console.log('Success:', response))
+            .then(response => {
+                console.log('Success:', response);
+                // let newArray = [...hHistory];
+                // newArray[index].review = localRating;
+                // setHHistory(newArray);
+            })
+            .then(() => getHostHistory())
+
             .catch(error => console.error(error));
 
 
@@ -104,28 +131,7 @@ export const HHistory = () => {
     // Match property_id from myListingslistings with property Ids from myProperties and create new array of objects
     // for listings below
 
-    var listingArray = []
 
-    myProperties.map((element) => {
-        myListings.forEach((elm) => {
-            if (elm.property_id == element.id) {
-                let tempObj = { ...element };
-                tempObj.special_note = elm.special_note;
-                tempObj.date_needed = elm.date_needed;
-                tempObj.status = elm.status;
-                tempObj.rate = elm.rate
-                tempObj.listing_id = elm.id
-                listingArray.push(tempObj)
-                console.log("tempObj", tempObj);
-                console.log("the matching elements")
-                console.log(listingArray)
-            }
-        })
-    })
-
-    const listingHistory = listingArray.filter((elm) => elm.status == "Completed");
-    console.log("filter results:")
-    console.log(listingHistory)
 
 
     return (
@@ -134,7 +140,7 @@ export const HHistory = () => {
                 <div className="col-12">
                     {
                         hHistory.length >= 1 ?
-                            hHistory.map((elm) => {
+                            hHistory.map((elm, index) => {
                                 return (<>
                                     <ul>
                                         <li key={elm.id}>
@@ -145,9 +151,11 @@ export const HHistory = () => {
                                                     </div>
                                                     <div className="col-10">
                                                         <div className="row">
-                                                            <div className="col-4 pt-2 fs-5">{elm.name}</div>
-                                                            <div className="col-5 pt-1">
-                                                                <span>Scheduled Date: {elm.date_needed}</span>
+                                                            <div className="col-4 pt-2 fs-5">
+                                                                <h4>{elm.name}</h4>
+                                                            </div>
+                                                            <div className="col-5 pt-1 text-center">
+                                                                <span>Date: {elm.date_needed}</span>
                                                             </div>
                                                             <div className="col-3 pt-1">
                                                                 <h4>Paid ${elm.rate} in full</h4>
@@ -156,25 +164,27 @@ export const HHistory = () => {
                                                                 style={elm.review <= 0 ? { display: "block" }
                                                                     : { display: "none" }}
                                                             >
-                                                                <div className="col-9">
+                                                                <div className="col-12 text-center">
                                                                     <Ratings
                                                                         setLocalRating={setLocalRating}
                                                                         localRating={localRating} />
-                                                                </div>
-                                                                <div className="col-3">
-                                                                    <span className="button-24"
+                                                                    <span className="button-24 ms-5"
                                                                         onClick={() => {
-                                                                            handleSubmitRating(elm.id, elm.worker_id)
+                                                                            handleSubmitRating(elm.id,
+                                                                                elm.worker_id,
+                                                                                index
+                                                                            )
                                                                         }}
-                                                                    >Submit Rating</span></div>
+                                                                    >Submit Rating</span>
+                                                                </div>
                                                             </div>
                                                             <div className="row pt-3 text-light text-center"
-                                                                style={elm.review > 0 ? { display: "block" }
+                                                                style={elm.review >= 1 ? { display: "block" }
                                                                     : { display: "none" }}
                                                             >
                                                                 <div className="col-12 fs-3">
                                                                     You rated this job: <StaticRating
-                                                                        ratingValue={elm.review}
+                                                                        rating={elm.review}
                                                                     />
                                                                 </div>
 

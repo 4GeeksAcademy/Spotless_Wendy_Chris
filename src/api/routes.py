@@ -117,7 +117,7 @@ def add_user_listing():
     
     test_listing= Listing.query.filter_by(property_id=listing_request['property_id'],date_needed=listing_request['date_needed']).first()
     if test_listing:
-       return jsonify(f"THis one already exists")
+       return jsonify(f"This one already exists")
     else:
         newL=Listing(property_id=listing_request['property_id'], date_needed= listing_request['date_needed'], special_note=listing_request['special_note'], rate= listing_request['rate'])
         db.session.add(newL)
@@ -239,11 +239,13 @@ def cancel_listing_by_user(idl):
     # you only need the id of the listing you want to cancel in the endpoint.
     db.session.query(Listing).filter_by(id=idl).update({"status":'Canceled'})
     db.session.commit()
+
     checkIfScheduleExist= Schedule.query.filter_by(listing_id=idl).first()
     if checkIfScheduleExist:
         db.session.query(Schedule).filter_by(listing_id=idl).update({"status":'Canceled'})
+
         db.session.commit()
-    return jsonify(f"Success"), 200
+    return jsonify(f"Successfully canceled listing number:", idl), 200
    
 
 
@@ -256,8 +258,8 @@ def get_host_history(idh):
     .join(User, Property.user_id==User.id)\
     .filter(Schedule.status=='Complete', User.id==idh)\
     .with_entities(Schedule.id, Listing.special_note, Listing.date_needed, Listing.rate, Listing.id, Property.img,
-                   Worker.id, Schedule.review ).all()
-     all_schedule= [dict(id=row[0], special_note=row[1], date_needed=row[2], rate=row[3], listing_id=row[4], property_img=row[5], worker_id=row[6], review=row[7]) for row in get_schedule]
+                   Worker.id, Schedule.review, Property.name ).all()
+     all_schedule= [dict(id=row[0], special_note=row[1], date_needed=row[2], rate=row[3], listing_id=row[4], property_img=row[5], worker_id=row[6], review=row[7], name=row[8]) for row in get_schedule]
      return (all_schedule), 200
 
 
