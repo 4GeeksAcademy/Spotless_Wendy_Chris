@@ -100,6 +100,18 @@
     text-shadow: 0 0 3px #000000;
 }
 
+.staticStar {
+    color: rgb(255, 232, 27);
+    text-shadow: 0 0 9px #ffffff;
+}
+
+.staticStarRating {
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 3px #676767;
+}
+
+
+
 .status {
     padding: 1px 1px;
 }
@@ -184,4 +196,11 @@
   .payment_button {
     width:69%;
   }
+
+ 
+
+.profilePic {
+    max-width: 333px;
+    border-radius: 7px;
+}
   

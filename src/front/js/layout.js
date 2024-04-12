@@ -15,6 +15,7 @@ import { Ratings } from "./component/ratings";
 import { MyPayments } from "./component/mypayments";
 import { HostHistory } from "./component/hosthistory";
 import { HHistory } from "./component/hhistory";
+import { StaticRating } from "./component/staticrating";
 
 import { WDashboard } from "./pages/workerdashboard";
 import { EditProfile } from "./pages/editprofile";
@@ -94,6 +95,7 @@ const Layout = () => {
                             <Route element={<EditProfile />} path="/editprofile" />
                             <Route element={<Landing />} path="/landing" />
                             <Route element={<Ratings />} path="ratings" />
+                            <Route element={<StaticRating />} path="staticrating" />
                             <Route element={<WHistory />} path="/whistory" />
                             <Route element={<AddListing />} path="/addlisting" />
                             <Route element={<MyListings />} path="/mylistings" />

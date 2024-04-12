@@ -69,7 +69,10 @@ def create_token():
                             "token": access_token,
                             "id": worker.id,
                             "email": worker.email,
-                            "phone": worker.phone, "full_name": worker.full_name,
+                            "phone": worker.phone,
+                            "full_name": worker.full_name,
+                            "rating": worker.ranking,
+                            "img": worker.img,
                              "role": "Worker"
                               }), 200            
     
