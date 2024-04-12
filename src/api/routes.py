@@ -117,7 +117,7 @@ def add_user_listing():
     
     test_listing= Listing.query.filter_by(property_id=listing_request['property_id'],date_needed=listing_request['date_needed']).first()
     if test_listing:
-       return jsonify(f"THis one already exists")
+       return jsonify(f"This one already exists")
     else:
         newL=Listing(property_id=listing_request['property_id'], date_needed= listing_request['date_needed'], special_note=listing_request['special_note'], rate= listing_request['rate'])
         db.session.add(newL)
@@ -233,11 +233,11 @@ def cancel_listing_by_user(idl):
     # you only need the id of the listing you want to cancel in the endpoint.
     db.session.query(Listing).filter_by(id=idl).update({"status":'Canceled'})
     db.session.commit()
-    checkIfScheduleExist= Schedule.query.filter_by(Schedule.listing_id==idl, status='Active').first()
+    checkIfScheduleExist= db.session.query(Schedule).filter_by(listing_id=idl, status="Active").first()
     if checkIfScheduleExist:
-        db.session.query(Schedule).filter_by(id=idl).update({"status":'Cancel'})
+        db.session.query(Schedule).filter_by(id=idl).update({"status":'Canceled'})
         db.session.commit()
-    return jsonify(f"Success"), 200
+    return jsonify(f"Successfully canceled listing number:", idl), 200
    
 
 

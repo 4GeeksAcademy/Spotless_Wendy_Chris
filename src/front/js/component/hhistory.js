@@ -115,11 +115,11 @@ export const HHistory = () => {
             })
             .then(response => {
                 console.log('Success:', response);
-                let newArray = [...hHistory];
-                newArray[index].review = localRating;
-                setHHistory(newArray);
+                // let newArray = [...hHistory];
+                // newArray[index].review = localRating;
+                // setHHistory(newArray);
             })
-            // .then(() => getHostHistory())
+            .then(() => getHostHistory())
 
             .catch(error => console.error(error));
 

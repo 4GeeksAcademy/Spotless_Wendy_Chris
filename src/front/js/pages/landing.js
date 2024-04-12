@@ -199,7 +199,19 @@ export const Landing = () => {
                         style={menu == "properties" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
-                            <div className="col-3"></div>
+                            <div className="col-3 ps-5">
+                                <span className="paymentAlert ms-5"
+                                    style={scheduledPaymentDue.length >= 1 ? { display: "block" } : { display: "none" }}
+                                    onClick={() => {
+                                        setDisplay("payments")
+                                        setMenu("payments")
+                                    }
+                                    }
+
+                                >
+                                    <i class="fa-solid fa-bell fa-shake px-1 fs-3"></i>{scheduledPaymentDue.length}
+                                </span>
+                            </div>
                             <div className="col-6">My Properties</div>
                             <div className="col-3"><span className="button-24 me-3 mt-1"
                                 style={display == "addProp" ? { display: "none" } : { display: "block" }}
@@ -223,7 +235,19 @@ export const Landing = () => {
                         style={menu == "profile" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
-                            <div className="col-3"></div>
+                            <div className="col-3 ps-5">
+                                <span className="paymentAlert ms-5"
+                                    style={scheduledPaymentDue.length >= 1 ? { display: "block" } : { display: "none" }}
+                                    onClick={() => {
+                                        setDisplay("payments")
+                                        setMenu("payments")
+                                    }
+                                    }
+
+                                >
+                                    <i class="fa-solid fa-bell fa-shake px-1 fs-3"></i>{scheduledPaymentDue.length}
+                                </span>
+                            </div>
                             <div className="col-6">My Profile</div>
                             <div className="col-3"><span className="button-24 me-3 mt-1"
                                 style={display == "myProfile" ? { display: "block" } : { display: "none" }}
@@ -247,7 +271,19 @@ export const Landing = () => {
                         style={menu == "history" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
-                            <div className="col-3"></div>
+                            <div className="col-3 ps-5">
+                                <span className="paymentAlert ms-5"
+                                    style={scheduledPaymentDue.length >= 1 ? { display: "block" } : { display: "none" }}
+                                    onClick={() => {
+                                        setDisplay("payments")
+                                        setMenu("payments")
+                                    }
+                                    }
+
+                                >
+                                    <i class="fa-solid fa-bell fa-shake px-1 fs-3"></i>{scheduledPaymentDue.length}
+                                </span>
+                            </div>
                             <div className="col-6">My History</div>
                             <div className="col-3"></div>
                         </div>
@@ -260,7 +296,19 @@ export const Landing = () => {
                         style={menu == "payments" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
-                            <div className="col-3"></div>
+                            <div className="col-3 ps-5">
+                                <span className="paymentAlert ms-5"
+                                    style={scheduledPaymentDue.length >= 1 ? { display: "block" } : { display: "none" }}
+                                    onClick={() => {
+                                        setDisplay("payments")
+                                        setMenu("payments")
+                                    }
+                                    }
+
+                                >
+                                    <i class="fa-solid fa-bell fa-shake px-1 fs-3"></i>{scheduledPaymentDue.length}
+                                </span>
+                            </div>
                             <div className="col-6">My Payments</div>
                             <div className="col-3"><span className="button-24 me-3 mt-1"
                                 style={display == "payments" ? { display: "block" } : { display: "none" }}
