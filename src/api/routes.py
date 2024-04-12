@@ -126,12 +126,6 @@ def add_user_listing():
 
 
       
-@api.route('/user/<idc>/listing', methods=['GET'])
-def get_user_listing(idc):
-    get_property_of_user=db.session.query(Property.id).filter_by(user_id=idc).subquery()
-    get_listing= Listing.query.filter(Listing.property_id.in_(get_property_of_user))
-    all_listing= list(map(lambda x: x.serialize(), get_listing))
-    return jsonify(all_listing), 200
 
 
 # Update user or worker endpoint
@@ -175,7 +169,7 @@ def get_worker_schedule(idw):
 
 
 
-# Add a new schedule for a specific worker below
+# Worker accepts a listing he sees available on his dashboard below
 @api.route('/worker/schedule/new', methods=['POST'])
 def add_to_schedule():
     schedule_request=request.json
@@ -188,7 +182,7 @@ def add_to_schedule():
 
 
 
-# Cancel schedule for a specific worker below
+# Worker can cancel his own schedule below
 @api.route('/worker/schedule/<ids>/cancel/<idl>', methods=['PUT'])
 def cancel_schedule(ids,idl):
     db.session.query(Listing).filter_by(id=idl).update({"status":'Active'})
@@ -218,7 +212,7 @@ def paid_listing(idc,idl):
    
      
 
-# Complete schedule 
+# Complete schedule by worker when the job is done.
 @api.route('/worker/schedule/<ids>/complete/<idl>', methods=['PUT'])
 def complete_schedule(ids,idl):
     db.session.query(Listing).filter_by(id=idl).update({"status":'Complete'})
@@ -228,14 +222,28 @@ def complete_schedule(ids,idl):
     return jsonify(f"Success"), 200
 
 
+
+# the two endpoint below are get listing for a user, and cancel it by the user 
+
+#get the listing for the current user
+@api.route('/user/<idc>/listing', methods=['GET'])
+def get_user_listing(idc):
+    get_property_of_user=db.session.query(Property.id).filter_by(user_id=idc).subquery()
+    get_listing= Listing.query.filter(Listing.property_id.in_(get_property_of_user))
+    all_listing= list(map(lambda x: x.serialize(), get_listing))
+    return jsonify(all_listing), 200
+
+# User can cancel his listing
 @api.route('/user/cancel/listing/<idl>', methods=['PUT'])
 def cancel_listing_by_user(idl):
     # you only need the id of the listing you want to cancel in the endpoint.
     db.session.query(Listing).filter_by(id=idl).update({"status":'Canceled'})
     db.session.commit()
-    checkIfScheduleExist= db.session.query(Schedule).filter_by(listing_id=idl, status="Active").first()
+
+    checkIfScheduleExist= Schedule.query.filter_by(listing_id=idl).first()
     if checkIfScheduleExist:
-        db.session.query(Schedule).filter_by(id=idl).update({"status":'Canceled'})
+        db.session.query(Schedule).filter_by(listing_id=idl).update({"status":'Canceled'})
+
         db.session.commit()
     return jsonify(f"Successfully canceled listing number:", idl), 200
    
@@ -263,6 +271,7 @@ def give_review_to_worker(ids):
     review_request=request.json
     db.session.query(Schedule).filter_by(id=ids).update({"review": review_request['score']})
     db.session.commit()
+    #this little tric below convert the id into a string to concat it to the execute method that only acceps a string
     idw= str(review_request['worker_id'])
     get_t_review= db.session.execute("SELECT sum(review) , count(review) from Schedule where worker_id="+idw+" and status='Complete' and review is not null ;")
     average_ranking= [dict(sum_review=row[0], total_review=row[1]) for row in get_t_review.fetchall()]
