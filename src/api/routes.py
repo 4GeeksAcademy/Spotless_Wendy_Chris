@@ -126,12 +126,6 @@ def add_user_listing():
 
 
       
-@api.route('/user/<idc>/listing', methods=['GET'])
-def get_user_listing(idc):
-    get_property_of_user=db.session.query(Property.id).filter_by(user_id=idc).subquery()
-    get_listing= Listing.query.filter(Listing.property_id.in_(get_property_of_user))
-    all_listing= list(map(lambda x: x.serialize(), get_listing))
-    return jsonify(all_listing), 200
 
 
 # Update user or worker endpoint
@@ -228,14 +222,25 @@ def complete_schedule(ids,idl):
     return jsonify(f"Success"), 200
 
 
+
+# the two endpoint below are get listing for a user, and cancel it by the user 
+#get the listing for the current user
+@api.route('/user/<idc>/listing', methods=['GET'])
+def get_user_listing(idc):
+    get_property_of_user=db.session.query(Property.id).filter_by(user_id=idc).subquery()
+    get_listing= Listing.query.filter(Listing.property_id.in_(get_property_of_user))
+    all_listing= list(map(lambda x: x.serialize(), get_listing))
+    return jsonify(all_listing), 200
+
+
 @api.route('/user/cancel/listing/<idl>', methods=['PUT'])
 def cancel_listing_by_user(idl):
     # you only need the id of the listing you want to cancel in the endpoint.
     db.session.query(Listing).filter_by(id=idl).update({"status":'Canceled'})
     db.session.commit()
-    checkIfScheduleExist= Schedule.query.filter_by(Schedule.listing_id==idl, status='Active').first()
+    checkIfScheduleExist= Schedule.query.filter_by(listing_id=idl).first()
     if checkIfScheduleExist:
-        db.session.query(Schedule).filter_by(id=idl).update({"status":'Cancel'})
+        db.session.query(Schedule).filter_by(listing_id=idl).update({"status":'Canceled'})
         db.session.commit()
     return jsonify(f"Success"), 200
    
@@ -263,6 +268,7 @@ def give_review_to_worker(ids):
     review_request=request.json
     db.session.query(Schedule).filter_by(id=ids).update({"review": review_request['score']})
     db.session.commit()
+    #this little tric below convert the id into a string to concat it to the execute method that only acceps a string
     idw= str(review_request['worker_id'])
     get_t_review= db.session.execute("SELECT sum(review) , count(review) from Schedule where worker_id="+idw+" and status='Complete' and review is not null ;")
     average_ranking= [dict(sum_review=row[0], total_review=row[1]) for row in get_t_review.fetchall()]

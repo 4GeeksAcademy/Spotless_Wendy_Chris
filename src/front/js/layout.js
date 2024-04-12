@@ -24,7 +24,6 @@ import { MyListings } from "./component/mylistings";
 import { WHistory } from "./pages/whistory";
 
 
-import { AddListing } from "./pages/addlisting";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -97,8 +96,7 @@ const Layout = () => {
                             <Route element={<Ratings />} path="ratings" />
                             <Route element={<StaticRating />} path="staticrating" />
                             <Route element={<WHistory />} path="/whistory" />
-                            <Route element={<AddListing />} path="/addlisting" />
-                            <Route element={<MyListings />} path="/mylistings" />
+                              <Route element={<MyListings />} path="/mylistings" />
                             <Route element={<MyPayments />} path="/mypayments" />
                             <Route element={<AddProperty />} path="/addproperty" />
                             <Route element={<History />} path="/history" />
