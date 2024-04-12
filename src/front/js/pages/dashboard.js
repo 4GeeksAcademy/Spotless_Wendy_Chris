@@ -121,6 +121,7 @@ export const Dashboard = () => {
 
 
   function save_modal_function(id) {
+
     let format_date = listingDate.replace("T", " ");
     let today = new Date();
     console.log("check today :" + today)
@@ -128,6 +129,7 @@ export const Dashboard = () => {
 
     let test = ComparedDate();
     console.log('Check if the date is in the past : ' + test);
+
 
     if (listingDate.length > 5) {
 
