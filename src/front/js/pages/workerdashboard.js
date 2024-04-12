@@ -15,6 +15,7 @@ export const WDashboard = () => {
     display, setDisplay, menu, setMenu
 
   } = useContext(AppContext);
+  const [eachCity, setEachCity]= useState([]);
   const navigate = useNavigate();
 
 
@@ -46,8 +47,11 @@ export const WDashboard = () => {
       })
 
       .catch(error => console.log(error));
+  
 
   }, []);
+
+
 
   const sortCity = (a, b) => {
     let cityA = a.city.toUpperCase();
@@ -125,7 +129,7 @@ export const WDashboard = () => {
   return (
     <div>
 
-      <div className="add_property_class_div">
+      <div className="go_back_div">
         <button className="test button-24"
           onClick={() => {
             setDisplay("mySchedule")
@@ -149,6 +153,7 @@ export const WDashboard = () => {
           <li><span className="dropdown-item" onClick={(e) => filter_listing_function(e)}>City (A-Z)</span></li>
           <li><span className="dropdown-item" onClick={(e) => filter_listing_function(e)}>Price: (High to Low)</span></li>
           <li><span className="dropdown-item" onClick={(e) => filter_listing_function(e)}>Date</span></li>
+          <li><span className="dropdown-item" >All cities</span></li>
         </ul>
       </div>
 

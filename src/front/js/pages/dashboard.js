@@ -53,6 +53,10 @@ export const Dashboard = () => {
   }, []);
 
 
+
+ 
+
+
   const ComparedDate = () => {
     const today = new Date()
     if (listingDate <= today) { //first date is in future, or it is today
@@ -61,8 +65,6 @@ export const Dashboard = () => {
 
     return true
   }
-
-
 
   function delete_property(id_to_delete) {
     fetch(process.env.BACKEND_URL + `/api/user/${currentUser.id}/delete/property/` + id_to_delete,
@@ -119,6 +121,7 @@ export const Dashboard = () => {
 
 
   function save_modal_function(id) {
+
     let format_date = listingDate.replace("T", " ");
     let today = new Date();
     console.log("check today :" + today)
@@ -126,6 +129,7 @@ export const Dashboard = () => {
 
     let test = ComparedDate();
     console.log('Check if the date is in the past : ' + test);
+
 
     if (listingDate.length > 5) {
 
@@ -169,13 +173,14 @@ export const Dashboard = () => {
 
       <div class="product-list-container">
 
-        {myProperties.map((element) =>
+        {myProperties.map((element,index) =>
 
           <div class="card text-secondary" style={{ width: "18rem" }} key={element.id}>
 
             <div id="slideshow">
               <div className="jump_div">
-                <Link to='/demo'>
+              <Link to={`/demo`} state={element}>
+
                   <span><i class="fa-solid fa-arrow-up-right-from-square fa-fade fa-xl"></i></span>
                 </Link>
               </div>

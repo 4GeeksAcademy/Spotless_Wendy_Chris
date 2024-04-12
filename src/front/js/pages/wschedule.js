@@ -16,8 +16,6 @@ export const WSchedule = () => {
   const [mySchedule, setMySchedule] = useState([]);
 
 
-
-
   useEffect(() => {
 
     fetch(process.env.BACKEND_URL + "api/worker/" + currentUser.id + "/schedule/all")
@@ -38,10 +36,7 @@ export const WSchedule = () => {
   }, []);
 
 
-
   function cancel_schedule_function(schedule_id, listing_id) {
-
-
     fetch(process.env.BACKEND_URL + "api/worker/schedule/" + schedule_id + "/cancel/" + listing_id,
       {
         method: 'PUT'
@@ -60,7 +55,24 @@ export const WSchedule = () => {
 
   }
 
+  function complete_schedule_function(schedule_id, listing_id) {
+    fetch(process.env.BACKEND_URL + "api/worker/schedule/" + schedule_id + "/complete/" + listing_id,
+      {
+        method: 'PUT'
+      })
+      .then(res => {
+        if (!res.ok) console.log(res.statusText);
+        return res.json();
+      })
+      .then(response => {
+        let test = mySchedule.filter((el) => el.id != schedule_id);
+        setMySchedule(test);
 
+      })
+
+      .catch(error => console.log(error));
+
+  }
 
 
   return (
@@ -95,13 +107,11 @@ export const WSchedule = () => {
                 </div>
 
                 <div className="accept_div">
-
+                <button className="test" onClick={() => complete_schedule_function(element.id, element.listing_id)}>Complete</button>
                   <button className="test" onClick={() => cancel_schedule_function(element.id, element.listing_id)}>Cancel</button>
                 </div>
 
               </div>
-
-
 
             </li>
           )}
