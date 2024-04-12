@@ -101,6 +101,8 @@ export const Home = () => {
 			.catch(error => console.log(error));
 	}
 
+
+
 	return (
 
 		<div className="container">
@@ -112,6 +114,7 @@ export const Home = () => {
 			<Link to='/dashboard'>
 				<button type="button" className="btn btn-secondary" >a Link to Dashboard</button><br /><br /><br />
 			</Link>
+
 			<Link to='/mylistings'>
 				<button type="button" className="btn btn-secondary" >a Link to MyListings</button><br /><br /><br />
 			</Link>
@@ -121,11 +124,8 @@ export const Home = () => {
 
 			</Link>
 
-
-
 			<Link to='/wdashboard'>
 				<button type="button" className="btn btn-secondary" >Link to worker dashboard</button><br /><br /><br />
-
 
 			</Link>
 
@@ -135,9 +135,10 @@ export const Home = () => {
 			</Link>
 
 			<Link to='/wschedule'>
-				<button type="button" className="btn btn-secondary" >Go to schedule</button>
+				<button type="button" className="btn btn-secondary" >Go to schedule</button><br /><br />
 			</Link>
 
+	
 
 		</div>
 

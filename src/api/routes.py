@@ -219,14 +219,28 @@ def paid_listing(idc,idl):
      
 
 # Complete schedule 
-@api.route('/worker/schedule/<ids>/complete/<idl>', methods=['POST'])
+@api.route('/worker/schedule/<ids>/complete/<idl>', methods=['PUT'])
 def complete_schedule(ids,idl):
     db.session.query(Listing).filter_by(id=idl).update({"status":'Complete'})
     db.session.commit()
     db.session.query(Schedule).filter_by(id=ids).update({"status":'Complete'})
     db.session.commit()
-    return jsonify(f"Success")
+    return jsonify(f"Success"), 200
+
+
+@api.route('/user/cancel/listing/<idl>', methods=['PUT'])
+def cancel_listing_by_user(idl):
+    # you only need the id of the listing you want to cancel in the endpoint.
+    db.session.query(Listing).filter_by(id=idl).update({"status":'Canceled'})
+    db.session.commit()
+    checkIfScheduleExist= Schedule.query.filter_by(Schedule.listing_id==idl, status='Active').first()
+    if checkIfScheduleExist:
+        db.session.query(Schedule).filter_by(id=idl).update({"status":'Cancel'})
+        db.session.commit()
+    return jsonify(f"Success"), 200
    
+
+
 #  Get completed schedule history for host below 
 @api.route('/user/<idh>/schedule/history', methods=['GET'])
 def get_host_history(idh):
@@ -240,8 +254,9 @@ def get_host_history(idh):
      all_schedule= [dict(id=row[0], special_note=row[1], date_needed=row[2], rate=row[3], listing_id=row[4], property_img=row[5], worker_id=row[6], review=row[7], name=row[8]) for row in get_schedule]
      return (all_schedule), 200
 
-# Give Review for completed schedule in host history below
 
+
+# Give Review for completed schedule in host history below
 @api.route('/schedule/<ids>/review/new', methods=['PUT'])
 def give_review_to_worker(ids):
     #this request.json  from the frontend should come as an object with those two keys worker_id and score
@@ -255,11 +270,4 @@ def give_review_to_worker(ids):
     db.session.query(Worker).filter_by(id=review_request['worker_id']).update({"ranking":new_ranking})
     db.session.commit()
     return jsonify("Great job! Your new ranking is:"+ str(new_ranking)),200     
-
- 
-# @api.route('/user/<idc>/listing/complete', methods=['GET'])
-# def get_user_listing_complete_notification(idc):
-#     get_listing= db.session.execute("select Listing.id, date_needed, special_note, Property.name from Listing join Property on Listing.property_id= Property.id where Property.user_id="+idc+" and Listing.status='Complete';")
-#     all_listing= [dict(id=row[0], date_needed=row[1], special_note=row[2], name=row[3]) for row in get_listing.fetchall()]   
-#     return jsonify(all_listing), 200
 
