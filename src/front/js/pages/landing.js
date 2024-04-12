@@ -116,7 +116,10 @@ export const Landing = () => {
                         <div className="row">
                             <div className={`col-12 border-bottom border-dark
                             ${menu == "listings" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => setMenu("listings")}
+                                onClick={() => {
+                                    setMenu("listings")
+                                    setFilterListings("Active")
+                                }}
                             ><i class="fa-solid fa-house"></i></div>
                             <div className={`col-12 border-bottom border-dark
                             ${menu == "properties" ? "activeMenu" : "myMenu"}`}
