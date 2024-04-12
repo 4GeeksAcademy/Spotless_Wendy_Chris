@@ -5,6 +5,7 @@ import "../../styles/wdashboard.css";
 import { AppContext } from "../layout";
 import { Link, useNavigate } from "react-router-dom";
 import { StaticRating } from "../component/staticrating";
+import { HHistory } from "../component/hhistory";
 
 export const WHistory = () => {
 
@@ -42,28 +43,23 @@ export const WHistory = () => {
     if (dateA > dateB) return 1;
   }
 
-  const sortPrice = (a, b) => b.rate - a.rate;
+  const sortReview = (a, b) => b.review - a.review;
 
   function filter_listing_function(val) {
 
-    let which_filter = val.currentTarget.innerText;
-    if (which_filter == 'City (A-Z)') {
-      let test = [...workerListings];
-      let final = test.toSorted(sortCity);
-      setWorkerListings(final);
+    
+    if (val==1) {
+      let test = [...myWHistory];
+      let final = test.toSorted(sortDate);
+      setMyWHistory(final);
 
     }
-    else if (which_filter == 'Price: (High to Low)') {
-      let test = [...workerListings];
-      let final = test.toSorted(sortPrice);
-      setWorkerListings(final);
-    }
     else {
-      
-      let test = [...workerListings];
-      let final = test.toSorted(sortDate);
+      let test = [...HHistory];
+      let final = test.toSorted(sortReview);
       setWorkerListings(final);
     }
+
 
   }
 
@@ -82,6 +78,8 @@ export const WHistory = () => {
         <div className="d-flex justify-content-center">
           <h3>Activity</h3>
         </div>
+
+
 
         <ul>
 
