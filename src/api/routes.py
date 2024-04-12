@@ -169,7 +169,7 @@ def get_worker_schedule(idw):
 
 
 
-# Add a new schedule for a specific worker below
+# Worker accepts a listing he sees available on his dashboard below
 @api.route('/worker/schedule/new', methods=['POST'])
 def add_to_schedule():
     schedule_request=request.json
@@ -182,7 +182,7 @@ def add_to_schedule():
 
 
 
-# Cancel schedule for a specific worker below
+# Worker can cancel his own schedule below
 @api.route('/worker/schedule/<ids>/cancel/<idl>', methods=['PUT'])
 def cancel_schedule(ids,idl):
     db.session.query(Listing).filter_by(id=idl).update({"status":'Active'})
@@ -212,7 +212,7 @@ def paid_listing(idc,idl):
    
      
 
-# Complete schedule 
+# Complete schedule by worker when the job is done.
 @api.route('/worker/schedule/<ids>/complete/<idl>', methods=['PUT'])
 def complete_schedule(ids,idl):
     db.session.query(Listing).filter_by(id=idl).update({"status":'Complete'})
@@ -224,6 +224,7 @@ def complete_schedule(ids,idl):
 
 
 # the two endpoint below are get listing for a user, and cancel it by the user 
+
 #get the listing for the current user
 @api.route('/user/<idc>/listing', methods=['GET'])
 def get_user_listing(idc):
@@ -232,7 +233,7 @@ def get_user_listing(idc):
     all_listing= list(map(lambda x: x.serialize(), get_listing))
     return jsonify(all_listing), 200
 
-
+# User can cancel his listing
 @api.route('/user/cancel/listing/<idl>', methods=['PUT'])
 def cancel_listing_by_user(idl):
     # you only need the id of the listing you want to cancel in the endpoint.
