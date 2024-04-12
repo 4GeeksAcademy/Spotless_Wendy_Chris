@@ -121,17 +121,12 @@ export const Dashboard = () => {
 
   function save_modal_function(id) {
     let format_date= listingDate.replace("T", " ");
-    let today= new Date();
-    console.log("check today :"+ today)
-    console.log("check if the date was formatted :"+ format_date)
-
-    let test= ComparedDate();
-    console.log('Check if the date is in the past : '+test);
+   
 
     if (listingDate.length > 5) {
 
       let price_for_listing = (listingId.bath * 15) + (listingId.beds * 10);
-      let new_listing = { property_id: listingId.id, special_note: listingNote, date_needed: listingDate, rate: price_for_listing };
+      let new_listing = { property_id: listingId.id, special_note: listingNote, date_needed: format_date, rate: price_for_listing };
 
       fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
         {

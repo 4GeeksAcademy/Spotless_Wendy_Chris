@@ -47,6 +47,7 @@ export const WDashboard = () => {
       })
 
       .catch(error => console.log(error));
+  
 
   }, []);
 
@@ -66,7 +67,6 @@ export const WDashboard = () => {
     if (dateA > dateB) return 1;
   }
 
-  const unique_city = [...new Set(workerListings.map((item) => item.cit))];
   const sortPrice = (a, b) => b.rate - a.rate;
 
   function filter_listing_function(val) {
@@ -153,7 +153,7 @@ export const WDashboard = () => {
           <li><span className="dropdown-item" onClick={(e) => filter_listing_function(e)}>City (A-Z)</span></li>
           <li><span className="dropdown-item" onClick={(e) => filter_listing_function(e)}>Price: (High to Low)</span></li>
           <li><span className="dropdown-item" onClick={(e) => filter_listing_function(e)}>Date</span></li>
-          <li><span className="dropdown-item" onClick={(e) => asyncCall(e)}>All cities</span></li>
+          <li><span className="dropdown-item" >All cities</span></li>
         </ul>
       </div>
 

@@ -212,20 +212,28 @@ def paid_listing(idc,idl):
             "my_listings": all_listing
         }
         )
-
-
-
-   
      
 
 # Complete schedule 
-@api.route('/worker/schedule/<ids>/complete/<idl>', methods=['POST'])
+@api.route('/worker/schedule/<ids>/complete/<idl>', methods=['PUT'])
 def complete_schedule(ids,idl):
     db.session.query(Listing).filter_by(id=idl).update({"status":'Complete'})
     db.session.commit()
     db.session.query(Schedule).filter_by(id=ids).update({"status":'Complete'})
     db.session.commit()
-    return jsonify(f"Success")
+    return jsonify(f"Success"), 200
+
+@api.route('/user/cancel/listing/<idl>', methods=['PUT'])
+def cancel_listing_by_user(idl):
+    # you only need the id of the listing you want to cancel in the endpoint.
+    db.session.query(Listing).filter_by(id=idl).update({"status":'Canceled'})
+    db.session.commit()
+    checkIfScheduleExist= Schedule.query.filter_by(Schedule.listing_id==idl, status='Active').first()
+    if checkIfScheduleExist:
+        db.session.query(Schedule).filter_by(id=idl).update({"status":'Cancel'})
+        db.session.commit()
+
+    return jsonify(f"Success"), 200
    
 #  Get completed schedule history for host below 
 @api.route('/user/<idh>/schedule/history', methods=['GET'])
@@ -254,12 +262,7 @@ def give_review_to_worker(ids):
     new_ranking= average_ranking[0]['sum_review'] / average_ranking[0]['total_review']
     db.session.query(Worker).filter_by(id=review_request['worker_id']).update({"ranking":new_ranking})
     db.session.commit()
-    return jsonify("Great job! this your new ranking "+ str(new_ranking)),200     
 
- 
-# @api.route('/user/<idc>/listing/complete', methods=['GET'])
-# def get_user_listing_complete_notification(idc):
-#     get_listing= db.session.execute("select Listing.id, date_needed, special_note, Property.name from Listing join Property on Listing.property_id= Property.id where Property.user_id="+idc+" and Listing.status='Complete';")
-#     all_listing= [dict(id=row[0], date_needed=row[1], special_note=row[2], name=row[3]) for row in get_listing.fetchall()]   
-#     return jsonify(all_listing), 200
+    
+    return jsonify("Great job! this your new ranking "+ str(new_ranking)),200     
 

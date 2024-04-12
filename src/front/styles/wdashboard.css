@@ -17,6 +17,7 @@
 
 .city_address_div{
   width: 25%;
+  overflow: hidden;
 }
 
 .note_rate_div{
@@ -30,13 +31,13 @@
 span, p{
   color: black;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size:20px;
+  font-size:15px;
 }
 
 h4{
   font-weight: bold;
   color: #FF4742;
-  font-size: 17px;
+  font-size: 20px;
 }
 
 .test {

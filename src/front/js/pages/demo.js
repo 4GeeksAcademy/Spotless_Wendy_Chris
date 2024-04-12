@@ -35,6 +35,11 @@ const data = location.state;
       })
 
       .catch(error => console.log(error));
+
+      let newArray= [...hHistory];
+      array[index].review= localrating;
+      setHHistory(newArray);
+
   }
 
 
@@ -47,9 +52,6 @@ const data = location.state;
       <div className="go_back_div">
         <button class="button-24" role="button" onClick={() => navigate("/dashboard")}>Back to my dashboard</button>
       </div>
-
-
-
 
         <div class="card text-secondary" style={{ width: "90%" }} >
 
@@ -82,12 +84,6 @@ const data = location.state;
 
       </div>
  
-
-
-
-
-
-
 
   );
 };

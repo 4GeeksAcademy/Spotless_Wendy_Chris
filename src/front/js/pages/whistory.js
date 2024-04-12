@@ -41,6 +41,32 @@ export const WHistory= () => {
     if (dateA > dateB) return 1;
   }
 
+  const sortPrice = (a, b) => b.rate - a.rate;
+
+  function filter_listing_function(val) {
+
+    let which_filter = val.currentTarget.innerText;
+    if (which_filter == 'City (A-Z)') {
+      let test = [...workerListings];
+      let final = test.toSorted(sortCity);
+      setWorkerListings(final);
+
+    }
+    else if (which_filter == 'Price: (High to Low)') {
+      let test = [...workerListings];
+      let final = test.toSorted(sortPrice);
+      setWorkerListings(final);
+    }
+    else {
+      
+      let test = [...workerListings];
+      let final = test.toSorted(sortDate);
+      setWorkerListings(final);
+    }
+
+  }
+
+
 
 
 
@@ -54,6 +80,22 @@ export const WHistory= () => {
      <div>
       <div className="d-flex justify-content-center">
         <h3>Activity</h3>
+      </div>
+      <div className="dropdown mb-3 text-start">
+        <button
+          className="btn btn-secondary mb-2 dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="fa-solid fa-sliders fa-2xl"></i>
+        </button>
+        <ul className="dropdown-menu text-lg" aria-labelledby="dropdownMenuButton">
+          <li><span className="dropdown-item" onClick={(e) => filter_listing_function(e)}>Review</span></li>
+            <li><span className="dropdown-item" onClick={(e) => filter_listing_function(e)}>Date</span></li>
+          <li><span className="dropdown-item" >All cities</span></li>
+        </ul>
       </div>
   
   <ul>
