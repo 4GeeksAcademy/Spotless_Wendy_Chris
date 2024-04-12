@@ -54,7 +54,7 @@ export const Dashboard = () => {
 
 
 
- 
+
 
 
   const ComparedDate = () => {
@@ -134,7 +134,7 @@ export const Dashboard = () => {
     if (listingDate.length > 5) {
 
       let price_for_listing = (listingId.bath * 15) + (listingId.beds * 10);
-      let new_listing = { property_id: listingId.id, special_note: listingNote, date_needed: listingDate, rate: price_for_listing };
+      let new_listing = { property_id: listingId.id, special_note: listingNote, date_needed: listingDate, rate: price_for_listing, user_id: currentUser.id };
 
       fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
         {
@@ -173,13 +173,13 @@ export const Dashboard = () => {
 
       <div class="product-list-container">
 
-        {myProperties.map((element,index) =>
+        {myProperties.map((element, index) =>
 
           <div class="card text-secondary" style={{ width: "18rem" }} key={element.id}>
 
             <div id="slideshow">
               <div className="jump_div">
-              <Link to={`/demo`} state={element}>
+                <Link to={`/demo`} state={element}>
 
                   <span><i class="fa-solid fa-arrow-up-right-from-square fa-fade fa-xl"></i></span>
                 </Link>

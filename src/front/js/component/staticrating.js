@@ -75,7 +75,6 @@ export const StaticRating = ({ rating }) => {
                         rating >= 5 ? { display: "inline" } :
                             { display: "none" }}
                 ></i>
-                {rating}
             </span>
 
 
