@@ -10,10 +10,10 @@ export const WSchedule = () => {
   const { store, actions } = useContext(Context);
 
   const { currentUser, myProperties, setMyProperties, workerListings, setWorkerListings, myListings, setMyListings, setCurrentUser, token, setToken, role, setRole,
-    display, setDisplay, menu, setMenu
+    display, setDisplay, menu, setMenu, mySchedule, setMySchedule, myWHistory, setMyWHistory
   } = useContext(AppContext);
   const navigate = useNavigate();
-  const [mySchedule, setMySchedule] = useState([]);
+
 
 
   useEffect(() => {
@@ -49,6 +49,7 @@ export const WSchedule = () => {
         let test = mySchedule.filter((el) => el.id != schedule_id);
         setMySchedule(test);
 
+
       })
 
       .catch(error => console.log(error));
@@ -56,7 +57,7 @@ export const WSchedule = () => {
   }
 
   function complete_schedule_function(schedule_id, listing_id) {
-    fetch(process.env.BACKEND_URL + "api/worker/schedule/" + schedule_id + "/complete/" + listing_id,
+    fetch(process.env.BACKEND_URL + `api/worker/${currentUser.id}/schedule/` + schedule_id + "/complete/" + listing_id,
       {
         method: 'PUT'
       })
@@ -67,6 +68,7 @@ export const WSchedule = () => {
       .then(response => {
         let test = mySchedule.filter((el) => el.id != schedule_id);
         setMySchedule(test);
+        setMyWHistory(response)
 
       })
 
@@ -80,9 +82,9 @@ export const WSchedule = () => {
       <div>
 
         <ul>
-          {mySchedule.map((element) =>
+          {mySchedule.filter((elm) => elm.status == "Pending").map((element, index) =>
 
-            <li>
+            <li key={index}>
 
               <div className="listing_div">
 
@@ -107,7 +109,7 @@ export const WSchedule = () => {
                 </div>
 
                 <div className="accept_div">
-                <button className="test" onClick={() => complete_schedule_function(element.id, element.listing_id)}>Complete</button>
+                  <button className="test" onClick={() => complete_schedule_function(element.id, element.listing_id)}>Complete</button>
                   <button className="test" onClick={() => cancel_schedule_function(element.id, element.listing_id)}>Cancel</button>
                 </div>
 

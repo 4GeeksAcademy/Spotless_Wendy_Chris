@@ -97,7 +97,7 @@ export const WDashboard = () => {
   function accept_offer_function(id) {
     let new_schedule = { listing_id: id, worker_id: currentUser.id };
     console.log('Accept offer function was called');
-    fetch(process.env.BACKEND_URL + "/api/worker/schedule/new",
+    fetch(process.env.BACKEND_URL + `/api/worker/${currentUser.id}/schedule/new`,
       {
         method: 'POST',
         body: JSON.stringify(new_schedule),
@@ -156,41 +156,45 @@ export const WDashboard = () => {
       <div>
 
         <ul>
+          {workerListings.length < 1 ? <div className="mb-5">There are no Active Listings for your Search</div>
 
-          {workerListings.map((element) =>
+            :
 
-            <li key={element.id}>
+            workerListings.map((element) =>
 
-              <div className="listing_div">
+              <li key={element.id}>
 
-                <div className="d-flex  justify-content-between ">
+                <div className="listing_div">
 
-                  <img src={element.image1} className="img_listing" />
+                  <div className="d-flex  justify-content-between ">
 
-                  <div className="city_address_div mx-2 mr-2 pt-2 ">
-                    <h4>{element.city}</h4>
-                    <span> {element.address}</span>
+                    <img src={element.image1} className="img_listing" />
+
+                    <div className="city_address_div mx-2 mr-2 pt-2 ">
+                      <h4>{element.city}</h4>
+                      <span> {element.address}</span>
+                    </div>
+
+                    <div className="mx-4 mr-4 ">
+                      <span>{element.date_needed}</span>
+                    </div>
+
+                    <div className="mx-4 mr-4">
+                      <span>Quote : {element.rate}$</span>
+                    </div>
+
                   </div>
 
-                  <div className="mx-4 mr-4 ">
-                    <span>{element.date_needed}</span>
-                  </div>
+                  <div className="accept_div">
 
-                  <div className="mx-4 mr-4">
-                    <span>Quote : {element.rate}$</span>
+                    <button className="test" onClick={() => accept_offer_function(element.id)}>Accept</button>
                   </div>
 
                 </div>
 
-                <div className="accept_div">
-
-                  <button className="test" onClick={() => accept_offer_function(element.id)}>Accept</button>
-                </div>
-
-              </div>
-
-            </li>
-          )}
+              </li>
+            )
+          }
 
         </ul>
 
