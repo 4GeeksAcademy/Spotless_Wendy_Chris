@@ -76,8 +76,6 @@ export const StaticRating = ({ rating }) => {
                             { display: "none" }}
                 ></i>
             </span>
-
-
         </>
     );
 };
