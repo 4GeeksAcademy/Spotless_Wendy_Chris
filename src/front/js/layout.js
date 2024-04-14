@@ -17,6 +17,8 @@ import { HostHistory } from "./component/hosthistory";
 import { HHistory } from "./component/hhistory";
 import { StaticRating } from "./component/staticrating";
 
+import { ColorTest } from "./pages/colortest";
+
 import { WDashboard } from "./pages/workerdashboard";
 import { EditProfile } from "./pages/editprofile";
 
@@ -105,6 +107,7 @@ const Layout = () => {
                             <Route element={<History />} path="/history" />
                             <Route element={<Demo />} path="/demo" />
                             <Route element={<Single />} path="/single/:theid" />
+                            <Route element={<ColorTest />} path="/colortest" />
                             <Route element={<h1>Not found!</h1>} />
                         </Routes>
                         <Footer />
