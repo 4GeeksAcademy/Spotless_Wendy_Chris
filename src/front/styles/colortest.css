@@ -1,0 +1,129 @@
+.testDiv {
+    min-height: 227px;
+}
+
+
+.mainColor {
+    background: linear-gradient(to right, #FF4B2B, #FF416C);
+}
+
+.gradientOne {
+    background: linear-gradient(to right, #FFCDEA, #FB9AD1);
+}
+
+.gradientTwo {
+    background: linear-gradient(to right, #AD88C6, #7469B6);
+}
+
+.gradientThree {
+    background: linear-gradient(to right, #FF7ED4, #6420AA);
+}
+
+.gradientFour {
+    background: linear-gradient(to right, #FFCDEA, #FB9AD1);
+}
+
+.gradientFive {
+    background: linear-gradient(to right, #F2EFE5, #E3E1D9);
+}
+
+
+
+.textOne {
+    color: #00224D;
+}
+
+
+
+.textTwo {
+    color: #F0EBE3;
+}
+
+.textThree {
+    color: #6420AA;
+}
+
+.textFour {
+    color: #FFE6E6;
+}
+
+.textFive {
+    color: #474F7A;
+}
+
+.textSix {
+    color: #3C0753;
+}
+
+.textSeven {
+    color: #864AF9;
+}
+
+.textEight {
+    color: #F8E559;
+}
+
+.buttonOne {
+    background-color: #6420AA;
+    padding: 9px 9px;
+    border-radius: 7px;
+    color: #F8E559;
+}
+
+.buttonOne:hover {
+    cursor: pointer;
+    background-color: #FF7ED4;
+    padding: 9px 9px;
+    border-radius: 7px;
+    color: #F0EBE3;
+}
+
+.buttonTwo {
+    background-color: #7469B6;
+    padding: 9px 9px;
+    border-radius: 7px;
+    color: #F0EBE3;
+}
+
+.buttonTwo:hover {
+    cursor: pointer;
+    background-color: #AD88C6;
+    padding: 9px 9px;
+    border-radius: 7px;
+    color: #00224D;
+}
+
+
+.buttonThree {
+    background-color: #E3E1D9;
+    padding: 9px 9px;
+    border-radius: 7px;
+    color: #00224D;
+}
+
+.buttonThree:hover {
+    cursor: pointer;
+    background-color: #F2EFE5;
+    padding: 9px 9px;
+    border-radius: 7px;
+    color: #6420AA;
+}
+
+
+.buttonFour {
+    background-color: #FF416C;
+    padding: 9px 9px;
+    border-radius: 7px;
+    color: #00224D;
+}
+
+.buttonFour:hover {
+    cursor: pointer;
+    background-color: #FF4B2B;
+    padding: 9px 9px;
+    border-radius: 7px;
+    color: #6420AA;
+}
+
+
+

@@ -5,7 +5,7 @@ import "../../styles/home.css";
 import { AppContext } from "../layout";
 import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom";
 
-export const MyPayments = () => {
+export const PaymentHistory = () => {
 
     const { store, actions } = useContext(Context);
     const { currentUser, myProperties, setMyProperties,
@@ -81,7 +81,7 @@ export const MyPayments = () => {
 
 
     const handlePayment = (idl) => {
-        var fetchedListings = []
+        var fetchedlistings = []
 
         fetch(process.env.BACKEND_URL + `api/user/${currentUser.id}/listing/${idl}/paid`, {
             method: 'PUT', // or 'POST'
@@ -96,10 +96,10 @@ export const MyPayments = () => {
             })
             .then(responseAsJson => {
                 console.log('Success:', responseAsJson),
-                    responseAsJson.my_listings.map((elm) => fetchedListings.push(elm))
+                    responseAsJson.my_listings.map((elm) => fetchedlistings.push(elm))
             }
             )
-            .then(() => setMyListings(fetchedListings))
+            .then(() => setMyListings(fetchedlistings))
             .catch(error => console.error(error));
 
     }
@@ -128,9 +128,9 @@ export const MyPayments = () => {
         })
     })
 
-    const needsPayment = listingArray.filter((elm) => elm.status == "Scheduled");
-    console.log("filter results:")
-    console.log(needsPayment)
+    const paid = listingArray.filter((elm) => (elm.status == "Paid") || (elm.status == "Complete"));
+    console.log("paid results:")
+    console.log(paid)
 
 
     return (
@@ -138,8 +138,8 @@ export const MyPayments = () => {
             <div className="row">
                 <div className="col-12">
                     {
-                        needsPayment.length >= 1 ?
-                            needsPayment.map((elm) => {
+                        paid.length >= 1 ?
+                            paid.map((elm) => {
                                 return (<>
                                     <ul>
                                         <li key={elm.id}>
@@ -153,17 +153,15 @@ export const MyPayments = () => {
                                                             <div className="col-6 pt-1 text-start">
                                                                 <h4>{elm.city}</h4>
                                                             </div>
-                                                            <div className="col-6 pt-1">
+                                                            <div className="col-6 pt-1 text-start">
                                                                 <span>Scheduled Date: {elm.date_needed}</span>
                                                             </div>
-                                                            <div className="col-6 pt-2 fs-3 text-start" >
+                                                            <div className="col-6 fs-3 text-start">
                                                                 {elm.name}</div>
-                                                            <div className="col-6 pt-2 fs-3">
-                                                                <button className="button-24 payment_button"
-                                                                    onClick={() => {
-                                                                        handlePayment(elm.listing_id)
-                                                                    }}>
-                                                                    Pay ${elm.rate}</button>
+                                                            <div className="col-6 fs-3 text-start">
+                                                                <span className="">
+                                                                    Paid: ${elm.rate} in full
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>

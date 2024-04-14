@@ -63,7 +63,7 @@ export const AddProperty = () => {
                     console.log('test begins here')
                     console.log(finalProperty);
                 })
-                // setMyProperties(finalProperty)
+                setMyProperties(finalProperty)
                 setName("")
                 setState("")
                 setCity("")

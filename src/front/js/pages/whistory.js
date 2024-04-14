@@ -11,9 +11,9 @@ export const WHistory = () => {
 
   const { store, actions } = useContext(Context);
 
-  const { currentUser, myProperties, setMyProperties, workerListings, setWorkerListings, myListings, setMyListings, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
+  const { currentUser, myProperties, setMyProperties, workerListings, setWorkerListings, myListings, setMyListings, setCurrentUser, token, setToken, role, setRole, myWHistory, setMyWHistory } = useContext(AppContext);
   const navigate = useNavigate();
-  const [myWHistory, setMyWHistory] = useState([]);
+
 
 
   useEffect(() => {
@@ -47,15 +47,15 @@ export const WHistory = () => {
 
   function filter_listing_function(val) {
 
-    
-    if (val==1) {
+
+    if (val == 1) {
       let test = [...myWHistory];
       let final = test.toSorted(sortDate);
       setMyWHistory(final);
 
     }
     else {
-      
+
       let test = [...myWHistory];
       let final = test.toSorted(sortReview);
       setMyWHistory(final);
@@ -80,27 +80,27 @@ export const WHistory = () => {
           <h3>Activity</h3>
         </div>
         <div className="dropdown mb-3 text-start">
-        <button
-          className="btn btn-secondary mb-2 dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton"
-          data-mdb-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <i class="fa-solid fa-sliders fa-2xl"></i>
-        </button>
-        <ul className="dropdown-menu text-lg" aria-labelledby="dropdownMenuButton">
-          <li><span className="dropdown-item " onClick={() => filter_listing_function(1)}>By date</span></li>
-          <li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>By review</span></li>
+          <button
+            className="btn btn-secondary mb-2 dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-sliders fa-2xl"></i>
+          </button>
+          <ul className="dropdown-menu text-lg" aria-labelledby="dropdownMenuButton">
+            <li><span className="dropdown-item " onClick={() => filter_listing_function(1)}>By date</span></li>
+            <li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>By review</span></li>
           </ul>
-      </div>
+        </div>
 
 
         <ul>
 
-          {myWHistory.map((element) =>
+          {myWHistory.map((element, index) =>
 
-            <li>
+            <li key={index}>
 
               <div className="listing_div">
 
@@ -125,7 +125,7 @@ export const WHistory = () => {
                   <div className="row">
                     <div className="col">
                       <StaticRating
-                        ratingValue={element.review}
+                        rating={element.review}
                       /></div>
                   </div>
 

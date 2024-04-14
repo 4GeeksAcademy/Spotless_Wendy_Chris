@@ -101,8 +101,12 @@ export const EditProfile = () => {
                     if (!res.ok) throw Error(res.statusText);
                     return res.json();
                 })
-                .then(response => console.log('This is the response from backend :', response))
-                .catch(error => console.error(error));
+                .then(responseAsJson => {
+                    console.log('This is the response from backend :', responseAsJson)
+                    setCurrentUser(responseAsJson)
+                }
+                )
+                .catch(error => console.error(error))
         }
 
         else {

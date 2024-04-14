@@ -114,15 +114,20 @@ def add_newproperty_load():
 @api.route('/user/property/listing/new', methods=['POST'])
 def add_user_listing():
     listing_request=request.json
-    
+    idc = listing_request['user_id']
+
     test_listing= Listing.query.filter_by(property_id=listing_request['property_id'],date_needed=listing_request['date_needed']).first()
     if test_listing:
-       return jsonify(f"THis one already exists")
+       return jsonify(f"This one already exists")
     else:
         newL=Listing(property_id=listing_request['property_id'], date_needed= listing_request['date_needed'], special_note=listing_request['special_note'], rate= listing_request['rate'])
         db.session.add(newL)
         db.session.commit()
-    return jsonify(f"Success"), 200
+
+    get_property_of_user=db.session.query(Property.id).filter_by(user_id=idc).subquery()
+    get_listing= Listing.query.filter(Listing.property_id.in_(get_property_of_user))
+    all_listing= list(map(lambda x: x.serialize(), get_listing))
+    return jsonify(all_listing), 200
 
 
       
@@ -144,9 +149,15 @@ def update_user_or_worker(id):
     else:
          test_token= User.query.filter_by(email=request_body['email'], password=request_body['password']).first()
          if test_token:
+            user = User.query.filter_by(email=request_body['email'], password=request_body['password']).first()
             db.session.query(User).filter_by(email=request_body['email'], password=request_body['password']).update({"full_name":request_body['full_name'], "email":request_body['email'],"phone": request_body['phone'], "password":request_body['new_password']})
             db.session.commit()
-            return jsonify(f"Success"), 200
+            return jsonify({"msg": "User info successfully updated",
+                    "id": user.id,
+                    "email": user.email,
+                     "phone": user.phone, "full_name": user.full_name,
+                      "role": "User"
+                       }), 200
          else:
             return (f"Password incorrect"),410
      
@@ -163,22 +174,32 @@ def get_worker_history(idw):
 #get schedule for a specific worker below
 @api.route('/worker/<idw>/schedule/all', methods=['GET'])
 def get_worker_schedule(idw):
-    get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Listing.special_note, Property.address, Property.city, Listing.rate, Listing.id FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property on Listing.property_id=Property.id where Schedule.status='Pending' AND Schedule.worker_id="+idw+";")
-    all_schedule= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3], city=row[4], rate=row[5], listing_id=row[6] ) for row in get_schedule.fetchall()]   
+    get_schedule= db.session.execute("SELECT Schedule.id,  Listing.date_needed, Listing.special_note, Property.address, Property.city, Listing.rate, Listing.id, Schedule.status FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property on Listing.property_id=Property.id where Schedule.status='Pending' AND Schedule.worker_id="+idw+";")
+    all_schedule= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3], city=row[4], rate=row[5], listing_id=row[6], status=row[7]  ) for row in get_schedule.fetchall()]   
     return jsonify(all_schedule), 200
 
 
 
 # Worker accepts a listing he sees available on his dashboard below
-@api.route('/worker/schedule/new', methods=['POST'])
-def add_to_schedule():
+@api.route('/worker/<idw>/schedule/new', methods=['POST'])
+def add_to_schedule(idw):
     schedule_request=request.json
+    # idw = schedule_request['worker_id']
     db.session.query(Listing).filter_by(id=schedule_request['listing_id']).update({"status":'Scheduled'})
     db.session.commit()
-    newS=Schedule(listing_id=schedule_request['listing_id'], worker_id=schedule_request['worker_id'])
+    newS=Schedule(listing_id=schedule_request['listing_id'], worker_id=schedule_request['worker_id'])    
     db.session.add(newS)
     db.session.commit()
-    return jsonify(f"Success"), 200
+
+    get_listing= db.session.execute("SELECT Listing.id, Listing.date_needed, Listing.special_note, Property.address, Property.city,  Property.img, Listing.rate FROM Listing join Property ON Property.id=Listing.property_id where Listing.status='Active';")
+    all_listing= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3],city=row[4], img=row[5], rate=row[6] ) for row in get_listing.fetchall()]
+    
+    get_schedule= db.session.execute("SELECT Schedule.id,  Listing.date_needed, Listing.special_note, Property.address, Property.city, Listing.rate, Listing.id, Schedule.status FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property on Listing.property_id=Property.id where Schedule.status='Pending' AND Schedule.worker_id="+idw+";")
+    all_schedule= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3], city=row[4], rate=row[5], listing_id=row[6], status=row[7] ) for row in get_schedule.fetchall()]
+    return jsonify({
+        "worker_schedule": all_schedule,
+        "available_listings": all_listing
+    }), 200
 
 
 
@@ -214,17 +235,16 @@ def paid_listing(idc,idl):
 
 # Complete schedule by worker when the job is done.
 @api.route('/worker/<idw>/schedule/<ids>/complete/<idl>', methods=['PUT'])
-def complete_schedule(idw, ids,idl):
+def complete_schedule(ids,idl,idw):
     db.session.query(Listing).filter_by(id=idl).update({"status":'Complete'})
     db.session.commit()
     db.session.query(Schedule).filter_by(id=ids).update({"status":'Complete'})
     db.session.commit()
-    idw= str(idw)
-    # just added the piece below to return the new worker history, which makes sense after a job is completed. 
+
     get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Listing.special_note, Property.address, Property.city, Listing.rate, Listing.id, Schedule.review FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property on Listing.property_id=Property.id where Schedule.status='Complete' AND Schedule.worker_id="+idw+";")
-    all_schedule= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3], city=row[4], rate=row[5], listing_id=row[6], review=row[7]  ) for row in get_schedule.fetchall()]   
+    all_schedule= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3], city=row[4], rate=row[5], listing_id=row[6], review=row[7]  ) for row in get_schedule.fetchall()]
+
     return jsonify(all_schedule), 200
-  
 
 
 
@@ -239,16 +259,23 @@ def get_user_listing(idc):
     return jsonify(all_listing), 200
 
 # User can cancel his listing
-@api.route('/user/cancel/listing/<idl>', methods=['PUT'])
-def cancel_listing_by_user(idl):
+@api.route('/user/<idc>/cancel/listing/<idl>', methods=['PUT'])
+def cancel_listing_by_user(idl, idc):
     # you only need the id of the listing you want to cancel in the endpoint.
     db.session.query(Listing).filter_by(id=idl).update({"status":'Canceled'})
     db.session.commit()
+
+    get_property_of_user=db.session.query(Property.id).filter_by(user_id=idc).subquery()
+    get_listing= Listing.query.filter(Listing.property_id.in_(get_property_of_user))
+    all_listing= list(map(lambda x: x.serialize(), get_listing))
+
     checkIfScheduleExist= Schedule.query.filter_by(listing_id=idl).first()
     if checkIfScheduleExist:
         db.session.query(Schedule).filter_by(listing_id=idl).update({"status":'Canceled'})
-        db.session.commit()
-    return jsonify(f"Success"), 200
+        db.session.commit()        
+    return jsonify(
+        all_listing
+        ), 200
    
 
 
@@ -261,8 +288,8 @@ def get_host_history(idh):
     .join(User, Property.user_id==User.id)\
     .filter(Schedule.status=='Complete', User.id==idh)\
     .with_entities(Schedule.id, Listing.special_note, Listing.date_needed, Listing.rate, Listing.id, Property.img,
-                   Worker.id, Schedule.review ).all()
-     all_schedule= [dict(id=row[0], special_note=row[1], date_needed=row[2], rate=row[3], listing_id=row[4], property_img=row[5], worker_id=row[6], review=row[7]) for row in get_schedule]
+                   Worker.id, Schedule.review, Property.name ).all()
+     all_schedule= [dict(id=row[0], special_note=row[1], date_needed=row[2], rate=row[3], listing_id=row[4], property_img=row[5], worker_id=row[6], review=row[7], name=row[8]) for row in get_schedule]
      return (all_schedule), 200
 
 
