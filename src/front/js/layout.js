@@ -46,6 +46,7 @@ const Layout = () => {
 
 
     const [menu, setMenu] = useState('listings')
+    const [myWHistory, setMyWHistory] = useState([]);
     const [myListings, setMyListings] = useState([])
     const [workerListings, setWorkerListings] = useState([])
     const [display, setDisplay] = useState("")
@@ -79,7 +80,8 @@ const Layout = () => {
                     currentUser, setCurrentUser, token, setToken,
                     myListings, setMyListings, myProperties, setMyProperties,
                     role, setRole, display, setDisplay, filterListings, setFilterListings,
-                    workerListings, setWorkerListings, menu, setMenu, mySchedule, setMySchedule
+                    workerListings, setWorkerListings, menu, setMenu, mySchedule, setMySchedule,
+                    myWHistory, setMyWHistory
                 }
             }>
                 <BrowserRouter basename={basename}>
