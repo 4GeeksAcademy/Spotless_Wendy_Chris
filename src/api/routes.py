@@ -213,13 +213,18 @@ def paid_listing(idc,idl):
      
 
 # Complete schedule by worker when the job is done.
-@api.route('/worker/schedule/<ids>/complete/<idl>', methods=['PUT'])
-def complete_schedule(ids,idl):
+@api.route('/worker/<idw>/schedule/<ids>/complete/<idl>', methods=['PUT'])
+def complete_schedule(idw, ids,idl):
     db.session.query(Listing).filter_by(id=idl).update({"status":'Complete'})
     db.session.commit()
     db.session.query(Schedule).filter_by(id=ids).update({"status":'Complete'})
     db.session.commit()
-    return jsonify(f"Success"), 200
+    idw= str(idw)
+    # just added the piece below to return the new worker history, which makes sense after a job is completed. 
+    get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Listing.special_note, Property.address, Property.city, Listing.rate, Listing.id, Schedule.review FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property on Listing.property_id=Property.id where Schedule.status='Complete' AND Schedule.worker_id="+idw+";")
+    all_schedule= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3], city=row[4], rate=row[5], listing_id=row[6], review=row[7]  ) for row in get_schedule.fetchall()]   
+    return jsonify(all_schedule), 200
+  
 
 
 

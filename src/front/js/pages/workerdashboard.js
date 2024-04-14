@@ -71,14 +71,13 @@ export const WDashboard = () => {
 
   function filter_listing_function(val) {
 
-    let which_filter = val.currentTarget.innerText;
-    if (which_filter == 'City (A-Z)') {
+    if (val == 1) {
       let test = [...workerListings];
       let final = test.toSorted(sortCity);
       setWorkerListings(final);
 
     }
-    else if (which_filter == 'Price: (High to Low)') {
+    else if (val == 2) {
       let test = [...workerListings];
       let final = test.toSorted(sortPrice);
       setWorkerListings(final);
@@ -149,10 +148,10 @@ export const WDashboard = () => {
         >
           <i class="fa-solid fa-sliders fa-2xl"></i>
         </button>
-        <ul className="dropdown-menu text-lg" aria-labelledby="dropdownMenuButton">
-          <li><span className="dropdown-item" onClick={(e) => filter_listing_function(e)}>City (A-Z)</span></li>
-          <li><span className="dropdown-item" onClick={(e) => filter_listing_function(e)}>Price: (High to Low)</span></li>
-          <li><span className="dropdown-item" onClick={(e) => filter_listing_function(e)}>Date</span></li>
+        <ul className="dropdown-menu text-lg" role='button' aria-labelledby="dropdownMenuButton">
+          <li><span className="dropdown-item" onClick={() => filter_listing_function(1)}>City (A-Z)</span></li>
+          <li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>Price: (High to Low)</span></li>
+          <li><span className="dropdown-item" onClick={() => filter_listing_function(3)}>Date</span></li>
           <li><span className="dropdown-item" >All cities</span></li>
         </ul>
       </div>

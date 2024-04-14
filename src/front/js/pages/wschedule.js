@@ -56,7 +56,7 @@ export const WSchedule = () => {
   }
 
   function complete_schedule_function(schedule_id, listing_id) {
-    fetch(process.env.BACKEND_URL + "api/worker/schedule/" + schedule_id + "/complete/" + listing_id,
+    fetch(process.env.BACKEND_URL + "api/worker/"+currentUser.id+"/schedule/" + schedule_id + "/complete/" + listing_id,
       {
         method: 'PUT'
       })
@@ -67,6 +67,7 @@ export const WSchedule = () => {
       .then(response => {
         let test = mySchedule.filter((el) => el.id != schedule_id);
         setMySchedule(test);
+        // you just need to reset the worker history state with the response.
 
       })
 

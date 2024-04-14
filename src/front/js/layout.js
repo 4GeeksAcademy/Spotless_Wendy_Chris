@@ -17,6 +17,7 @@ import { HostHistory } from "./component/hosthistory";
 import { HHistory } from "./component/hhistory";
 import { StaticRating } from "./component/staticrating";
 
+
 import { WDashboard } from "./pages/workerdashboard";
 import { EditProfile } from "./pages/editprofile";
 
@@ -31,6 +32,7 @@ import { Footer } from "./component/footer";
 import { useState } from "react";
 import { AddProperty } from "./component/add_prop";
 import { History } from "./component/history";
+import { Faq } from "./pages/faq";
 
 
 
@@ -87,6 +89,7 @@ const Layout = () => {
                         <Routes>
                             <Route element={<Login />} path="/login" />
                             <Route element={<Home />} path="/" />
+                            <Route element={<Faq />} path="/faq" />
                             <Route element={<Dashboard />} path="/dashboard" />
                             <Route element={<HHistory />} path="/hhistory" />
                             <Route element={<WDashboard />} path="/wdashboard" />
@@ -96,7 +99,7 @@ const Layout = () => {
                             <Route element={<Ratings />} path="ratings" />
                             <Route element={<StaticRating />} path="staticrating" />
                             <Route element={<WHistory />} path="/whistory" />
-                              <Route element={<MyListings />} path="/mylistings" />
+                            <Route element={<MyListings />} path="/mylistings" />
                             <Route element={<MyPayments />} path="/mypayments" />
                             <Route element={<AddProperty />} path="/addproperty" />
                             <Route element={<History />} path="/history" />
