@@ -204,3 +204,14 @@
     border-radius: 7px;
 }
   
+
+.test {
+    color: #95D7AE;
+
+}
+
+.rotate {
+    /* transform: scale(-1, 1); */
+    transform: rotate(-180deg);
+
+}
