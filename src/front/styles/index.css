@@ -39,34 +39,33 @@
 .myMenu {
     padding-top: 15px;
     padding-bottom: 15px;
-    background-color: rgb(233, 233, 233);
-    color: rgb(82, 82, 82);
+    background-color: #d4d3cd;
+    color: rgb(19, 19, 19);
    
 }
 
 .myMenu:Hover {
     cursor: pointer;
-    background-color: rgb(140, 139, 139);
-    color: rgb(255, 255, 255);
-    box-shadow: 0 5px 15px rgba(145, 92, 182, 0.59);
+    background-color: #b4b4b4;
+    color: #FF416C;
+    box-shadow: 0 3px 11px #ff4b2b90;
 }
 
 .activeMenu {
     padding-top: 15px;
     padding-bottom: 15px;
-    background-color: rgb(97, 97, 97);
-    color: rgb(255, 255, 255);
+    background-color: #ffffff;
+    color: rgb(19, 19, 19);
    
 }
 
 .activeMenu:Hover {
     cursor: pointer;
-    color: rgb(255, 255, 255);
     box-shadow: 0 5px 15px rgba(145, 92, 182, 0.59);
 }
 
 .dashComponents {
-    background-color: rgb(97, 97, 97);
+    background: linear-gradient(to right, #ffffff, #c9c9c9);
     color: rgb(255, 255, 255);
 }
 
@@ -92,7 +91,7 @@
 
 .starRating {
     color: rgb(255, 255, 255);
-    text-shadow: 0 0 3px #676767;
+    text-shadow: 0 0 3px #000000;
 }
 
 .starRating:hover {
@@ -102,7 +101,7 @@
 
 .staticStar {
     color: rgb(255, 232, 27);
-    text-shadow: 0 0 9px #ffffff;
+    text-shadow: 0 0 5px #000000;
 }
 
 .staticStarRating {
@@ -215,3 +214,22 @@
     transform: rotate(-180deg);
 
 }
+
+.supTest{
+    position: relative;
+    bottom: 3ex;
+    font-size: 80%;
+    color: white;
+}
+
+.header1 {
+    background-color: blue;
+    height: 169px;
+    width: 100%;
+}
+
+
+
+
+
+

@@ -137,7 +137,8 @@ export const Login = () => {
 							"email": email,
 							"password": password,
 							"phone": phone,
-							"address": ""
+							"address": "",
+							"img": "https://cdn.pixabay.com/photo/2012/02/23/09/11/brush-15931_1280.jpg"
 						}
 					]
 				), // data can be a 'string' or an {object} which comes from somewhere further above in our application
