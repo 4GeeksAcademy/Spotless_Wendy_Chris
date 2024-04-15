@@ -347,13 +347,7 @@ export const Landing = () => {
                                     setMenu("listings")
                                 }}
                             ><i class="fa-solid fa-house"></i></div>
-                            <div className={`col-12 border-bottom border-dark
-                            ${menu == "mySchedule" ? "activeMenu" : "myMenu"}`}
-                                onClick={() => {
-                                    setDisplay("mySchedule")
-                                    setMenu("mySchedule")
-                                }}
-                            >My Schedule</div>
+
                             <div className={`col-12 border-bottom border-dark
                             ${menu == "myProfile" ? "activeMenu" : "myMenu"}`}
                                 onClick={() => {
@@ -362,12 +356,30 @@ export const Landing = () => {
                                 }}
                             >My Profile</div>
                             <div className={`col-12 border-bottom border-dark
+                            ${menu == "mySchedule" ? "activeMenu" : "myMenu"}`}
+                                onClick={() => {
+                                    setDisplay("mySchedule")
+                                    setMenu("mySchedule")
+                                }}
+                            >My Schedule</div>
+                            <div className={`col-12 border-bottom border-dark mb-3
                             ${menu == "history" ? "activeMenu" : "myMenu"}`}
                                 onClick={() => {
                                     setDisplay("history")
                                     setMenu("history")
                                 }}
                             >My Work History</div>
+                            <div className={`col-12 border-bottom border-dark mt-5 mb-5
+                            // ${menu == "history" ? "activeMenu" : "myMenu"}`}
+                            //     onClick={() => {
+                            //         setDisplay("history")
+                            //         setMenu("history")
+                            //     }}
+                            >Logout
+                                <span clasname>
+                                    <i class="fa-solid fa-arrow-right-from-bracket rotate ms-3"></i>
+                                </span>
+                            </div>
                         </div>
                     </div>
 
@@ -387,23 +399,6 @@ export const Landing = () => {
                             {/* Add logic for when there are no avaible listings here or in WDashboard  */}
                             <WDashboard /></div>
                     </div>
-
-                    {/* Worker Schedule Body Below  */}
-                    <div className="col-10 text-center dashComponents fs-3"
-                        style={menu == "mySchedule" ? { display: "block" } : { display: "none" }}
-                    >
-                        <div className="row d-flex justify-content-center pt-1 mb-2">
-                            <div className="col-3"></div>
-                            <div className="col-6">My Schedule</div>
-                            <div className="col-3"></div>
-                        </div>
-                        <div
-                            style={display == "mySchedule" ? { display: "block" } : { display: "none" }}
-                        ><WSchedule /></div>
-                    </div>
-
-
-
 
                     {/* Worker Profile Body Below  */}
                     <div className="col-10 text-center dashComponents fs-3"
@@ -428,6 +423,26 @@ export const Landing = () => {
                             style={display == "myProfile" ? { display: "block" } : { display: "none" }}
                         ><WorkerProfile /></div>
                     </div>
+
+
+                    {/* Worker Schedule Body Below  */}
+                    <div className="col-10 text-center dashComponents fs-3"
+                        style={menu == "mySchedule" ? { display: "block" } : { display: "none" }}
+                    >
+                        <div className="row d-flex justify-content-center pt-1 mb-2">
+                            <div className="col-3"></div>
+                            <div className="col-6">My Schedule</div>
+                            <div className="col-3"></div>
+                        </div>
+                        <div
+                            style={display == "mySchedule" ? { display: "block" } : { display: "none" }}
+                        ><WSchedule /></div>
+                    </div>
+
+
+
+
+
 
                     {/* Worker History Body Below  */}
                     <div className="col-10 text-center dashComponents fs-3"

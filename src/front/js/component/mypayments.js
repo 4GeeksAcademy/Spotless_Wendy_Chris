@@ -139,10 +139,10 @@ export const MyPayments = () => {
                 <div className="col-12">
                     {
                         needsPayment.length >= 1 ?
-                            needsPayment.map((elm) => {
-                                return (<>
-                                    <ul>
-                                        <li key={elm.id}>
+                            needsPayment.map((elm, index) => {
+                                return (
+                                    <ul key={index}>
+                                        <li >
                                             <div className="payments_div mt-2">
                                                 <div className="row">
                                                     <div className="col-3">
@@ -171,7 +171,7 @@ export const MyPayments = () => {
                                             </div>
                                         </li>
                                     </ul >
-                                </>
+
                                 )
                             }) : <div>There are no payments due</div>
 

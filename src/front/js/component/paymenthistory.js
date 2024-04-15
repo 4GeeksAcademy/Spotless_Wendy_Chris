@@ -139,10 +139,11 @@ export const PaymentHistory = () => {
                 <div className="col-12">
                     {
                         paid.length >= 1 ?
-                            paid.map((elm) => {
-                                return (<>
-                                    <ul>
-                                        <li key={elm.id}>
+                            paid.map((elm, index) => {
+                                return (
+
+                                    <ul key={index}>
+                                        <li >
                                             <div className="payments_div mt-2">
                                                 <div className="row">
                                                     <div className="col-3">
@@ -169,7 +170,7 @@ export const PaymentHistory = () => {
                                             </div>
                                         </li>
                                     </ul >
-                                </>
+
                                 )
                             }) : <div>There are no payments due</div>
 
