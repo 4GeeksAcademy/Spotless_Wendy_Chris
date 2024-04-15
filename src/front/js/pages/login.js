@@ -12,7 +12,7 @@ export const Login = () => {
 
 	const navigate = useNavigate();
 
-
+	const [valid, setValid] = useState("is-valid");
 
 	const { store, actions } = useContext(Context);
 	const [userU, setUserU] = useState('')
@@ -48,7 +48,11 @@ export const Login = () => {
 			}
 		})
 			.then(res => {
-				if (!res.ok) console.log(res.statusText);
+				if (!res.ok) {
+					setValid("is-invalid")
+					throw Error(res.statusText);
+				}
+
 				return res.json();
 			})
 			.then(responseAsJson => {
@@ -58,10 +62,7 @@ export const Login = () => {
 				console.log(responseAsJson)
 				setCurrentUser(responseAsJson)
 				var token = responseAsJson.token
-				setToken(token)
-
-			})
-			.then(() => {
+				setToken(token);
 				navigate('/landing');
 
 			})
@@ -218,7 +219,12 @@ export const Login = () => {
 					<form>
 						<h1 className="pb-3">Sign in</h1>
 						<input type="email" placeholder="Email" value={userE} onChange={(e) => get_email(e)} />
-						<input type="password" placeholder="Password" value={userP} onChange={(e) => get_password(e)} />
+						<input
+							id="validationpassword" className={valid}
+							type="password" placeholder="Password" value={userP} onChange={(e) => get_password(e)} />
+						<div id="validationpassword" className="invalid-feedback fs-3">
+							Incorrect Password or email
+						</div>
 						<a href="#">Forgot your password?</a>
 						<button onClick={(event) => {
 							event.preventDefault();
