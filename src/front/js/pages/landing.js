@@ -86,27 +86,9 @@ export const Landing = () => {
         <>
             <div className="row d-flex justify-content-center py-3">
 
-                <div className="col-2">
-                    <span className="myButton1 text-center fs-7"
-                        onClick={() => handleUser()}
-                    >Click to be User</span>
-                </div>
                 <div className="col-8 text-center">
                     <h3>Hello {name}!</h3>
                 </div>
-                <div className="col-2">
-                    <span className="myButton1 text-center fs-7"
-                        onClick={() => handleWorker()}
-                    >Click to be Worker</span>
-                </div>
-            </div>
-            <div className="row d-flex justify-content-center pt-3">
-                <div className="col text-center border-bottom"
-                    style={role == "User" ? { display: "block" } : { display: "none" }}
-                >Main User Dashboard</div>
-                <div className="col text-center border-bottom"
-                    style={role == "Worker" ? { display: "block" } : { display: "none" }}
-                >Main Worker Dashboard</div>
             </div>
 
             {/* The div below conditionally renders the "User" dashboard */}
@@ -149,6 +131,19 @@ export const Landing = () => {
                                 }
                                 }
                             >My Payments</div>
+                            <div className={`col-12 border-bottom border-dark mt-5 mb-5 myMenu`}
+                                onClick={() => {
+                                    localStorage.clear();
+                                    setCurrentUser({});
+                                    setDisplay("");
+                                    setMenu("listings");
+                                    navigate("/login")
+                                }}
+                            >Logout
+                                <span clasname>
+                                    <i class="fa-solid fa-arrow-right-from-bracket rotate ms-3"></i>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     {/* End left navigation for "User" start main body of landing dashboard for "User" */}
@@ -369,12 +364,14 @@ export const Landing = () => {
                                     setMenu("history")
                                 }}
                             >My Work History</div>
-                            <div className={`col-12 border-bottom border-dark mt-5 mb-5
-                            // ${menu == "history" ? "activeMenu" : "myMenu"}`}
-                            //     onClick={() => {
-                            //         setDisplay("history")
-                            //         setMenu("history")
-                            //     }}
+                            <div className={`col-12 border-bottom border-dark mt-5 mb-5 myMenu`}
+                                onClick={() => {
+                                    localStorage.clear();
+                                    setCurrentUser({});
+                                    setDisplay("");
+                                    setMenu("listings");
+                                    navigate("/login")
+                                }}
                             >Logout
                                 <span clasname>
                                     <i class="fa-solid fa-arrow-right-from-bracket rotate ms-3"></i>
