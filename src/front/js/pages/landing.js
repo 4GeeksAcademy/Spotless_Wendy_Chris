@@ -149,6 +149,19 @@ export const Landing = () => {
                                 }
                                 }
                             >My Payments</div>
+                            <div className={`col-12 border-bottom border-dark mt-5 mb-5 myMenu`}
+                                onClick={() => {
+                                    localStorage.clear();
+                                    setCurrentUser({});
+                                    setDisplay("");
+                                    setMenu("listings");
+                                    navigate("/login")
+                                }}
+                            >Logout
+                                <span clasname>
+                                    <i class="fa-solid fa-arrow-right-from-bracket rotate ms-3"></i>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     {/* End left navigation for "User" start main body of landing dashboard for "User" */}
@@ -369,12 +382,14 @@ export const Landing = () => {
                                     setMenu("history")
                                 }}
                             >My Work History</div>
-                            <div className={`col-12 border-bottom border-dark mt-5 mb-5
-                            // ${menu == "history" ? "activeMenu" : "myMenu"}`}
-                            //     onClick={() => {
-                            //         setDisplay("history")
-                            //         setMenu("history")
-                            //     }}
+                            <div className={`col-12 border-bottom border-dark mt-5 mb-5 myMenu`}
+                                onClick={() => {
+                                    localStorage.clear();
+                                    setCurrentUser({});
+                                    setDisplay("");
+                                    setMenu("listings");
+                                    navigate("/login")
+                                }}
                             >Logout
                                 <span clasname>
                                     <i class="fa-solid fa-arrow-right-from-bracket rotate ms-3"></i>
