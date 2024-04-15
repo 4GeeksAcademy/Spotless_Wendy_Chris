@@ -82,11 +82,13 @@ export const WDashboard = () => {
       let final = test.toSorted(sortPrice);
       setWorkerListings(final);
     }
-    else {
+    else if (val == 2){
 
       let test = [...workerListings];
       let final = test.toSorted(sortDate);
       setWorkerListings(final);
+    }else{
+      
     }
 
   }
@@ -148,7 +150,7 @@ export const WDashboard = () => {
           <li><span className="dropdown-item" onClick={() => filter_listing_function(1)}>City (A-Z)</span></li>
           <li><span className="dropdown-item" onClick={() => filter_listing_function(2)}>Price: (High to Low)</span></li>
           <li><span className="dropdown-item" onClick={() => filter_listing_function(3)}>Date</span></li>
-          <li><span className="dropdown-item" >All cities</span></li>
+          <li><span className="dropdown-item" onClick={() => filter_listing_function(4)}>My city</span></li>
         </ul>
       </div>
 
