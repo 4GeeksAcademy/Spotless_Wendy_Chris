@@ -33,6 +33,7 @@ import { Footer } from "./component/footer";
 import { useState } from "react";
 import { AddProperty } from "./component/add_prop";
 import { History } from "./component/history";
+import { Faq } from "./pages/faq";
 
 
 
@@ -92,6 +93,7 @@ const Layout = () => {
                         <Routes>
                             <Route element={<Login />} path="/login" />
                             <Route element={<Home />} path="/" />
+                            <Route element={<Faq />} path="/faq" />
                             <Route element={<Dashboard />} path="/dashboard" />
                             <Route element={<HHistory />} path="/hhistory" />
                             <Route element={<WDashboard />} path="/wdashboard" />

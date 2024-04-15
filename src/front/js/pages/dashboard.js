@@ -125,12 +125,7 @@ export const Dashboard = () => {
   function save_modal_function(id) {
 
     let format_date = listingDate.replace("T", " ");
-    let today = new Date();
-    console.log("check today :" + today)
-    console.log("check if the date was formatted :" + format_date)
-
-    let test = ComparedDate();
-    console.log('Check if the date is in the past : ' + test);
+   
 
 
     if (listingDate.length > 5) {
@@ -140,7 +135,7 @@ export const Dashboard = () => {
 
       var fetchedListings = []
 
-      fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
+      fetch(process.env.BACKEND_URL + "/api/user/property/listing/new25",
         {
           method: 'POST',
           body: JSON.stringify(new_listing),
