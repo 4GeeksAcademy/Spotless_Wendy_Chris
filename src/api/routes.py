@@ -137,11 +137,12 @@ def add_user_listing():
 @api.route('/update/profile/<id>', methods=['PUT'])
 def update_user_or_worker(id):
     request_body=request.json
-    if request_body['role']=='worker':
+    if request_body['role']=='Worker':
+        print(' we found a worker')
          
         test_token= Worker.query.filter_by(email=request_body, password=request_body['password'])
         if test_token:
-            db.session.query(Worker).get(id).update({"full_name":request_body['full_name'], "email":request_body['email'],"phone": request_body['phone']})
+            db.session.query(Worker).filter_by(email=request_body['email'], password=request_body['password']).update({"full_name":request_body['full_name'], "email":request_body['email'],"phone": request_body['phone'], "password":request_body['new_password']})
             db.session.commit()
             return jsonify(f"Success"), 200
         else:
