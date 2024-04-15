@@ -73,8 +73,8 @@
   
   .faq .card .card-header .faq-title .badge {
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   line-height: 14px;
   float: left;
   
@@ -82,7 +82,7 @@
   -moz-border-radius: 100px;
   border-radius: 100px;
   text-align: center;
-  background: #E91E63;
+  background: #FF4742;
   color: #fff;
   font-size: 12px;
   margin-right: 20px;

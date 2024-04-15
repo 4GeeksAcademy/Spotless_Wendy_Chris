@@ -39,7 +39,7 @@ const navigate= useNavigate();
                                 </div>
                                 <div id="faqCollapse-1" class="collapse" aria-labelledby="faqHeading-1" data-parent="#accordion">
                                     <div class="card-body">
-                                        <p>"Spotless" is a new service that allows homeowner or AirBnb host to find independent worker to clean their property in a timely manner without dealing with the hassle of finding someone available when needed. </p>
+                                        <p class="card-body">"Spotless" is a new service that allows homeowner or AirBnb host to find independent worker to clean their property in a timely manner without dealing with the hassle of finding someone available when needed. </p>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@ const navigate= useNavigate();
                                 </div>
                                 <div id="faqCollapse-2" class="collapse" aria-labelledby="faqHeading-2" data-parent="#accordion">
                                     <div class="card-body ">
-                                        <p>The process of applying on <strong> Spotless</strong> couldn't be more easy, all you have to do is click on that link <a role="button" onClick={()=>navigate('/login')}>Apply here</a></p>
+                                        <p class="card-body">The process of applying on <strong> Spotless</strong> couldn't be more easy, all you have to do is click on that link <a role="button" onClick={()=>navigate('/login')}><strong>Apply here</strong></a></p>
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@ const navigate= useNavigate();
                                 </div>
                                 <div id="faqCollapse-3" class="collapse" aria-labelledby="faqHeading-3" data-parent="#accordion">
                                     <div class="card-body">
-                                        <p> Your payment on Spotless is available within 72hours a cleaning session was completed, from the moment you applied, you'll have the opportinuty to set up your preferred method of getting paid. </p>
+                                        <p class="card-body"> Your payment on Spotless is available within 72hours a cleaning session was completed, from the moment you applied, you'll have the opportinuty to set up your preferred method of getting paid. </p>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@ const navigate= useNavigate();
                                 </div>
                                 <div id="faqCollapse-5" class="collapse" aria-labelledby="faqHeading-5" data-parent="#accordion">
                                     <div class="card-body">
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here.</p>
+                                        <p class="card-body">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here.</p>
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +114,7 @@ const navigate= useNavigate();
                                 </div>
                                 <div id="faqCollapse-6" class="collapse" aria-labelledby="faqHeading-6" data-parent="#accordion">
                                     <div class="card-body">
-                                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here.</p>
+                                        <p class="card-body">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here.</p>
                                     </div>
                                 </div>
                             </div>
