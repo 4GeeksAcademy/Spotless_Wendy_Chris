@@ -216,7 +216,11 @@ def cancel_schedule(ids,idl):
     db.session.commit()
     db.session.query(Schedule).filter_by(id=ids).update({"status":'Cancelled'})
     db.session.commit()
-    return jsonify(f"Success")
+
+    get_listing= db.session.execute("SELECT Listing.id, Listing.date_needed, Listing.special_note, Property.address, Property.city,  Property.img, Listing.rate FROM Listing join Property ON Property.id=Listing.property_id where Listing.status='Active';")
+    all_listing= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3],city=row[4], img=row[5], rate=row[6] ) for row in get_listing.fetchall()]
+    return jsonify(all_listing), 200
+
 
 
 # Mark Listing as Paid for a specific listing below

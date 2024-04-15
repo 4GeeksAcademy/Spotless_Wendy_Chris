@@ -225,7 +225,7 @@ def add_newworker_load():
                return jsonify("This worker already exists!"), 500
         
         else:
-            newW=Worker(full_name=el['name'], email=el['email'],password= el['password'], phone=el['phone'], address=el['address']  )
+            newW=Worker(full_name=el['name'], email=el['email'],password= el['password'], phone=el['phone'], address=el['address'], img=el['img']  )
             db.session.add(newW)
             db.session.commit()
     return jsonify(

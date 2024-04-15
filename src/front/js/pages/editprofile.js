@@ -61,6 +61,7 @@ export const EditProfile = () => {
         setTempF('');
         setTempPA('');
         setTempNPA('');
+        setDisplay("myProfile")
     }
 
     function save_update_function() {

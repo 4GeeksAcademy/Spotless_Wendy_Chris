@@ -16,6 +16,7 @@ import { MyPayments } from "./component/mypayments";
 import { HostHistory } from "./component/hosthistory";
 import { HHistory } from "./component/hhistory";
 import { StaticRating } from "./component/staticrating";
+import { Header } from "./component/header";
 
 import { ColorTest } from "./pages/colortest";
 
@@ -75,7 +76,8 @@ const Layout = () => {
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
-    return (
+    return (<>
+
         <div className="container">
             {/* Export global variables below */}
             <AppContext.Provider value={
@@ -109,6 +111,7 @@ const Layout = () => {
                             <Route element={<Demo />} path="/demo" />
                             <Route element={<Single />} path="/single/:theid" />
                             <Route element={<ColorTest />} path="/colortest" />
+                            <Route element={<Header />} path="/header" />
                             <Route element={<h1>Not found!</h1>} />
                         </Routes>
                         <Footer />
@@ -116,6 +119,7 @@ const Layout = () => {
                 </BrowserRouter>
             </AppContext.Provider>
         </div>
+    </>
     );
 };
 

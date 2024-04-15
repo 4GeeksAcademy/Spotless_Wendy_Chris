@@ -70,15 +70,7 @@ export const WHistory = () => {
 
   return (
     <div>
-
-      <div className="add_property_class_div">
-        <button className="test button-24" onClick={() => navigate("/schedule")}>Schedule</button>
-      </div>
-
       <div>
-        <div className="d-flex justify-content-center">
-          <h3>Activity</h3>
-        </div>
         <div className="dropdown mb-3 text-start">
           <button
             className="btn btn-secondary mb-2 dropdown-toggle"
@@ -111,19 +103,19 @@ export const WHistory = () => {
                     <span> {element.address}</span>
                   </div>
 
-                  <div className="date_div mx-4 pr-4 ">
+                  <div className="date_div mx-1">
                     <span>{element.date_needed}</span>
                   </div>
 
-                  <div className="note_rate_div mx-4 pr-2">
+                  <div className="note_rate_div mx-1">
                     <span>Recieved : {element.rate}$</span>
                   </div>
 
-                  <div className="d-flex align-items-center mx-4">
+                  <div className="d-flex align-items-center mx-1">
                     <span>Status: Completed</span>
                   </div>
                   <div className="row">
-                    <div className="col">
+                    <div className="col mx-1">
                       <StaticRating
                         rating={element.review}
                       /></div>
