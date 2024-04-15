@@ -127,6 +127,7 @@ export const Login = () => {
 				.catch(error => console.error(error));
 		}
 		else if (localRole == "Worker" && userEmail && userPassword && userPhone && userFullName) {
+			console.log("worker role signup")
 			fetch(process.env.BACKEND_URL + "/worker/new/load", {
 				method: 'POST', // or 'PUT'
 				body: JSON.stringify(
