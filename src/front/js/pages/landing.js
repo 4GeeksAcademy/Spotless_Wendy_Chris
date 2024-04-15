@@ -86,27 +86,9 @@ export const Landing = () => {
         <>
             <div className="row d-flex justify-content-center py-3">
 
-                <div className="col-2">
-                    <span className="myButton1 text-center fs-7"
-                        onClick={() => handleUser()}
-                    >Click to be User</span>
-                </div>
                 <div className="col-8 text-center">
                     <h3>Hello {name}!</h3>
                 </div>
-                <div className="col-2">
-                    <span className="myButton1 text-center fs-7"
-                        onClick={() => handleWorker()}
-                    >Click to be Worker</span>
-                </div>
-            </div>
-            <div className="row d-flex justify-content-center pt-3">
-                <div className="col text-center border-bottom"
-                    style={role == "User" ? { display: "block" } : { display: "none" }}
-                >Main User Dashboard</div>
-                <div className="col text-center border-bottom"
-                    style={role == "Worker" ? { display: "block" } : { display: "none" }}
-                >Main Worker Dashboard</div>
             </div>
 
             {/* The div below conditionally renders the "User" dashboard */}
