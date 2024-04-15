@@ -141,9 +141,9 @@ export const HHistory = () => {
                     {
                         hHistory.length >= 1 ?
                             hHistory.map((elm, index) => {
-                                return (<>
-                                    <ul>
-                                        <li key={elm.id}>
+                                return (
+                                    <ul key={index}>
+                                        <li >
                                             <div className="payments_div mt-2">
                                                 <div className="row d-flex  justify-content-between">
                                                     <div className="col-2">
@@ -195,7 +195,7 @@ export const HHistory = () => {
                                             </div>
                                         </li>
                                     </ul >
-                                </>
+
                                 )
                             }) : <div>You have no listing history</div>
 

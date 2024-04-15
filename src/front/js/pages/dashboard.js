@@ -125,7 +125,7 @@ export const Dashboard = () => {
   function save_modal_function(id) {
 
     let format_date = listingDate.replace("T", " ");
-   
+
 
 
     if (listingDate.length > 5) {
@@ -135,7 +135,7 @@ export const Dashboard = () => {
 
       var fetchedListings = []
 
-      fetch(process.env.BACKEND_URL + "/api/user/property/listing/new25",
+      fetch(process.env.BACKEND_URL + "/api/user/property/listing/new",
         {
           method: 'POST',
           body: JSON.stringify(new_listing),
