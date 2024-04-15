@@ -64,7 +64,6 @@ export const EditProfile = () => {
     }
 
     function save_update_function() {
-
         let current_role = currentUser.role;
 
 
