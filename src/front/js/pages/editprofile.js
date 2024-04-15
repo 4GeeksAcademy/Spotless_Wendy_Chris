@@ -64,8 +64,7 @@ export const EditProfile = () => {
     }
 
     function save_update_function() {
-        let current_role = "user";
-        //let current_role= currentUser.role;
+        let current_role = currentUser.role;
 
 
         if (tempF.length > 3 && tempE.length > 3 && tempP.length > 3) {
@@ -88,7 +87,7 @@ export const EditProfile = () => {
             setDisplay("myProfile")
 
 
-            let url_enpoint = "/api/update/profile/" + currentUser.id;
+            let url_enpoint = "api/update/profile/" + currentUser.id;
 
             fetch(process.env.BACKEND_URL + url_enpoint, {
                 method: 'PUT',

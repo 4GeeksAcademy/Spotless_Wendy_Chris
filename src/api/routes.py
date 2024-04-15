@@ -137,15 +137,21 @@ def add_user_listing():
 @api.route('/update/profile/<id>', methods=['PUT'])
 def update_user_or_worker(id):
     request_body=request.json
-    if request_body['role']=='worker':
+    if request_body['role']=='Worker':
          
         test_token= Worker.query.filter_by(email=request_body, password=request_body['password'])
         if test_token:
-            db.session.query(Worker).get(id).update({"full_name":request_body['full_name'], "email":request_body['email'],"phone": request_body['phone']})
+            worker = Worker.query.filter_by(email=request_body['email'], password=request_body['password']).first()
+            db.session.query(Worker).filter_by(email=request_body['email'], password=request_body['password']).update({"full_name":request_body['full_name'], "email":request_body['email'],"phone": request_body['phone'], "password":request_body['new_password']})
             db.session.commit()
-            return jsonify(f"Success"), 200
+            return jsonify({"msg": "Worker info successfully updated",
+                    "id": worker.id,
+                    "email": worker.email,
+                     "phone": worker.phone, "full_name": worker.full_name,
+                      "role": "Worker", "img": worker.img, "rating": worker.ranking
+                       }), 200
         else:
-            return (f"Password incorrect"),410
+            return (f"Password or email incorrect"),410
     else:
          test_token= User.query.filter_by(email=request_body['email'], password=request_body['password']).first()
          if test_token:
