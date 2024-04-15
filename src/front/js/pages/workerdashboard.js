@@ -82,13 +82,13 @@ export const WDashboard = () => {
       let final = test.toSorted(sortPrice);
       setWorkerListings(final);
     }
-    else if (val == 2){
+    else if (val == 2) {
 
       let test = [...workerListings];
       let final = test.toSorted(sortDate);
       setWorkerListings(final);
-    }else{
-      
+    } else {
+
     }
 
   }
@@ -126,16 +126,6 @@ export const WDashboard = () => {
   return (
     <div>
 
-      <div className="go_back_div">
-        <button className="test button-24"
-          onClick={() => {
-            setDisplay("mySchedule")
-            setMenu("mySchedule")
-          }}
-        >My Schedule</button>
-      </div>
-
-
       <div className="dropdown mb-3 text-start">
         <button
           className="btn btn-secondary mb-2 dropdown-toggle"
@@ -161,9 +151,9 @@ export const WDashboard = () => {
 
             :
 
-            workerListings.map((element) =>
+            workerListings.map((element, index) =>
 
-              <li key={element.id}>
+              <li key={index}>
 
                 <div className="listing_div">
 

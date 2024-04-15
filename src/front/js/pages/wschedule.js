@@ -35,6 +35,43 @@ export const WSchedule = () => {
 
   }, []);
 
+  const getWorkerListings = () => {
+
+    fetch(process.env.BACKEND_URL + "api/worker/listing/all")
+      .then(res => {
+        if (!res.ok) throw Error(res.statusText);
+        return res.json();
+      })
+      .then(response => {
+
+        let newArray = [...response];
+        let formatted_Listing = [];
+
+        newArray.forEach((el) => {
+          let each_listing = {};
+          each_listing = el;
+          let all_img = el.img.split(" ");
+          each_listing.image1 = all_img[0];
+          formatted_Listing.push(each_listing);
+
+        })
+
+        setWorkerListings(formatted_Listing);
+        console.log("Worker Dashboard  listing below : ")
+        console.log(formatted_Listing);
+
+      })
+
+      .catch(error => console.log(error));
+
+
+
+  }
+
+
+
+
+  // var fetchedListings = []
 
   function cancel_schedule_function(schedule_id, listing_id) {
     fetch(process.env.BACKEND_URL + "api/worker/schedule/" + schedule_id + "/cancel/" + listing_id,
@@ -48,9 +85,10 @@ export const WSchedule = () => {
       .then(response => {
         let test = mySchedule.filter((el) => el.id != schedule_id);
         setMySchedule(test);
-
-
-      })
+        // response.map((elm) => fetchedListings.push(elm))
+      }
+      )
+      .then(() => getWorkerListings())
 
       .catch(error => console.log(error));
 

@@ -130,14 +130,13 @@ export const WorkerProfile = () => {
                 </div>
             </div>
             <div className="col-5">
-                <div className="row d-flex justify-content-start">
-                    <div className="col">
-                        <img
-                            className="profilePic"
-                            src={`${currentUser.img}`} />
-                    </div>
+                <div className="col">
+                    <img
+                        className="profilePic"
+                        src={`${currentUser.img}`} />
                 </div>
             </div>
         </div>
+
     );
 };

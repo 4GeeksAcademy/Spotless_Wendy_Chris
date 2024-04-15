@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import "../../styles/colortest.css";
 
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../layout";
@@ -18,6 +19,7 @@ import { WHistory } from "./whistory";
 import { HostHistory } from "../component/hosthistory";
 import { WorkerProfile } from "../component/workerprofile";
 import { HHistory } from "../component/hhistory";
+import { Header } from "../component/header";
 
 export const Landing = () => {
 
@@ -86,6 +88,7 @@ export const Landing = () => {
         <>
             <div className="row d-flex justify-content-center py-3">
 
+
                 <div className="col-8 text-center">
                     <h3>Hello {name}!</h3>
                 </div>
@@ -102,7 +105,7 @@ export const Landing = () => {
                                     setMenu("listings")
                                     setFilterListings("Active")
                                 }}
-                            ><i class="fa-solid fa-house"></i></div>
+                            ><i class="fa-solid fa-house activeMenu"></i></div>
                             <div className={`col-12 border-bottom border-dark
                             ${menu == "properties" ? "activeMenu" : "myMenu"}`}
                                 onClick={() => {
@@ -162,7 +165,8 @@ export const Landing = () => {
                                     }
 
                                 >
-                                    <i class="fa-solid fa-bell fa-shake px-1 fs-3"></i>{scheduledPaymentDue.length}
+                                    <i className="fa-solid fa-bell fa-shake px-1 fs-3 text-light"></i>
+                                    <span className="supTest">{scheduledPaymentDue.length}</span>
                                 </span>
                             </div>
                             <div className="col-6"
@@ -188,6 +192,7 @@ export const Landing = () => {
 
                             </div>
                         </div>
+                        <div className="col-12"><Header /></div>
                         <div className="col-12">
                             <MyListings />
                         </div>
