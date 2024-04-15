@@ -47,7 +47,7 @@ export const Home = () => {
 					let each_house = {};
 
 					let r = Math.floor(Math.random() * 6);
-					let u = Math.floor(Math.random() * 11) + 1;
+					let u = Math.floor(Math.random() * 2) + 1;
 					let b = Math.floor(Math.random() * 4) + 1;
 					let be = Math.floor(Math.random() * 5) + 1;
 
@@ -58,8 +58,7 @@ export const Home = () => {
 					each_house.city = cityR[r];
 					each_house.state = stateR[r];
 					each_house.address = el.address;
-					each_house.images = el.images[0] + '  ' + el.images[1] + '  ' + el.images[2] + '  ' + el.images[3] + " " + el.images[4];
-
+					each_house.images = el.images[0] + '  ' + el.images[1] + '  ' + el.images[2] + '  ' + el.images[3] ;
 					test2.push(each_house);
 
 				})
