@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import duster from "../../img/duster_1.png";
+import sweep from "../../img/sweep2.png";
 
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../layout";
@@ -228,24 +230,29 @@ export const Login = () => {
 							Incorrect Password or email
 						</div>
 						<a href="#">Forgot your password?</a>
-						<button onClick={(event) => {
-							event.preventDefault();
-							login_function()
-						}
-						}>Sign In</button>
+						<button
+							className="buttonL"
+							onClick={(event) => {
+								event.preventDefault();
+								login_function()
+							}
+							}>Sign In</button>
 					</form>
 				</div>
 				<div className="overlay-container">
 					<div className="overlay">
 						<div className="overlay-panel overlay-left">
+							<img className="duster2 mb-3" src={duster} />
 							<h1 className="pb-3">Already have an account?</h1>
-							<button className="ghost" id="signIn" onClick={() => sign_in_function()}>Sign In</button>
+							<button className="ghost" id="signUp" onClick={() => sign_in_function()}>Sign In</button>
 						</div>
 						<div className="overlay-panel overlay-right">
 							<h1>Welcome to Spotless!</h1>
 							<p>Start your on demand cleaning journey today!</p>
 							<button className="ghost" id="signUp" onClick={() => sign_up_function()}>Sign Up</button>
+							<span className="mt-3"><img className="duster" src={duster} /></span>
 						</div>
+
 					</div>
 				</div>
 			</div >

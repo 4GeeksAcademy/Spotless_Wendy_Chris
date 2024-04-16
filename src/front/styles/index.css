@@ -46,9 +46,9 @@
 
 .myMenu:Hover {
     cursor: pointer;
-    background-color: #b4b4b4;
+    /* background-color: #b4b4b4; */
     color: #FF416C;
-    box-shadow: 0 3px 11px #ff4b2b90;
+    box-shadow: inset 0px 0px 7px #ff416da2;
 }
 
 .activeMenu {
@@ -60,7 +60,7 @@
 }
 
 .activeMenu:Hover {
-    cursor: pointer;
+    
     box-shadow: 0 5px 15px rgba(145, 92, 182, 0.59);
 }
 
@@ -226,6 +226,19 @@
     background-color: blue;
     height: 169px;
     width: 100%;
+}
+
+.duster {    
+    height:75%;
+}
+
+.duster2 {   
+    height:23%;
+}
+
+.sweep {
+    /* width: 69%; */
+    height:33%;
 }
 
 
