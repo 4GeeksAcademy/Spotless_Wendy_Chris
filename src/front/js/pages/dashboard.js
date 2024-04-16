@@ -184,7 +184,7 @@ export const Dashboard = () => {
 
     <div>
 
-      <div class="product-list-container">
+      <div class="product-list-container mt-3">
 
         {myProperties.map((element, index) =>
 
