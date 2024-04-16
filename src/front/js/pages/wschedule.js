@@ -120,41 +120,46 @@ export const WSchedule = () => {
       <div>
 
         <ul>
-          {mySchedule.filter((elm) => elm.status == "Pending").map((element, index) =>
+          {mySchedule.length > 0 ?
 
-            <li key={index}>
+            mySchedule.filter((elm) => elm.status == "Pending").map((element, index) =>
 
-              <div className="listing_div">
+              <li key={index}>
 
-                <div className="d-flex  justify-content-between ">
+                <div className="listing_div">
 
-                  <div className="city_address_div mx-2 mr-2 pt-2 ">
-                    <h4>{element.city}</h4>
-                    <span> {element.address}</span>
+                  <div className="d-flex  justify-content-between ">
+
+                    <div className="city_address_div mx-2 mr-2 pt-2 ">
+                      <h4>{element.city}</h4>
+                      <span> {element.address}</span>
+                    </div>
+
+                    <div className="mx-4 mr-4 ">
+                      <span>{element.date_needed}</span>
+                    </div>
+                    <div className="mx-4 mr-4 ">
+                      <span>{element.special_note}</span>
+                    </div>
+
+                    <div className="mx-4 mr-4">
+                      <span>Quote : {element.rate}$</span>
+                    </div>
+
                   </div>
 
-                  <div className="mx-4 mr-4 ">
-                    <span>{element.date_needed}</span>
-                  </div>
-                  <div className="mx-4 mr-4 ">
-                    <span>{element.special_note}</span>
-                  </div>
-
-                  <div className="mx-4 mr-4">
-                    <span>Quote : {element.rate}$</span>
+                  <div className="accept_div">
+                    <button className="test" onClick={() => complete_schedule_function(element.id, element.listing_id)}>Complete</button>
+                    <button className="test" onClick={() => cancel_schedule_function(element.id, element.listing_id)}>Cancel</button>
                   </div>
 
                 </div>
 
-                <div className="accept_div">
-                  <button className="test" onClick={() => complete_schedule_function(element.id, element.listing_id)}>Complete</button>
-                  <button className="test" onClick={() => cancel_schedule_function(element.id, element.listing_id)}>Cancel</button>
-                </div>
-
-              </div>
-
-            </li>
-          )}
+              </li>
+            )
+            :
+            <div className="mb-5 pt-5">Your Schedule is empty</div>
+          }
 
         </ul>
 
