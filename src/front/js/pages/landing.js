@@ -136,7 +136,7 @@ export const Landing = () => {
                                     setCurrentUser({});
                                     setDisplay("");
                                     setMenu("listings");
-                                    navigate("/login")
+                                    navigate("/")
                                 }}
                             >Logout
                                 <span clasname>
@@ -371,7 +371,7 @@ export const Landing = () => {
                                     setCurrentUser({});
                                     setDisplay("");
                                     setMenu("listings");
-                                    navigate("/login")
+                                    navigate("/")
                                 }}
                             >Logout
                                 <span clasname>
