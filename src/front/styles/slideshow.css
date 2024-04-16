@@ -1,0 +1,57 @@
+#slideshow_div {
+    overflow: hidden;
+    height: 400px;
+    width: 800px;
+    margin: 0 auto;
+}
+ 
+
+ 
+/* Add animation to the slides */
+.slide-wrapper_div {
+ 
+    /* Calculate the total width on the
+    basis of number of slides */
+    width: calc(800px * 4);
+ 
+    /* Specify the animation with the
+    duration and speed */
+    animation: slide 10s ease infinite;
+}
+
+
+/* Style each of the sides 
+  with a fixed width and height */
+  .slide_div {
+    float: left;
+    height: 400px;
+    width: 800px;
+}
+.img_slide{
+    width: 100%;
+    height: 100%;
+}
+ 
+
+/* Define the animation 
+  for the slideshow */
+@keyframes slide {
+ 
+    /* Calculate the margin-left for 
+    each of the slides */
+    20% {
+        margin-left: 0px;
+    }
+ 
+    40% {
+        margin-left: calc(-800px * 1);
+    }
+ 
+    60% {
+        margin-left: calc(-800px * 2);
+    }
+ 
+    80% {
+        margin-left: calc(-800px * 3);
+    }
+}

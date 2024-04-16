@@ -1,7 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
-import rigoImage from "../../img/how-to.png";
+import rigo from "../../img/maid1.jpg";
+import rigo2 from "../../img/maid2.jpeg";
+import rigo3 from "../../img/maid3.jpg";
+import rigo4 from "../../img/maid4.png";
 import "../../styles/home.css";
 import { AppContext } from "../layout";
 import { Link, useNavigate } from "react-router-dom";
@@ -181,7 +183,7 @@ export const Dashboard = () => {
 
         {myProperties.map((element, index) =>
 
-          <div class="card text-secondary" style={{ width: "18rem" }} key={element.id}>
+          <div class="card text-secondary" style={{ width: "310px" }} key={element.id}>
 
             <div id="slideshow">
               <div className="jump_div">
@@ -192,12 +194,31 @@ export const Dashboard = () => {
               </div>
 
               <div class="slide-wrapper">
-                <div class="slide"><img src={element.image1} class="slide-number w-100" /></div>
-                <div class="slide"><img src={element.image2} class="slide-number w-100" /></div>
-                <div class="slide"><img src={element.image3} class="slide-number w-100" /></div>
-                <div class="slide"><img src={element.image1} class="slide-number w-100" /></div>
+               
+            <div class="slide">
+                <img class="slide-number img_sl"  src={rigo} />
+                  
+             
+            </div>
+            <div class="slide">
+            <img class="slide-number img_sl"  src={rigo2} />
+               
+            </div>
+            <div class="slide">
+            <img class="slide-number img_sl"  src={rigo3} />
+               
+            </div>
+            <div class="slide">
+            <img class="slide-number img_sl"  src={rigo4} />
+               
+            </div>
+             
+             
+                {/* <div class="slide_l"><img src={element.image1} class="slide-number img_sl" /></div>
+                 */}
               </div>
             </div>
+
 
             <div class="card-body">
               <h5 class="card-title">{element.name}</h5>
