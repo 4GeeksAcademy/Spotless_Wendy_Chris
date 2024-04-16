@@ -23,6 +23,8 @@ export const Dashboard = () => {
   const [listingId, setListingId] = useState({});
   const [dateN, setDateN] = useState('');
 
+  const [listingExists, setListingExists] = useState("is-valid btn")
+
 
 
   useEffect(() => {
@@ -80,7 +82,10 @@ export const Dashboard = () => {
         }
       })
       .then(res => {
-        if (!res.ok) console.log(res.statusText);
+        if (!res.ok) {
+          setListingExists("is-invalid btn");
+          throw Error(res.statusText);
+        }
         return res.json();
       })
       .then(response => {
@@ -194,26 +199,26 @@ export const Dashboard = () => {
               </div>
 
               <div class="slide-wrapper">
-               
-            <div class="slide">
-                <img class="slide-number img_sl"  src={rigo} />
-                  
-             
-            </div>
-            <div class="slide">
-            <img class="slide-number img_sl"  src={rigo2} />
-               
-            </div>
-            <div class="slide">
-            <img class="slide-number img_sl"  src={rigo3} />
-               
-            </div>
-            <div class="slide">
-            <img class="slide-number img_sl"  src={rigo4} />
-               
-            </div>
-             
-             
+
+                <div class="slide">
+                  <img class="slide-number img_sl" src={element.image1} />
+
+
+                </div>
+                <div class="slide">
+                  <img class="slide-number img_sl" src={element.image2} />
+
+                </div>
+                <div class="slide">
+                  <img class="slide-number img_sl" src={element.image3} />
+
+                </div>
+                <div class="slide">
+                  <img class="slide-number img_sl" src={element.image1} />
+
+                </div>
+
+
                 {/* <div class="slide_l"><img src={element.image1} class="slide-number img_sl" /></div>
                  */}
               </div>
@@ -224,11 +229,18 @@ export const Dashboard = () => {
               <h5 class="card-title">{element.name}</h5>
               <p class="card-text">Address: {element.address}<br />
                 City: {element.city}</p>
+
+
               <div className="d-flex justify-content-between">
                 <button class="button-24" role="button" onClick={() => pop_modal_function(element)}>Add to Listing</button>
-                <button className="btn" onClick={() => delete_property(element.id)}>
+                <button
+                  id="validationpassword" className={listingExists}
+                  onClick={() => delete_property(element.id)}>
                   <i className="fas fa-trash-alt fa-bounce fa-xl" />
                 </button>
+                <p id="validationpassword" className="invalid-feedback fs-3">
+                  Cannot Delete Property with Active Listing
+                </p>
               </div>
 
             </div>

@@ -84,11 +84,15 @@ def get_available_listing_for_worker():
 @api.route('/user/<id>/delete/property/<idP>', methods=['DELETE'])
 def remove_Property(id, idP):
     get_property= Property.query.get(idP)
-    db.session.delete(get_property)
-    db.session.commit()
-    get_property= Property.query.filter_by(user_id=id)
-    all_property= list(map(lambda x: x.serialize(), get_property))
-    return jsonify(all_property), 200
+    listing_exists = Listing.query.filter_by(property_id=idP).first()
+    if listing_exists:
+        return("Cannot delete Property with existing listing"), 401
+    else:
+        db.session.delete(get_property)
+        db.session.commit()
+        get_property= Property.query.filter_by(user_id=id)
+        all_property= list(map(lambda x: x.serialize(), get_property))
+        return jsonify(all_property), 200
 
 
     
@@ -292,15 +296,9 @@ def cancel_listing_by_user(idl, idc):
 #  Get completed schedule history for host below 
 @api.route('/user/<idh>/schedule/history', methods=['GET'])
 def get_host_history(idh):
-     get_schedule = db.session.query(Schedule)\
-    .join(Listing, Schedule.listing_id==Listing.id)\
-    .join(Property, Listing.property_id== Property.id)\
-    .join(User, Property.user_id==User.id)\
-    .filter(Schedule.status=='Complete', User.id==idh)\
-    .with_entities(Schedule.id, Listing.special_note, Listing.date_needed, Listing.rate, Listing.id, Property.img,
-                   Worker.id, Schedule.review, Property.name ).all()
-     all_schedule= [dict(id=row[0], special_note=row[1], date_needed=row[2], rate=row[3], listing_id=row[4], property_img=row[5], worker_id=row[6], review=row[7], name=row[8]) for row in get_schedule]
-     return (all_schedule), 200
+     get_schedule= db.session.execute("SELECT Schedule.id, Listing.date_needed, Listing.special_note, Property.address, Property.city, Listing.rate, Listing.id, Schedule.review, Property.img, Schedule.worker_id FROM Schedule join Listing ON Schedule.listing_id=Listing.id join Property on Listing.property_id=Property.id where Schedule.status='Complete' AND Schedule.worker_id="+idh+";")
+     all_schedule= [dict(id=row[0], date_needed=row[1], special_note=row[2], address=row[3], city=row[4], rate=row[5], listing_id=row[6], review=row[7], img=row[8], worker_id=row[9]  ) for row in get_schedule.fetchall()]   
+     return jsonify(all_schedule), 200
 
 
 

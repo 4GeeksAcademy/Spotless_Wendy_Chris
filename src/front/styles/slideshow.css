@@ -1,6 +1,6 @@
 #slideshow_div {
     overflow: hidden;
-    height: 400px;
+    height: 300px;
     width: 800px;
     margin: 0 auto;
 }
@@ -24,7 +24,7 @@
   with a fixed width and height */
   .slide_div {
     float: left;
-    height: 400px;
+    height: 300px;
     width: 800px;
 }
 .img_slide{

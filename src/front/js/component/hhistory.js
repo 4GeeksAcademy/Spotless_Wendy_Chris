@@ -61,7 +61,7 @@ export const HHistory = () => {
                 return res.json();
             })
             .then(responseAsJson => {
-                console.log("response for listing from backend:")
+                console.log("HHistory response for listing from backend:")
                 console.log(responseAsJson)
                 setHHistory(responseAsJson)
 
@@ -147,7 +147,7 @@ export const HHistory = () => {
                                             <div className="payments_div mt-2">
                                                 <div className="row d-flex  justify-content-between">
                                                     <div className="col-2">
-                                                        <img src={elm.property_img} className="img_payments" />
+                                                        <img src={elm.img} className="img_payments" />
                                                     </div>
                                                     <div className="col-10">
                                                         <div className="row">
