@@ -182,7 +182,7 @@ export const MyListings = () => {
 
                         :
 
-                        <div>There are no Listings with the status {filterListings}
+                        <div>You have no {filterListings} listings
                             <div><span className="button-24 my-5"
                                 onClick={() => {
                                     setDisplay("propMain")

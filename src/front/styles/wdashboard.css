@@ -103,7 +103,7 @@ height: 100%;
 
 
 .listing_div {
-  background: linear-gradient(to right, #F2EFE5, #E3E1D9);
+  background: linear-gradient(to right, #c9c9c9, #c9c9c9);
   display: flex;
   justify-content: space-between;
   height: 100px;
