@@ -83,7 +83,9 @@ export const Dashboard = () => {
       })
       .then(res => {
         if (!res.ok) {
-          setListingExists("is-invalid btn");
+        
+    const dialog = document.getElementById('delete_dialog');
+    dialog.showModal();
           throw Error(res.statusText);
         }
         return res.json();
@@ -234,13 +236,11 @@ export const Dashboard = () => {
               <div className="d-flex justify-content-between">
                 <button class="button-24" role="button" onClick={() => pop_modal_function(element)}>Add to Listing</button>
                 <button
-                  id="validationpassword" className={listingExists}
+                  className={listingExists}
                   onClick={() => delete_property(element.id)}>
                   <i className="fas fa-trash-alt fa-bounce fa-xl" />
                 </button>
-                <p id="validationpassword" className="invalid-feedback fs-3">
-                  Cannot Delete Property with Active Listing
-                </p>
+               
               </div>
 
             </div>
@@ -292,6 +292,23 @@ export const Dashboard = () => {
 
       </dialog>
 
+
+<dialog id="delete_dialog" className="rounded">
+
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>Unfortunately, you Can't delete property with an existing listing. </p>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style={{fontFamily:"arial"}}onClick={()=>{
+           const dialog = document.getElementById('delete_dialog');
+           dialog.close();
+        }}>Close</button>
+      </div>
+  
+  </div>
+
+</dialog>
 
     </div>
 
