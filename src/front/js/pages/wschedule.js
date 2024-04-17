@@ -158,7 +158,7 @@ export const WSchedule = () => {
               </li>
             )
             :
-            <div className="mb-5 pt-5g">Your Schedule is empty</div>
+            <div className="mb-5 pt-5">Your Schedule is empty</div>
           }
 
         </ul>
