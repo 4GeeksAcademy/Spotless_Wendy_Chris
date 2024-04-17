@@ -70,7 +70,7 @@ const data = location.state;
   <p class="card-text">Address: {data.address}<br />
     City: {data.city}</p>
   <div className="d-flex justify-content-between">
-    <button class="button-24" role="button"></button>
+    
     <button className="btn" onClick={() => delete_property(data.id)}>
       <i className="fas fa-trash-alt fa-bounce fa-xl" />
     </button>

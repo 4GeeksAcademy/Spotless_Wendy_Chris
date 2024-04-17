@@ -104,7 +104,7 @@ export const Home = () => {
 
 	return (
 
-		<div className="container">
+		<div className="">
 			<h1>test</h1>
 			<button type="button" className="btn btn-secondary" onClick={() => fetch_listing()}>Fetch api</button><br /><br /><br />
 			<button type="button" className="btn btn-secondary" onClick={() => load_property()}>Test property</button><br /><br /><br />

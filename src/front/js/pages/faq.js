@@ -16,7 +16,7 @@ const navigate= useNavigate();
 		<>
 		
     <section class="faq-section">
-<div class="container">
+
   <div class="row">
                    
                     <div class="col-md-6 offset-md-3">
@@ -52,7 +52,7 @@ const navigate= useNavigate();
                                 </div>
                                 <div id="faqCollapse-2" class="collapse" aria-labelledby="faqHeading-2" data-parent="#accordion">
                                     <div class="card-body ">
-                                        <p class="card-body">The process of applying on <strong> Spotless</strong> couldn't be more easy, all you have to do is click on that link <a role="button" onClick={()=>navigate('/login')}><strong>Apply here</strong></a></p>
+                                        <p class="card-body">The process of applying on <strong> Spotless</strong> couldn't be more easy, all you have to do is click on that link <a role="button" onClick={()=>navigate('/')}><strong>Apply here</strong></a></p>
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@ const navigate= useNavigate();
                     </div>
                   </div>
                 </div>
-                </div>
+             
                 </section>
 		</>
 

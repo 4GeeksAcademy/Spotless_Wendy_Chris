@@ -35,6 +35,7 @@ import { useState } from "react";
 import { AddProperty } from "./component/add_prop";
 import { History } from "./component/history";
 import { Faq } from "./pages/faq";
+import "../styles/home.css";
 
 
 
@@ -70,7 +71,7 @@ const Layout = () => {
 
     return (<>
 
-        <div className="container">
+        <div class='layout_div'>
             {/* Export global variables below */}
             <AppContext.Provider value={
                 {
@@ -106,7 +107,7 @@ const Layout = () => {
                             <Route element={<Header />} path="/header" />
                             <Route element={<h1>Not found!</h1>} />
                         </Routes>
-                        <Footer />
+                        <Footer/>
                     </ScrollToTop>
                 </BrowserRouter>
             </AppContext.Provider>

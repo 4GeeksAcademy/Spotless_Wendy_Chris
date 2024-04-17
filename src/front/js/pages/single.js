@@ -9,8 +9,8 @@ export const Single = props => {
 	const params = useParams();
 
 	return (
-		<div className="container">
-		
+		<div>
+		test
 		</div>
 	);
 };
