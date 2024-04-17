@@ -94,31 +94,31 @@ export const WHistory = () => {
 
             <li key={index}>
 
-              <div className="listing_div">
+              <div className="history_div">
 
                 <div className=" d-flex  justify-content-between pt-2 ">
 
-                  <div className="city_address_div mx-4  ">
+                  <div className="px-4  ">
                     <h4>{element.city}</h4>
                     <span> {element.address}</span>
                   </div>
 
-                  <div className="date_div mx-1">
+                  <div className="px-4">
                     <span>{element.date_needed}</span>
                   </div>
 
-                  <div className="note_rate_div mx-1">
+                  <div className="px-4">
                     <span>Recieved : {element.rate}$</span>
                   </div>
-
-                  <div className="d-flex align-items-center mx-1">
-                    <span>Status: Completed</span>
-                  </div>
                   <div className="row">
-                    <div className="col mx-1">
-                      <StaticRating
-                        rating={element.review}
-                      /></div>
+                    <div className="col px-4">
+                      {element.review > 0 ?
+                        <StaticRating
+                          rating={element.review} />
+                        :
+                        <span className="ms-3">Not Reviewed Yet</span>
+                      }
+                    </div>
                   </div>
 
                 </div>

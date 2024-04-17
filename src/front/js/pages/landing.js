@@ -86,13 +86,7 @@ export const Landing = () => {
 
     return (
         <>
-            <div className="row d-flex justify-content-center py-3">
 
-
-                <div className="col-8 text-center">
-                    <h3>Hello {name}!</h3>
-                </div>
-            </div>
 
             {/* The div below conditionally renders the "User" dashboard */}
             <div style={role == "User" ? { display: "block" } : { display: "none" }}>
@@ -105,7 +99,9 @@ export const Landing = () => {
                                     setMenu("listings")
                                     setFilterListings("Active")
                                 }}
-                            ><i class="fa-solid fa-house activeMenu"></i></div>
+                            ><i class="fa-solid fa-house"></i>
+
+                            </div>
                             <div className={`col-12 border-bottom border-dark
                             ${menu == "properties" ? "activeMenu" : "myMenu"}`}
                                 onClick={() => {
@@ -140,7 +136,7 @@ export const Landing = () => {
                                     setCurrentUser({});
                                     setDisplay("");
                                     setMenu("listings");
-                                    navigate("/login")
+                                    navigate("/")
                                 }}
                             >Logout
                                 <span clasname>
@@ -375,7 +371,7 @@ export const Landing = () => {
                                     setCurrentUser({});
                                     setDisplay("");
                                     setMenu("listings");
-                                    navigate("/login")
+                                    navigate("/")
                                 }}
                             >Logout
                                 <span clasname>

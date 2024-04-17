@@ -61,7 +61,7 @@ export const HHistory = () => {
                 return res.json();
             })
             .then(responseAsJson => {
-                console.log("response for listing from backend:")
+                console.log("HHistory response for listing from backend:")
                 console.log(responseAsJson)
                 setHHistory(responseAsJson)
 
@@ -120,6 +120,7 @@ export const HHistory = () => {
                 // setHHistory(newArray);
             })
             .then(() => getHostHistory())
+            .then(() => setLocalRating(0))
 
             .catch(error => console.error(error));
 
@@ -138,68 +139,68 @@ export const HHistory = () => {
         <div>
             <div className="row">
                 <div className="col-12">
+
                     {
                         hHistory.length >= 1 ?
                             hHistory.map((elm, index) => {
                                 return (
-                                    <ul key={index}>
-                                        <li >
-                                            <div className="payments_div mt-2">
-                                                <div className="row d-flex  justify-content-between">
-                                                    <div className="col-2">
-                                                        <img src={elm.property_img} className="img_payments" />
-                                                    </div>
-                                                    <div className="col-10">
-                                                        <div className="row">
-                                                            <div className="col-4 pt-2 fs-5">
-                                                                <h4>{elm.name}</h4>
+                                    <div key={elm.id}>
+                                        <div className="payments_div mt-2">
+                                            <div className="row d-flex  justify-content-between">
+                                                <div className="col-2">
+                                                    <img src={elm.img} className="img_payments" />
+                                                </div>
+                                                <div className="col-10">
+                                                    <div className="row">
+                                                        <div className="col-4 pt-2 fs-5">
+                                                            <h4>{elm.name}</h4>
+                                                        </div>
+                                                        <div className="col-5 pt-1 text-center">
+                                                            <span>Date: {elm.date_needed}</span>
+                                                        </div>
+                                                        <div className="col-3 pt-1">
+                                                            <h4>Paid ${elm.rate} in full</h4>
+                                                        </div>
+                                                        <div className="row pt-3"
+                                                            style={elm.review <= 0 ? { display: "block" }
+                                                                : { display: "none" }}
+                                                        >
+                                                            <div className="col-12 text-center">
+                                                                <Ratings
+                                                                    setLocalRating={setLocalRating}
+                                                                    localRating={localRating} />
+                                                                <span className="button-24 ms-5"
+                                                                    onClick={() => {
+                                                                        handleSubmitRating(elm.id,
+                                                                            elm.worker_id,
+                                                                            index
+                                                                        )
+                                                                    }}
+                                                                >Submit Rating</span>
                                                             </div>
-                                                            <div className="col-5 pt-1 text-center">
-                                                                <span>Date: {elm.date_needed}</span>
+                                                        </div>
+                                                        <div className="row pt-3 text-light text-center"
+                                                            style={elm.review >= 1 ? { display: "block" }
+                                                                : { display: "none" }}
+                                                        >
+                                                            <div className="col-12 fs-3">
+                                                                You rated this job: <StaticRating
+                                                                    rating={elm.review}
+                                                                />
                                                             </div>
-                                                            <div className="col-3 pt-1">
-                                                                <h4>Paid ${elm.rate} in full</h4>
-                                                            </div>
-                                                            <div className="row pt-3"
-                                                                style={elm.review <= 0 ? { display: "block" }
-                                                                    : { display: "none" }}
-                                                            >
-                                                                <div className="col-12 text-center">
-                                                                    <Ratings
-                                                                        setLocalRating={setLocalRating}
-                                                                        localRating={localRating} />
-                                                                    <span className="button-24 ms-5"
-                                                                        onClick={() => {
-                                                                            handleSubmitRating(elm.id,
-                                                                                elm.worker_id,
-                                                                                index
-                                                                            )
-                                                                        }}
-                                                                    >Submit Rating</span>
-                                                                </div>
-                                                            </div>
-                                                            <div className="row pt-3 text-light text-center"
-                                                                style={elm.review >= 1 ? { display: "block" }
-                                                                    : { display: "none" }}
-                                                            >
-                                                                <div className="col-12 fs-3">
-                                                                    You rated this job: <StaticRating
-                                                                        rating={elm.review}
-                                                                    />
-                                                                </div>
 
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </li>
-                                    </ul >
-
+                                        </div>
+                                    </div>
                                 )
                             }) : <div>You have no listing history</div>
 
+
                     }
+
                 </div>
             </div>
         </div >

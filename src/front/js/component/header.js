@@ -9,32 +9,32 @@ import "../../styles/slideshow.css";
 export const Header = () => {
 
     return (
-       
-       
-       <div id="slideshow_div">
-        <div class="slide-wrapper_div">
- 
-      
- 
-            <div class="slide_div">
-                <img class="slide-number img_slide"  src={rigo} />
-                  
-             
-            </div>
-            <div class="slide_div">
-            <img class="slide-number img_slide"  src={rigo2} />
-               
-            </div>
-            <div class="slide_div">
-            <img class="slide-number img_slide"  src={rigo3} />
-               
-            </div>
-            <div class="slide_div">
-            <img class="slide-number img_slide"  src={rigo} />
-               
+
+
+        <div id="slideshow_div">
+            <div class="slide-wrapper_div">
+
+
+
+                <div class="slide_div">
+                    <img class="slide-number img_slide" src={rigo} />
+
+
+                </div>
+                <div class="slide_div">
+                    <img class="slide-number img_slide" src={rigo2} />
+
+                </div>
+                <div class="slide_div">
+                    <img class="slide-number img_slide" src={rigo3} />
+
+                </div>
+                <div class="slide_div">
+                    <img class="slide-number img_slide" src={rigo} />
+
+                </div>
             </div>
         </div>
-    </div>
 
 
 

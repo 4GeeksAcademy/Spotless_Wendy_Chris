@@ -57,15 +57,7 @@ const Layout = () => {
     const [myProperties, setMyProperties] = useState([])
     const [filterListings, setFilterListings] = useState("Active")
     const [mySchedule, setMySchedule] = useState([]);
-    const [currentUser, setCurrentUser] = useState({
-        "address": null,
-        "billing": null,
-        "email": "test@test.com",
-        "full_name": "test",
-        "id": 2,
-        "img": null,
-        "phone": "9994445555"
-    })
+    const [currentUser, setCurrentUser] = useState({})
 
 
 
@@ -92,8 +84,8 @@ const Layout = () => {
                 <BrowserRouter basename={basename}>
                     <ScrollToTop>
                         <Routes>
-                            <Route element={<Login />} path="/login" />
-                            <Route element={<Home />} path="/" />
+                            <Route element={<Login />} path="/" />
+                            <Route element={<Home />} path="/home" />
                             <Route element={<Faq />} path="/faq" />
                             <Route element={<Dashboard />} path="/dashboard" />
                             <Route element={<HHistory />} path="/hhistory" />
