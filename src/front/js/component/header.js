@@ -30,7 +30,7 @@ export const Header = () => {
                
             </div>
             <div class="slide_div">
-            <img class="slide-number img_slide"  src={rigo4} />
+            <img class="slide-number img_slide"  src={rigo} />
                
             </div>
         </div>

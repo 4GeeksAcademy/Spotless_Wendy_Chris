@@ -196,27 +196,25 @@ export const Dashboard = () => {
               <div class="slide-wrapper">
                
             <div class="slide">
-                <img class="slide-number img_sl"  src={rigo} />
+                <img class="slide-number img_sl"  src={element.image1} />
                   
              
             </div>
             <div class="slide">
-            <img class="slide-number img_sl"  src={rigo2} />
+            <img class="slide-number img_sl"  src={element.image2} />
                
             </div>
             <div class="slide">
-            <img class="slide-number img_sl"  src={rigo3} />
+            <img class="slide-number img_sl"  src={element.image3} />
                
             </div>
             <div class="slide">
-            <img class="slide-number img_sl"  src={rigo4} />
+            <img class="slide-number img_sl"  src={element.image1} />
                
             </div>
              
              
-                {/* <div class="slide_l"><img src={element.image1} class="slide-number img_sl" /></div>
-                 */}
-              </div>
+                    </div>
             </div>
 
 
