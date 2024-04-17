@@ -252,7 +252,7 @@ export const Dashboard = () => {
       </div>
 
 
-      <dialog id="modal_dialog" class=" rounded">
+      <dialog id="modal_dialog" class=" rounded dialog_margin">
 
         <div class="row gx-3 mb-3">
           <div class="col-2 d-flex align-items-center">
@@ -293,7 +293,7 @@ export const Dashboard = () => {
       </dialog>
 
 
-<dialog id="delete_dialog" className="rounded">
+<dialog id="delete_dialog" className="rounded dialog_margin">
 
     <div class="modal-content">
       <div class="modal-body">

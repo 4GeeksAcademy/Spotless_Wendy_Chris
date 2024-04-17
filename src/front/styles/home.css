@@ -5,6 +5,15 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+.layout_div{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+}
+.login_div{
+	width: 80%;
+}
 
 * {
 	box-sizing: border-box;
@@ -22,7 +31,9 @@
 		height: 30px;
 	
 }
-
+.dialog_margin{
+	margin: auto;
+}
   
   #slideshow {
 	
@@ -380,30 +391,7 @@ input {
 	width: 40px;
 }
 
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
-}
 
-footer p {
-    margin: 10px 0;
-}
-
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
-}
 
 .buttonL {
 	border-radius: 20px;
