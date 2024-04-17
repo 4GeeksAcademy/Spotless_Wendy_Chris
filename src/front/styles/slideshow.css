@@ -16,7 +16,7 @@
  
     /* Specify the animation with the
     duration and speed */
-    animation: slide 10s ease infinite;
+    animation: slide 15s ease infinite;
 }
 
 
@@ -24,11 +24,11 @@
   with a fixed width and height */
   .slide_div {
     float: left;
-    height: 300px;
+    height: 250px;
     width: 800px;
 }
 .img_slide{
-    width: 100%;
+    /* width: 50%; */
     height: 100%;
 }
  

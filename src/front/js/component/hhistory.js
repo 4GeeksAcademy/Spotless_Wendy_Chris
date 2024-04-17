@@ -94,7 +94,7 @@ export const HHistory = () => {
 
     // submit rating below
 
-    const handleSubmitRating = (id, worker_id, index) => {
+    const handleSubmitRating = (id, worker_id) => {
 
         fetch(process.env.BACKEND_URL + `api/schedule/${id}/review/new`, {
             method: 'PUT',
@@ -115,9 +115,7 @@ export const HHistory = () => {
             })
             .then(response => {
                 console.log('Success:', response);
-                // let newArray = [...hHistory];
-                // newArray[index].review = localRating;
-                // setHHistory(newArray);
+
             })
             .then(() => getHostHistory())
             .then(() => setLocalRating(0))
@@ -137,7 +135,7 @@ export const HHistory = () => {
 
     return (
         <div>
-            <div className="row">
+            <div className="row mt-2 mb-5">
                 <div className="col-12">
 
                     {
@@ -172,8 +170,7 @@ export const HHistory = () => {
                                                                 <span className="button-24 ms-5"
                                                                     onClick={() => {
                                                                         handleSubmitRating(elm.id,
-                                                                            elm.worker_id,
-                                                                            index
+                                                                            elm.worker_id
                                                                         )
                                                                     }}
                                                                 >Submit Rating</span>
