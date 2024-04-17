@@ -13,7 +13,7 @@ export const AddProperty = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [state, setState] = useState("")
-    const [img, setImg] = useState("https://cdn.pixabay.com/photo/2022/08/03/16/26/prairie-7362991_1280.jpg")
+    const [img, setImg] = useState("https://cdn.pixabay.com/photo/2017/04/05/01/16/palm-trees-2203737_1280.jpg  https://cdn.pixabay.com/photo/2017/04/05/01/16/palm-trees-2203737_1280.jpg  https://cdn.pixabay.com/photo/2018/04/21/22/43/sea-3339751_1280.jpg")
     const [bath, setBath] = useState(0)
     const [beds, setBeds] = useState(0)
     const [address, setAddress] = useState("")
