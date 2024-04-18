@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../layout";
+import george from "../../img/george.png";
 
 
 export const StaticProfile = () => {
@@ -109,38 +110,27 @@ export const StaticProfile = () => {
     return (
 
 
-        <div class="card-body">
-
-            <div class="row gx-3 mb-3">
-
-                <div class="col-2 d-flex align-items-center">
-                    <label class="medium mb-1" for="inputFirstName">Full Name</label>
-                </div>
-                <div class="col-10 d-flex align-items-start">
-                    {currentUser.full_name}
-                </div>
-
-
-            </div>
-
-            <div className="row mb-3">
-                <div class="col-2 d-flex align-items-center">
-                    <label class="medium mb-1" for="inputEmailAddress">Email address</label>
-                </div>
-
-                <div class="col-10 d-flex align-items-start">
-                    {currentUser.email}
+        <div className="row my-5">
+            <div className="col-7">
+                <div className="row ms-2 mb-5 ps-5">
+                    <div className="col-12 text-start ps-1 pb-4">
+                        Full Name:<span className="ps-3">{currentUser.full_name}</span>
+                    </div>
+                    <div className="col-12 text-start ps-1  pb-4">
+                        Email: <span className="ps-3">{currentUser.email}</span>
+                    </div>
+                    <div className="col-12 text-start ps-1  pb-4">
+                        Phone: <span className="ps-3">{currentUser.phone}</span>
+                    </div>
                 </div>
             </div>
-            <div className="row mb-3">
-                <div class="col-2 d-flex align-items-center">
-                    <label class="medium mb-1" for="inputEmailAddress">Phone</label>
-                </div>
-                <div class="col-10 d-flex align-items-start">
-                    {currentUser.phone}
+            <div className="col-5">
+                <div className="col">
+                    <img
+                        className="profilePic"
+                        src={george} />
                 </div>
             </div>
-
         </div>
     );
 };
