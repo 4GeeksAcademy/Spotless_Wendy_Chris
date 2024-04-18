@@ -315,7 +315,7 @@ def give_review_to_worker(ids):
     review_request=request.json
     db.session.query(Schedule).filter_by(id=ids).update({"review": review_request['score']})
     db.session.commit()
-    #this little tric below convert the id into a string to concat it to the execute method that only acceps a string
+    #this little trick below convert the id into a string to concat it to the execute method that only acceps a string
     idw= str(review_request['worker_id'])
     get_t_review= db.session.execute("SELECT sum(review) , count(review) from Schedule where worker_id="+idw+" and status='Complete' and review is not null ;")
     average_ranking= [dict(sum_review=row[0], total_review=row[1]) for row in get_t_review.fetchall()]
