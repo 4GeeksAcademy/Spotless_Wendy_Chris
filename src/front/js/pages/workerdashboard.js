@@ -113,9 +113,23 @@ export const WDashboard = () => {
       .then(response => {
         console.log("Successfully accepted listing, work schedule is:", response)
         setMySchedule(response.worker_schedule);
-        setWorkerListings(response.available_listings)
+        //setWorkerListings(response.available_listings)
+        let newArray = [...response.available_listings];
+        let finalListing = [];
 
+        newArray.forEach((el) => {
+          let each_listing = {};
+          let all_img = el.img.split("  ");
+
+          each_listing = { ...el };
+          each_listing.image1 = all_img[0];
+          finalListing.push(each_listing);
+
+        })
+        setWorkerListings(finalListing);
       })
+
+
 
       .catch(error => console.log(error));
 

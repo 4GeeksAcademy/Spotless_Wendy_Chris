@@ -10,7 +10,7 @@
   /*Without this, clicking will make it sticky*/
     pointer-events: none;
 }
-*{
+h1,h2,h3,h4{
   font-family: "Pacifico", cursive;
 
 }
@@ -30,7 +30,7 @@
 
 span, p{
   color: black;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
   font-size:15px;
 }
 

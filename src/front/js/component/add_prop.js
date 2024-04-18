@@ -83,29 +83,29 @@ export const AddProperty = () => {
                 <p>Get your property cleaned hassle-free! Submit your details below and we'll pair you with the perfect house cleaner. Experience convenience like never before!</p>
                 <div className="row">
                     <div className="col">
-                        <input type="text" onChange={(e) => setState(e.target.value)} className="form-control" placeholder="State" />
+                        <input type="text" onChange={(e) => setState(e.target.value)} className="form-control" placeholder="State"  value={state}/>
                     </div>
                     <div className="col">
-                        <input type="text" onChange={(e) => setCity(e.target.value)} className="form-control" placeholder="City" />
+                        <input type="text" onChange={(e) => setCity(e.target.value)} className="form-control" placeholder="City" value={city} />
                     </div>
                     <div className="col">
-                        <input type="text" onChange={(e) => setBeds(e.target.value)} className="form-control" placeholder="Bed" />
+                        <input type="text" onChange={(e) => setBeds(e.target.value)} className="form-control" placeholder="Bed" value={beds} />
                     </div>
                 </div>
                 <div className="row">
                     <div className="col">
-                        <input type="text" onChange={(e) => setBath(e.target.value)} className="form-control" placeholder="Bath" />
+                        <input type="text" onChange={(e) => setBath(e.target.value)} className="form-control" placeholder="Bath" value={bath} />
                     </div>
                     <div className="col">
                         <input type="text" onChange={(e) => setImg(e.target.value)} className="form-control" placeholder="img" />
                     </div>
                     <div className="col">
-                        <input type="text" onChange={(e) => setAddress(e.target.value)} className="form-control" placeholder="address" />
+                        <input type="text" onChange={(e) => setAddress(e.target.value)} className="form-control" placeholder="address" value={address}/>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-12">
-                        <input type="text" onChange={(e) => setName(e.target.value)} className="form-control" placeholder="Give your property a brief descriptive name" />
+                    <div className="col-12"> 
+                        <input type="text" onChange={(e) => setName(e.target.value)} className="form-control" placeholder="Give your property a brief descriptive name" value={name} />
                     </div>
                 </div>
             </div>

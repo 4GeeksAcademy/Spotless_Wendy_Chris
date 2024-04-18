@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
+
 import "../../styles/home.css";
 import { AppContext } from "../layout";
 import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom";
@@ -133,11 +134,11 @@ export const MyListings = () => {
                     results.map((element, index) => {
                         console.log("results", results);
                         return (
-                            <div className="card text-secondary" style={{ width: "18rem" }} key={index}>
+                            <div className="card text-secondary mb-3" style={{ width: "18rem" }} key={index}>
                                 <div id="carouselExampleSlidesOnly" className="carousel slide h-50" data-bs-ride="carousel">
                                     <div className="carousel-inner" style={{ height: "10rem" }}>
                                         <div>
-                                            <p className="card-text" style={element.status == "Active" ? { display: "block" } : { display: "none" }}>
+                                            <p className="card-text card_p_fix" style={element.status == "Active" ? { display: "block" } : { display: "none" }}>
                                                 <i className="fa-solid fa-circle text-warning fs-5"></i> Pairing with Cleaner
                                             </p>
                                             <p className="card-text" style={element.status == "Scheduled" ? { display: "block" } : { display: "none" }}>
@@ -147,8 +148,8 @@ export const MyListings = () => {
                                                 <i className="fa-solid fa-circle text-secondary fs-5"></i> Complete
                                             </p>
                                         </div>
-                                        <div className="carousel-item active">
-                                            <img src={element.image1} className="d-block w-100 " alt="..." />
+                                        <div className="">
+                                            <img src={element.image1} className="d-block listing_img" alt="..." />
                                         </div>
                                     </div>
                                 </div>
