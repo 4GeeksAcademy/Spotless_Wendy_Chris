@@ -36,14 +36,14 @@ span, p{
 
 h4{
   font-weight: bold;
-  color: #FF4742;
+  color: #D61261;
   font-size: 20px;
 }
 
 .test {
   
-    background: #FF4742;
-    border: 1px solid #FF4742;
+    background: #D61261;
+    border: 1px solid #D61261;
     border-radius: 6px;
     box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
     box-sizing: border-box;
@@ -63,7 +63,7 @@ h4{
     position: absolute;
     height: 120%;
     width: 120%;
-    background: #FF4742;
+    background: #D61261;
     top: 0;
     opacity: 0;
     left: -80px;
@@ -119,7 +119,7 @@ height: 100%;
   text-transform: capitalize; 
   letter-spacing: 1px;
 
-  border-right: 8px solid  #FF4742;
+  border-right: 8px solid  #D61261;
   border-radius: 8px;
   box-sizing:  border-box;
 }
@@ -142,7 +142,7 @@ height: 100%;
   text-transform: capitalize; 
   letter-spacing: 1px;
 
-  border-right: 8px solid  #FF4742;
+  border-right: 8px solid  #D61261;
   border-radius: 8px;
   box-sizing:  border-box;
 }
