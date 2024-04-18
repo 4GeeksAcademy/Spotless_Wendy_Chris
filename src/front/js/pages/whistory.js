@@ -73,7 +73,7 @@ export const WHistory = () => {
       <div>
         <div className="dropdown mb-3 text-start">
           <button
-            className="btn btn-secondary mb-2 dropdown-toggle"
+            className="button-24 px-3 dropdown-toggle"
             type="button"
             id="dropdownMenuButton"
             data-mdb-toggle="dropdown"
