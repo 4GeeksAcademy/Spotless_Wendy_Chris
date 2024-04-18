@@ -1,8 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
+import logo from "../../img/logo_1.png";
 import "../../styles/home.css";
 import "../../styles/colortest.css";
+import "../../styles/index.css"
 
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../layout";
@@ -85,7 +87,14 @@ export const Landing = () => {
 
 
     return (
-        <>
+        <><div className="row">
+
+            <div className="col">
+                <img src={logo}
+                    className="logo1"
+                />
+            </div>
+        </div>
 
 
             {/* The div below conditionally renders the "User" dashboard */}
