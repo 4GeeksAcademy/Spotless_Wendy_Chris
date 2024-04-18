@@ -87,28 +87,25 @@ export const Landing = () => {
 
 
     return (
-        <><div className="row">
-
-            <div className="col">
-                <img src={logo}
-                    className="logo1"
-                />
-            </div>
-        </div>
-
+        <>
 
             {/* The div below conditionally renders the "User" dashboard */}
             <div style={role == "User" ? { display: "block" } : { display: "none" }}>
                 <div className="row d-flex justify-content-center pt-3">
                     <div className="col-2 text-center">
                         <div className="row">
-                            <div className={`col-12 border-bottom border-dark
-                            ${menu == "listings" ? "activeMenu" : "myMenu"}`}
+                            {/* <div className="col-12 border-bottom border-dark activeMenu ">
+                                <img src={logo} class="logo1" />
+                            </div> */}
+                            <div className={`col-12 border-bottom border-dark activeMenu'
+                            ${menu == "listings" ? "activeMenu" : "myMenu2"}`}
                                 onClick={() => {
                                     setMenu("listings")
                                     setFilterListings("Active")
                                 }}
-                            ><i class="fa-solid fa-house"></i>
+                            >
+                                {/* <i class="fa-solid fa-house"></i> */}
+                                <img src={logo} class="logo1" />
 
                             </div>
                             <div className={`col-12 border-bottom border-dark
@@ -156,7 +153,7 @@ export const Landing = () => {
                     </div>
                     {/* End left navigation for "User" start main body of landing dashboard for "User" */}
                     {/* Listings Body below  */}
-                    <div className="col-10 text-center dashComponents fs-3"
+                    <div className="col-10 text-center dashComponents fs-3 pt-3"
                         style={menu == "listings" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
@@ -168,7 +165,6 @@ export const Landing = () => {
                                         setMenu("payments")
                                     }
                                     }
-
                                 >
                                     <i className="fa-solid fa-bell fa-shake px-1 fs-3 text-light"></i>
                                     <span className="supTest">{scheduledPaymentDue.length}</span>
@@ -177,7 +173,7 @@ export const Landing = () => {
                             <div className="col-6"
                             ><h3>My Listings</h3></div>
                             <div className="col-3">
-                                <div className="dropdown">
+                                {/* <div className="dropdown">
                                     <button className="btn button-24 dropdown-toggle me-3 mt-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         Filter Listings
                                     </button>
@@ -192,7 +188,7 @@ export const Landing = () => {
                                             onClick={() => setFilterListings("Complete")}
                                         >Status Complete</li>
                                     </ul>
-                                </div>
+                                </div> */}
 
 
                             </div>
@@ -203,7 +199,7 @@ export const Landing = () => {
                         </div>
                     </div>
                     {/* Properties body for "User" below  */}
-                    <div className="col-10 text-center dashComponents fs-3"
+                    <div className="col-10 text-center dashComponents fs-3 pt-3"
                         style={menu == "properties" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
@@ -239,7 +235,7 @@ export const Landing = () => {
                     </div>
 
                     {/* Profile Body for "User" below  */}
-                    <div className="col-10 text-center dashComponents fs-3"
+                    <div className="col-10 text-center dashComponents fs-3 pt-3"
                         style={menu == "profile" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
@@ -275,7 +271,7 @@ export const Landing = () => {
                     </div>
 
                     {/* History body for "User" Below  */}
-                    <div className="col-10 text-center dashComponents fs-3"
+                    <div className="col-10 text-center dashComponents fs-3 pt-3"
                         style={menu == "history" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
@@ -300,7 +296,7 @@ export const Landing = () => {
                     </div>
 
                     {/* Payments Body for "User" Below  */}
-                    <div className="col-10 text-center dashComponents fs-3"
+                    <div className="col-10 text-center dashComponents fs-3 pt-3"
                         style={menu == "payments" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
@@ -345,13 +341,17 @@ export const Landing = () => {
                 <div className="row d-flex justify-content-center pt-3">
                     <div className="col-2 text-center">
                         <div className="row">
-                            <div className={`col-12 border-bottom border-dark
-                            ${menu == "listings" ? "activeMenu" : "myMenu"}`}
+                            <div className={`col-12 border-bottom border-dark activeMenu'
+                            ${menu == "listings" ? "activeMenu" : "myMenu2"}`}
                                 onClick={() => {
-                                    setDisplay("listings")
                                     setMenu("listings")
+                                    setFilterListings("Active")
                                 }}
-                            ><i class="fa-solid fa-house"></i></div>
+                            >
+                                {/* <i class="fa-solid fa-house"></i> */}
+                                <img src={logo} class="logo1" />
+
+                            </div>
 
                             <div className={`col-12 border-bottom border-dark
                             ${menu == "myProfile" ? "activeMenu" : "myMenu"}`}
@@ -392,7 +392,7 @@ export const Landing = () => {
 
                     {/* End left navigation for "Worker" start main body of landing dashboard for "Worker" */}
                     {/* Listings Body "WorkerDashboard" below  */}
-                    <div className="col-10 text-center dashComponents fs-3"
+                    <div className="col-10 text-center dashComponents fs-3 pt-3"
                         style={menu == "listings" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
@@ -408,7 +408,7 @@ export const Landing = () => {
                     </div>
 
                     {/* Worker Profile Body Below  */}
-                    <div className="col-10 text-center dashComponents fs-3"
+                    <div className="col-10 text-center dashComponents fs-3 pt-3"
                         style={menu == "myProfile" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
@@ -433,7 +433,7 @@ export const Landing = () => {
 
 
                     {/* Worker Schedule Body Below  */}
-                    <div className="col-10 text-center dashComponents fs-3"
+                    <div className="col-10 text-center dashComponents fs-3 pt-3"
                         style={menu == "mySchedule" ? { display: "block" } : { display: "none" }}
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
@@ -452,7 +452,7 @@ export const Landing = () => {
 
 
                     {/* Worker History Body Below  */}
-                    <div className="col-10 text-center dashComponents fs-3"
+                    <div className="col-10 text-center dashComponents fs-3 pt-3"
                         style={menu == "history" ? { display: "block" } : { display: "none" }}                    >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
                             <div className="col-3"></div>

@@ -84,9 +84,9 @@ export const Dashboard = () => {
       })
       .then(res => {
         if (!res.ok) {
-        
-    const dialog = document.getElementById('delete_dialog');
-    dialog.showModal();
+
+          const dialog = document.getElementById('delete_dialog');
+          dialog.showModal();
           throw Error(res.statusText);
         }
         return res.json();
@@ -136,8 +136,8 @@ export const Dashboard = () => {
 
     let format_date = listingDate.replace("T", " ");
     const last2 = format_date.slice(-2);
-    let final_date= last2<30? "00": 59;
-    const las = format_date.slice(0, -2)+ final_date;
+    let final_date = last2 < 30 ? "00" : 59;
+    const las = format_date.slice(0, -2) + final_date;
 
 
     if (listingDate.length > 5) {
@@ -237,13 +237,13 @@ export const Dashboard = () => {
 
 
               <div className="d-flex justify-content-between">
-                <button class="button-24" role="button" onClick={() => pop_modal_function(element)}>Add to Listing</button>
+                <button class="button-24" role="button" onClick={() => pop_modal_function(element)}>Add a Listing</button>
                 <button
                   className={listingExists}
                   onClick={() => delete_property(element.id)}>
                   <i className="fas fa-trash-alt fa-bounce fa-xl" />
                 </button>
-               
+
               </div>
 
             </div>
@@ -296,22 +296,22 @@ export const Dashboard = () => {
       </dialog>
 
 
-<dialog id="delete_dialog" className="rounded dialog_margin">
+      <dialog id="delete_dialog" className="rounded dialog_margin">
 
-    <div class="modal-content">
-      <div class="modal-body">
-        <p>Unfortunately, you Can't delete property with an existing listing. </p>
-      </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" style={{fontFamily:"arial"}}onClick={()=>{
-           const dialog = document.getElementById('delete_dialog');
-           dialog.close();
-        }}>Close</button>
-      </div>
-  
-  </div>
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>Unfortunately, you Can't delete property with an existing listing. </p>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" style={{ fontFamily: "arial" }} onClick={() => {
+              const dialog = document.getElementById('delete_dialog');
+              dialog.close();
+            }}>Close</button>
+          </div>
 
-</dialog>
+        </div>
+
+      </dialog>
 
     </div>
 
