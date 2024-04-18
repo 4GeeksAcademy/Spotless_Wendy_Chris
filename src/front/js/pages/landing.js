@@ -166,7 +166,7 @@ export const Landing = () => {
                                 </span>
                             </div>
                             <div className="col-6"
-                            >My Listings</div>
+                            ><h3>My Listings</h3></div>
                             <div className="col-3">
                                 <div className="dropdown">
                                     <button className="btn button-24 dropdown-toggle me-3 mt-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

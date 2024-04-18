@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
-import rigo from "../../img/maid1.jpg";
+import rigo5 from "../../img/maid1.jpg";
 import rigo2 from "../../img/maid2.jpeg";
 import rigo3 from "../../img/maid3.jpg";
 import rigo4 from "../../img/maid4.png";
+import rigo from "../../img/image_480.png";
 import "../../styles/home.css";
 import { AppContext } from "../layout";
 import { Link, useNavigate } from "react-router-dom";
@@ -134,13 +135,15 @@ export const Dashboard = () => {
   function save_modal_function(id) {
 
     let format_date = listingDate.replace("T", " ");
-
+    const last2 = format_date.slice(-2);
+    let final_date= last2<30? "00": 59;
+    const las = format_date.slice(0, -2)+ final_date;
 
 
     if (listingDate.length > 5) {
 
       let price_for_listing = (listingId.bath * 15) + (listingId.beds * 10);
-      let new_listing = { property_id: listingId.id, special_note: listingNote, date_needed: listingDate, rate: price_for_listing, user_id: currentUser.id };
+      let new_listing = { property_id: listingId.id, special_note: listingNote, date_needed: las, rate: price_for_listing, user_id: currentUser.id };
 
       var fetchedListings = []
 
