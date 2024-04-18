@@ -302,7 +302,7 @@ def get_host_history(idh):
     .join(Property, Listing.property_id== Property.id)\
     .join(User, Property.user_id==User.id)\
     .filter(Schedule.status=='Complete', User.id==idh)\
-    .with_entities(Schedule.id, Schedule.review, Schedule.worker_id, Listing.special_note, Listing.date_needed, Listing.rate, Listing.id, Property.img, Property.city, Property.address,  ).all()
+    .with_entities(Schedule.id, Schedule.review, Schedule.worker_id, Listing.special_note, Listing.date_needed, Listing.rate, Listing.id, Property.img, Property.city, Property.address  ).all()
      all_schedule= [dict(id=row[0], review=row[1], worker_id=row[2], special_note=row[3], date_needed=row[4], rate=row[5], listing_id=row[6], img=row[7], city=row[8], address=row[9] ) for row in get_schedule]   
      return (all_schedule), 200
 
