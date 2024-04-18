@@ -197,7 +197,7 @@
     text-transform: capitalize; 
     letter-spacing: 1px;
   
-    border-right: 8px solid  #FF4742;
+    border-right: 8px solid  #D61261;
     border-radius: 8px;
     box-sizing:  border-box;
   }
@@ -266,7 +266,7 @@
 }
 
 .logo1 {
-    width: 69%;
+    width: 89%;
     margin-inline: auto;
 }
 

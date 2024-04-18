@@ -100,8 +100,9 @@ export const Landing = () => {
                             <div className={`col-12 border-bottom border-dark activeMenu'
                             ${menu == "listings" ? "activeMenu" : "myMenu2"}`}
                                 onClick={() => {
-                                    setMenu("listings")
-                                    setFilterListings("Active")
+                                    setMenu("listings");
+                                    setDisplay("listings");
+                                    setFilterListings("Active");
                                 }}
                             >
                                 {/* <i class="fa-solid fa-house"></i> */}
@@ -344,8 +345,9 @@ export const Landing = () => {
                             <div className={`col-12 border-bottom border-dark activeMenu'
                             ${menu == "listings" ? "activeMenu" : "myMenu2"}`}
                                 onClick={() => {
-                                    setMenu("listings")
-                                    setFilterListings("Active")
+                                    setMenu("listings");
+                                    setDisplay("listings");
+                                    setFilterListings("Active");
                                 }}
                             >
                                 {/* <i class="fa-solid fa-house"></i> */}

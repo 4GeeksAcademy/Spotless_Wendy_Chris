@@ -134,10 +134,11 @@ export const MyListings = () => {
                     results.map((element, index) => {
                         console.log("results", results);
                         return (
-                            <div className="card text-secondary mb-3" style={{ width: "18rem" }} key={index}>
+                            <div className="card text-secondary mb-3 border border-secondary"
+                                style={{ width: "18rem" }} key={index}>
                                 <div id="carouselExampleSlidesOnly" className="carousel slide h-50" data-bs-ride="carousel">
                                     <div className="carousel-inner" style={{ height: "10rem" }}>
-                                        <div>
+                                        {/* <div>
                                             <p className="card-text card_p_fix" style={element.status == "Active" ? { display: "block" } : { display: "none" }}>
                                                 <i className="fa-solid fa-circle text-warning fs-5"></i> Pairing with Cleaner
                                             </p>
@@ -147,14 +148,14 @@ export const MyListings = () => {
                                             <p className="card-text" style={element.status == "Complete" ? { display: "block" } : { display: "none" }}>
                                                 <i className="fa-solid fa-circle text-secondary fs-5"></i> Complete
                                             </p>
-                                        </div>
+                                        </div> */}
                                         <div className="">
+                                            <p className="card-title fs-5">{element.name}</p>
                                             <img src={element.image1} className="d-block listing_img" alt="..." />
                                         </div>
                                     </div>
                                 </div>
                                 <div className="card-body">
-                                    <p className="card-title fs-5">{element.name}</p>
                                     <p className="card-text"><u>Date Needed:</u><br />
                                         {element.date_needed}</p>
                                     <p className="card-text"><u>Special Instructions:</u><br />
