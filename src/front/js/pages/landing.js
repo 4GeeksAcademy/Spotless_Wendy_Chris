@@ -22,6 +22,7 @@ import { HostHistory } from "../component/hosthistory";
 import { WorkerProfile } from "../component/workerprofile";
 import { HHistory } from "../component/hhistory";
 import { Header } from "../component/header";
+import { Footer } from "../component/footer";
 
 export const Landing = () => {
 
@@ -90,7 +91,7 @@ export const Landing = () => {
         <>
 
             {/* The div below conditionally renders the "User" dashboard */}
-            <div style={role == "User" ? { display: "block" } : { display: "none" }}>
+            <div className=" landing_user_o" style={role == "User" ? { display: "block" } : { display: "none" }}>
                 <div className="row d-flex justify-content-center pt-3">
                     <div className="col-2 text-center">
                         <div className="row">
@@ -214,10 +215,11 @@ export const Landing = () => {
                                     }
 
                                 >
-                                    <i class="fa-solid fa-bell fa-shake px-1 fs-3"></i>{scheduledPaymentDue.length}
+                                     <i className="fa-solid fa-bell fa-shake px-1 fs-3 text-light"></i>
+                                    <span className="supTest">{scheduledPaymentDue.length}</span>
                                 </span>
                             </div>
-                            <div className="col-6">My Properties</div>
+                            <div className="col-6"><h2>My Properties</h2></div>
                             <div className="col-3"><span className="button-24 me-3 mt-1"
                                 style={display == "addProp" ? { display: "none" } : { display: "block" }}
                                 onClick={() => setDisplay("addProp")}
@@ -250,10 +252,11 @@ export const Landing = () => {
                                     }
 
                                 >
-                                    <i class="fa-solid fa-bell fa-shake px-1 fs-3"></i>{scheduledPaymentDue.length}
+                                    <i className="fa-solid fa-bell fa-shake px-1 fs-3 text-light"></i>
+                                    <span className="supTest">{scheduledPaymentDue.length}</span>
                                 </span>
                             </div>
-                            <div className="col-6">My Profile</div>
+                            <div className="col-6"><h2>My Profile</h2></div>
                             <div className="col-3"><span className="button-24 me-3 mt-1"
                                 style={display == "myProfile" ? { display: "block" } : { display: "none" }}
                                 onClick={() => setDisplay("editProfile")}
@@ -286,10 +289,11 @@ export const Landing = () => {
                                     }
 
                                 >
-                                    <i class="fa-solid fa-bell fa-shake px-1 fs-3"></i>{scheduledPaymentDue.length}
+                                     <i className="fa-solid fa-bell fa-shake px-1 fs-3 text-light"></i>
+                                    <span className="supTest">{scheduledPaymentDue.length}</span>
                                 </span>
                             </div>
-                            <div className="col-6">My History</div>
+                            <div className="col-6"><h2>My History</h2></div>
                             <div className="col-3"></div>
                         </div>
                         <div><HHistory /></div>
@@ -311,10 +315,11 @@ export const Landing = () => {
                                     }
 
                                 >
-                                    <i class="fa-solid fa-bell fa-shake px-1 fs-3"></i>{scheduledPaymentDue.length}
+                                    <i className="fa-solid fa-bell fa-shake px-1 fs-3 text-light"></i>
+                                    <span className="supTest">{scheduledPaymentDue.length}</span>
                                 </span>
                             </div>
-                            <div className="col-6">My Payments</div>
+                            <div className="col-6"><h2>My Payments</h2></div>
                             <div className="col-3"><span className="button-24 me-3 mt-1"
                                 style={display == "payments" ? { display: "block" } : { display: "none" }}
                                 onClick={() => setDisplay("paymentHistory")}
@@ -332,6 +337,7 @@ export const Landing = () => {
                         ><PaymentHistory /></div>
                     </div>
                 </div>
+                <Footer/>
             </div>
 
             {/* ///////////////////////////////////////////////////////////////////////////////////////////////////  */}
@@ -415,7 +421,7 @@ export const Landing = () => {
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
                             <div className="col-3"></div>
-                            <div className="col-6">My Profile</div>
+                            <div className="col-6"><h2>My Profile</h2></div>
                             <div className="col-3"><span className="button-24 me-3 mt-1"
                                 style={display == "myProfile" ? { display: "block" } : { display: "none" }}
                                 onClick={() => setDisplay("editProfile")}
@@ -440,7 +446,7 @@ export const Landing = () => {
                     >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
                             <div className="col-3"></div>
-                            <div className="col-6">My Schedule</div>
+                            <div className="col-6"><h2>My Schedule</h2></div>
                             <div className="col-3"></div>
                         </div>
                         <div
@@ -458,7 +464,7 @@ export const Landing = () => {
                         style={menu == "history" ? { display: "block" } : { display: "none" }}                    >
                         <div className="row d-flex justify-content-center pt-1 mb-2">
                             <div className="col-3"></div>
-                            <div className="col-6">My Work History</div>
+                            <div className="col-6"><h2>My Work History</h2></div>
                             <div className="col-3">
                             </div>
                         </div>
@@ -466,6 +472,7 @@ export const Landing = () => {
 
                     </div>
                 </div>
+               <Footer/>
             </div >
 
         </>

@@ -8,10 +8,13 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 export const Demo = () => {
   const location =useLocation();
 const data = location.state;
+ const navigate= useNavigate();
 
 
   const { store, actions } = useContext(Context);
-  const { currentUser, myProperties, setMyProperties, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
+
+  const {  display, setDisplay, filterListings, setFilterListings,
+    menu, setMenu} = useContext(AppContext);
 
 
 
@@ -50,17 +53,15 @@ const data = location.state;
     <div>
 
       <div className="go_back_div">
-        <button class="button-24" role="button" onClick={() => navigate("/dashboard")}>Back to my dashboard</button>
+        <button class="button-24" role="button" onClick={() =>{ 
+          
+          setDisplay("propMain");
+          setFilterListings("Active");
+          setMenu("properties");
+         }}>Back to my dashboard</button>
       </div>
 
-        <div class="card text-secondary" style={{ width: "90%" }} >
-
-
-  <div className="jump_div">
-    <Link to='/dashboard'>
-      <span><i class="fa-solid fa-arrow-up-right-from-square fa-fade fa-xl"></i></span>
-    </Link>
-  </div>
+        <div class="card text-secondary" style={{ width: "80%" , height: "50%"}} >
 
   <img className="img_div_100" src={data.image1}/>
 

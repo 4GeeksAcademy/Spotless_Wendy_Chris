@@ -36,6 +36,7 @@ import { AddProperty } from "./component/add_prop";
 import { History } from "./component/history";
 import { Faq } from "./pages/faq";
 import "../styles/home.css";
+import { TestSlide } from "./component/testslide";
 
 
 
@@ -92,6 +93,7 @@ const Layout = () => {
                             <Route element={<HHistory />} path="/hhistory" />
                             <Route element={<WDashboard />} path="/wdashboard" />
                             <Route element={<WSchedule />} path="/wschedule" />
+                            <Route element={<TestSlide />} path="/testslide" />
                             <Route element={<EditProfile />} path="/editprofile" />
                             <Route element={<Landing />} path="/landing" />
                             <Route element={<Ratings />} path="ratings" />
@@ -107,7 +109,7 @@ const Layout = () => {
                             <Route element={<Header />} path="/header" />
                             <Route element={<h1>Not found!</h1>} />
                         </Routes>
-                      
+                     
                     </ScrollToTop>
                 </BrowserRouter>
             </AppContext.Provider>

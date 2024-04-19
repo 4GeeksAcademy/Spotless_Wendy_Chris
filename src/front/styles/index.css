@@ -3,6 +3,10 @@
 */
 
 
+.landing_user_o{
+    overflow: hidden;
+}
+
 .myButton1 {
     width: 169px;
     background-color: rgba(145, 145, 145, 0.69);
@@ -86,6 +90,7 @@
 .dashComponents {
     background: linear-gradient(to right, #ffffff, #c9c9c9);
     color: rgb(255, 255, 255);
+    min-height: 700px;
 }
 
 .myListLink {
@@ -175,10 +180,7 @@
   ul {
     list-style-type: none;
   }
-  .img_payments{
-    width: 169px;
-  height: 100px;
-  }
+
 
   .payments_div {
     background: linear-gradient(to right, #d2d2d2, #f2f2f2);
