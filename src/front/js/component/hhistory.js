@@ -55,32 +55,32 @@ export const HHistory = () => {
     //   fetch all listings via schedule and store in hHistory below 
     useEffect(() => {
 
-    //     fetch(process.env.BACKEND_URL + `api/user/${currentUser.id}/schedule/history`)
-    //         .then(res => {
-    //             if (!res.ok) throw Error(res.statusText);
-    //             return res.json();
-    //         })
-    //         .then(responseAsJson => {
-    //             let newArray = [...responseAsJson];
-    //             let formatted_schedule = [];
+        fetch(process.env.BACKEND_URL + `api/user/${currentUser.id}/schedule/history`)
+            .then(res => {
+                if (!res.ok) throw Error(res.statusText);
+                return res.json();
+            })
+            .then(responseAsJson => {
+                let newArray = [...responseAsJson];
+                let formatted_schedule = [];
         
-    //             newArray.forEach((el) => {
-    //               let each_schedule = {};
-    //               each_schedule = el;
-    //               let all_img = el.img.split("  ");
-    //               each_schedule.image = all_img[0];
-    //               formatted_schedule.push(each_schedule);
+                newArray.forEach((el) => {
+                  let each_schedule = {};
+                  each_schedule = el;
+                  let all_img = el.img.split("  ");
+                  each_schedule.image1 = all_img[0];
+                  formatted_schedule.push(each_schedule);
         
-    //             })
+                })
         
-    //             console.log("HHistory response for listing from backend:")
+                console.log("HHistory response for schedule from backend:")
                 
-    //             setHHistory(formatted_schedule)
+                setHHistory(formatted_schedule)
 
-    //         })
+            })
 
 
-    //         .catch(error => console.log(error));
+            .catch(error => console.log(error));
 
      }, []);
 
@@ -105,7 +105,7 @@ export const HHistory = () => {
                 })
         
                  setHHistory(formatted_schedule);
-                 console.log("HHistory response for host from backend:")
+                 console.log("HHistory response for host from backend: ")
                  setHHistory(formatted_schedule);
                 
             })
@@ -169,10 +169,10 @@ export const HHistory = () => {
                                     <div key={elm.id}>
                                         <div className="payments_div mt-2">
                                             <div className="row d-flex  justify-content-between">
-                                                <div className="col-3">
+                                                <div className="col-2">
                                                     <img src={elm.image1} className="img_payments" />
                                                 </div>
-                                                <div className="col-9">
+                                                <div className="col-10">
                                                     <div className="row">
                                                         <div className="col-4 pt-2 fs-5">
                                                             <h4>{elm.name}</h4>

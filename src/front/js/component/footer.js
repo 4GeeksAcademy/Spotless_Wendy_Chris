@@ -6,11 +6,11 @@ import { Navigate, useNavigate } from "react-router-dom";
 export const Footer = () => {
 const navigate = useNavigate();
 	return (
-		<footer class="footer mt-5">
+		<footer className="footer">
 
-		 <div class="row pad_div pt-3">
+		 <div className="row pad_div pt-3">
 			
-		   <div class="footer-col">
+		   <div className="footer-col">
 			 <h4>Spotless</h4>
 			 <ul>
 			   <li><span>about us</span></li>
@@ -19,7 +19,7 @@ const navigate = useNavigate();
 			
 			 </ul>
 		   </div>
-		   <div class="footer-col">
+		   <div className="footer-col">
 			 <h4>get help</h4>
 			 <ul>
 			   <li><span onClick={()=> navigate("/faq")}>FAQ</span></li>
@@ -29,17 +29,20 @@ const navigate = useNavigate();
 			 </ul>
 		   </div>
 		
-		   <div class="footer-col">
+		   <div className="footer-col">
 			 <h4>follow us</h4>
-			 <div class="social-links">
-			   <span><i class="fab fa-facebook-f"></i></span>
-			   <span><i class="fab fa-twitter"></i></span>
-			   <span><i class="fab fa-instagram"></i></span>
+			 <div className="social-links">
+			   <span><i className="fab fa-facebook-f"></i></span>
+			   <span><i className="fab fa-twitter"></i></span>
+			   <span><i className="fab fa-instagram"></i></span>
 			  
 			 </div>
 		   </div>
 		 </div>
+
+	
 	
 	 </footer>
+	 
 	)
 };
