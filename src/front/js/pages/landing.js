@@ -215,7 +215,7 @@ export const Landing = () => {
                                     }
 
                                 >
-                                     <i className="fa-solid fa-bell fa-shake px-1 fs-3 text-light"></i>
+                                    <i className="fa-solid fa-bell fa-shake px-1 fs-3 text-light"></i>
                                     <span className="supTest">{scheduledPaymentDue.length}</span>
                                 </span>
                             </div>
@@ -289,7 +289,7 @@ export const Landing = () => {
                                     }
 
                                 >
-                                     <i className="fa-solid fa-bell fa-shake px-1 fs-3 text-light"></i>
+                                    <i className="fa-solid fa-bell fa-shake px-1 fs-3 text-light"></i>
                                     <span className="supTest">{scheduledPaymentDue.length}</span>
                                 </span>
                             </div>
@@ -337,7 +337,7 @@ export const Landing = () => {
                         ><PaymentHistory /></div>
                     </div>
                 </div>
-                <Footer/>
+                <Footer />
             </div>
 
             {/* ///////////////////////////////////////////////////////////////////////////////////////////////////  */}
@@ -472,7 +472,7 @@ export const Landing = () => {
 
                     </div>
                 </div>
-               <Footer/>
+                <Footer />
             </div >
 
         </>

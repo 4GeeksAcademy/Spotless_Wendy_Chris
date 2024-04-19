@@ -10,7 +10,7 @@ import { AppContext } from "../layout";
 
 
 export const Login = () => {
-	const { currentUser, setCurrentUser, token, setToken, role, setRole } = useContext(AppContext);
+	const { currentUser, setCurrentUser, token, setToken, role, setRole, localRole, setLocalRole } = useContext(AppContext);
 
 	const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ export const Login = () => {
 	const [userPassword, setUserPassword] = useState('')
 	const [userPhone, setUserPhone] = useState('')
 
-	const [localRole, setLocalRole] = useState('')
+	// const [localRole, setLocalRole] = useState('')
 
 
 
@@ -229,7 +229,7 @@ export const Login = () => {
 						<div id="validationpassword" className="invalid-feedback fs-3">
 							Incorrect Password or email
 						</div>
-						<a href="#">Forgot your password?</a>
+						<a>Forgot your password?</a>
 						<button
 							className="buttonL"
 							onClick={(event) => {

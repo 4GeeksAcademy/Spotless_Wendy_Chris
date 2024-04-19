@@ -37,11 +37,9 @@ export const Home = () => {
 			.then(response => {
 
 				let test = [...response.results];
-				console.log(test);
-				console.log('above is what we got');
+				console.log('the Airbnb response', test);
 
 				let test2 = [];
-
 
 				test.forEach((el) => {
 					let each_house = {};
@@ -58,7 +56,7 @@ export const Home = () => {
 					each_house.city = cityR[r];
 					each_house.state = stateR[r];
 					each_house.address = el.address;
-					each_house.images = el.images[0] + '  ' + el.images[1] + '  ' + el.images[2] + '  ' + el.images[3] ;
+					each_house.images = el.images[0] + '  ' + el.images[1] + '  ' + el.images[2] + '  ' + el.images[3];
 					test2.push(each_house);
 
 				})
@@ -104,7 +102,7 @@ export const Home = () => {
 
 	return (
 
-		<div className="">
+		<div className="container">
 			<h1>test</h1>
 			<button type="button" className="btn btn-secondary" onClick={() => fetch_listing()}>Fetch api</button><br /><br /><br />
 			<button type="button" className="btn btn-secondary" onClick={() => load_property()}>Test property</button><br /><br /><br />
@@ -137,7 +135,7 @@ export const Home = () => {
 				<button type="button" className="btn btn-secondary" >Go to schedule</button><br /><br />
 			</Link>
 
-	
+
 
 		</div>
 
