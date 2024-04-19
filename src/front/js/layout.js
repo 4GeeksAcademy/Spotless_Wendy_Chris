@@ -4,7 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
+// import { Demo } from "./pages/demo";
 import { Login } from "./pages/login";
 import { Single } from "./pages/single";
 import { Landing } from "./pages/landing";
@@ -61,7 +61,7 @@ const Layout = () => {
     const [mySchedule, setMySchedule] = useState([]);
     const [currentUser, setCurrentUser] = useState({})
 
-
+    const [localRole, setLocalRole] = useState('')
 
     const [role, setRole] = useState("")
 
@@ -80,7 +80,7 @@ const Layout = () => {
                     myListings, setMyListings, myProperties, setMyProperties,
                     role, setRole, display, setDisplay, filterListings, setFilterListings,
                     workerListings, setWorkerListings, menu, setMenu, mySchedule, setMySchedule,
-                    myWHistory, setMyWHistory
+                    myWHistory, setMyWHistory, localRole, setLocalRole
                 }
             }>
                 <BrowserRouter basename={basename}>
@@ -103,13 +103,12 @@ const Layout = () => {
                             <Route element={<MyPayments />} path="/mypayments" />
                             <Route element={<AddProperty />} path="/addproperty" />
                             <Route element={<History />} path="/history" />
-                            <Route element={<Demo />} path="/demo" />
+                            {/* <Route element={<Demo />} path="/demo" /> */}
                             <Route element={<Single />} path="/single/:theid" />
                             <Route element={<ColorTest />} path="/colortest" />
                             <Route element={<Header />} path="/header" />
                             <Route element={<h1>Not found!</h1>} />
                         </Routes>
-                     
                     </ScrollToTop>
                 </BrowserRouter>
             </AppContext.Provider>
