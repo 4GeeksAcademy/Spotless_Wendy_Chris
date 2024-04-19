@@ -238,9 +238,12 @@ export const Login = () => {
 							}
 							}>Sign In</button>
 						
-<div className="d-flex justify-content-between mt-3">
-	<button type="button" id="bg_sign_in" class="login-with-google-btn mr-2" >
+<div className="d-flex justify-content-between mt-3 sign_button">
+	<button type="button" id="bg_sign_in" class="login-with-google-btn" >
   Sign in with Google
+</button>
+<button type="button" id="bg_sign_a" class="login-with-google-btn" >
+  Sign in with Apple
 </button>
 
 </div>

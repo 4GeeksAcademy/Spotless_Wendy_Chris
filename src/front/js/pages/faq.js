@@ -123,16 +123,7 @@ export const Faq = () => {
 
                         </div>
                     </div>
-                    <div class="col-md-6 offset-md-3 text-center">
-                        {currentUser.id ? <span className="button-24"
-                            onClick={() => navigate("/landing")}
-                        >Go Home</span>
-                            :
-                            <span className="button-24"
-                                onClick={() => navigate("/")}
-                            >Go to Login</span>
-                        }
-                    </div>
+                 
                 </div>
 
             </section>
