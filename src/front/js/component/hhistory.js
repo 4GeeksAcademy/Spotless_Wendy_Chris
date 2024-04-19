@@ -39,7 +39,7 @@ export const HHistory = () => {
                 newArray.forEach((el) => {
                     let each_property = {};
                     let all_img = el.img.split("  ");
-                    // console.log(all_img)
+                   
                     each_property = { ...el };
                     each_property.image1 = all_img[0];
                     each_property.image2 = all_img[1];
@@ -61,16 +61,28 @@ export const HHistory = () => {
                 return res.json();
             })
             .then(responseAsJson => {
-                console.log("HHistory response for listing from backend:")
-                console.log(responseAsJson)
-                setHHistory(responseAsJson)
+                let newArray = [...responseAsJson];
+                let formatted_schedule = [];
+        
+                newArray.forEach((el) => {
+                  let each_schedule = {};
+                  each_schedule = el;
+                  let all_img = el.img.split("  ");
+                  each_schedule.image1 = all_img[0];
+                  formatted_schedule.push(each_schedule);
+        
+                })
+        
+                console.log("HHistory response for schedule from backend:")
+                
+                setHHistory(formatted_schedule)
 
             })
 
 
             .catch(error => console.log(error));
 
-    }, []);
+     }, []);
 
 
     const getHostHistory = () => {
@@ -80,10 +92,22 @@ export const HHistory = () => {
                 return res.json();
             })
             .then(responseAsJson => {
-                console.log("response for listing from backend:")
-                console.log(responseAsJson)
-                setHHistory(responseAsJson)
-
+                let newArray = [...responseAsJson];
+                let formatted_schedule = [];
+        
+                newArray.forEach((el) => {
+                  let each_schedule = {};
+                  each_schedule = el;
+                  let all_img = el.img.split("  ");
+                  each_schedule.image = all_img[0];
+                  formatted_schedule.push(each_schedule);
+        
+                })
+        
+                 setHHistory(formatted_schedule);
+                 console.log("HHistory response for host from backend: ")
+                 setHHistory(formatted_schedule);
+                
             })
 
 
@@ -146,7 +170,7 @@ export const HHistory = () => {
                                         <div className="payments_div mt-2">
                                             <div className="row d-flex  justify-content-between">
                                                 <div className="col-2">
-                                                    <img src={elm.img} className="img_payments" />
+                                                    <img src={elm.image1} className="img_payments" />
                                                 </div>
                                                 <div className="col-10">
                                                     <div className="row">

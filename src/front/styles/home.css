@@ -5,6 +5,82 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+*{
+	color:black;
+}
+
+
+
+@keyframes slideshow3__fade {
+    0% {
+      opacity: 0;
+      z-index: 2;
+    }
+    6.6666666667% {
+      opacity: 1;
+    }
+    26.6666666667% {
+      opacity: 1;
+    }
+    27.6666666667% {
+      opacity: 0;
+      z-index: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .slideshow3 {
+    position: relative;
+    width: 308px;
+    height: 250px;
+    margin: auto;
+  }
+
+
+  .slideshow3 img:not(:first-child) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0 auto;
+    animation-duration: 10s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    animation-name: slideshow3__fade;
+    animation-timing-function: ease-in;
+    transition: opacity 2s ease-in;
+  }
+
+
+  .slideshow3 img:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .slideshow3 img:nth-child(2) {
+    animation-delay: 2s;
+  }
+  .slideshow3 img:nth-child(3) {
+    animation-delay: 4s;
+  }
+  .slideshow3 img:nth-child(4) {
+    animation-delay: 8s;
+  }
+  .slideshow3 img:nth-child(5) {
+    animation-delay: 10s;
+  }
+.img_sl{
+	width: 308px;
+	height: 250px;;
+  }
+
+ 
+/* Style each of the sides 
+with a fixed width and height */
+ 
+
+
+
+
 .layout_div{
 	display: flex;
 	flex-direction: column;
@@ -16,10 +92,7 @@
 	width: 80%;
 }
 
-* {
-	box-sizing: border-box;
-	color: black;
-}
+
 
 #dateofbirth{
 	
@@ -27,8 +100,7 @@
 		border-radius: 5px;
 		background-color: #fff;
 		padding: 5px 10px;
-		box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
-		
+		box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);	
 		height: 30px;
 	
 }
@@ -37,23 +109,15 @@
 	padding: 15px 15px 15px 15px;
 	border-radius:  5px solid black;
 }
-  
-  #slideshow {
-	
-	overflow: hidden;
-	height: 200px;
-	width: 310px;
-	margin: 0 auto;
-	
+.img_payments{
+    width: 169px;
+  height: 100px;
   }
-  .img_sl{
-	width: 300px;
-	height: 200px;;
-  }
-  .listing_img{
-	width: 92%;
-	
-  }
+ 
+.fa-trash_t{
+	color: black;
+}
+
 
   .card_p_fix{
 
@@ -65,38 +129,8 @@
 
   }
   
-  .slide-wrapper {
-	width: calc(310px * 3);
-	-webkit-animation: slide 10s ease infinite;
-  }
-  
-  .slide {
-	float: left;
-	height: 200px;
-	width: 310px;
-  }
-  
- 
-  @keyframes slide {
- 
-    /* Calculate the margin-left for 
-    each of the slides */
-    20% {
-        margin-left: 0px;
-    }
- 
-    40% {
-        margin-left: calc(-300px * 1);
-    }
- 
-    60% {
-        margin-left: calc(-300px * 2);
-    }
- 
-    80% {
-        margin-left: calc(-300px * 3);
-    }
-}
+
+
 
 
   
@@ -118,13 +152,28 @@ textarea{
 }
 
 
-.jump_div{
+
+.jump_did_emo{
 	
-	position: relative;
+	position: absolute;
 	height:1px;
 	display:flex;
 	justify-content: end;
 	color:black;
+	left:85%;
+	z-index: 5;
+	margin-right: 5px;
+}
+
+
+.jump_div{
+	
+	position: absolute;
+	height:1px;
+	display:flex;
+	justify-content: end;
+	color:black;
+	left:280px;
 	z-index: 5;
 	margin-right: 5px;
 }
@@ -153,7 +202,9 @@ textarea{
 	gap: 15px;
   }
 
-
+i{
+	color: white;
+}
   .button-24 {
 	background: #D61261;
 	border: 1px solid #D61261;
@@ -214,9 +265,6 @@ p {
 	margin: 10px 0 10px;
 }
 
-span {
-	font-size: 12px;
-}
 
 a {
 	color: #333;

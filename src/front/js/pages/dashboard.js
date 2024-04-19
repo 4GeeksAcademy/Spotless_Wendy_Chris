@@ -1,10 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
-import rigo5 from "../../img/maid1.jpg";
-import rigo2 from "../../img/maid2.jpeg";
-import rigo3 from "../../img/maid3.jpg";
-import rigo4 from "../../img/maid4.png";
-import rigo from "../../img/image_480.png";
+
 import "../../styles/home.css";
 import { AppContext } from "../layout";
 import { Link, useNavigate } from "react-router-dom";
@@ -195,38 +191,32 @@ export const Dashboard = () => {
 
           <div class="card text-secondary" style={{ width: "310px" }} key={element.id}>
 
-            <div id="slideshow">
+            <div className="slideshow3">
               <div className="jump_div">
                 <Link to={`/demo`} state={element}>
-
                   <span><i class="fa-solid fa-arrow-up-right-from-square fa-fade fa-xl"></i></span>
                 </Link>
               </div>
 
-              <div class="slide-wrapper">
+           
 
-                <div class="slide">
-                  <img class="slide-number img_sl" src={element.image1} />
-
-
-                </div>
-                <div class="slide">
-                  <img class="slide-number img_sl" src={element.image2} />
-
-                </div>
-                <div class="slide">
-                  <img class="slide-number img_sl" src={element.image3} />
-
-                </div>
-                <div class="slide">
-                  <img class="slide-number img_sl" src={element.image1} />
-
-                </div>
+               
+                  <img class="l img_sl" src={element.image1} />
 
 
-                {/* <div class="slide_l"><img src={element.image1} class="slide-number img_sl" /></div>
-                 */}
-              </div>
+              
+                  <img class=" img_sl" src={element.image2} />
+
+         
+                  <img class=" img_sl" src={element.image3} />
+
+                
+            
+                  <img class="img_sl" src={element.image1} />
+                  <img class=" img_sl" src={element.image2} />
+
+
+        
             </div>
 
 
@@ -241,7 +231,7 @@ export const Dashboard = () => {
                 <button
                   className={listingExists}
                   onClick={() => delete_property(element.id)}>
-                  <i className="fas fa-trash-alt fa-bounce fa-xl" />
+                  <i className="fas fa-trash-alt fa-bounce fa-xl fa-trash_t" />
                 </button>
 
               </div>

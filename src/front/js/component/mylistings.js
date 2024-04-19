@@ -4,7 +4,7 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 
 import "../../styles/home.css";
 import { AppContext } from "../layout";
-import { BrowserRouter, Route, Routes, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BackendURL } from "./backendURL";
 
 export const MyListings = () => {
@@ -37,7 +37,7 @@ export const MyListings = () => {
                 newArray.forEach((el) => {
                     let each_property = {};
                     let all_img = el.img.split("  ");
-                    // console.log(all_img)
+                 
                     each_property = { ...el };
                     each_property.image1 = all_img[0];
                     each_property.image2 = all_img[1];
@@ -50,7 +50,6 @@ export const MyListings = () => {
     }, []);
 
 
-    //   fetch all listings and store in myListings below 
     useEffect(() => {
 
         fetch(process.env.BACKEND_URL + `api/user/${currentUser.id}/listing`)
