@@ -36,7 +36,7 @@ export const HostHistory = () => {
                 newArray.forEach((el) => {
                     let each_property = {};
                     let all_img = el.img.split("  ");
-                    // console.log(all_img)
+                   
                     each_property = { ...el };
                     each_property.image1 = all_img[0];
                     each_property.image2 = all_img[1];
