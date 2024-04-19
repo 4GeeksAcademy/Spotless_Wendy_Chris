@@ -248,14 +248,7 @@ i{
 
 
 
-h1 {
-	font-weight: bold;
-	margin: 0;
-}
 
-h2 {
-	text-align: center;
-}
 
 p {
 	font-size: 14px;
@@ -318,15 +311,16 @@ input {
 	width: 100%;
 }
 
-.container {
+.container_div {
 	background-color: #fff;
 	border-radius: 10px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
-	width: 95%;
+	width: 50%;
 	max-width: 100%;
+	margin: auto;
 	min-height: 600px;
 	margin-top: 1rem;
 }
@@ -344,7 +338,7 @@ input {
 	z-index: 2;
 }
 
-.container.right-panel-active .sign-in-container {
+.container_div.right-panel-active .sign-in-container {
 	transform: translateX(100%);
 }
 
@@ -355,7 +349,7 @@ input {
 	z-index: 1;
 }
 
-.container.right-panel-active .sign-up-container {
+.container_div.right-panel-active .sign-up-container {
 	transform: translateX(100%);
 	opacity: 1;
 	z-index: 5;
@@ -385,7 +379,7 @@ input {
 	z-index: 100;
 }
 
-.container.right-panel-active .overlay-container{
+.container_div.right-panel-active .overlay-container{
 	transform: translateX(-100%);
 }
 
@@ -405,7 +399,7 @@ input {
 	transition: transform 0.6s ease-in-out;
 }
 
-.container.right-panel-active .overlay {
+.container_div.right-panel-active .overlay {
   	transform: translateX(50%);
 }
 
@@ -428,7 +422,7 @@ input {
 	transform: translateX(-20%);
 }
 
-.container.right-panel-active .overlay-left {
+.container_div.right-panel-active .overlay-left {
 	transform: translateX(0);
 }
 
@@ -437,7 +431,7 @@ input {
 	transform: translateX(0);
 }
 
-.container.right-panel-active .overlay-right {
+.container_div.right-panel-active .overlay-right {
 	transform: translateX(20%);
 }
 
@@ -482,4 +476,33 @@ input {
 .buttonL.ghost {
 	background-color: transparent;
 	border-color: #FFFFFF;
+}
+
+.login-with-google-btn {
+	transition: background-color .3s, box-shadow .3s;
+	  
+	padding: 12px 10px 12px 35px;
+	border: none;
+	border-radius: 3px;
+	box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+	
+	color: #757575;
+	font-size: 8px;
+	font-weight: 500;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+	
+	background-color: white;
+	background-repeat: no-repeat;
+	background-position: 12px 11px;
+	
+	&:hover {
+	  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+	}
+	
+	
+
+  }
+#bg_sign_in{
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+		
 }

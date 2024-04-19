@@ -199,19 +199,12 @@ export const Dashboard = () => {
               </div>
 
            
-
-               
                   <img class="l img_sl" src={element.image1} />
-
-
               
                   <img class=" img_sl" src={element.image2} />
 
-         
                   <img class=" img_sl" src={element.image3} />
 
-                
-            
                   <img class="img_sl" src={element.image1} />
                   <img class=" img_sl" src={element.image2} />
 

@@ -231,7 +231,7 @@ export const Landing = () => {
                             <div className="col-12"
                                 style={display == "addProp" ? { display: "block" } : { display: "none" }}
                             ><AddProperty /></div>
-                            <div className="col-12"
+                            <div className="col-12 pt-3"
                                 style={display == "propMain" ? { display: "block" } : { display: "none" }}
                             ><Dashboard /></div>
                         </div>

@@ -25,6 +25,7 @@ const navigate = useNavigate();
 			   <li><span onClick={()=> navigate("/faq")}>FAQ</span></li>
 			   <li><span >How to apply?</span></li>
 			   <li><span >Requirements</span></li>
+			   <li><span >Requirements</span></li>
 			   
 			 </ul>
 		   </div>
@@ -35,6 +36,7 @@ const navigate = useNavigate();
 			   <span><i className="fab fa-facebook-f"></i></span>
 			   <span><i className="fab fa-twitter"></i></span>
 			   <span><i className="fab fa-instagram"></i></span>
+			   
 			  
 			 </div>
 		   </div>

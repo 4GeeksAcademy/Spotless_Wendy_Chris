@@ -164,7 +164,7 @@ export const Login = () => {
 
 	return (
 		<>
-			<div className="container mt-5" id='container'>
+			<div className="container_div mt-5" id='container'>
 				<div className="form-container sign-up-container">
 					<form>
 						<h2 style={localRole == "" ? { display: "block" } : { display: "none" }}>Time to Choose!</h2>
@@ -237,13 +237,21 @@ export const Login = () => {
 								login_function()
 							}
 							}>Sign In</button>
+						
+<div className="d-flex justify-content-between mt-3">
+	<button type="button" id="bg_sign_in" class="login-with-google-btn mr-2" >
+  Sign in with Google
+</button>
+
+</div>
+
 					</form>
 				</div>
 				<div className="overlay-container">
 					<div className="overlay">
 						<div className="overlay-panel overlay-left">
 							<img className="duster2 mb-3" src={duster} />
-							<h1 className="pb-3">Already have an account?</h1>
+							<h1 className="pb-3 mx-3">Already have an account?</h1>
 							<button className="ghost" id="signUp" onClick={() => sign_in_function()}>Sign In</button>
 						</div>
 						<div className="overlay-panel overlay-right">
@@ -256,6 +264,7 @@ export const Login = () => {
 					</div>
 				</div>
 			</div >
+			<div className="d-flex justify-content-center mt-5">  </div>
 		</>
 	);
 };
