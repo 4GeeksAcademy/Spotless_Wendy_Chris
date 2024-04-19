@@ -111,7 +111,7 @@ export const WorkerProfile = () => {
     return (
         <div className="row my-5">
             <div className="col-7">
-                <div className="row ms-2 mb-5">
+                <div className="row ms-2 mb-5 ps-5">
                     <div className="col-12 text-start ps-1 pb-4">
                         Full Name:<span className="ps-3">{currentUser.full_name}</span>
                     </div>
